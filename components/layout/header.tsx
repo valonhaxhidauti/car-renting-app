@@ -18,8 +18,8 @@ import {
 
 export default function Header({ background }: { background: boolean }) {
   return (
-    <header className="px-16 pt-14 fixed top-0 z-10 w-full">
-      <div className="flex justify-between w-full max-w-[1440px] m-auto">
+    <header className="fixed top-0 left-0 right-0 z-10 w-full max-w-[1440px] m-auto">
+      <div className="px-8 pt-14 flex justify-between w-full">
         <div className="flex justify-start gap-8 items-center ">
           <Link href="/">
             {background ? (

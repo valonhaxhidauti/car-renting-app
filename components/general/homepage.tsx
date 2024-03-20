@@ -1,80 +1,111 @@
 "use client";
 
-import { useState } from "react";
-import Header from "@/components/layout/header";
 import Image from "next/image";
-import { Checkbox } from "../ui/checkbox";
+import { useForm } from "react-hook-form";
+import { SearchIcon } from "@/assets/svgs";
+
+interface IFormInputs {
+  rentLocation: string;
+  showReturnLocation: boolean;
+  returnLocation: string;
+  pickupDate: string;
+  dropOffDate: string;
+}
 
 export default function Homepage() {
-  const [pickupLocation, setPickupLocation] = useState("");
-  const [pickupDate, setPickupDate] = useState("");
-  const [dropOffDate, setDropOffDate] = useState("");
+  const {
+    register,
+    watch,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IFormInputs>();
+  const watchshowReturnLocation = watch("showReturnLocation", false);
 
-  const handleSearch = () => {
-    // Handle search functionality here
-    console.log("Searching with:", pickupLocation, pickupDate, dropOffDate);
+  const onSubmit = (data: IFormInputs) => {
+    console.log("TEST", data);
+    alert(JSON.stringify(data));
   };
 
   return (
     <>
-      <div className="flex max-w-[1440px] w-full">
-        <div className="hidden desktop:block w-1/2 h-screen ">
+      <div>
+        <div className="absolute -z-10 w-1/2 h-screen">
           <Image
-            alt="homepage"
             src="/homeBackground.png"
-            width={953}
-            height={969}
+            alt="homeBg"
+            fill
+            sizes="width:100%"
+            className="object-cover"
             priority
-            className="w-full h-full"
           />
         </div>
-        <div className="w-full h-screen items-start desktop:w-1/2 p-8 flex flex-col gap-4 justify-center">
-          <p className="font-bold leading-4 text-[#5a5a5a] text-lg">
-            Find your car
-          </p>
-          <div className="flex text-center shadow-xl">
-            <div className="flex relative">
-              <div className="py-2 bg-white flex ">
-                <input
-                  type="text"
-                  placeholder="Rent Location"
-                  value={pickupLocation}
-                  onChange={(e) => setPickupLocation(e.target.value)}
-                  className="rounded-lg px-4 py-2"
-                />
-                <input
-                  type="date"
-                  value={pickupDate}
-                  onChange={(e) => setPickupDate(e.target.value)}
-                  className="border-l border-gray-300 rounded-lg px-4 py-2"
-                />
-                <input
-                  type="date"
-                  value={dropOffDate}
-                  onChange={(e) => setDropOffDate(e.target.value)}
-                  className="border-l border-gray-300 rounded-lg px-4 py-2"
-                />
+        <div className="flex max-w-[1440px] m-auto">
+          <div className="w-0 laptop:w-1/2"></div>
+          <div className="w-full h-screen items-end laptop:items-start laptop:w-1/2 p-8 flex flex-col justify-center">
+            <p className="pb-4 font-bold leading-4 text-[#5a5a5a] text-lg w-full text-right laptop:text-left">
+              Find your car
+            </p>
+            <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+              <div className="shadow-search w-full">
+                <div className="flex relative w-full">
+                  <div className="py-2 bg-white flex w-full">
+                    <input
+                      type="text"
+                      {...register("rentLocation", { required: true })}
+                      placeholder={
+                        errors.rentLocation ? "Required" : "Rent Location"
+                      }
+                      className={`${
+                        watchshowReturnLocation ? "w-1/4" : "w-1/2"
+                      } rounded-lg p-2 ${
+                        errors.rentLocation ? "placeholder:text-red-500" : ""
+                      }`}
+                    />
+                    {watchshowReturnLocation && (
+                      <input
+                        type="text"
+                        {...register("returnLocation")}
+                        placeholder="Return Location"
+                        className="w-1/4 border-l rounded-lg p-2"
+                      />
+                    )}
+                    <input
+                      type="date"
+                      {...register("pickupDate")}
+                      className="w-1/4 border-l border-gray-300 rounded-lg p-2"
+                    />
+                    <input
+                      type="date"
+                      {...register("dropOffDate")}
+                      className="w-1/4 border-l border-gray-300 rounded-lg p-2"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-24 flex items-center justify-center bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-300"
+                  >
+                    <SearchIcon />
+                  </button>
+                  <h1 className="absolute -bottom-4 desktop:-bottom-5 -right-9 desktop:-right-10 font-bold text-[132px] desktop:text-[148px] text-[#f6f6f6] -z-10">
+                    Find Now
+                  </h1>
+                </div>
               </div>
-              <button
-                onClick={handleSearch}
-                className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-300"
-              >
-                Search
-              </button>
-
-              <h1 className="absolute -bottom-5 -right-11 font-bold text-[148px] text-[#f6f6f6] -z-10">
-                Find Now
-              </h1>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox id="diffLocation" />
-            <label
-              htmlFor="diffLocation"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Deliver at different point
-            </label>
+              <div className="flex items-center space-x-2 pt-4">
+                <input
+                  id="diffLocation"
+                  type="checkbox"
+                  className="w-4 h-4"
+                  {...register("showReturnLocation")}
+                />
+                <label
+                  htmlFor="diffLocation"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Deliver at different point
+                </label>
+              </div>
+            </form>
           </div>
         </div>
       </div>
