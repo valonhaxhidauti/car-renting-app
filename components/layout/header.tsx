@@ -19,14 +19,11 @@ import {
 export default function Header({ background }: { background: boolean }) {
   return (
     <header className="fixed top-0 left-0 right-0 z-10 w-full max-w-[1440px] m-auto">
-      <div className="px-8 pt-14 flex justify-between w-full">
+      <div className="px-4 mobile:px-8 pt-14 flex justify-between w-full">
         <div className="flex justify-start gap-8 items-center ">
           <Link href="/">
             {background ? (
-              <>
-              <LogoLight className="hidden desktop:block" />
-              <Logo className="block desktop:hidden"/>
-              </>
+              <LogoLight/>
             ) : (
               <Logo />
             )}
@@ -56,16 +53,16 @@ export default function Header({ background }: { background: boolean }) {
             Contact
           </Link>
         </div>
-        <div className="flex justify-end gap-8 items-center bg-white">
+        <div className="flex justify-end gap-8 items-center">
           <Link
             href="/"
-            className="hidden desktop:flex font-bold text-[#5a5a5a] border border-[#5a5a5a] py-2 px-6 items-center gap-3 rounded-full"
+            className="hidden bg-white hover:bg-slate-50 desktop:flex font-bold text-[#5a5a5a] border border-[#5a5a5a] py-2 px-6 items-center gap-3 rounded-full"
           >
             <LoginIcon />
             LOGIN or REGISTER
           </Link>
           <Select>
-            <SelectTrigger className="hidden desktop:flex w-[65px] border border-[#5a5a5a] rounded-full">
+            <SelectTrigger className="hidden bg-white hover:bg-slate-50 desktop:flex w-[65px] border border-[#5a5a5a] rounded-full">
               <UkIcon />
             </SelectTrigger>
             <SelectContent>
@@ -76,7 +73,7 @@ export default function Header({ background }: { background: boolean }) {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <HamburgerIcon />
+          <HamburgerIcon className="cursor-pointer"/>
         </div>
       </div>
     </header>

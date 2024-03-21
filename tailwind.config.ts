@@ -10,7 +10,8 @@ const config = {
   prefix: "",
   theme: {
     screens: {
-      'mobile': '450px',
+      'mobile': '600px',
+      'tablet': '768px',
       'laptop': '1024px',
       'desktop': '1280px',
     }, 

@@ -1,35 +1,12 @@
-"use client";
-
 import Image from "next/image";
-import { useForm } from "react-hook-form";
-import { SearchIcon } from "@/assets/svgs";
-
-interface IFormInputs {
-  rentLocation: string;
-  showReturnLocation: boolean;
-  returnLocation: string;
-  pickupDate: string;
-  dropOffDate: string;
-}
+import RentForm from "./rentForm";
+import { AutomaticIcon, DieselIcon } from "@/assets/svgs";
 
 export default function Homepage() {
-  const {
-    register,
-    watch,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<IFormInputs>();
-  const watchshowReturnLocation = watch("showReturnLocation", false);
-
-  const onSubmit = (data: IFormInputs) => {
-    console.log("TEST", data);
-    alert(JSON.stringify(data));
-  };
-
   return (
     <>
       <div>
-        <div className="absolute -z-10 w-1/2 h-screen">
+        <div className="absolute -z-10 w-full tablet:w-1/2 h-screen">
           <Image
             src="/homeBackground.png"
             alt="homeBg"
@@ -40,72 +17,65 @@ export default function Homepage() {
           />
         </div>
         <div className="flex max-w-[1440px] m-auto">
-          <div className="w-0 laptop:w-1/2"></div>
-          <div className="w-full h-screen items-end laptop:items-start laptop:w-1/2 p-8 flex flex-col justify-center">
-            <p className="pb-4 font-bold leading-4 text-[#5a5a5a] text-lg w-full text-right laptop:text-left">
+          <div className="hidden tablet:flex w-1/2 h-screen gap-4 items-start p-8 flex-col justify-center">
+            <h1 className="text-4xl leading-tight laptop:text-5xl text-white font-bold">
+              Enjoy
+              <br />
+              the journey
+              <br />
+              with your family
+            </h1>
+            <p className="text-base laptop:text-lg text-white">
+              RentTU Car Rental Template
+            </p>
+          </div>
+          <div className="w-full tablet:w-1/2 h-screen relative p-4 mobile:p-8 flex flex-col justify-center">
+            <p className="pb-4 font-bold leading-4 text-white tablet:text-[#5a5a5a] text-lg">
               Find your car
             </p>
-            <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-              <div className="shadow-search w-full">
-                <div className="flex relative w-full">
-                  <div className="py-2 bg-white flex w-full">
-                    <input
-                      type="text"
-                      {...register("rentLocation", { required: true })}
-                      placeholder={
-                        errors.rentLocation ? "Required" : "Rent Location"
-                      }
-                      className={`${
-                        watchshowReturnLocation ? "w-1/4" : "w-1/2"
-                      } rounded-lg p-2 ${
-                        errors.rentLocation ? "placeholder:text-red-500" : ""
-                      }`}
-                    />
-                    {watchshowReturnLocation && (
-                      <input
-                        type="text"
-                        {...register("returnLocation")}
-                        placeholder="Return Location"
-                        className="w-1/4 border-l rounded-lg p-2"
-                      />
-                    )}
-                    <input
-                      type="date"
-                      {...register("pickupDate")}
-                      className="w-1/4 border-l border-gray-300 rounded-lg p-2"
-                    />
-                    <input
-                      type="date"
-                      {...register("dropOffDate")}
-                      className="w-1/4 border-l border-gray-300 rounded-lg p-2"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-24 flex items-center justify-center bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-300"
-                  >
-                    <SearchIcon />
-                  </button>
-                  <h1 className="absolute -bottom-4 desktop:-bottom-5 -right-9 desktop:-right-10 font-bold text-[132px] desktop:text-[148px] text-[#f6f6f6] -z-10">
-                    Find Now
-                  </h1>
+            <RentForm />
+          </div>
+          <div className="hidden laptop:block bg-blue-700 w-1/2 h-1/6 fixed bottom-0 right-0 ">
+            <div className="bg-blue-500 w-1/4 h-full absolute bottom-0 -translate-x-full flex flex-col justify-center items-center">
+              <p className="text-white text-base font-bold">Rent Now</p>
+              <p className="text-white text-[9px]">Volvo XC90 Excellence</p>
+            </div>
+            <div className="flex max-w-[720px] h-full justify-between px-8 py-4 text-white">
+              <div className="flex flex-col justify-center">
+                <p className="text-[9px] leading-none">Start From</p>
+                <div className="text-3xl">
+                  <sup className="text-xs font-bold -top-4">$</sup>
+                  <span className="text-4xl font-bold">64</span>
+                  <span className="inline-block text-lg">
+                    <sup className="relative block leading-none font-bold -top-[3px]">
+                      ,99
+                    </sup>
+                    <sub className="relative block leading-none font-bold top-0">
+                      / Daily
+                    </sub>
+                  </span>
                 </div>
               </div>
-              <div className="flex items-center space-x-2 pt-4">
-                <input
-                  id="diffLocation"
-                  type="checkbox"
-                  className="w-4 h-4"
-                  {...register("showReturnLocation")}
-                />
-                <label
-                  htmlFor="diffLocation"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  Deliver at different point
-                </label>
+              <div className="flex flex-col justify-center gap-3">
+                <p className="text-white text-base font-bold leading-none">
+                  Volvo XC90 Excellence
+                </p>
+                <div className="flex gap-4 text-[10px]">
+                  <span className="flex gap-1 items-center">
+                    <DieselIcon /> Diesel
+                  </span>
+                  <span className="flex gap-1 items-center">
+                    <AutomaticIcon /> Automatic
+                  </span>
+                </div>
               </div>
-            </form>
+              <Image
+                src="/sampleCar.png"
+                alt="Volvo"
+                fill
+                className="!-top-8 desktop:!h-[120%] !w-[auto] !relative"
+              />
+            </div>
           </div>
         </div>
       </div>
