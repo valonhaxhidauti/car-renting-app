@@ -40,7 +40,7 @@ export default function Homepage() {
               <p className="text-white text-base font-bold">Rent Now</p>
               <p className="text-white text-[9px]">Volvo XC90 Excellence</p>
             </div>
-            <div className="flex max-w-[720px] h-full justify-between px-8 py-4 text-white">
+            <div className="flex max-w-[720px] h-full relative justify-between px-8 py-4 text-white">
               <div className="flex flex-col justify-center">
                 <p className="text-[9px] leading-none">Start From</p>
                 <div className="text-3xl">
@@ -73,6 +73,7 @@ export default function Homepage() {
                 src="/sampleCar.png"
                 alt="Volvo"
                 fill
+                sizes="100%"
                 className="!-top-8 desktop:!h-[120%] !w-[auto] !relative"
               />
             </div>

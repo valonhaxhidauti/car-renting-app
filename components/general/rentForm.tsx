@@ -29,7 +29,7 @@ export default function RentForm() {
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
       <div className="shadow-search w-full rounded-[8px] desktop:rounded-none p-2 desktop:p-0 bg-white">
         <div className="flex flex-col desktop:flex-row relative w-full">
-          <div className="desktop:py-1 w-full flex flex-col desktop:flex-row bg-white">
+          <div className="desktop:py-1 w-full flex flex-col desktop:flex-row bg-white ">
             <input
               type="text"
               {...register("rentLocation", { required: true })}
@@ -40,14 +40,16 @@ export default function RentForm() {
                 errors.rentLocation ? "placeholder:text-red-500" : ""
               }`}
             />
-            {watchShowReturnLocation && (
-              <input
-                type="text"
-                {...register("returnLocation")}
-                placeholder="Return Location"
-                className="w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-gray-300 p-2"
-              />
-            )}
+            <input
+              type="text"
+              {...register("returnLocation")}
+              placeholder="Return Location"
+              className={`${
+                watchShowReturnLocation
+                  ? "h-full transition-all duration-300 desktop:transition-none w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-gray-300 p-2"
+                  : "w-0 h-0 transition-all duration-100 desktop:transition-none"
+              } `}
+            />
             <input
               type="date"
               {...register("pickupDate")}
@@ -68,9 +70,9 @@ export default function RentForm() {
           <h1
             className={`hidden tablet:block absolute ${
               watchShowReturnLocation
-                ? "bottom-[180px] laptop:bottom-[150px]"
+                ? "bottom-[175px] laptop:bottom-[150px]"
                 : "bottom-[140px] laptop:bottom-[110px]"
-            }  laptop:bottom-0 desktop:-bottom-3 -right-2 laptop:-right-9 desktop:-right-10 font-bold text-[72px] laptop:text-[110px] desktop:text-[144px] text-[#f6f6f6] -z-10`}
+            }  laptop:bottom-0 desktop:-bottom-3 -right-2 laptop:-right-9 desktop:-right-7 font-bold text-[72px] laptop:text-[110px] desktop:text-[144px] text-[#f6f6f6] -z-10`}
           >
             Find Now
           </h1>
