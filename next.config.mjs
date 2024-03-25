@@ -1,14 +1,16 @@
 /** @type {import('next').NextConfig} */
+import createNextIntlPlugin from 'next-intl/plugin';
+const withNextIntl = createNextIntlPlugin();
+
 const nextConfig = {
-    webpack: (config) => {
-      // Add SVGR loader
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      });
-  
-      return config;
-    },
-  };
-  
-  export default nextConfig;
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
+  },
+};
+
+export default withNextIntl(nextConfig);
