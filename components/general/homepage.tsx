@@ -1,6 +1,6 @@
 import Image from "next/image";
 import RentForm from "./rentForm";
-import { AutomaticIcon, DieselIcon } from "@/assets/svgs";
+import { GearIcon, FuelIcon } from "@/assets/svgs";
 
 export default function Homepage() {
   return (
@@ -62,10 +62,10 @@ export default function Homepage() {
                 </p>
                 <div className="flex gap-4 text-[10px]">
                   <span className="flex gap-1 items-center">
-                    <DieselIcon /> Diesel
+                    <FuelIcon /> Diesel
                   </span>
                   <span className="flex gap-1 items-center">
-                    <AutomaticIcon /> Automatic
+                    <GearIcon /> Automatic
                   </span>
                 </div>
               </div>
