@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTransition } from "react";
 import {
   Select,
@@ -24,13 +24,15 @@ export default function LanguageSelector({
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const localActive = useLocale();
-
-  const onSelectChange = (nextLocale: string) => {
+  const pathname = usePathname();
+  
+  function onSelectChange(nextLocale: string) {
     startTransition(() => {
-      router.replace(`/${nextLocale}`);
+      const newPathname = pathname.replace(`/${localActive}`, `/${nextLocale}`);
+      router.replace(newPathname);
     });
-  };
-
+  }
+  
   const t = useTranslations("Header");
 
   return (
