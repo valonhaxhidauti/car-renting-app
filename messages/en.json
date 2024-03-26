@@ -1,5 +1,48 @@
 {
-    "Index": {
-        "title": "Hello!"
+    "Header": {
+        "loginRegister": "LOGIN or REGISTER",
+        "homepage": "Homepage",
+        "exploreVehicles": "Explore Vehicles",
+        "aboutUs": "About Us",
+        "faq": "FAQ",
+        "rentalTerms": "Rental Terms",
+        "privacyPolicy": "Privacy Policy",
+        "contact": "Contact",
+        "currencies": {
+            "label": "Currencies",
+            "usd": "USD ($)",
+            "eur": "EUR (€)"
+        },
+        "languages": {
+            "label": "Languages",
+            "english": "English",
+            "german": "German"
+        },
+        "copyright": "Copyrights {currentYear} © All rights reserved."
+    },
+    "Homepage": {
+        "enjoyJourney": {
+            "title": "Enjoy<br></br>the journey<br></br>with your family",
+            "subtitle": "RentTU Car Rental Template"
+        },
+        "rentNow": "Rent Now",
+        "carDetails": {
+            "startFrom": "Start From",
+            "daily": "/ Daily",
+            "fuelType": "Diesel",
+            "transmission": "Automatic"
+        }
+    },
+    "RentForm": {
+        "findYourCar": "Find your car",
+        "rentLocation": {
+            "placeholder": "Rent Location",
+            "requiredError": "Required"
+        },
+        "returnLocation": {
+            "placeholder": "Return Location"
+        },
+        "deliverAtDifferentPoint": "Deliver at different point",
+        "findNow": "Find Now"
     }
 }

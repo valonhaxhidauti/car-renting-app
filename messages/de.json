@@ -1,5 +1,48 @@
 {
-    "Index": {
-        "title": "Hallo!"
+    "Header": {
+        "loginRegister": "ANMELDEN oder REGISTRIEREN",
+        "homepage": "Startseite",
+        "exploreVehicles": "Fahrzeuge erkunden",
+        "aboutUs": "Über uns",
+        "faq": "FAQ",
+        "rentalTerms": "Mietbedingungen",
+        "privacyPolicy": "Datenschutzrichtlinie",
+        "contact": "Kontakt",
+        "currencies": {
+            "label": "Währungen",
+            "usd": "USD ($)",
+            "eur": "EUR (€)"
+        },
+        "languages": {
+            "label": "Sprachen",
+            "english": "Englisch",
+            "german": "Deutsch"
+        },
+        "copyright": "Urheberrechte {currentYear} © Alle Rechte vorbehalten."
+    },
+    "Homepage": {
+        "enjoyJourney": {
+            "title": "Genießen <br></br> Sie die Reise <br></br> mit Ihrer Familie",
+            "subtitle": "RentTU Autovermietungsvorlage"
+        },
+        "rentNow": "Jetzt mieten",
+        "carDetails": {
+            "startFrom": "Ab",
+            "daily": "/ Täglich",
+            "fuelType": "Diesel",
+            "transmission": "Automatik"
+        }
+    },
+    "RentForm": {
+        "findYourCar": "Finden Sie Ihr Auto",
+        "rentLocation": {
+            "placeholder": "Mietort",
+            "requiredError": "Erforderlich"
+        },
+        "returnLocation": {
+            "placeholder": "Rückgabeort"
+        },
+        "deliverAtDifferentPoint": "An anderer Stelle liefern",
+        "findNow": "Jetzt finden"
     }
 }

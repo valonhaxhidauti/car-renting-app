@@ -8,8 +8,7 @@ import {
   LoginIcon,
   Logo,
   LogoLight,
-  LogoMenu,
-  UkIcon,
+  LogoMenu
 } from "@/assets/svgs";
 import {
   Select,
@@ -20,9 +19,9 @@ import {
   SelectTrigger,
 } from "../ui/select";
 import Image from "next/image";
-import {
-  ChevronDown
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
+import LanguageSelector from "../ui/languageSelector";
 
 export default function Header({ background }: { background: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +30,8 @@ export default function Header({ background }: { background: boolean }) {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const t = useTranslations("Header");
 
   return (
     <header className="fixed top-0 left-0 z-10 w-full max-w-[1440px] m-auto">
@@ -52,87 +53,75 @@ export default function Header({ background }: { background: boolean }) {
             className="text-white border-white flex tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
           >
             <LoginIcon className="text-white" />
-            LOGIN or REGISTER
+            {t("loginRegister")}
           </Link>
           <div className="flex gap-4">
             <Select>
               <SelectTrigger className="flex tablet:hidden border-white text-white w-[96px] border rounded-full h-6 py-4 px-2 g-2">
-                USD ($)
+                {t("currencies.usd")}
                 <ChevronDown className="text-white h-4 w-4" />
               </SelectTrigger>
               <SelectContent className="bg-white">
                 <SelectGroup>
-                  <SelectLabel>Currencies</SelectLabel>
-                  <SelectItem value="english">USD ($)</SelectItem>
-                  <SelectItem value="german">EUR (€)</SelectItem>
+                  <SelectLabel>{t("currencies.label")}</SelectLabel>
+                  <SelectItem value="usd">{t("currencies.usd")}</SelectItem>
+                  <SelectItem value="eur">{t("currencies.eur")}</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <Select>
-              <SelectTrigger className="border-white text-white flex tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2 g-2">
-                <UkIcon />
-                <ChevronDown className="text-white h-4 w-4" />
-              </SelectTrigger>
-              <SelectContent className="bg-white">
-                <SelectGroup>
-                  <SelectLabel>Languages</SelectLabel>
-                  <SelectItem value="english">English</SelectItem>
-                  <SelectItem value="german">German</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <LanguageSelector isOpen={isOpen} triggerClass="border-white text-white flex tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2 g-2"/>
           </div>
           <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">Homepage</p>
+            <p className="group-hover:font-bold">{t("homepage")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
           <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">Explore Vehicles</p>
+            <p className="group-hover:font-bold">{t("exploreVehicles")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
           <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">About Us</p>
+            <p className="group-hover:font-bold">{t("aboutUs")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
           <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">FAQ</p>
+            <p className="group-hover:font-bold">{t("faq")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
           <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">Rental Terms</p>
+            <p className="group-hover:font-bold">{t("rentalTerms")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
           <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">Privacy Policy</p>
+            <p className="group-hover:font-bold">{t("privacyPolicy")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
           <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">Contact</p>
+            <p className="group-hover:font-bold">{t("contact")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
           <div className="absolute bottom-10 left-4 tablet:left-8">
-            <p>Copyrights {currentYear} &#169; All rights reserved.</p>
+            <p>{t("copyright", { currentYear: currentYear })}</p>
           </div>
         </nav>
       </div>
@@ -160,7 +149,7 @@ export default function Header({ background }: { background: boolean }) {
                 background ? "text-white" : "text-[#5a5a5a]"
               }`}
             >
-              Homepage
+              {t("homepage")}
             </Link>
             <Link
               href="/"
@@ -168,7 +157,7 @@ export default function Header({ background }: { background: boolean }) {
                 background ? "text-white" : "text-[#5a5a5a]"
               }`}
             >
-              Explore Vehicles
+              {t("exploreVehicles")}
             </Link>
             <Link
               href="/contact"
@@ -176,7 +165,7 @@ export default function Header({ background }: { background: boolean }) {
                 background ? "text-white" : "text-[#5a5a5a]"
               }`}
             >
-              Contact
+              {t("contact")}
             </Link>
           </div>
         </div>
@@ -184,16 +173,16 @@ export default function Header({ background }: { background: boolean }) {
           {isOpen && (
             <Select>
               <SelectTrigger className="hidden tablet:flex border-white hover:opacity-75 text-white w-[96px] border rounded-full ">
-                USD ($)
+                {t("currencies.usd")}
                 <ChevronDown
                   className={`${isOpen ? "text-white" : ""} h-4 w-4`}
                 />
               </SelectTrigger>
               <SelectContent className="bg-white">
                 <SelectGroup>
-                  <SelectLabel>Currencies</SelectLabel>
-                  <SelectItem value="english">USD ($)</SelectItem>
-                  <SelectItem value="german">EUR (€)</SelectItem>
+                  <SelectLabel>{t("currencies.label")}</SelectLabel>
+                  <SelectItem value="usd">{t("currencies.usd")}</SelectItem>
+                  <SelectItem value="eur">{t("currencies.eur")}</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -209,29 +198,16 @@ export default function Header({ background }: { background: boolean }) {
             <LoginIcon
               className={`${isOpen ? "text-white" : "text-[#5a5a5a]"}`}
             />
-            LOGIN or REGISTER
+            {t("loginRegister")}
           </Link>
-          <Select>
-            <SelectTrigger
-              className={`${
-                isOpen
-                  ? "bg-none hover:opacity-75 border-white text-white hidden tablet:flex"
-                  : "bg-white hover:bg-slate-50 border-[#5a5a5a] hidden laptop:flex"
-              } w-[65px] border rounded-full`}
-            >
-              <UkIcon />
-              <ChevronDown
-                className={`${isOpen ? "text-white" : ""} h-4 w-4`}
-              />
-            </SelectTrigger>
-            <SelectContent className="bg-white">
-              <SelectGroup>
-                <SelectLabel>Languages</SelectLabel>
-                <SelectItem value="english">English</SelectItem>
-                <SelectItem value="german">German</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <LanguageSelector
+            isOpen={isOpen}
+            triggerClass={`${
+              isOpen
+                ? "bg-none hover:opacity-75 border-white text-white hidden tablet:flex"
+                : "bg-white hover:bg-slate-50 border-[#5a5a5a] hidden laptop:flex"
+            } w-[65px] border rounded-full`}
+          />
           <div className="cursor-pointer w-7 h-5 relative" onClick={toggleMenu}>
             <HamburgerIcon
               className={`${
