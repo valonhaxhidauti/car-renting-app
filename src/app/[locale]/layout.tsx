@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { ReactNode } from "react";
-import Header from "@/components/layout/header";
 import "../globals.css";
 
 const font = Roboto({
@@ -30,7 +29,6 @@ export default function RootLayout({
     <html lang={locale}>
       <body className={font.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header background={true} />
           {children}
         </NextIntlClientProvider>
       </body>

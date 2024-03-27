@@ -29,8 +29,8 @@ export default function Homepage() {
             </p>
           </div>
           <RentForm />
-          <div className="hidden laptop:block bg-blue-700 w-1/2 h-1/6 fixed bottom-0 right-0 ">
-            <div className="bg-blue-500 w-1/4 h-full absolute bottom-0 -translate-x-full flex flex-col justify-center items-center">
+          <div className="hidden laptop:block bg-secondary w-1/2 h-1/6 fixed bottom-0 right-0 ">
+            <div className="bg-primary w-1/4 h-full absolute bottom-0 -translate-x-full flex flex-col justify-center items-center">
               <p className="text-white text-base font-bold">{t("rentNow")}</p>
               <p className="text-white text-[9px]">Volvo XC90 Excellence</p>
             </div>

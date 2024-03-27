@@ -30,11 +30,11 @@ export default function RentForm() {
 
   return (
     <div className="w-full tablet:w-1/2 h-screen relative p-4 mobile:p-8 flex flex-col justify-center">
-      <p className="pb-4 font-bold leading-4 text-white tablet:text-[#5a5a5a] text-lg">
+      <p className="pb-4 font-bold leading-4 text-white tablet:text-gray text-lg">
         {t("findYourCar")}
       </p>
       <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className="shadow-search w-full rounded-[8px] desktop:rounded-none p-2 desktop:p-0 bg-white">
+        <div className="shadow-grayPrimary w-full rounded-[8px] desktop:rounded-none p-2 desktop:p-0 bg-white">
           <div className="flex flex-col desktop:flex-row relative w-full">
             <div className="desktop:py-1 w-full flex flex-col desktop:flex-row bg-white ">
               <input
@@ -74,7 +74,7 @@ export default function RentForm() {
             </div>
             <button
               type="submit"
-              className="w-full desktop:w-24 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-[6px] desktop:rounded-none px-4 py-2 transition duration-300"
+              className="w-full desktop:w-24 flex items-center justify-center bg-primary hover:bg-secondary text-white rounded-[6px] desktop:rounded-none px-4 py-2 transition duration-300"
             >
               <SearchIcon />
             </button>
@@ -98,7 +98,7 @@ export default function RentForm() {
           />
           <label
             htmlFor="diffLocation"
-            className="text-sm font-medium text-white tablet:text-[#5a5a5a] leading-none cursor-pointer"
+            className="text-sm font-medium text-white tablet:text-gray leading-none cursor-pointer"
           >
             {t("deliverAtDifferentPoint")}
           </label>

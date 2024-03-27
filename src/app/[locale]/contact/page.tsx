@@ -1,7 +1,13 @@
-import { useTranslations } from "next-intl";
+import Contact from "@/components/general/contact";
+import Footer from "@/components/layout/footer";
+import Header from "@/components/layout/header";
 
-export default function Contact() {
-  const t = useTranslations();
-
-  return <div>{t("Header.contact")}</div>;
+export default function ContactPage() {
+  return (
+    <>
+      <Header background={false} fixed={false} />
+      <Contact />
+      <Footer />
+    </>
+  );
 }

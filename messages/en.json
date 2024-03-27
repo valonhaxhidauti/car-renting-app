@@ -1,4 +1,32 @@
 {
+    "Contact": {
+        "heading": "Contact",
+        "breadcrumb": {
+            "homepage": "Homepage"
+        },
+        "visitUs": "Visit Us",
+        "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+        "callUs": "Call us 24/7",
+        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse."
+    },
+    "Footer": {
+        "companyName": "RentTU! Car Rental Template",
+        "slogan": "Enjoy car rental!",
+        "pages": {
+            "title": "Pages",
+            "aboutUs": "About Us",
+            "exploreVehicles": "Explore Vehicles",
+            "blog": "Blog",
+            "contact": "Contact"
+        },
+        "information": {
+            "title": "Information",
+            "faq": "FAQ",
+            "rentalTerms": "Rental Terms",
+            "privacyPolicy": "Privacy Policy"
+        },
+        "copyright": "Copyright © {currentYear} All right reserved."
+    },
     "Header": {
         "loginRegister": "LOGIN or REGISTER",
         "homepage": "Homepage",
@@ -18,7 +46,7 @@
             "english": "English",
             "german": "German"
         },
-        "copyright": "Copyrights {currentYear} © All rights reserved."
+        "copyright": "Copyright {currentYear} © All rights reserved."
     },
     "Homepage": {
         "enjoyJourney": {

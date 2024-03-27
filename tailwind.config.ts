@@ -28,7 +28,9 @@ const config = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
+        bgSecondary: "hsl(var(--bgSecondary))",
         foreground: "hsl(var(--foreground))",
+        gray: "hsl(var(--gray))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -64,7 +66,7 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'search': "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
+        'grayPrimary': "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
       },
       keyframes: {
         "accordion-down": {

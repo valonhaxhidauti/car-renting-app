@@ -1,4 +1,32 @@
 {
+    "Contact": {
+        "heading": "Kontakt",
+        "breadcrumb": {
+            "homepage": "Startseite"
+        },
+        "visitUs": "Besuchen Sie uns",
+        "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+        "callUs": "Rufen Sie uns 24/7 an",
+        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse."
+    },
+    "Footer": {
+        "companyName": "RentTU! Autovermietungsvorlage",
+        "slogan": "Genießen Sie die Autovermietung!",
+        "pages": {
+            "title": "Seiten",
+            "aboutUs": "Über uns",
+            "exploreVehicles": "Fahrzeuge erkunden",
+            "blog": "Blog",
+            "contact": "Kontakt"
+        },
+        "information": {
+            "title": "Informationen",
+            "faq": "FAQ",
+            "rentalTerms": "Mietbedingungen",
+            "privacyPolicy": "Datenschutz-Bestimmungen"
+        },
+        "copyright": "Urheberrechte {currentYear} © Alle Rechte vorbehalten."
+    },
     "Header": {
         "loginRegister": "ANMELDEN oder REGISTRIEREN",
         "homepage": "Startseite",
