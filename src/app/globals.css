@@ -8,7 +8,8 @@
     --bgSecondary: 0 0% 97.65%;  
     --foreground: 222.2 84% 4.9%;
 
-    --gray: 0 0% 35.29%;
+    --gray: 0 0% 35%;
+    --graySecondary: 0 0% 60%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -31,6 +32,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
+    --borderForm: 0 0% 58%;
     --border: 0 0% 80%;
     --input: 0 0% 80%;
     --ring: 222.2 84% 4.9%;

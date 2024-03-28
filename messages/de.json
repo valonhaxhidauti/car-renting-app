@@ -7,7 +7,14 @@
         "visitUs": "Besuchen Sie uns",
         "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
         "callUs": "Rufen Sie uns 24/7 an",
-        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse."
+        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+        "formHeading": "Kontaktformular",
+        "formDescription": "Rufen Sie uns an oder kommen Sie jederzeit vorbei. Wir bemühen uns, alle Anfragen innerhalb von 24 Stunden an Werktagen zu beantworten.",
+        "fullNamePlaceholder": "Vollständiger Name",
+        "emailPlaceholder": "E-Mail-Adresse",
+        "phoneNumberPlaceholder": "Telefonnummer",
+        "messagePlaceholder": "Ihre Nachricht",
+        "sendMessage": "Nachricht senden"
     },
     "Footer": {
         "companyName": "RentTU! Autovermietungsvorlage",

@@ -45,7 +45,7 @@ export default function Header({
         className={`${
           isOpen
             ? "left-0 top-0 tablet:top-0 transition-[left] tablet:transition-[top] tablet:duration-300 "
-            : "-left-full tablet:-top-full transition-none"
+            : "-left-[105%] tablet:-top-full transition-none"
         } fixed z-10 w-screen h-screen bg-primary`}
       >
         <Image

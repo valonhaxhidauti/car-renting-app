@@ -7,7 +7,14 @@
         "visitUs": "Visit Us",
         "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
         "callUs": "Call us 24/7",
-        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse."
+        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+        "formHeading": "Contact Form",
+        "formDescription": "Give us a call or drop by anytime, we endeavor to answer all enquiries within 24 hours on business days.",
+        "fullNamePlaceholder": "Full Name",
+        "emailPlaceholder": "E-Mail Address",
+        "phoneNumberPlaceholder": "Phone Number",
+        "messagePlaceholder": "Your Message",
+        "sendMessage": "Send Message"
     },
     "Footer": {
         "companyName": "RentTU! Car Rental Template",
@@ -25,7 +32,7 @@
             "rentalTerms": "Rental Terms",
             "privacyPolicy": "Privacy Policy"
         },
-        "copyright": "Copyright © {currentYear} All right reserved."
+        "copyright": "Copyright © {currentYear} All rights reserved."
     },
     "Header": {
         "loginRegister": "LOGIN or REGISTER",

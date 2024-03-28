@@ -24,6 +24,7 @@ const config = {
     },
     extend: {
       colors: {
+        borderForm: "hsl(var(--borderForm))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -31,6 +32,7 @@ const config = {
         bgSecondary: "hsl(var(--bgSecondary))",
         foreground: "hsl(var(--foreground))",
         gray: "hsl(var(--gray))",
+        graySecondary: "hsl(var(--graySecondary))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
