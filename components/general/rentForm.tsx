@@ -74,7 +74,7 @@ export default function RentForm() {
             </div>
             <button
               type="submit"
-              className="w-full desktop:w-24 flex items-center justify-center bg-primary hover:bg-secondary text-white rounded-[6px] desktop:rounded-none px-4 py-2 transition duration-300"
+              className="w-full desktop:w-24 flex items-center justify-center bg-primary hover:bg-secondary text-white rounded-[6px] desktop:rounded-none px-4 py-2 transition"
             >
               <SearchIcon />
             </button>

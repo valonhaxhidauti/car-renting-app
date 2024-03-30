@@ -25,6 +25,7 @@ const config = {
     extend: {
       colors: {
         borderForm: "hsl(var(--borderForm))",
+        borderGray: "hsl(var(--borderGray))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

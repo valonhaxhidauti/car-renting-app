@@ -18,22 +18,16 @@ import {
 } from "@/assets/svgs";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { ChevronUp } from "lucide-react";
+import ScrollToTop from "../common/scrollToTop";
+import SideMenu from "../common/sideMenu";
 
 export default function Contact() {
   const { register, handleSubmit } = useForm();
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  const t = useTranslations("Contact");
 
   const onSubmit = (data: any) => {
     console.log(data);
   };
-  const t = useTranslations("Contact");
 
   return (
     <>
@@ -59,8 +53,9 @@ export default function Contact() {
           </BreadcrumbList>
         </Breadcrumb>
         <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
-          <div className="flex flex-col tablet:flex-row w-full laptop:w-4/5 gap-8 max-w-[1440px] px-0 py-8 tablet:px-8">
-            <div className="flex flex-col min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
+          <SideMenu />
+          <div className="flex flex-col tablet:flex-row w-full laptop:w-3/4 gap-8 py-8">
+            <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
               <VisitUsIcon />
               <h1 className="text-center text-gray font-bold text-2xl">
                 {t("visitUs")}
@@ -69,7 +64,7 @@ export default function Contact() {
                 {t("visitUsDescription")}
               </p>
             </div>
-            <div className="flex flex-col min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
+            <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
               <CallUsIcon />
               <h1 className="text-center text-gray font-bold text-2xl">
                 {t("callUs")}
@@ -78,7 +73,7 @@ export default function Contact() {
                 {t("callUsDescription")}
               </p>
             </div>
-            <div className="flex flex-col min-h-64 gap-2 relative z-0 shadow-grayPrimary justify-center items-center py-8 px-12 ">
+            <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-2 relative z-0 shadow-grayPrimary justify-center items-center py-8 px-12 ">
               <MailIcon className="absolute top-1 right-4 -z-10" />
               <a href="mailto:rentgo@rentgotheme.com" className="text-primary">
                 rentgo@rentgotheme.com
@@ -88,7 +83,7 @@ export default function Contact() {
               </a>
             </div>
           </div>
-          <div className="px-0 py-8 tablet:px-8 w-full laptop:w-4/5">
+          <div className="py-8 w-full laptop:w-3/4">
             <div className="flex flex-col tablet:flex-row gap-8">
               <div className="relative flex-shrink-0 w-full tablet:w-1/2 h-80 tablet:h-auto">
                 <Image
@@ -140,7 +135,7 @@ export default function Contact() {
                   <div className="w-full text-right">
                     <button
                       type="submit"
-                      className="w-full mobile:w-fit text-white bg-primary hover:bg-secondary px-8 py-3"
+                      className="w-full mobile:w-fit transition text-white bg-primary hover:bg-secondary px-8 py-3"
                     >
                       {t("sendMessage")}
                     </button>
@@ -149,12 +144,7 @@ export default function Contact() {
               </div>
             </div>
           </div>
-          <div
-            className="hidden laptop:block cursor-pointer rounded-full p-3 border-gray border-2 absolute bottom-16 right-8"
-            onClick={scrollToTop}
-          >
-            <ChevronUp size={32} className="text-gray" />
-          </div>
+          <ScrollToTop />
         </div>
       </div>
     </>

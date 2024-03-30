@@ -96,14 +96,14 @@ export default function Header({
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <Link href="/" className="flex group items-center gap-12">
+          <Link href="/about" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("aboutUs")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <Link href="/" className="flex group items-center gap-12">
+          <Link href="/faq" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("faq")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
@@ -117,14 +117,14 @@ export default function Header({
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <Link href="/" className="flex group items-center gap-12">
+          <Link href="/policy" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("privacyPolicy")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <Link href="/" className="flex group items-center gap-12">
+          <Link href="/contact" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("contact")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
