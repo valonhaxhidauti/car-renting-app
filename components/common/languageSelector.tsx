@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-} from "./select";
+} from "../ui/select"
 import { ChevronDown } from "lucide-react";
 import { FlagDeIcon, FlagUkIcon } from "@/assets/svgs";
 

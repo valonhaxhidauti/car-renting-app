@@ -21,7 +21,7 @@ import {
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
-import LanguageSelector from "../ui/languageSelector";
+import LanguageSelector from "../common/languageSelector";
 
 export default function Header({
   background,
@@ -57,7 +57,7 @@ export default function Header({
         />
         <div className="flex flex-col text-white justify-center relative items-center tablet:items-end w-full h-full gap-2 tablet:gap-4 max-w-[1440px] m-auto">
           <Link
-            href="/"
+            href="/register"
             className="text-white border-white flex mb-3 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
           >
             <LoginIcon className="text-white" />
@@ -110,7 +110,7 @@ export default function Header({
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <Link href="/" className="flex group items-center gap-12">
+          <Link href="/terms" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("rentalTerms")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
@@ -208,7 +208,7 @@ export default function Header({
               </Select>
             )}
             <Link
-              href="/"
+              href="/register"
               className={`${
                 isOpen
                   ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"

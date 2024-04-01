@@ -22,7 +22,7 @@ export default function SideMenu() {
         {t("faq")}
       </Link>
       <Link
-        href="/"
+        href="/terms"
         className="text-white p-4 text-xs border-b-[#4c95eb] hover:font-medium border-b"
       >
         {t("rentalTerms")}

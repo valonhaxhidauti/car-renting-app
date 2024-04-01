@@ -28,7 +28,7 @@ export default function Footer() {
               <p className="text-primary text-xl ">{t("pages.title")}</p>
               <div className="flex flex-col gap-4 mt-6 justify-between">
                 <Link
-                  href="/"
+                  href="/about"
                   className="text-gray hover:font-medium text-sm leading-none"
                 >
                   {t("pages.aboutUs")}
@@ -46,7 +46,7 @@ export default function Footer() {
                   {t("pages.blog")}
                 </Link>
                 <Link
-                  href="/"
+                  href="/contact"
                   className="text-gray hover:font-medium text-sm leading-none"
                 >
                   {t("pages.contact")}
@@ -57,19 +57,19 @@ export default function Footer() {
               <p className="text-primary text-xl ">{t("information.title")}</p>
               <div className="flex flex-col gap-4 mt-6 justify-between">
                 <Link
-                  href="/"
+                  href="/faq"
                   className="text-gray hover:font-medium text-sm leading-none"
                 >
                   {t("information.faq")}
                 </Link>
                 <Link
-                  href="/"
+                  href="/terms"
                   className="text-gray hover:font-medium text-sm leading-none"
                 >
                   {t("information.rentalTerms")}
                 </Link>
                 <Link
-                  href="/"
+                  href="/policy"
                   className="text-gray hover:font-medium text-sm leading-none"
                 >
                   {t("information.privacyPolicy")}

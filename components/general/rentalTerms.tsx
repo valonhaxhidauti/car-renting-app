@@ -5,13 +5,12 @@ import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 import ScrollToTop from "../common/scrollToTop";
 import SideMenu from "../common/sideMenu";
 
-export default function PrivacyPolicy() {
-  const t = useTranslations("PrivacyPolicy");
+export default function RentalTerms() {
+  const t = useTranslations("RentalTerms");
   const paragraphs = [
     t("content.paragraph1"),
     t("content.paragraph2"),
     t("content.paragraph3"),
-    t("content.paragraph4"),
   ];
 
   return (

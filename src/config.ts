@@ -14,11 +14,19 @@ export const pathnames = {
   },
   '/policy': {
     en: '/policy',
-    de: '/Datenschutzrichtlinie'
+    de: '/datenschutzrichtlinie'
   },
   '/faq': {
     en: '/faq',
     de: '/faq'
+  },
+  '/terms': {
+    en: '/terms',
+    de: '/bedingungen'
+  },
+  '/register': {
+    en: '/register',
+    de: '/registrieren'
   }
 } satisfies Pathnames<typeof locales>;
 
