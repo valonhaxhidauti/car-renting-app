@@ -24,10 +24,6 @@ export const pathnames = {
     en: '/terms',
     de: '/bedingungen'
   },
-  '/register': {
-    en: '/register',
-    de: '/registrieren'
-  }
 } satisfies Pathnames<typeof locales>;
 
 export const localePrefix = undefined;

@@ -29,6 +29,39 @@
             "button": "Rent now!"
         }
     },
+    "Authenthication": {
+        "Login": {
+            "Title": "Login",
+            "Description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+            "FacebookButton": "Signup with Facebook",
+            "GoogleButton": "Signup with Google",
+            "Or": "or",
+            "EmailLabel": "E-mail address",
+            "PasswordLabel": "Password",
+            "ForgotPassword": "Forgot your password?",
+            "LoginButton": "Log in"
+        },
+        "PasswordReset": {
+            "Title": "Forgot Your Password?",
+            "Description1": "Enter your registered email address to set a new password.",
+            "Description2": "We will send the password change link to your email address.",
+            "EmailLabel": "E-mail Address",
+            "PasswordResetButton": "Password Reset"
+        },
+        "Register": {
+            "Title": "Register Now",
+            "Description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+            "MrLabel": "Mr.",
+            "MrsLabel": "Mrs.",
+            "NameLabel": "Name",
+            "SurnameLabel": "Surname",
+            "EmailAddressLabel": "E-mail address",
+            "PhoneNumberLabel": "Phone Number",
+            "PasswordLabel": "Password",
+            "PasswordAgainLabel": "Password (Again)",
+            "RegisterButton": "Register"
+        }
+    },
     "Contact": {
         "heading": "Contact",
         "breadcrumb": {

@@ -6,7 +6,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     screens: {
@@ -14,7 +14,7 @@ const config = {
       'tablet': '768px',
       'laptop': '1024px',
       'desktop': '1280px',
-    }, 
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -69,7 +69,8 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'grayPrimary': "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
+        "grayPrimary": "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
+        "btnShadow": "3.346px 3.716px 15px 0px rgba(0, 0, 0, 0.05)",
       },
       keyframes: {
         "accordion-down": {

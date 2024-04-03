@@ -29,6 +29,40 @@
             "button": "Jetzt mieten!"
         }
     },
+    "Authenthication": {
+        "Login": {
+            "Title": "Anmelden",
+            "Description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+            "FacebookButton": "Mit Facebook anmelden",
+            "GoogleButton": "Mit Google anmelden",
+            "Or": "oder",
+            "EmailLabel": "E-Mail-Adresse",
+            "PasswordLabel": "Passwort",
+            "ForgotPassword": "Passwort vergessen?",
+            "LoginButton": "Einloggen"
+        },
+        "PasswordReset": {
+            "Title": "Passwort vergessen?",
+            "Description1": "Geben Sie Ihre registrierte E-Mail-Adresse ein, um ein neues Passwort festzulegen.",
+            "Description2": "Wir senden Ihnen den Link zur Passwortänderung an Ihre E-Mail-Adresse.",
+            "EmailLabel": "E-Mail-Adresse",
+            "PasswordResetButton": "Passwort zurücksetzen"
+        },
+        "Register": {
+            "Title": "Jetzt registrieren",
+            "Description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+            "MrLabel": "Herr",
+            "MrsLabel": "Frau",
+            "NameLabel": "Name",
+            "SurnameLabel": "Nachname",
+            "EmailAddressLabel": "E-Mail-Adresse",
+            "PhoneNumberLabel": "Telefonnummer",
+            "CountryLabel": "Land",
+            "PasswordLabel": "Passwort",
+            "PasswordAgainLabel": "Passwort (Wiederholen)",
+            "RegisterButton": "Registrieren"
+        }
+    },
     "Contact": {
         "heading": "Kontakt",
         "breadcrumb": {

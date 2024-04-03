@@ -57,7 +57,7 @@ export default function Header({
         />
         <div className="flex flex-col text-white justify-center relative items-center tablet:items-end w-full h-full gap-2 tablet:gap-4 max-w-[1440px] m-auto">
           <Link
-            href="/register"
+            href="/account"
             className="text-white border-white flex mb-3 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
           >
             <LoginIcon className="text-white" />
@@ -208,7 +208,7 @@ export default function Header({
               </Select>
             )}
             <Link
-              href="/register"
+              href="/account"
               className={`${
                 isOpen
                   ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
