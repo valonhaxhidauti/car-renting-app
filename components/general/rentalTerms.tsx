@@ -22,7 +22,7 @@ export default function RentalTerms() {
           <SideMenu />
           <div className="flex flex-col w-full laptop:w-3/4 gap-8 py-8">
             {paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-gray">
+              <p key={index} className="text-grayFont">
                 {paragraph}
               </p>
             ))}

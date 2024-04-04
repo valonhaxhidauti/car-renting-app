@@ -17,6 +17,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
+  SelectValue,
 } from "../ui/select";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
@@ -66,7 +67,7 @@ export default function Header({
           <div className="flex gap-4 mb-3 tablet:mb-0">
             <Select>
               <SelectTrigger className="flex tablet:hidden border-white text-white w-[96px] border rounded-full h-6 py-4 px-2 g-2">
-                {t("currencies.usd")}
+                <SelectValue placeholder={t("currencies.usd")} />
                 <ChevronDown className="text-white h-4 w-4" />
               </SelectTrigger>
               <SelectContent className="bg-white">
@@ -166,7 +167,7 @@ export default function Header({
               <Link
                 href="/"
                 className={`hidden desktop:flex px-1 font-bold hover:scale-105 transition-transform ${
-                  background ? "text-white" : "text-gray"
+                  background ? "text-white" : "text-grayFont"
                 }`}
               >
                 {t("homepage")}
@@ -174,7 +175,7 @@ export default function Header({
               <Link
                 href="/"
                 className={`hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
-                  background ? "text-white" : "text-gray"
+                  background ? "text-white" : "text-grayFont"
                 }`}
               >
                 {t("exploreVehicles")}
@@ -182,7 +183,7 @@ export default function Header({
               <Link
                 href="/contact"
                 className={`hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
-                  background ? "text-white" : "text-gray"
+                  background ? "text-white" : "text-grayFont"
                 }`}
               >
                 {t("contact")}
@@ -193,7 +194,7 @@ export default function Header({
             {isOpen && (
               <Select>
                 <SelectTrigger className="hidden tablet:flex border-white hover:opacity-75 text-white w-[96px] border rounded-full ">
-                  {t("currencies.usd")}
+                  <SelectValue placeholder={t("currencies.usd")} />
                   <ChevronDown
                     className={`${isOpen ? "text-white" : ""} h-4 w-4`}
                   />
@@ -212,10 +213,12 @@ export default function Header({
               className={`${
                 isOpen
                   ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
-                  : "bg-white hover:bg-slate-50 text-gray border-gray hidden laptop:flex"
+                  : "bg-white hover:bg-slate-50 text-grayFont border-gray hidden laptop:flex"
               } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
             >
-              <LoginIcon className={`${isOpen ? "text-white" : "text-gray"}`} />
+              <LoginIcon
+                className={`${isOpen ? "text-white" : "text-grayFont"}`}
+              />
               {t("loginRegister")}
             </Link>
             <LanguageSelector
@@ -233,7 +236,7 @@ export default function Header({
               <HamburgerIcon
                 className={`${
                   isOpen ? "opacity-0" : "opacity-100 z-10"
-                } transition-opacity text-gray hover:text-slate-900 duration-150 absolute right-0 top-0`}
+                } transition-opacity text-grayFont hover:text-slate-900 duration-150 absolute right-0 top-0`}
               />
               <CloseMenuIcon
                 className={`${

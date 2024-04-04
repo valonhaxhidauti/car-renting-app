@@ -13,16 +13,16 @@ import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function RegisterForm() {
-  const t = useTranslations("Authenthication");
+  const t = useTranslations("Account");
 
   return (
     <div className="flex flex-col tablet:flex-row w-full gap-8">
-      <div className="items-start flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between py-16 px-16">
-        <h1 className="text-gray font-bold text-4xl mb-2">
-          {t("Register.Title")}
+      <div className="items-start flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between mobile:p-16">
+        <h1 className="text-grayFont font-bold text-4xl mb-2">
+          {t("register.title")}
         </h1>
         <div className="w-20 h-0.5 bg-primary"></div>
-        <p className="text-gray">{t("Register.Description")}</p>
+        <p className="text-grayFont">{t("register.description")}</p>
         <div className="w-full">
           <form
             className="grid grid-cols-1 mobile:grid-cols-2 gap-4"
@@ -38,7 +38,7 @@ export default function RegisterForm() {
                   >
                     <RadioGroupItem value="mr" id="r1" />
 
-                    {t("Register.MrLabel")}
+                    {t("register.mrLabel")}
                   </Label>
                 </div>
                 <div className="w-full">
@@ -47,48 +47,48 @@ export default function RegisterForm() {
                     className="bg-white p-4 flex rounded-sm gap-4 w-full hover:shadow-btnShadow cursor-pointer"
                   >
                     <RadioGroupItem value="mrs" id="r2" />
-                    {t("Register.MrsLabel")}
+                    {t("register.mrsLabel")}
                   </Label>
                 </div>
               </RadioGroup>
             </div>
             <div></div>
             <div className="mt-2">
-              <label className="block text-sm font-medium leading-6 text-gray">
-                {t("Register.NameLabel")}
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.nameLabel")}
               </label>
               <input
                 type="text"
                 required
-                className="block w-full rounded-sm p-4 text-gray focus-visible:outline-primary"
+                className="block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary"
               />
             </div>
             <div className="mt-2">
-              <label className="block text-sm font-medium leading-6 text-gray">
-                {t("Register.SurnameLabel")}
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.surnameLabel")}
               </label>
               <input
                 type="text"
                 required
-                className="block w-full rounded-sm p-4 text-gray focus-visible:outline-primary"
+                className="block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-gray">
-                {t("Register.EmailAddressLabel")}
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.emailAddressLabel")}
               </label>
               <div className="mt-2 relative">
                 <input
                   type="email"
                   required
-                  className="block w-full rounded-sm p-4 text-gray focus-visible:outline-primary pr-8"
+                  className="block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
                 />
                 <CheckIcon className="absolute right-4 bottom-[22px]" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-gray">
-                {t("Register.PhoneNumberLabel")}
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.phoneNumberLabel")}
               </label>
               <div className="mt-2 flex gap-2">
                 <Select>
@@ -107,35 +107,31 @@ export default function RegisterForm() {
                 <input
                   type="tel"
                   required
-                  className="block w-full rounded-sm p-4 text-gray focus-visible:outline-primary"
+                  className="block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary"
                 />
               </div>
             </div>
             <div>
-              <div className="flex items-center justify-between">
-                <label className="block text-sm font-medium leading-6 text-gray">
-                  {t("Register.PasswordLabel")}
-                </label>
-              </div>
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.passwordLabel")}
+              </label>
               <div className="mt-2">
                 <input
                   type="password"
                   required
-                  className="block w-full rounded-sm p-4 text-gray focus-visible:outline-primary"
+                  className="block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary"
                 />
               </div>
             </div>
             <div>
-              <div className="flex items-center justify-between">
-                <label className="block text-sm font-medium leading-6 text-gray">
-                  {t("Register.PasswordAgainLabel")}
-                </label>
-              </div>
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.passwordAgainLabel")}
+              </label>
               <div className="mt-2">
                 <input
                   type="password"
                   required
-                  className="block w-full rounded-sm p-4 text-gray focus-visible:outline-primary"
+                  className="block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary"
                 />
               </div>
             </div>
@@ -143,9 +139,9 @@ export default function RegisterForm() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="flex justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
+                className="flex justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline-primary"
               >
-                {t("Register.RegisterButton")}
+                {t("register.registerButton")}
               </button>
             </div>
           </form>

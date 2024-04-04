@@ -1,7 +1,7 @@
 import PasswordReset from "@/components/general/passwordReset";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
-export default function Register() {
+export default function ResetPassword() {
   return (
     <>
       <Header background={false} fixed={false} />

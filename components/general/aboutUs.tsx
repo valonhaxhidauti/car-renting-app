@@ -22,37 +22,37 @@ export default function AboutUs() {
             <p className="text-primary text-xl font-medium">
               {t("description.paragraph1")}
             </p>
-            <p className="text-gray">{t("description.paragraph2")}</p>
+            <p className="text-grayFont">{t("description.paragraph2")}</p>
           </div>
           <div className="py-8 w-full laptop:w-3/4">
             <div className="flex flex-col tablet:flex-row gap-8 w-full">
               <div className="flex flex-col flex-grow group p-8 tablet:w-1/3 hover:bg-primary transition duration-300">
                 <EasyIcon className="text-primary group-hover:text-white" />
-                <h1 className="text-3xl text-gray group-hover:text-white my-4">
+                <h1 className="text-3xl text-grayFont group-hover:text-white my-4">
                   {t("features.easy.title")}
                 </h1>
                 <div className="w-20 h-[2.5px] mb-4 bg-primary group-hover:bg-white"></div>
-                <p className="group-hover:text-white text-gray">
+                <p className="group-hover:text-white text-grayFont">
                   {t("features.easy.description")}
                 </p>
               </div>
               <div className="flex flex-col flex-grow group p-8 tablet:w-1/3 hover:bg-primary transition duration-300">
                 <EconomicIcon className="text-primary group-hover:text-white" />
-                <h1 className="text-3xl text-gray group-hover:text-white my-4">
+                <h1 className="text-3xl text-grayFont group-hover:text-white my-4">
                   {t("features.economic.title")}
                 </h1>
                 <div className="w-20 h-[2.5px] mb-4 bg-primary group-hover:bg-white"></div>
-                <p className="group-hover:text-white text-gray">
+                <p className="group-hover:text-white text-grayFont">
                   {t("features.economic.description")}
                 </p>
               </div>
               <div className="flex flex-col flex-grow group p-8 tablet:w-1/3 hover:bg-primary transition duration-300">
                 <EverywhereIcon className="text-primary group-hover:text-white" />
-                <h1 className="text-3xl text-gray group-hover:text-white my-4">
+                <h1 className="text-3xl text-grayFont group-hover:text-white my-4">
                   {t("features.everywhere.title")}
                 </h1>
                 <div className="w-20 h-[2.5px] mb-4 bg-primary group-hover:bg-white"></div>
-                <p className="group-hover:text-white text-gray">
+                <p className="group-hover:text-white text-grayFont">
                   {t("features.everywhere.description")}
                 </p>
               </div>
@@ -60,7 +60,7 @@ export default function AboutUs() {
           </div>
           <div className="py-8 w-full laptop:w-3/4">
             <div className="flex flex-col gap-8 w-full items-center">
-              <h1 className="text-center text-gray text-4xl mb-4">
+              <h1 className="text-center text-grayFont text-4xl mb-4">
                 {t("teamSection")}
               </h1>
               <div className="flex flex-col gap-4 tablet:flex-row">

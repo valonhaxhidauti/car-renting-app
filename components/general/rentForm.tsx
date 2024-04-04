@@ -13,6 +13,7 @@ interface IFormInputs {
 }
 
 export default function RentForm() {
+  const t = useTranslations("RentForm");
   const {
     register,
     watch,
@@ -26,11 +27,9 @@ export default function RentForm() {
     alert(JSON.stringify(data));
   };
 
-  const t = useTranslations("RentForm");
-
   return (
     <div className="w-full tablet:w-1/2 h-screen relative p-4 mobile:p-8 flex flex-col justify-center">
-      <p className="pb-4 font-bold leading-4 text-white tablet:text-gray text-lg">
+      <p className="pb-4 font-bold leading-4 text-white tablet:text-grayFont text-lg">
         {t("findYourCar")}
       </p>
       <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +82,7 @@ export default function RentForm() {
                 watchShowReturnLocation
                   ? "bottom-[175px] laptop:bottom-[150px]"
                   : "bottom-[140px] laptop:bottom-[110px]"
-              }  laptop:bottom-0 desktop:-bottom-3 -right-2 laptop:-right-9 desktop:-right-7 font-bold text-[72px] laptop:text-[110px] desktop:text-[144px] text-[#f6f6f6] -z-10`}
+              }  laptop:bottom-0 desktop:-bottom-3 -right-2 laptop:-right-9 desktop:-right-7 font-bold text-[72px] laptop:text-[110px] desktop:text-[144px] text-gray-100 -z-10`}
             >
               {t("findNow")}
             </h1>
@@ -98,7 +97,7 @@ export default function RentForm() {
           />
           <label
             htmlFor="diffLocation"
-            className="text-sm font-medium text-white tablet:text-gray leading-none cursor-pointer"
+            className="text-sm font-medium text-white tablet:text-grayFont leading-none cursor-pointer"
           >
             {t("deliverAtDifferentPoint")}
           </label>

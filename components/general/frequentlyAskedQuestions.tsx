@@ -52,7 +52,7 @@ export default function FrequentlyAskedQuestions() {
                     className={`${
                       isOpen[item]
                         ? " text-primary font-bold"
-                        : "text-gray font-normal"
+                        : "text-grayFont font-normal"
                     } text-start`}
                   >
                     {/* @ts-ignore */}
@@ -61,7 +61,7 @@ export default function FrequentlyAskedQuestions() {
                   <AccordionContent
                     className={`${
                       isOpen[item] ? "border-primary border-b-2" : ""
-                    } text-sm text-gray`}
+                    } text-sm text-grayFont`}
                   >
                     {/* @ts-ignore */}
                     {t(`items.${item}.answer`)}

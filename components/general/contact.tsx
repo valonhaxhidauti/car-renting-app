@@ -23,27 +23,27 @@ export default function Contact() {
 
   return (
     <>
-      <HeadingTitle translations={t("heading")} /> 
+      <HeadingTitle translations={t("heading")} />
       <div className="bg-bgSecondary w-full pb-16">
-      <Breadcrumbs translations={t} /> 
-        <div className="relative max-w-[1440px]  bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
+        <Breadcrumbs translations={t} />
+        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
           <SideMenu />
           <div className="flex flex-col tablet:flex-row w-full laptop:w-3/4 gap-8 py-8">
             <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
               <VisitUsIcon />
-              <h1 className="text-center text-gray font-bold text-2xl">
+              <h1 className="text-center text-grayFont font-bold text-2xl">
                 {t("visitUs")}
               </h1>
-              <p className="text-center text-gray text-sm ">
+              <p className="text-center text-grayFont text-sm ">
                 {t("visitUsDescription")}
               </p>
             </div>
             <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
               <CallUsIcon />
-              <h1 className="text-center text-gray font-bold text-2xl">
+              <h1 className="text-center text-grayFont font-bold text-2xl">
                 {t("callUs")}
               </h1>
-              <p className="text-center text-gray text-sm ">
+              <p className="text-center text-grayFont text-sm ">
                 {t("callUsDescription")}
               </p>
             </div>
@@ -72,10 +72,10 @@ export default function Contact() {
                 <LocationMapIcon className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="flex flex-col w-full tablet:w-1/2">
-                <h1 className="text-gray text-2xl font-bold">
+                <h1 className="text-grayFont text-2xl font-bold">
                   {t("formHeading")}
                 </h1>
-                <p className="text-graySecondary text-sm mt-2 mb-10">
+                <p className="text-grayFontSecondary text-sm mt-2 mb-10">
                   {t("formDescription")}
                 </p>
                 <form

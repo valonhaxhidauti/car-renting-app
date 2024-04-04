@@ -3,7 +3,7 @@ import Header from "@/components/layout/header";
 import LoginForm from "@/components/general/logInForm";
 import RegisterForm from "@/components/general/registerForm";
 
-export default function Register() {
+export default function Account() {
   return (
     <>
       <Header background={false} fixed={false} />

@@ -14,8 +14,8 @@ export default function Footer() {
           <div className="w-full max-w-[1440px] m-auto flex flex-col tablet:flex-row gap-8 tablet:gap-32 laptop:gap-48 px-4 mobile:px-8 py-12">
             <div className="flex flex-col justify-between">
               <Logo />
-              <p className="text-gray text-xs mt-6">{t("companyName")}</p>
-              <p className="text-gray text-2xl mb-6">{t("slogan")}</p>
+              <p className="text-grayFont text-xs mt-6">{t("companyName")}</p>
+              <p className="text-grayFont text-2xl mb-6">{t("slogan")}</p>
               <div className="flex gap-4">
                 <Facebook size={20} />
                 <Twitter size={20} />
@@ -29,25 +29,25 @@ export default function Footer() {
               <div className="flex flex-col gap-4 mt-6 justify-between">
                 <Link
                   href="/about"
-                  className="text-gray hover:font-medium text-sm leading-none"
+                  className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("pages.aboutUs")}
                 </Link>
                 <Link
                   href="/"
-                  className="text-gray hover:font-medium text-sm leading-none"
+                  className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("pages.exploreVehicles")}
                 </Link>
                 <Link
                   href="/"
-                  className="text-gray hover:font-medium text-sm leading-none"
+                  className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("pages.blog")}
                 </Link>
                 <Link
                   href="/contact"
-                  className="text-gray hover:font-medium text-sm leading-none"
+                  className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("pages.contact")}
                 </Link>
@@ -58,19 +58,19 @@ export default function Footer() {
               <div className="flex flex-col gap-4 mt-6 justify-between">
                 <Link
                   href="/faq"
-                  className="text-gray hover:font-medium text-sm leading-none"
+                  className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("information.faq")}
                 </Link>
                 <Link
                   href="/terms"
-                  className="text-gray hover:font-medium text-sm leading-none"
+                  className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("information.rentalTerms")}
                 </Link>
                 <Link
                   href="/policy"
-                  className="text-gray hover:font-medium text-sm leading-none"
+                  className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("information.privacyPolicy")}
                 </Link>
@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="max-w-[1440px] m-auto">
-          <div className="px-4 mobile:px-8 py-6 text-gray text-sm">
+          <div className="px-4 mobile:px-8 py-6 text-grayFont text-sm">
             {t("copyright", { currentYear: currentYear })}
           </div>
         </div>

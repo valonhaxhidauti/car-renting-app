@@ -26,13 +26,14 @@ const config = {
       colors: {
         borderForm: "hsl(var(--borderForm))",
         borderGray: "hsl(var(--borderGray))",
+        borderMenu: "hsl(var(--borderMenu))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         bgSecondary: "hsl(var(--bgSecondary))",
         foreground: "hsl(var(--foreground))",
-        gray: "hsl(var(--gray))",
+        grayFont: "hsl(var(--gray))",
         graySecondary: "hsl(var(--graySecondary))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

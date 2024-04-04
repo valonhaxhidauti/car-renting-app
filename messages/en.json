@@ -29,37 +29,67 @@
             "button": "Rent now!"
         }
     },
-    "Authenthication": {
-        "Login": {
-            "Title": "Login",
-            "Description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-            "FacebookButton": "Signup with Facebook",
-            "GoogleButton": "Signup with Google",
-            "Or": "or",
-            "EmailLabel": "E-mail address",
-            "PasswordLabel": "Password",
-            "ForgotPassword": "Forgot your password?",
-            "LoginButton": "Log in"
+    "Account": {
+        "title": "My Account",
+        "breadcrumb": {
+            "homepage": "Homepage",
+            "personalInfo": "My Personal Informations"
         },
-        "PasswordReset": {
-            "Title": "Forgot Your Password?",
-            "Description1": "Enter your registered email address to set a new password.",
-            "Description2": "We will send the password change link to your email address.",
-            "EmailLabel": "E-mail Address",
-            "PasswordResetButton": "Password Reset"
+        "login": {
+            "title": "Login",
+            "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+            "facebookButton": "Signup with Facebook",
+            "googleButton": "Signup with Google",
+            "or": "or",
+            "emailLabel": "E-mail address",
+            "passwordLabel": "Password",
+            "forgotPassword": "Forgot your password?",
+            "loginButton": "Log in"
         },
-        "Register": {
-            "Title": "Register Now",
-            "Description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-            "MrLabel": "Mr.",
-            "MrsLabel": "Mrs.",
-            "NameLabel": "Name",
-            "SurnameLabel": "Surname",
-            "EmailAddressLabel": "E-mail address",
-            "PhoneNumberLabel": "Phone Number",
-            "PasswordLabel": "Password",
-            "PasswordAgainLabel": "Password (Again)",
-            "RegisterButton": "Register"
+        "birthdaySelect": {
+            "label": "Birth Day",
+            "months": {
+                "jan": "January",
+                "feb": "February",
+                "mar": "March",
+                "apr": "April",
+                "may": "May",
+                "jun": "June",
+                "jul": "July",
+                "aug": "August",
+                "sep": "September",
+                "oct": "October",
+                "nov": "November",
+                "dec": "December"
+            },
+            "day": "Day",
+            "month": "Month",
+            "year": "Year"
+        },
+        "passwordReset": {
+            "title": "Forgot Your Password?",
+            "description1": "Enter your registered email address to set a new password.",
+            "description2": "We will send the password change link to your email address.",
+            "emailLabel": "E-mail Address",
+            "passwordResetButton": "Password Reset"
+        },
+        "register": {
+            "title": "Register Now",
+            "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+            "mrLabel": "Mr.",
+            "mrsLabel": "Mrs.",
+            "nameLabel": "Name",
+            "surnameLabel": "Surname",
+            "emailAddressLabel": "E-mail address",
+            "phoneNumberLabel": "Phone Number",
+            "passwordLabel": "Password",
+            "passwordAgainLabel": "Password (Again)",
+            "registerButton": "Register"
+        },
+        "SideMenu": {
+            "personalInformations": "My Personal Informations",
+            "reservations": "My Reservations",
+            "logOut": "Log Out"
         }
     },
     "Contact": {

@@ -18,9 +18,9 @@ const HeadingTitle = ({ translations }: { translations: string }) => {
   );
 };
 
-const Breadcrumbs = ({ translations }: { translations: any }) => {
+const Breadcrumbs = ({ translations, }: { translations: any }) => {
   return (
-    <Breadcrumb className="max-w-[1440px] m-auto w-full px-4 mobile:px-8 py-8 font-bold text-gray">
+    <Breadcrumb className="max-w-[1440px] m-auto w-full px-4 mobile:px-8 py-8 ">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
@@ -29,7 +29,7 @@ const Breadcrumbs = ({ translations }: { translations: any }) => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className=" font-bold">
+          <BreadcrumbPage>
             {translations("heading")}
           </BreadcrumbPage>
         </BreadcrumbItem>

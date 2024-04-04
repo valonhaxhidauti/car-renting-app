@@ -29,38 +29,68 @@
             "button": "Jetzt mieten!"
         }
     },
-    "Authenthication": {
-        "Login": {
-            "Title": "Anmelden",
-            "Description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-            "FacebookButton": "Mit Facebook anmelden",
-            "GoogleButton": "Mit Google anmelden",
-            "Or": "oder",
-            "EmailLabel": "E-Mail-Adresse",
-            "PasswordLabel": "Passwort",
-            "ForgotPassword": "Passwort vergessen?",
-            "LoginButton": "Einloggen"
+    "Account": {
+        "title": "Mein Konto",
+        "breadcrumb": {
+            "homepage": "Startseite",
+            "personalInfo": "Meine persönlichen Informationen"
         },
-        "PasswordReset": {
-            "Title": "Passwort vergessen?",
-            "Description1": "Geben Sie Ihre registrierte E-Mail-Adresse ein, um ein neues Passwort festzulegen.",
-            "Description2": "Wir senden Ihnen den Link zur Passwortänderung an Ihre E-Mail-Adresse.",
-            "EmailLabel": "E-Mail-Adresse",
-            "PasswordResetButton": "Passwort zurücksetzen"
+        "login": {
+            "title": "Anmelden",
+            "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+            "facebookButton": "Mit Facebook anmelden",
+            "googleButton": "Mit Google anmelden",
+            "or": "oder",
+            "emailLabel": "E-Mail-Adresse",
+            "passwordLabel": "Passwort",
+            "forgotPassword": "Passwort vergessen?",
+            "loginButton": "Einloggen"
         },
-        "Register": {
-            "Title": "Jetzt registrieren",
-            "Description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-            "MrLabel": "Herr",
-            "MrsLabel": "Frau",
-            "NameLabel": "Name",
-            "SurnameLabel": "Nachname",
-            "EmailAddressLabel": "E-Mail-Adresse",
-            "PhoneNumberLabel": "Telefonnummer",
-            "CountryLabel": "Land",
-            "PasswordLabel": "Passwort",
-            "PasswordAgainLabel": "Passwort (Wiederholen)",
-            "RegisterButton": "Registrieren"
+        "birthdaySelect": {
+            "label": "Geburtstag",
+            "months": {
+                "jan": "Januar",
+                "feb": "Februar",
+                "mar": "März",
+                "apr": "April",
+                "may": "Mai",
+                "jun": "Juni",
+                "jul": "Juli",
+                "aug": "August",
+                "sep": "September",
+                "oct": "Oktober",
+                "nov": "November",
+                "dec": "Dezember"
+            },
+            "day": "Tag",
+            "month": "Monat",
+            "year": "Jahr"
+        },
+        "passwordReset": {
+            "title": "Passwort vergessen?",
+            "description1": "Geben Sie Ihre registrierte E-Mail-Adresse ein, um ein neues Passwort festzulegen.",
+            "description2": "Wir senden Ihnen den Link zur Passwortänderung an Ihre E-Mail-Adresse.",
+            "emailLabel": "E-Mail-Adresse",
+            "passwordResetButton": "Passwort zurücksetzen"
+        },
+        "register": {
+            "title": "Jetzt registrieren",
+            "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+            "mrLabel": "Herr",
+            "mrsLabel": "Frau",
+            "nameLabel": "Name",
+            "surnameLabel": "Nachname",
+            "emailAddressLabel": "E-Mail-Adresse",
+            "phoneNumberLabel": "Telefonnummer",
+            "countryLabel": "Land",
+            "passwordLabel": "Passwort",
+            "passwordAgainLabel": "Passwort (Wiederholen)",
+            "registerButton": "Registrieren"
+        },
+        "SideMenu": {
+            "personalInformations": "Meine persönlichen Informationen",
+            "reservations": "Meine Reservierungen",
+            "logOut": "Abmelden"
         }
     },
     "Contact": {
