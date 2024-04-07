@@ -107,7 +107,9 @@
             "passwordWeak": "Passwort ist nicht stark genug",
             "passwordConfirmRequired": "Passwort bestätigen",
             "passwordsNotMatch": "Passwörter stimmen nicht überein"
-        }
+        },
+        "update": "Aktualisieren",
+        "viewPassword": "Passwort anzeigen"
     },
     "Contact": {
         "heading": "Kontakt",
