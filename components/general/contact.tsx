@@ -1,10 +1,10 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
 import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 import {
   CallUsIcon,
+  CheckIcon,
   LocationMapIcon,
   MailIcon,
   VisitUsIcon,
@@ -12,13 +12,35 @@ import {
 import Image from "next/image";
 import ScrollToTop from "../common/scrollToTop";
 import SideMenu from "../common/sideMenu";
+import { useState } from "react";
+
+interface FormValues {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+}
 
 export default function Contact() {
-  const { register, handleSubmit } = useForm();
   const t = useTranslations("Contact");
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const [formData, setFormData] = useState<FormValues>({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    message: "",
+  });
+
+  const handleInputChange = (fieldName: keyof FormValues, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
   };
 
   return (
@@ -79,33 +101,86 @@ export default function Contact() {
                   {t("formDescription")}
                 </p>
                 <form
-                  onSubmit={handleSubmit(onSubmit)}
+                  onSubmit={onSubmit}
                   className="flex flex-col gap-2 text-right"
                 >
-                  <input
-                    type="text"
-                    placeholder={t("fullNamePlaceholder")}
-                    className="p-2 border border-gray rounded outline-primary"
-                    {...register("fullName")}
-                  />
-                  <input
-                    type="email"
-                    placeholder={t("emailPlaceholder")}
-                    className="p-2 border border-gray rounded outline-primary"
-                    {...register("email")}
-                  />
-                  <input
-                    type="text"
-                    placeholder={t("phoneNumberPlaceholder")}
-                    className="p-2 border border-gray rounded outline-primary"
-                    {...register("phoneNumber")}
-                  />
-                  <textarea
-                    placeholder={t("messagePlaceholder")}
-                    rows={4}
-                    className="p-2 border border-gray rounded outline-primary resize-none"
-                    {...register("message")}
-                  ></textarea>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder={t("fullNamePlaceholder")}
+                      className="w-full px-8 py-3 border border-gray rounded outline-primary"
+                      value={formData.fullName}
+                      onChange={(e) =>
+                        handleInputChange("fullName", e.target.value)
+                      }
+                    />
+                    <CheckIcon
+                      className={`absolute transition-opacity right-5 top-5
+                      ${
+                        formData.fullName.trim() !== ""
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }`}
+                    />
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      placeholder={t("emailPlaceholder")}
+                      className="w-full px-8 py-3 border border-gray rounded outline-primary"
+                      value={formData.email}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
+                    />
+                    <CheckIcon
+                      className={`absolute transition-opacity right-5 top-5
+                      ${
+                        formData.email.trim() !== ""
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }`}
+                    />
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder={t("phoneNumberPlaceholder")}
+                      className="w-full px-8 py-3 border border-gray rounded outline-primary"
+                      value={formData.phoneNumber}
+                      onChange={(e) =>
+                        handleInputChange("phoneNumber", e.target.value)
+                      }
+                    />
+                    <CheckIcon
+                      className={`absolute transition-opacity right-5 top-5
+                      ${
+                        formData.phoneNumber.trim() !== ""
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }`}
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <textarea
+                      placeholder={t("messagePlaceholder")}
+                      rows={4}
+                      className="w-full px-8 py-3 border border-gray rounded outline-primary resize-none"
+                      value={formData.message}
+                      onChange={(e) =>
+                        handleInputChange("message", e.target.value)
+                      }
+                    />
+                    <CheckIcon
+                      className={`absolute transition-opacity right-5 top-5
+                      ${
+                        formData.message.trim() !== ""
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }`}
+                    />
+                  </div>
                   <div className="w-full text-right">
                     <button
                       type="submit"

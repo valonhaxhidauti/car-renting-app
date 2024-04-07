@@ -3,16 +3,30 @@
 import { FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import ReCAPTCHA from "react-google-recaptcha";
+import { CheckIcon } from "@/assets/svgs";
+import { isEmailValid } from "../utils/formValidations";
 
 export default function PasswordReset() {
   const t = useTranslations("Account");
+  const translations = {
+    emailRequired: t("validation.emailRequired"),
+    emailInvalid: t("validation.emailInvalid"),
+  };
+
+  const [formData, setFormData] = useState("");
   const [captcha, setCaptcha] = useState<string | null>();
+  const [isEmailValidated, setIsEmailValidated] = useState(false);
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (captcha) {
-      console.log("Captcha verified");
+    if (captcha && isEmailValidated) {
+      console.log("Form submitted:", formData);
     }
+  };
+
+  const handleInputChange = (value: string) => {
+    setFormData(value);
+    setIsEmailValidated(isEmailValid(value));
   };
 
   return (
@@ -28,18 +42,29 @@ export default function PasswordReset() {
         </div>
         <form className="flex flex-col gap-4 items-center" onSubmit={onSubmit}>
           <div className="flex flex-col items-center">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium leading-6 text-grayFont text-center"
-            >
-              {t("passwordReset.emailLabel")}
-            </label>
-            <div className="mt-2">
-              <input
-                type="email"
-                required
-                className="block rounded-sm border-zinc-300 border p-4 text-grayFont focus-visible:outline-primary"
-              />
+            <div>
+              <div className="relative">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-6 text-grayFont text-center"
+                >
+                  {t("passwordReset.emailLabel")}
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={formData}
+                  onChange={(e) => handleInputChange(e.target.value)}
+                  className="block rounded-sm mt-2 mobile:w-96 border-zinc-300 border px-6 py-4 mobile:px-8 text-grayFont focus-visible:outline-primary"
+                />
+                <CheckIcon
+                  className={`absolute transition-opacity right-4 bottom-[22px] ${
+                    isEmailValidated && formData !== ""
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                />
+              </div>
             </div>
           </div>
           <ReCAPTCHA

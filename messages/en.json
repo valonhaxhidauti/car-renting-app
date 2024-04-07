@@ -44,7 +44,7 @@
             "emailLabel": "E-mail address",
             "passwordLabel": "Password",
             "forgotPassword": "Forgot your password?",
-            "loginButton": "Log in"
+            "loginButton": "Login"
         },
         "birthdaySelect": {
             "label": "Birth Day",
@@ -84,13 +84,31 @@
             "phoneNumberLabel": "Phone Number",
             "passwordLabel": "Password",
             "passwordAgainLabel": "Password (Again)",
-            "registerButton": "Register"
+            "registerButton": "Register",
+            "updateButton": "Update"
         },
-        "SideMenu": {
+        "sideMenu": {
             "personalInformations": "My Personal Informations",
             "reservations": "My Reservations",
             "logOut": "Log Out"
-        }
+        },
+        "validation": {
+            "nameRequired": "Name is required",
+            "nameInvalid": "Name is invalid",
+            "surnameRequired": "Surname is required",
+            "surnameInvalid": "Surname is invalid",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Email is invalid",
+            "phoneRequired": "Phone is required",
+            "phoneInvalid": "Phone is invalid",
+            "passwordRequired": "Password is required",
+            "passwordInvalid": "Password is invalid",
+            "passwordWeak": "Password is not strong enough",
+            "passwordConfirmRequired": "Confirm password",
+            "passwordsNotMatch": "Passwords do not match"
+        },
+        "update": "Update",
+        "viewPassword": "View Password"
     },
     "Contact": {
         "heading": "Contact",

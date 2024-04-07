@@ -36,7 +36,7 @@
             "personalInfo": "Meine persönlichen Informationen"
         },
         "login": {
-            "title": "Anmelden",
+            "title": "Einloggen",
             "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
             "facebookButton": "Mit Facebook anmelden",
             "googleButton": "Mit Google anmelden",
@@ -85,12 +85,28 @@
             "countryLabel": "Land",
             "passwordLabel": "Passwort",
             "passwordAgainLabel": "Passwort (Wiederholen)",
-            "registerButton": "Registrieren"
+            "registerButton": "Registrieren",
+            "updateButton": "Aktualisieren"
         },
-        "SideMenu": {
+        "sideMenu": {
             "personalInformations": "Meine persönlichen Informationen",
             "reservations": "Meine Reservierungen",
             "logOut": "Abmelden"
+        },
+        "validation": {
+            "nameRequired": "Name ist erforderlich",
+            "nameInvalid": "Name ist ungültig",
+            "surnameRequired": "Nachname ist erforderlich",
+            "surnameInvalid": "Nachname ist ungültig",
+            "emailRequired": "E-Mail ist erforderlich",
+            "emailInvalid": "E-Mail ist ungültig",
+            "phoneRequired": "Telefon ist erforderlich",
+            "phoneInvalid": "Telefon ist ungültig",
+            "passwordRequired": "Passwort ist erforderlich",
+            "passwordInvalid": "Passwort ist ungültig",
+            "passwordWeak": "Passwort ist nicht stark genug",
+            "passwordConfirmRequired": "Passwort bestätigen",
+            "passwordsNotMatch": "Passwörter stimmen nicht überein"
         }
     },
     "Contact": {

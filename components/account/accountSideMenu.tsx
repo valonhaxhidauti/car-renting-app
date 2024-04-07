@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function AccountSideMenu() {
-  const t = useTranslations("Account.SideMenu");
+  const t = useTranslations("Account.sideMenu");
 
   return (
     <div className="bg-primary hidden desktop:flex flex-col absolute -top-[60px] right-8 w-64">

@@ -1,11 +1,63 @@
-import { FacebookIcon, GoogleIcon } from "@/assets/svgs";
+"use client";
+
+import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import {
+  LoginFormValidation,
+  LoginFormValues,
+  isEmailValid,
+  isPasswordValid,
+} from "../utils/formValidations";
+
+interface FormValues {
+  email: string;
+  password: string;
+}
 
 export default function LoginForm() {
   const t = useTranslations("Account");
+  const translations = {
+    emailRequired: t("validation.emailRequired"),
+    emailInvalid: t("validation.emailInvalid"),
+    passwordRequired: t("validation.passwordRequired"),
+    passwordInvalid: t("validation.passwordInvalid")
+  };
+
+  const [formData, setFormData] = useState<FormValues>({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState<Partial<LoginFormValues>>({});
+
+  const handleInputChange = (fieldName: keyof FormValues, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: "",
+    }));
+  };
+
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const errors = LoginFormValidation(formData,translations);
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      console.log("Form submitted:", formData);
+    } else {
+      console.log("Form not submitted due to errors:", errors);
+    }
+  };
 
   return (
-    <div className="flex flex-col mobile:bg-white tablet:flex-row w-full gap-8 ">
+    <div className="flex mobile:bg-white w-full">
       <div className="items-start flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between mobile:p-16">
         <h1 className="text-grayFont font-bold text-4xl mb-2">
           {t("login.title")}
@@ -29,54 +81,77 @@ export default function LoginForm() {
             <div className=" border-b border-zinc-200 w-full"></div>
           </div>
           <div className="w-full">
-            <form className="flex flex-col gap-4" action="#" method="POST">
+            <form className="flex flex-col gap-4" onSubmit={submitForm}>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-grayFont"
-                >
-                  {t("login.emailLabel")}
-                </label>
-                <div className="mt-2">
+                <div className="mt-2 relative">
+                  <label className="block text-sm font-medium leading-6 text-grayFont">
+                    {t("login.emailLabel")}
+                  </label>
                   <input
-                    id="email"
-                    name="email"
                     type="email"
-                    autoComplete="email"
-                    required
-                    className="block w-full rounded-sm border-zinc-300 border p-4 text-grayFont focus-visible:outline-primary"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    className={`block w-full rounded-sm border-zinc-300 border p-4 text-grayFont focus-visible:outline-primary pr-8 ${
+                      errors.email && "outline outline-2 outline-red-500"
+                    }`}
+                  />
+                  <CheckIcon
+                    className={`absolute transition-opacity right-4 bottom-[22px] ${
+                      isEmailValid(formData.email) ? "opacity-100" : "opacity-0"
+                    }`}
                   />
                 </div>
+                <p
+                  className={`text-xs p-2 opacity-0 text-red-500 w-full transition-opacity
+                    ${errors.email && "opacity-100"}`}
+                >
+                  {errors.email}
+                </p>
               </div>
               <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-grayFont"
+                <div>
+                  <div className="mt-2 relative">
+                    <label className="block text-sm font-medium leading-6 text-grayFont">
+                      {t("login.passwordLabel")}
+                    </label>
+                    <input
+                      type="password"
+                      value={formData.password}
+                      onChange={(e) =>
+                        handleInputChange("password", e.target.value)
+                      }
+                      className={`block w-full rounded-sm border-zinc-300 border p-4 text-grayFont focus-visible:outline-primary pr-8 ${
+                        errors.password && "outline outline-2 outline-red-500"
+                      }`}
+                    />
+                    <CheckIcon
+                      className={`absolute transition-opacity right-4 bottom-[22px] ${
+                        isPasswordValid(formData.password)
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }`}
+                    />
+                  </div>
+                  <p
+                    className={`text-xs p-2 opacity-0 text-red-500 w-full transition-opacity
+                    ${errors.password && "opacity-100"}`}
                   >
-                    {t("login.passwordLabel")}
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full rounded-sm border-zinc-300 gray border p-4 text-grayFont focus-visible:outline-primary"
-                  />
+                    {errors.password}
+                  </p>
                 </div>
               </div>
               <div className="flex justify-between items-center">
                 <div className="text-sm">
-                  <a href="/account/password-reset" className="font-bold text-grayFont hover:underline">
-                  {t("login.forgotPassword")}
+                  <a
+                    href="/account/password-reset"
+                    className="font-bold text-grayFont hover:underline"
+                  >
+                    {t("login.forgotPassword")}
                   </a>
                 </div>
                 <button
                   type="submit"
-                  className="flex justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
+                  className="flex justify-center bg-primary w-[150px] mobile:w-[200px] p-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
                 >
                   {t("login.loginButton")}
                 </button>

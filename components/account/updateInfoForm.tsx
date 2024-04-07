@@ -7,31 +7,27 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { CheckIcon, FlagUkIcon } from "@/assets/svgs";
-import { FieldValues, useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import BirthdaySelector from "@/components/account/birthdaySelector";
 
 export default function UpdateInfoForm() {
   const t = useTranslations("Account");
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
 
-  const onSubmit = (data: FieldValues) => {
-    console.log("TEST", data);
-    alert(JSON.stringify(data));
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
   return (
-    <form
-      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end"
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end">
       <div className="flex gap-4 w-full">
         <RadioGroup defaultValue="mr" className="flex w-full">
           <div className="w-full">
@@ -40,7 +36,6 @@ export default function UpdateInfoForm() {
               className="border-borderForm h-[57px] border p-4 flex items-center rounded-sm gap-4 w-full cursor-pointer"
             >
               <RadioGroupItem value="mr" id="r1" />
-
               {t("register.mrLabel")}
             </Label>
           </div>
@@ -61,13 +56,8 @@ export default function UpdateInfoForm() {
         </label>
         <input
           type="text"
-          {...register("firstName")}
           className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
         />
-
-        {!errors.firstName && (
-          <CheckIcon className="absolute right-4 bottom-[22px]" />
-        )}
       </div>
       <div>
         <label className="block text-sm font-medium leading-6 text-grayFont">
@@ -75,7 +65,6 @@ export default function UpdateInfoForm() {
         </label>
         <input
           type="text"
-          required
           className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
         />
       </div>
@@ -83,13 +72,11 @@ export default function UpdateInfoForm() {
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.emailAddressLabel")}
         </label>
-        <div className="mt-2 relative">
+        <div className="mt-2">
           <input
             type="email"
-            required
             className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
           />
-          <CheckIcon className="absolute right-4 bottom-[22px]" />
         </div>
       </div>
       <div>
@@ -118,17 +105,27 @@ export default function UpdateInfoForm() {
         </div>
       </div>
       <BirthdaySelector />
-      <div>
+      <div className="relative">
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.passwordLabel")}
         </label>
-        <div className="mt-2">
-          <input
-            type="password"
-            required
-            className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
-          />
-        </div>
+        <input
+          type={showPassword ? "text" : "password"}
+          required
+          onChange={handlePasswordChange}
+          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+        />
+        {password && (
+          <div className="flex gap-2 items-center absolute right-4 bottom-[20px]">
+            <p
+              className="text-primary text-sm cursor-pointer"
+              onClick={togglePasswordVisibility}
+            >
+              {t("viewPassword")}
+            </p>
+            {/* <CheckIcon /> */}
+          </div>
+        )}
       </div>
       <div className="hidden laptop:block"></div>
       <div className="justify-self-end">
@@ -136,7 +133,7 @@ export default function UpdateInfoForm() {
           type="submit"
           className="flex justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline-primary"
         >
-          Update
+          {t("update")}
         </button>
       </div>
       <div className="flex justify-between "></div>
