@@ -56,19 +56,19 @@ export default function RentForm() {
                 placeholder={t("returnLocation.placeholder")}
                 className={`${
                   watchShowReturnLocation
-                    ? "h-full transition-all duration-300 desktop:transition-none w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-gray-300 p-2"
+                    ? "h-full transition-all duration-300 desktop:transition-none w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-borderGray-300 p-2"
                     : "w-0 h-0 transition-all duration-100 desktop:transition-none"
                 } `}
               />
               <input
                 type="date"
                 {...register("pickupDate")}
-                className="w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-gray-300 p-2"
+                className="w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-borderGray-300 p-2"
               />
               <input
                 type="date"
                 {...register("dropOffDate")}
-                className="w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-gray-300 p-2"
+                className="w-full desktop:w-1/4 border-t desktop:border-t-0 desktop:border-l border-borderGray-300 p-2"
               />
             </div>
             <button

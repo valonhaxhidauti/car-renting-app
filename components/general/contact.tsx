@@ -48,7 +48,7 @@ export default function Contact() {
       <HeadingTitle translations={t("heading")} />
       <div className="bg-bgSecondary w-full pb-16">
         <Breadcrumbs translations={t} />
-        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
+        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-0 pb-8 flex flex-col">
           <SideMenu />
           <div className="flex flex-col tablet:flex-row w-full laptop:w-3/4 gap-8 py-8">
             <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
@@ -108,7 +108,7 @@ export default function Contact() {
                     <input
                       type="text"
                       placeholder={t("fullNamePlaceholder")}
-                      className="w-full px-8 py-3 border border-gray rounded outline-primary"
+                      className="w-full px-8 py-3 border border-borderGray rounded outline-primary"
                       value={formData.fullName}
                       onChange={(e) =>
                         handleInputChange("fullName", e.target.value)
@@ -127,7 +127,7 @@ export default function Contact() {
                     <input
                       type="email"
                       placeholder={t("emailPlaceholder")}
-                      className="w-full px-8 py-3 border border-gray rounded outline-primary"
+                      className="w-full px-8 py-3 border border-borderGray rounded outline-primary"
                       value={formData.email}
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
@@ -146,7 +146,7 @@ export default function Contact() {
                     <input
                       type="text"
                       placeholder={t("phoneNumberPlaceholder")}
-                      className="w-full px-8 py-3 border border-gray rounded outline-primary"
+                      className="w-full px-8 py-3 border border-borderGray rounded outline-primary"
                       value={formData.phoneNumber}
                       onChange={(e) =>
                         handleInputChange("phoneNumber", e.target.value)
@@ -166,7 +166,7 @@ export default function Contact() {
                     <textarea
                       placeholder={t("messagePlaceholder")}
                       rows={4}
-                      className="w-full px-8 py-3 border border-gray rounded outline-primary resize-none"
+                      className="w-full px-8 py-3 border border-borderGray rounded outline-primary resize-none"
                       value={formData.message}
                       onChange={(e) =>
                         handleInputChange("message", e.target.value)

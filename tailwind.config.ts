@@ -33,11 +33,12 @@ const config = {
         background: "hsl(var(--background))",
         bgSecondary: "hsl(var(--bgSecondary))",
         foreground: "hsl(var(--foreground))",
-        grayFont: "hsl(var(--gray))",
+        grayFont: "hsl(var(--grayFont))",
         graySecondary: "hsl(var(--graySecondary))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          background: "hsl(var(--primary-background))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

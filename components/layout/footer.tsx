@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="relative bottom-0 left-0 ">
       <div className="bg-bgSecondary">
         <div className="bg-white">
-          <div className="w-full max-w-[1440px] m-auto flex flex-col tablet:flex-row gap-8 tablet:gap-32 laptop:gap-48 px-4 mobile:px-8 py-12">
+          <div className="w-full max-w-[1440px] m-auto flex flex-col tablet:flex-row gap-8 tablet:gap-32 laptop:gap-48 px-4 mobile:px-0 py-12">
             <div className="flex flex-col justify-between">
               <Logo />
               <p className="text-grayFont text-xs mt-6">{t("companyName")}</p>
@@ -34,7 +34,7 @@ export default function Footer() {
                   {t("pages.aboutUs")}
                 </Link>
                 <Link
-                  href="/"
+                  href="/explore"
                   className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("pages.exploreVehicles")}
@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="max-w-[1440px] m-auto">
-          <div className="px-4 mobile:px-8 py-6 text-grayFont text-sm">
+          <div className="px-4 mobile:px-0 py-6 text-grayFont text-sm">
             {t("copyright", { currentYear: currentYear })}
           </div>
         </div>

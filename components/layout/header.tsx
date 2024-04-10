@@ -90,7 +90,7 @@ export default function Header({
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <Link href="/" className="flex group items-center gap-12">
+          <Link href="/explore" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("exploreVehicles")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
@@ -149,7 +149,7 @@ export default function Header({
         <div
           className={`${
             isOpen ? "opacity-95" : ""
-          } px-4 mobile:px-8 pt-14 pb-4 flex justify-between w-full max-w-[1440px] m-auto`}
+          } px-4 mobile:px-0 pt-14 pb-4 flex justify-between w-full max-w-[1440px] m-auto`}
         >
           <div className="flex justify-start gap-8 items-center ">
             {isOpen ? (
@@ -173,7 +173,7 @@ export default function Header({
                 {t("homepage")}
               </Link>
               <Link
-                href="/"
+                href="/explore"
                 className={`hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
                   background ? "text-white" : "text-grayFont"
                 }`}
@@ -213,7 +213,7 @@ export default function Header({
               className={`${
                 isOpen
                   ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
-                  : "bg-white hover:bg-slate-50 text-grayFont border-gray hidden laptop:flex"
+                  : "bg-white hover:bg-slate-50 text-grayFont border-borderGray hidden laptop:flex"
               } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
             >
               <LoginIcon
@@ -226,7 +226,7 @@ export default function Header({
               triggerClass={`${
                 isOpen
                   ? "bg-none hover:opacity-75 border-white text-white hidden tablet:flex"
-                  : "bg-white hover:bg-slate-50 border-gray hidden laptop:flex"
+                  : "bg-white hover:bg-slate-50 border-borderGray hidden laptop:flex"
               } w-[65px] border rounded-full`}
             />
             <div

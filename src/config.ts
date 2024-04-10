@@ -4,17 +4,13 @@ export const locales = ['en', 'de'] as const;
 
 export const pathnames = {
   '/': '/',
-  '/contact': {
-    en: '/contact',
-    de: '/kontakt'
+  '/explore': {
+    en: '/explore',
+    de: '/erkunden'
   },
   '/about': {
     en: '/about',
     de: '/uber'
-  },
-  '/policy': {
-    en: '/policy',
-    de: '/datenschutzrichtlinie'
   },
   '/faq': {
     en: '/faq',
@@ -23,6 +19,14 @@ export const pathnames = {
   '/terms': {
     en: '/terms',
     de: '/bedingungen'
+  },
+  '/policy': {
+    en: '/policy',
+    de: '/datenschutzrichtlinie'
+  },
+  '/contact': {
+    en: '/contact',
+    de: '/kontakt'
   },
 } satisfies Pathnames<typeof locales>;
 

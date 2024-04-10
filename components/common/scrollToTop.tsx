@@ -11,7 +11,7 @@ export default function ScrollToTop() {
 
   return (
     <div
-      className="hidden laptop:block bg-white cursor-pointer rounded-full p-3 border-gray border-2 absolute bottom-16 right-8"
+      className="hidden laptop:block bg-white cursor-pointer rounded-full p-3 border-borderGray border-2 absolute bottom-16 right-8"
       onClick={scrollToTop}
     >
       <ChevronUp size={32} className="text-grayFont" />

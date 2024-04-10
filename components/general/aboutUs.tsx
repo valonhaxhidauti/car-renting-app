@@ -16,7 +16,7 @@ export default function AboutUs() {
       <HeadingTitle translations={t("heading")} /> 
       <div className="bg-bgSecondary w-full pb-16">
       <Breadcrumbs translations={t} /> 
-        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
+        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-0 pb-8 flex flex-col">
           <SideMenu />
           <div className="flex flex-col w-full laptop:w-3/4 gap-8 py-8">
             <p className="text-primary text-xl font-medium">

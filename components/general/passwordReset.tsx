@@ -55,7 +55,7 @@ export default function PasswordReset() {
                   required
                   value={formData}
                   onChange={(e) => handleInputChange(e.target.value)}
-                  className="block rounded-sm mt-2 mobile:w-96 border-zinc-300 border px-6 py-4 mobile:px-8 text-grayFont focus-visible:outline-primary"
+                  className="block rounded-sm mt-2 mobile:w-96 border-zinc-300 border px-6 py-4 mobile:px-0 text-grayFont focus-visible:outline-primary"
                 />
                 <CheckIcon
                   className={`absolute transition-opacity right-4 bottom-[22px] ${

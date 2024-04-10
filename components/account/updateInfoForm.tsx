@@ -113,7 +113,7 @@ export default function UpdateInfoForm() {
           type={showPassword ? "text" : "password"}
           required
           onChange={handlePasswordChange}
-          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28"
         />
         {password && (
           <div className="flex gap-2 items-center absolute right-4 bottom-[20px]">

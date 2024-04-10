@@ -38,10 +38,10 @@ export default function FrequentlyAskedQuestions() {
 
   return (
     <>
-      <HeadingTitle translations={t("heading")} /> 
+      <HeadingTitle translations={t("heading")} />
       <div className="bg-bgSecondary w-full pb-16">
-      <Breadcrumbs translations={t} /> 
-        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
+        <Breadcrumbs translations={t} />
+        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-0 pb-8 flex flex-col">
           <SideMenu />
           <div className="flex flex-col tablet:flex-row w-full laptop:w-3/4 gap-8 py-8">
             <Accordion type="multiple" className="w-full">
@@ -71,7 +71,7 @@ export default function FrequentlyAskedQuestions() {
             </Accordion>
           </div>
           <div className="desktop:mb-20">
-          <ScrollToTop />
+            <ScrollToTop />
           </div>
         </div>
       </div>
