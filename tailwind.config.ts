@@ -24,6 +24,7 @@ const config = {
     },
     extend: {
       colors: {
+        borderBooking: "hsl(var(--borderBooking))",
         borderForm: "hsl(var(--borderForm))",
         borderGray: "hsl(var(--borderGray))",
         borderMenu: "hsl(var(--borderMenu))",
@@ -83,6 +84,9 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+      },
+      border: {
+        "booking": "2px solid hsl(85deg 54% 51%)"
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

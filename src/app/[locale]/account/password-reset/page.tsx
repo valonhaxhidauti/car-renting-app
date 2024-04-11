@@ -6,7 +6,7 @@ export default function ResetPassword() {
     <>
       <Header background={false} fixed={false} />
       <div className="bg-bgSecondary w-full pb-16 pt-8">
-        <div className="max-w-[1440px] m-auto px-4 mobile:px-0 flex flex-col desktop:flex-row">
+        <div className="max-w-[1440px] m-auto px-4 mobile:px-8 flex flex-col desktop:flex-row">
           <PasswordReset />
         </div>
       </div>

@@ -48,35 +48,55 @@ export default function Contact() {
       <HeadingTitle translations={t("heading")} />
       <div className="bg-bgSecondary w-full pb-16">
         <Breadcrumbs translations={t} />
-        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-0 pb-8 flex flex-col">
+        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
           <SideMenu />
           <div className="flex flex-col tablet:flex-row w-full laptop:w-3/4 gap-8 py-8">
-            <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
-              <VisitUsIcon />
-              <h1 className="text-center text-grayFont font-bold text-2xl">
+            <div className="flex flex-col hover:justify-center flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 transition-all group hover:relative hover:border-none hover:shadow-grayPrimary border-primary border-b-[3px]">
+              <VisitUsIcon className="text-primary group-hover:text-[#f3f3f3] group-hover:scale-[2.3] group-hover:absolute group-hover:top-12 group-hover:right-14 transition-all" />
+              <h1 className="text-center text-grayFont font-bold text-2xl group-hover:hidden">
                 {t("visitUs")}
               </h1>
-              <p className="text-center text-grayFont text-sm ">
+              <h1 className="text-center relative text-primary group-hover:flex hidden">
+                {t("visitUsLocation")}
+              </h1>
+              <p className="text-center text-grayFont text-sm group-hover:hidden">
                 {t("visitUsDescription")}
               </p>
             </div>
-            <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 border-primary border-b-[3px]">
-              <CallUsIcon />
-              <h1 className="text-center text-grayFont font-bold text-2xl">
+            <div className="flex flex-col hover:justify-center flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 transition-all group hover:relative hover:border-none hover:shadow-grayPrimary border-primary border-b-[3px]">
+              <CallUsIcon className="text-primary group-hover:text-[#f3f3f3] group-hover:scale-[2.3] group-hover:absolute group-hover:top-12 group-hover:right-14 transition-all" />
+              <h1 className="text-center text-grayFont font-bold text-2xl group-hover:hidden">
                 {t("callUs")}
               </h1>
-              <p className="text-center text-grayFont text-sm ">
+              <h1 className="text-center relative text-primary group-hover:flex hidden">
+                +383123456789
+              </h1>
+              <p className="text-center text-grayFont text-sm group-hover:hidden">
                 {t("callUsDescription")}
               </p>
             </div>
-            <div className="flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-2 relative z-0 shadow-grayPrimary justify-center items-center py-8 px-12 ">
-              <MailIcon className="absolute top-1 right-4 -z-10" />
-              <a href="mailto:rentgo@rentgotheme.com" className="text-primary">
-                rentgo@rentgotheme.com
-              </a>
-              <a href="mailto:support@rentgotheme.com" className="text-primary">
-                support@rentgotheme.com
-              </a>
+            <div className="flex flex-col hover:justify-center flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 transition-all group hover:relative hover:border-none hover:shadow-grayPrimary border-primary border-b-[3px]">
+              <MailIcon className="text-primary group-hover:text-[#f3f3f3] group-hover:scale-[2.3] group-hover:absolute group-hover:top-12 group-hover:right-14 transition-all" />
+              <h1 className="text-center text-grayFont font-bold text-2xl group-hover:hidden">
+                {t("mailUs")}
+              </h1>
+              <div className="relative hidden flex-col gap-2 group-hover:flex">
+                <a
+                  href="mailto:rentgo@rentgotheme.com"
+                  className="text-primary"
+                >
+                  rentgo@rentgotheme.com
+                </a>
+                <a
+                  href="mailto:support@rentgotheme.com"
+                  className="text-primary"
+                >
+                  support@rentgotheme.com
+                </a>
+              </div>
+              <p className="text-center text-grayFont text-sm group-hover:hidden">
+                {t("mailUsDescription")}
+              </p>
             </div>
           </div>
           <div className="py-8 w-full laptop:w-3/4">

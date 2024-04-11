@@ -33,10 +33,12 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
+    --border: 0 0% 80%;
+    --borderBooking: 85 54% 51%;
     --borderForm: 0 0% 58%;
     --borderGray: 0 0% 89%;
     --borderMenu: 212.45 80% 61%;
-    --border: 0 0% 80%;
+
     --input: 0 0% 80%;
     --ring: 222.2 84% 4.9%;
  

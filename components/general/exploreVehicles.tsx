@@ -18,7 +18,13 @@ import {
 } from "../ui/select";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { GridViewIcon, ListViewIcon } from "@/assets/svgs";
+import {
+  EditBookingIcon,
+  GridViewIcon,
+  ListViewIcon,
+  RentLocIcon,
+  ReturnLocIcon,
+} from "@/assets/svgs";
 import VehicleCard from "../common/vehicleCard";
 import {
   Accordion,
@@ -33,7 +39,7 @@ export default function ExploreVehicles() {
   return (
     <div className="bg-bgSecondary w-full pb-16">
       <div className="w-full bg-white ">
-        <div className="max-w-[1440px] m-auto flex justify-between px-4 mobile:px-0 py-8">
+        <div className="max-w-[1440px] m-auto flex justify-between px-4 mobile:px-8 py-8">
           <div className="text-primary font-bold text-4xl w-full items-center flex cursor-default">
             Explore Vehicles
           </div>
@@ -85,7 +91,7 @@ export default function ExploreVehicles() {
         </div>
       </div>
       <div className="max-w-[1440px] m-auto">
-        <Breadcrumb className="w-full px-4 mobile:px-0 py-8 ">
+        <Breadcrumb className="w-full px-4 mobile:px-8 py-8 ">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
@@ -98,124 +104,179 @@ export default function ExploreVehicles() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="flex gap-4">
+        <div className="flex gap-4 ">
           <div className="w-4/5 flex flex-col gap-4">
             <VehicleCard />
             <VehicleCard />
             <VehicleCard />
             <VehicleCard />
           </div>
-          <div className="w-1/5 bg-white p-4 flex flex-col gap-4 h-full">
-            <Accordion type="single" collapsible className="w-full py-0">
-              <AccordionItem
-                value="item-1"
-                className="border-none"
-              >
-                <AccordionTrigger className="pb-4 pt-0">
-                  <div className="flex justify-between cursor-pointer">
-                    <h1 className="text-lg text-fontGray font-bold">
-                      Filter Vehicles
-                    </h1>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-col items-start gap-2 pb-4 border-borderGray border-b">
-                    <p className="pb-2 text-sm font-bold">Vehicle Class</p>
-                    <div className="flex gap-4">
-                      <input type="checkbox" id="economic" className="cursor-pointer" />
-                      <label htmlFor="economic" className="text-grayFont text-xs cursor-pointer">Economic</label>
+          <div className="w-1/5 flex flex-col h-full gap-4 mr-4 mobile:mr-8">
+            <div className="bg-white p-4 flex flex-col gap-4 border-borderBooking border-2">
+              <div className="flex justify-between">
+                Booking Information <EditBookingIcon />
+              </div>
+              <div className="flex gap-2 items-center">
+                <RentLocIcon className="w-12" />
+                <div className="text-grayFont">
+                  <p className="text-sm leading-none">30.10.2019 08:00 PM</p>
+                  <p className="text-xs leading-none">
+                    Los Angeles, ABD International Airport (LAX)
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-2 items-center">
+                <ReturnLocIcon className="w-12" />
+                <div className="text-grayFont">
+                  <p className="text-sm leading-none">03.11.2019 08:00 PM</p>
+                  <p className="text-xs leading-none">
+                    Los Angeles, ABD International Airport (LAX)
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-4 flex flex-col gap-4 h-full">
+              <Accordion type="single" collapsible className="w-full py-0">
+                <AccordionItem value="item-1" className="border-none">
+                  <AccordionTrigger className="pb-4 pt-0">
+                    <div className="flex justify-between cursor-pointer">
+                      <h1 className="text-lg text-fontGray font-bold">
+                        Filter Vehicles
+                      </h1>
                     </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">
-                        Middle Class
-                      </label>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col items-start gap-2 pb-4 border-borderGray border-b">
+                      <p className="pb-2 text-sm font-bold">Vehicle Class</p>
+                      <div className="flex gap-4">
+                        <input
+                          type="checkbox"
+                          id="economic"
+                          className="cursor-pointer"
+                        />
+                        <label
+                          htmlFor="economic"
+                          className="text-grayFont text-xs cursor-pointer"
+                        >
+                          Economic
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Middle Class
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Top Grade
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Luxury
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          7+ Persons
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          SUV
+                        </label>
+                      </div>
                     </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Top Grade</label>
+                    <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
+                      <p className="pb-2 text-sm font-bold">Vehicle Type</p>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Sedan
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Hatchback
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Stationwagon
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          SUV
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          VAN
+                        </label>
+                      </div>
                     </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Luxury</label>
+                    <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
+                      <p className="pb-2 text-sm font-bold">Gear Type</p>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Autoamatic
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Manual
+                        </label>
+                      </div>
                     </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">
-                        7+ Persons
-                      </label>
+                    <div className="flex flex-col items-start gap-2 mt-4">
+                      <p className="pb-2 text-sm font-bold">Fuel Type</p>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Diesel
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Autogas
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Hybrid
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Gasoline
+                        </label>
+                      </div>
+                      <div className="flex gap-4">
+                        <input type="checkbox" className="cursor-pointer" />
+                        <label className="text-grayFont text-xs cursor-pointer">
+                          Electrical
+                        </label>
+                      </div>
                     </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">SUV</label>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-                    <p className="pb-2 text-sm font-bold">Vehicle Type</p>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Sedan</label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Hatchback</label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">
-                        Stationwagon
-                      </label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">SUV</label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">VAN</label>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-                    <p className="pb-2 text-sm font-bold">Gear Type</p>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">
-                        Autoamatic
-                      </label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Manual</label>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-start gap-2 mt-4">
-                    <p className="pb-2 text-sm font-bold">Fuel Type</p>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Diesel</label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Autogas</label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Hybrid</label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">Gasoline</label>
-                    </div>
-                    <div className="flex gap-4">
-                      <input type="checkbox" className="cursor-pointer" />
-                      <label className="text-grayFont text-xs cursor-pointer">
-                        Electrical
-                      </label>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
           </div>
         </div>
       </div>
