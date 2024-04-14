@@ -9,6 +9,7 @@ export { default as EditIcon } from "./editIcon.svg";
 export { default as EditBookingIcon } from "./editBookingIcon.svg";
 export { default as EverywhereIcon } from "./everywhereIcon.svg";
 export { default as FacebookIcon } from "./facebookIcon.svg";
+export { default as FilterIcon } from "./filterIcon.svg";
 export { default as FlagDeIcon } from "./flagDeIcon.svg";
 export { default as FlagUkIcon } from "./flagUkIcon.svg";
 export { default as FuelIcon } from "./fuelIcon.svg";

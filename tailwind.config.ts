@@ -1,19 +1,19 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
     screens: {
-      'mobile': '600px',
-      'tablet': '768px',
-      'laptop': '1024px',
-      'desktop': '1280px',
+      mobile: "600px",
+      tablet: "768px",
+      laptop: "1024px",
+      desktop: "1280px",
     },
     container: {
       center: true,
@@ -72,10 +72,22 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        "grayPrimary": "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
-        "btnShadow": "3.346px 3.716px 15px 0px rgba(0, 0, 0, 0.05)",
+        grayPrimary: "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
+        btnShadow: "3.346px 3.716px 15px 0px rgba(0, 0, 0, 0.05)",
       },
       keyframes: {
+        "show-filters": {
+          "0%": { opacity: "0.5", right: "-100%" },
+          "100%": { opacity: "1", right: "0%" },
+        },
+        "hide-filters": {
+          "0%": { opacity: "1", right: "0%" },
+          "100%": { opacity: "0.5", right: "-100%" },
+        },
+        "show-overlay": {
+          "0%": { background: "rgb(0 0 0 / 0)" },
+          "100%": { background: "rgb(0 0 0 / .5)" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -86,15 +98,18 @@ const config = {
         },
       },
       border: {
-        "booking": "2px solid hsl(85deg 54% 51%)"
+        booking: "2px solid hsl(85deg 54% 51%)",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "show-filters": "show-filters 0.4s cubic-bezier(.61,1,.88,1)",
+        "hide-filters": "hide-filters 0.4s cubic-bezier(.61,1,.88,1)",
+        "show-overlay": "show-overlay 0.4s cubic-bezier(.61,1,.88,1)",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

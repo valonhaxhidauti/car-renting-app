@@ -4,8 +4,8 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-export default function VehicleCard() {
-  return (
+export default function VehicleCard({ viewMode }: { viewMode: string }) {
+  return viewMode === "list" ? (
     <div className="bg-white flex flex-col gap-4 pl-4 mobile:pl-8">
       <div className="w-full p-2 flex gap-8">
         <Image
@@ -14,6 +14,7 @@ export default function VehicleCard() {
           width="240"
           height="120"
           className="py-12"
+          priority
         />
         <div className="flex justify-between w-full gap-2">
           <div className="w-full flex flex-col justify-between">
@@ -96,7 +97,7 @@ export default function VehicleCard() {
           </div>
         </div>
       </div>
-      <Tabs defaultValue="test1" className="p-2">
+      {/* <Tabs defaultValue="test1" className="p-2">
         <TabsList className="gap-6">
           <TabsTrigger className="" value="test1">
             test1
@@ -117,7 +118,102 @@ export default function VehicleCard() {
         <TabsContent value="test3">
           Excepteur sint occaecat cupidatat non proident.
         </TabsContent>
-      </Tabs>
+      </Tabs> */}
+    </div>
+  ) : (
+    <div className="bg-white pl-4 mobile:pl-8">
+      <div className="w-full p-2 flex flex-col gap-8">
+        <div className="flex w-full justify-between pt-2">
+          <div className="flex flex-col gap-4 justify-between">
+            <p className="w-fit border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
+              25% OFF
+            </p>
+            <div className="flex flex-col gap-4">
+              <p className="text-graySecondary w-fit border-graySecondary border rounded-full font-medium text-[10px] px-12 py-1">
+                SUV
+              </p>
+              <p className="text-grayFont font-medium text-2xl">
+                Volvo XC90 Excellence
+              </p>
+            </div>
+          </div>
+          <Image
+            src="/sampleCar.png"
+            alt="vehicle"
+            width="200"
+            height="100"
+            className="py-12"
+            priority
+          />
+        </div>
+        <div className="flex justify-between w-full gap-2">
+          <div className="w-full flex flex-col justify-between">
+            <div className="flex flex-col w-full">
+              <div className="flex flex-col">
+                <div className="py-2 pr-2 border-y text-grayFont hover:text-primary flex gap-1 items-center">
+                  <SearchIcon className="w-3 h-3" />
+                  <p className="text-[11px] font-medium">
+                    Filter vehicles of the same specifications
+                  </p>
+                </div>
+                <div className="py-2 pr-2 border-b text-grayFont flex gap-1 items-center">
+                  <WarningIcon className="w-4 h-4" />
+                  <p className="text-[11px] font-medium">
+                    The options of the vehicle to be delivered may vary
+                  </p>
+                </div>
+              </div>
+              <div className="border-borderGray border-b grid grid-cols-3 w-full">
+                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                  <FuelIcon />
+                  <p className="text-sm leading-none font-bold">DIESEL</p>
+                </div>
+                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                  <FuelIcon />
+                  <p className="text-sm leading-none font-bold">DIESEL</p>
+                </div>
+                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center">
+                  <FuelIcon />
+                  <p className="text-sm leading-none font-bold">DIESEL</p>
+                </div>
+              </div>
+              <div className="border-borderGray border-b grid grid-cols-3 w-full">
+                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                  <FuelIcon />
+                  <p className="text-sm leading-none font-bold">DIESEL</p>
+                </div>
+                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                  <FuelIcon />
+                  <p className="text-sm leading-none font-bold">DIESEL</p>
+                </div>
+                <div className="text-primary p-4 w-full flex flex-col justify-between items-center gap-2">
+                  <ChevronRight size={14} />
+                  <p className="text-sm leading-none text-center">
+                    View All Specifications
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col justify-between items-center p-4 bg-primary-background text-secondary">
+            <div className="h-full content-center">
+              <sup className="text-4xl font-bold top-0">$</sup>
+              <span className="text-6xl font-bold">64</span>
+              <span className="inline-block ">
+                <sup className="relative block text-xl leading-none font-bold -top-7">
+                  ,99
+                </sup>
+              </span>
+              <p className="text-xs font-medium text-center">
+                Daily Rental Fee
+              </p>
+            </div>
+            <button className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
+              Rent Now!
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
