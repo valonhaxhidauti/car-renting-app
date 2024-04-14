@@ -41,7 +41,7 @@ import { useEffect, useState } from "react";
 export default function ExploreVehicles() {
   const t = useTranslations("Header");
   const [showFilters, setShowFilters] = useState(false);
-  const [viewMode, setViewMode] = useState("list");
+  const [viewMode, setViewMode] = useState("grid");
   //   () => {
   //   return localStorage.getItem("viewMode") || "grid";
   // });
