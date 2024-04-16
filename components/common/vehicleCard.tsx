@@ -33,43 +33,43 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-2 w-full">
-              <div className="py-2 pr-2 border border-l-0 text-grayFont hover:text-primary flex gap-1 items-center">
+            <div className="flex w-full">
+              <div className="w-1/2 py-2 pr-2 border border-l-0 text-grayFont hover:text-primary flex gap-1 items-center">
                 <SearchIcon className="w-3 h-3" />
                 <p className="text-[11px] font-medium">
                   Filter vehicles of the same specifications
                 </p>
               </div>
-              <div className="p-2 border border-x-0 text-grayFont flex gap-1 items-center">
+              <div className="w-1/2 p-2 border border-x-0 text-grayFont flex gap-1 items-center">
                 <WarningIcon className="w-4 h-4" />
                 <p className="text-[11px] font-medium">
                   The options of the vehicle to be delivered may vary
                 </p>
               </div>
-              <div className="border-borderGray border-b flex w-full">
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+            </div>
+            <div className="border-borderGray border-b flex w-full">
+              <div className="flex w-full">
+                <div className="text-grayFont p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                <div className="text-grayFont p-4 w-1/6 hidden desktop:flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                <div className="text-grayFont p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-              </div>
-              <div className="border-borderGray border-b flex w-full">
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                <div className="text-grayFont p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                <div className="text-grayFont p-4 w-1/6 hidden desktop:flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-                <div className="text-primary p-4 w-full flex flex-col justify-between items-center gap-2">
+                <div className="text-primary p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center gap-2">
                   <ChevronRight size={14} />
                   <p className="text-sm leading-none text-center">
                     View All Specifications
@@ -163,26 +163,26 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                   </p>
                 </div>
               </div>
-              <div className="border-borderGray border-b grid grid-cols-3 w-full">
+              <div className="border-borderGray border-b grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-2 desktop:grid-cols-3 w-full">
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                <div className="text-grayFont p-4 w-full hidden mobile:flex tablet:hidden desktop:flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center">
+                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center gap-2">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
               </div>
-              <div className="border-borderGray border-b grid grid-cols-3 w-full">
+              <div className="border-borderGray border-b grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-2 desktop:grid-cols-3 w-full">
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
-                <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
+                <div className="text-grayFont p-4 w-full hidden mobile:flex tablet:hidden desktop:flex flex-col justify-between items-center border-r">
                   <FuelIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>

@@ -84,6 +84,14 @@ const config = {
           "0%": { opacity: "1", right: "0%" },
           "100%": { opacity: "0.5", right: "-100%" },
         },
+        "show-booking": {
+          "0%": { opacity: "0.5", top: "-100%" },
+          "100%": { opacity: "1", top: "0%" },
+        },
+        "hide-booking": {
+          "0%": { opacity: "1", top: "0%" },
+          "100%": { opacity: "0.5", top: "-100%" },
+        },
         "show-overlay": {
           "0%": { background: "rgb(0 0 0 / 0)" },
           "100%": { background: "rgb(0 0 0 / .5)" },
@@ -105,6 +113,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "show-filters": "show-filters 0.4s cubic-bezier(.61,1,.88,1)",
         "hide-filters": "hide-filters 0.4s cubic-bezier(.61,1,.88,1)",
+        "show-booking": "show-booking 0.4s cubic-bezier(.61,1,.88,1)",
+        "hide-booking": "hide-booking 0.4s cubic-bezier(.61,1,.88,1)",
         "show-overlay": "show-overlay 0.4s cubic-bezier(.61,1,.88,1)",
       },
     },
