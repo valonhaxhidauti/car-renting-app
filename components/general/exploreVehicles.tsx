@@ -26,8 +26,6 @@ import {
   FilterIcon,
   GridViewIcon,
   ListViewIcon,
-  RentLocIcon,
-  ReturnLocIcon,
 } from "@/assets/svgs";
 import VehicleCard from "../common/vehicleCard";
 import {
@@ -36,8 +34,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import VehicleFilters from "../common/vehicleFilters";
+import BookingInfo from "../common/bookingInfo";
 
 export default function ExploreVehicles() {
   const t = useTranslations("Header");
@@ -46,6 +45,7 @@ export default function ExploreVehicles() {
   const [showBooking, setShowBooking] = useState(false);
   const [showBookingAnimation, setShowBookingAnimation] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
+
   //   () => {
   //   return localStorage.getItem("viewMode") || "grid";
   // });
@@ -163,20 +163,20 @@ export default function ExploreVehicles() {
               </Select>
             </div>
             <div
-              className="flex gap-2 p-2 h-8 text-xs text-grayFont items-center border-borderGray border-2 rounded-full self-center"
+              className="flex gap-2 p-2 h-8 text-xs text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full self-center"
               onClick={toggleBooking}
             >
               <EditBookingIcon />
               Booking
             </div>
             <div
-              className="border-borderGray h-8 border-2 rounded-full px-2 text-grayFont font-medium text-xs flex gap-2 items-center"
+              className="border-borderGray h-8 border-2 cursor-pointer rounded-full px-2 text-grayFont font-medium text-xs flex gap-2 items-center"
               onClick={toggleFilters}
             >
               <FilterIcon className="text-primary" /> Filters
             </div>
             <div
-              className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards	${
+              className={`fixed top-0 right-0 left-0 bottom-0 z-10 w-full fill-mode-forwards	${
                 showBooking ? "animate-show-overlay" : "hidden"
               }`}
               onClick={toggleBooking}
@@ -190,33 +190,7 @@ export default function ExploreVehicles() {
                   : "hidden"
               }`}
             >
-              <div className="bg-white p-4 flex flex-col gap-4 ">
-                <div className="flex justify-between text-lg text-grayFont font-bold">
-                  Booking Information
-                  <CloseMenuIcon
-                    className="text-primary"
-                    onClick={toggleBooking}
-                  />
-                </div>
-                <div className="flex gap-2 items-center">
-                  <RentLocIcon className="w-12" />
-                  <div className="text-grayFont">
-                    <p className="text-sm leading-none">30.10.2019 08:00 PM</p>
-                    <p className="text-xs leading-none">
-                      Los Angeles, ABD International Airport (LAX)
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-2 items-center">
-                  <ReturnLocIcon className="w-12" />
-                  <div className="text-grayFont">
-                    <p className="text-sm leading-none">03.11.2019 08:00 PM</p>
-                    <p className="text-xs leading-none">
-                      Los Angeles, ABD International Airport (LAX)
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <BookingInfo border={false} />
             </div>
 
             <div
@@ -235,10 +209,10 @@ export default function ExploreVehicles() {
               }`}
             >
               <div className="bg-white p-4 h-screen ">
-                <div className="flex justify-between cursor-pointer text-lg text-grayFont font-bold mb-4">
+                <div className="flex justify-between text-lg text-grayFont font-bold mb-4">
                   Filter Vehicles
                   <CloseMenuIcon
-                    className="text-primary"
+                    className="text-primary cursor-pointer"
                     onClick={toggleFilters}
                   />
                 </div>
@@ -261,29 +235,7 @@ export default function ExploreVehicles() {
             <VehicleCard viewMode={viewMode} />
           </div>
           <div className="w-1/5  flex-col h-full gap-4 mr-8 hidden laptop:flex">
-            <div className="bg-white p-4 flex flex-col gap-4 border-borderBooking border-2">
-              <div className="flex justify-between text-lg text-grayFont font-bold">
-                Booking Information <EditBookingIcon />
-              </div>
-              <div className="flex gap-2 items-center">
-                <RentLocIcon className="w-12" />
-                <div className="text-grayFont">
-                  <p className="text-sm leading-none">30.10.2019 08:00 PM</p>
-                  <p className="text-xs leading-none">
-                    Los Angeles, ABD International Airport (LAX)
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-center">
-                <ReturnLocIcon className="w-12" />
-                <div className="text-grayFont">
-                  <p className="text-sm leading-none">03.11.2019 08:00 PM</p>
-                  <p className="text-xs leading-none">
-                    Los Angeles, ABD International Airport (LAX)
-                  </p>
-                </div>
-              </div>
-            </div>
+            <BookingInfo border={true} />
             <div className="bg-white p-4 flex flex-col gap-4 h-full">
               <Accordion type="single" collapsible className="w-full py-0">
                 <AccordionItem value="item-1" className="border-none">

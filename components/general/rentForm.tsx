@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { SearchIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
+import { useRouter } from 'next/navigation';
 
 interface IFormInputs {
   rentLocation: string;
@@ -14,6 +15,7 @@ interface IFormInputs {
 
 export default function RentForm() {
   const t = useTranslations("RentForm");
+  const router = useRouter();
   const {
     register,
     watch,
@@ -22,9 +24,17 @@ export default function RentForm() {
   } = useForm<IFormInputs>();
   const watchShowReturnLocation = watch("showReturnLocation", false);
 
-  const onSubmit = (data: IFormInputs) => {
-    console.log("TEST", data);
-    alert(JSON.stringify(data));
+  
+  const onSubmit = (data:IFormInputs) => {
+    const { rentLocation, showReturnLocation, returnLocation, pickupDate, dropOffDate } = data;
+    const queryParams = new URLSearchParams({
+      rentLocation,
+      returnLocation: showReturnLocation ? returnLocation : rentLocation,
+      pickupDate,
+      dropOffDate
+    }).toString();
+
+    router.push(`/explore?${queryParams}`);
   };
 
   return (
