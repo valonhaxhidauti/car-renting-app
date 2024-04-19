@@ -1,14 +1,6 @@
 "use client";
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-} from "../ui/select";
-import {
   RegisterFormValidation,
   RegisterFormValues,
   isNameValid,
@@ -19,13 +11,11 @@ import {
 } from "../utils/formValidations";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { ChevronDown } from "lucide-react";
-import { CheckIcon, FlagUkIcon } from "@/assets/svgs";
+import { CheckIcon } from "@/assets/svgs";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/semantic-ui.css";
 
 interface FormValues {
-  salutation: string;
   name: string;
   surname: string;
   email: string;
@@ -52,7 +42,6 @@ export default function RegisterForm() {
   };
 
   const [formData, setFormData] = useState<FormValues>({
-    salutation: "mr",
     name: "",
     surname: "",
     email: "",
@@ -88,12 +77,6 @@ export default function RegisterForm() {
     }
   };
 
-  const handleSalutationChange = (value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      salutation: value,
-    }));
-  };
   return (
     <div className="flex w-full">
       <div className="items-start flex flex-col flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between mobile:p-16">
@@ -107,33 +90,6 @@ export default function RegisterForm() {
             className="grid grid-cols-1 mobile:grid-cols-2 gap-4"
             onSubmit={submitForm}
           >
-            <div className="flex gap-4 w-full">
-              <RadioGroup
-                className="flex w-full"
-                defaultValue="mr"
-                onValueChange={(value: string) => handleSalutationChange(value)}
-              >
-                <div className="w-full">
-                  <Label
-                    htmlFor="r1"
-                    className="bg-white p-4 flex rounded-sm gap-4 w-full hover:shadow-btnShadow cursor-pointer"
-                  >
-                    <RadioGroupItem value="mr" id="r1" />
-                    {t("register.mrLabel")}
-                  </Label>
-                </div>
-                <div className="w-full">
-                  <Label
-                    htmlFor="r2"
-                    className="bg-white p-4 flex rounded-sm gap-4 w-full hover:shadow-btnShadow cursor-pointer"
-                  >
-                    <RadioGroupItem value="mrs" id="r2" />
-                    {t("register.mrsLabel")}
-                  </Label>
-                </div>
-              </RadioGroup>
-            </div>
-            <div></div>
             <div>
               <div className="mt-2 relative">
                 <label className="block text-sm font-medium leading-6 text-grayFont">
@@ -218,27 +174,26 @@ export default function RegisterForm() {
               <label className="block text-sm font-medium leading-6 text-grayFont">
                 {t("register.phoneNumberLabel")}
               </label>
-              <div className="mt-2 flex gap-2 relative">
-                <Select>
-                  <SelectTrigger className="bg-white border-none rounded-sm h-[56px] w-fit flex gap-2">
-                    <FlagUkIcon />
-                    <ChevronDown size={12} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>country</SelectLabel>
-                      <SelectItem value="en">eng</SelectItem>
-                      <SelectItem value="de">de</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                <input
-                  type="tel"
+              <div className="mt-2 relative">
+                <PhoneInput
+                  country={"de"}
                   value={formData.phone}
-                  onChange={(e) => handleInputChange("phone", e.target.value)}
-                  className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
-                    errors.phone && " outline outline-2 outline-red-500"
-                  }`}
+                  onChange={(value) => handleInputChange("phone", value)}
+                  buttonStyle={{
+                    border: "none",
+                    background: "white",
+                    margin: "2px",
+                  }}
+                  dropdownStyle={{
+                    border: "none",
+                    marginTop: "4px",
+                    maxWidth: "272px",
+                  }}
+                  inputProps={{
+                    required: true,
+                    className: `block w-full rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary
+                      ${errors.phone && " outline outline-2 outline-red-500"}`,
+                  }}
                 />
                 <CheckIcon
                   className={`absolute transition-opacity right-4 bottom-[22px] ${
@@ -254,72 +209,68 @@ export default function RegisterForm() {
               </p>
             </div>
             <div>
-              <div>
-                <label className="block text-sm font-medium leading-6 text-grayFont">
-                  {t("register.passwordLabel")}
-                </label>
-                <div className="mt-2 relative">
-                  <input
-                    type="password"
-                    value={formData.password}
-                    onChange={(e) =>
-                      handleInputChange("password", e.target.value)
-                    }
-                    className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
-                      errors.password && " outline outline-2 outline-red-500"
-                    }`}
-                  />
-                  <CheckIcon
-                    className={`absolute transition-opacity right-4 bottom-[22px] ${
-                      isPasswordValid(formData.password)
-                        ? "opacity-100"
-                        : "opacity-0"
-                    }`}
-                  />
-                </div>
-                <p
-                  className={`text-xs p-2 opacity-0 text-red-500 w-full transition-opacity
-                  ${errors.password && "opacity-100"}`}
-                >
-                  {errors.password}
-                </p>
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.passwordLabel")}
+              </label>
+              <div className="mt-2 relative">
+                <input
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
+                  className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
+                    errors.password && " outline outline-2 outline-red-500"
+                  }`}
+                />
+                <CheckIcon
+                  className={`absolute transition-opacity right-4 bottom-[22px] ${
+                    isPasswordValid(formData.password)
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                />
               </div>
+              <p
+                className={`text-xs p-2 opacity-0 text-red-500 w-full transition-opacity
+                  ${errors.password && "opacity-100"}`}
+              >
+                {errors.password}
+              </p>
             </div>
             <div>
-              <div>
-                <label className="block text-sm font-medium leading-6 text-grayFont">
-                  {t("register.passwordAgainLabel")}
-                </label>
-                <div className="mt-2 relative">
-                  <input
-                    type="password"
-                    value={formData.passwordConfirm}
-                    onChange={(e) =>
-                      handleInputChange("passwordConfirm", e.target.value)
-                    }
-                    className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
-                      errors.passwordConfirm &&
-                      " outline outline-2 outline-red-500"
-                    }`}
-                  />
-                  <CheckIcon
-                    className={`absolute transition-opacity right-4 bottom-[22px] ${
-                      isPasswordMatched(
-                        formData.password,
-                        formData.passwordConfirm
-                      )
-                        ? "opacity-100"
-                        : "opacity-0"
-                    }`}
-                  />
-                </div>
-                <p
-                  className={`text-xs p-2 opacity-0 text-red-500 w-full transition-opacity
-                  ${errors.passwordConfirm && "opacity-100"}`}
-                >
-                  {errors.passwordConfirm}
-                </p>
+              <label className="block text-sm font-medium leading-6 text-grayFont">
+                {t("register.passwordAgainLabel")}
+              </label>
+              <div className="mt-2 relative">
+                <input
+                  type="password"
+                  value={formData.passwordConfirm}
+                  onChange={(e) =>
+                    handleInputChange("passwordConfirm", e.target.value)
+                  }
+                  className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
+                    errors.passwordConfirm &&
+                    " outline outline-2 outline-red-500"
+                  }`}
+                />
+                <CheckIcon
+                  className={`absolute transition-opacity right-4 bottom-[22px] ${
+                    isPasswordMatched(
+                      formData.password,
+                      formData.passwordConfirm
+                    )
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                />
               </div>
+              <p
+                className={`text-xs p-2 opacity-0 text-red-500 w-full transition-opacity
+                  ${errors.passwordConfirm && "opacity-100"}`}
+              >
+                {errors.passwordConfirm}
+              </p>
             </div>
             <div></div>
             <div className="flex justify-end">

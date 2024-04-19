@@ -1,18 +1,11 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-} from "@/components/ui/select";
 import { CheckIcon, FlagUkIcon } from "@/assets/svgs";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import BirthdaySelector from "@/components/account/birthdaySelector";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/semantic-ui.css";
 
 export default function UpdateInfoForm() {
   const t = useTranslations("Account");
@@ -83,24 +76,24 @@ export default function UpdateInfoForm() {
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.phoneNumberLabel")}
         </label>
-        <div className="mt-2 flex gap-2 ">
-          <Select>
-            <SelectTrigger className="border-borderForm border rounded-sm h-[56px] w-fit flex gap-2">
-              <FlagUkIcon />
-              <ChevronDown size={12} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>country</SelectLabel>
-                <SelectItem value="en">eng</SelectItem>
-                <SelectItem value="de">test</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <input
-            type="tel"
-            required
-            className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+        <div className="mt-2">
+          <PhoneInput
+            country={"de"}
+            buttonStyle={{
+              border: "none",
+              background: "white",
+              margin: "2px",
+            }}
+            dropdownStyle={{
+              border: "none",
+              marginTop: "4px",
+              maxWidth: "272px",
+            }}
+            inputProps={{
+              required: true,
+              className:
+                "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
+            }}
           />
         </div>
       </div>
