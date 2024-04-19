@@ -1,4 +1,4 @@
-import { FuelIcon, SearchIcon, WarningIcon } from "@/assets/svgs";
+import { ChildSeatIcon, ConsumptionIcon, DriverIcon, EngineIcon, FuelIcon, HorsepowerIcon, InsuranceIcon, KeyIcon, LuggageIcon, MostRentedIcon, NavigationIcon, SearchIcon, SeatIcon, TransmissionIcon, VehicleIcon, WarningIcon } from "@/assets/svgs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -35,7 +35,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
             </div>
             <div className="flex w-full">
               <div className="w-1/2 py-2 pr-2 border border-l-0 text-grayFont hover:text-primary flex gap-1 items-center">
-                <SearchIcon className="w-3 h-3" />
+                <SearchIcon className="w-4 h-4" />
                 <p className="text-[11px] font-medium">
                   Filter vehicles of the same specifications
                 </p>
@@ -151,7 +151,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
             <div className="flex flex-col w-full">
               <div className="flex flex-col">
                 <div className="py-2 pr-2 border-y text-grayFont hover:text-primary flex gap-1 items-center">
-                  <SearchIcon className="w-3 h-3" />
+                  <SearchIcon className="w-4 h-4" />
                   <p className="text-[11px] font-medium">
                     Filter vehicles of the same specifications
                   </p>
@@ -169,21 +169,21 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full hidden mobile:flex tablet:hidden desktop:flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <TransmissionIcon/>
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center gap-2">
-                  <FuelIcon />
+                  <ConsumptionIcon/>
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
               </div>
               <div className="border-borderGray border-b grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-2 desktop:grid-cols-3 w-full">
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <LuggageIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full hidden mobile:flex tablet:hidden desktop:flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <SeatIcon />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-primary p-4 w-full flex flex-col justify-between items-center gap-2">

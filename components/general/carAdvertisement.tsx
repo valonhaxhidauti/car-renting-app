@@ -7,9 +7,7 @@ const ADVERTISEMENT_DATA = {
   price: 64,
   priceDecimal: 99,
   fuelType: "Gas",
-  fuelIcon: FuelIcon,
   transmissionType: "Manual",
-  transmissionIcon: TransmissionIcon,
   imageSrc: "/sampleCar.png",
 };
 
