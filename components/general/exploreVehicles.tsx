@@ -216,7 +216,7 @@ export default function ExploreVehicles() {
                     onClick={toggleFilters}
                   />
                 </div>
-                <VehicleFilters />
+                <VehicleFilters filtersId="1"/>
               </div>
             </div>
           </div>
@@ -237,15 +237,15 @@ export default function ExploreVehicles() {
           <div className="w-1/5  flex-col h-full gap-4 mr-8 hidden laptop:flex">
             <BookingInfo border={true} />
             <div className="bg-white p-4 flex flex-col gap-4 h-full">
-              <Accordion type="single" collapsible className="w-full py-0">
-                <AccordionItem value="item-1" className="border-none">
+              <Accordion defaultValue="filters" type="single" collapsible className="w-full py-0">
+                <AccordionItem value="filters" className="border-none">
                   <AccordionTrigger className="pb-4 pt-0">
                     <div className="flex justify-between cursor-pointer text-lg text-grayFont font-bold">
                       Filter Vehicles
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <VehicleFilters />
+                    <VehicleFilters filtersId="2"/>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
