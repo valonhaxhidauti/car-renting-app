@@ -2,6 +2,7 @@ import { ChildSeatIcon, ConsumptionIcon, DriverIcon, EngineIcon, FuelIcon, Horse
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function VehicleCard({ viewMode }: { viewMode: string }) {
@@ -91,34 +92,12 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 Daily Rental Fee
               </p>
             </div>
-            <button className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
+            <Link href="/explore/123" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
               Rent Now!
-            </button>
+            </Link>
           </div>
         </div>
       </div>
-      {/* <Tabs defaultValue="test1" className="p-2">
-        <TabsList className="gap-6">
-          <TabsTrigger className="" value="test1">
-            test1
-          </TabsTrigger>
-          <TabsTrigger className="" value="test2">
-            test2
-          </TabsTrigger>
-          <TabsTrigger className="" value="test3">
-            test3
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="test1">
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
-        </TabsContent>
-        <TabsContent value="test2">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse.
-        </TabsContent>
-        <TabsContent value="test3">
-          Excepteur sint occaecat cupidatat non proident.
-        </TabsContent>
-      </Tabs> */}
     </div>
   ) : (
     <div className="bg-white pl-4 mobile:pl-8">
@@ -208,9 +187,9 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 Daily Rental Fee
               </p>
             </div>
-            <button className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
+            <Link href="/explore/123" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
               Rent Now!
-            </button>
+            </Link>
           </div>
         </div>
       </div>

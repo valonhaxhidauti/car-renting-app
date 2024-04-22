@@ -22,6 +22,7 @@ export { default as GoogleIcon } from "./googleIcon.svg";
 export { default as GridViewIcon } from "./gridViewIcon.svg";
 export { default as HamburgerIcon } from "./hamburgerIcon.svg";
 export { default as HorsepowerIcon } from "./horsepowerIcon.svg";
+export { default as InfoIcon } from "./infoIcon.svg";
 export { default as InsuranceIcon } from "./insuranceIcon.svg";
 export { default as KeyIcon } from "./keyIcon.svg";
 export { default as ListViewIcon } from "./listViewIcon.svg";
