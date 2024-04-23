@@ -51,23 +51,23 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
             <div className="border-borderGray border-b flex w-full">
               <div className="flex w-full">
                 <div className="text-grayFont p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <FuelIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-1/6 hidden desktop:flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <TransmissionIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <ConsumptionIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <LuggageIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-1/6 hidden desktop:flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <SeatIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-primary p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center gap-2">
@@ -92,7 +92,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 Daily Rental Fee
               </p>
             </div>
-            <Link href="/explore/123" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
+            <Link href="/explore/1" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
               Rent Now!
             </Link>
           </div>
@@ -144,25 +144,25 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
               </div>
               <div className="border-borderGray border-b grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-2 desktop:grid-cols-3 w-full">
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
-                  <FuelIcon />
+                  <FuelIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full hidden mobile:flex tablet:hidden desktop:flex flex-col justify-between items-center border-r">
-                  <TransmissionIcon/>
+                  <TransmissionIcon className="text-graySecondary"/>
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center gap-2">
-                  <ConsumptionIcon/>
+                  <ConsumptionIcon className="text-graySecondary"/>
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
               </div>
               <div className="border-borderGray border-b grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-2 desktop:grid-cols-3 w-full">
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center border-r">
-                  <LuggageIcon />
+                  <LuggageIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full hidden mobile:flex tablet:hidden desktop:flex flex-col justify-between items-center border-r">
-                  <SeatIcon />
+                  <SeatIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-primary p-4 w-full flex flex-col justify-between items-center gap-2">
@@ -187,7 +187,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 Daily Rental Fee
               </p>
             </div>
-            <Link href="/explore/123" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
+            <Link href="/explore/1" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
               Rent Now!
             </Link>
           </div>

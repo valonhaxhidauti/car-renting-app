@@ -2,17 +2,22 @@ import {
   ChildSeatIcon,
   ConsumptionIcon,
   DriverIcon,
+  EngineIcon,
   FuelIcon,
+  HorsepowerIcon,
   InfoIcon,
   InsuranceIcon,
+  KeyIcon,
   LuggageIcon,
   NavigationIcon,
   SeatIcon,
   TransmissionIcon,
+  VehicleIcon,
 } from "@/assets/svgs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import React from "react";
+import VehicleGallery from "../other/vehicleGallery";
 
 export default function VehiclePage() {
   return (
@@ -32,35 +37,45 @@ export default function VehiclePage() {
               <div className="flex justify-between gap-2">
                 <div className="flex flex-col">
                   <div className="flex flex-col justify-between pt-2 mb-2">
-                      <p className="text-grayFont font-medium text-lg ">
-                        Volvo XC90 Excellence
-                      </p>
-                      <p className="text-graySecondary font-medium text-xs">
-                        SUV
-                      </p>
+                    <p className="text-grayFont font-medium text-lg ">
+                      Volvo XC90 Excellence
+                    </p>
+                    <p className="text-graySecondary font-medium text-xs">
+                      SUV
+                    </p>
                   </div>
                   <div>
                     <div className="flex w-full">
                       <div className="flex flex-wrap items-center py-2 gap-4">
-                        <div className="text-grayFont flex gap-2 justify-between w-full mobile:w-3/4 self-center items-center">
-                          <FuelIcon />
-                          <p className="text-xs mobile:text-sm">Diesel</p>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
+                          <FuelIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            Diesel
+                          </p>
                         </div>
-                        <div className="text-grayFont flex gap-2 justify-between w-full mobile:w-3/4 self-center items-center">
-                          <TransmissionIcon />
-                          <p className="text-xs mobile:text-sm">Automatic</p>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
+                          <TransmissionIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            Automatic
+                          </p>
                         </div>
-                        <div className="text-grayFont flex gap-2 justify-between w-full mobile:w-3/4 self-center items-center">
-                          <ConsumptionIcon />
-                          <p className="text-xs mobile:text-sm">6,5 lt</p>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
+                          <ConsumptionIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            6,5 lt
+                          </p>
                         </div>
-                        <div className="text-grayFont flex gap-2 justify-between w-full mobile:w-3/4 self-center items-center">
-                          <LuggageIcon />
-                          <p className="text-xs mobile:text-sm">615 lt</p>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
+                          <LuggageIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            615 lt
+                          </p>
                         </div>
-                        <div className="text-grayFont flex gap-2 justify-between w-full mobile:w-3/4 self-center items-center">
-                          <SeatIcon />
-                          <p className="text-xs mobile:text-sm">5</p>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
+                          <SeatIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            5
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -85,7 +100,7 @@ export default function VehiclePage() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="options">
-              <div className="grid  laptop:grid-cols-2 desktop:grid-cols-4 border-borderGray border-y border-x w-full">
+              <div className="grid laptop:grid-cols-2 desktop:grid-cols-4 border-borderGray border-y border-x w-full">
                 <div className="flex gap-2 items-center pl-4 border-b desktop:border-b-0 laptop:border-r">
                   <div className="w-10 laptop:w-fit">
                     <ChildSeatIcon />
@@ -95,7 +110,7 @@ export default function VehiclePage() {
                       <p className="flex items-center text-[10px] font-bold gap-1">
                         CHILD SEAT <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-gray-400">$24.00/Daily</p>
+                      <p className="text-sm text-graySecondary">$24.00/Daily</p>
                     </div>
                     <div className="flex flex-col items-center">
                       <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
@@ -118,7 +133,7 @@ export default function VehiclePage() {
                       <p className="flex items-center text-[10px] font-bold gap-1">
                         NAVIGATION <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-gray-400">$15.50/Daily</p>
+                      <p className="text-sm text-graySecondary">$15.50/Daily</p>
                     </div>
                     <div className="flex flex-col items-center">
                       <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
@@ -141,7 +156,7 @@ export default function VehiclePage() {
                       <p className="flex items-center text-[10px] font-bold gap-1">
                         ADITIONAL DRIVER <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-gray-400">$40.00/Daily</p>
+                      <p className="text-sm text-graySecondary">$40.00/Daily</p>
                     </div>
                     <div className="flex flex-col items-center">
                       <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
@@ -157,14 +172,14 @@ export default function VehiclePage() {
                 </div>
                 <div className="flex gap-2 items-center pl-4">
                   <div className="w-10 laptop:w-fit">
-                    <InsuranceIcon className=""/>
+                    <InsuranceIcon className="" />
                   </div>
                   <div className="p-2 flex justify-between gap-8 items-center w-full">
                     <div className="flex flex-col text-grayFont">
                       <p className="flex items-center text-[10px] font-bold gap-1">
                         DAMAGE INSURANCE <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-gray-400">$16.60/Daily</p>
+                      <p className="text-sm text-graySecondary">$16.60/Daily</p>
                     </div>
                     <div className="flex flex-col items-center">
                       <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
@@ -214,10 +229,92 @@ export default function VehiclePage() {
               </p>
             </TabsContent>
             <TabsContent value="specs">
-              Excepteur sint occaecat cupidatat non proident.
+              <div className="grid mobile:grid-cols-2 desktop:grid-cols-3 gap-4">
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <FuelIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">FUEL TYPE</span>
+                    <p className="font-medium text-sm">Gasoline</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <TransmissionIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">GEAR TYPE</span>
+                    <p className="font-medium text-sm">Automatic</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <SeatIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">PASSENGER CAPACITY</span>
+                    <p className="font-medium text-sm">5 Person</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <KeyIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">MODEL YEAR</span>
+                    <p className="font-medium text-sm">2018</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <EngineIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">ENGINE TYPE</span>
+                    <p className="font-medium text-sm">3.0 L V6 TFSI</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <ConsumptionIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">FUEL CONSUMPTION</span>
+                    <p className="font-medium text-sm">4,5 lt / 100 km</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <VehicleIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">VEHICLE TYPE</span>
+                    <p className="font-medium text-sm">Sportback</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <LuggageIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">LUGGAGE CAPACITY</span>
+                    <p className="font-medium text-sm">345 lt</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 border-y border-borderGray py-6">
+                  <div className="w-9">
+                    <HorsepowerIcon className="text-graySecondary" />
+                  </div>
+                  <div className="flex justify-between text-grayFont w-full items-center">
+                    <span className="text-[9px] font-bold">HP (HORSE POWER)</span>
+                    <p className="font-medium text-sm">245 hp</p>
+                  </div>
+                </div>
+              </div>
             </TabsContent>
             <TabsContent value="gallery">
-              Excepteur sint occaecat cupidatat non proident.
+              <VehicleGallery/>
             </TabsContent>
           </Tabs>
         </div>

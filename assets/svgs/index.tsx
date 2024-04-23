@@ -46,3 +46,4 @@ export { default as TransmissionIcon } from "./transmissionIcon.svg";
 export { default as VehicleIcon } from "./vehicleIcon.svg";
 export { default as VisitUsIcon } from "./visitUsIcon.svg";
 export { default as WarningIcon } from "./warningIcon.svg";
+export { default as ZoomImageIcon } from "./zoomImageIcon.svg";
