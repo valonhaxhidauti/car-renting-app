@@ -59,11 +59,11 @@
 .flicking-arrow-prev::after,
 .flicking-arrow-next::before,
 .flicking-arrow-next::after {
-  background-color: #ccc !important;
+  background-color: hsl(var(--primary)) !important;
 }
 .flicking-arrow-disabled::before,
 .flicking-arrow-disabled::after,
 .flicking-arrow-disabled::before,
 .flicking-arrow-disabled::after {
-  background-color: #e6e6e6 !important;
+  background-color: hsl(var(--borderGray)) !important;
 }
