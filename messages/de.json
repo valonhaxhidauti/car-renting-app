@@ -82,7 +82,6 @@
             "surnameLabel": "Nachname",
             "emailAddressLabel": "E-Mail-Adresse",
             "phoneNumberLabel": "Telefonnummer",
-            "countryLabel": "Land",
             "passwordLabel": "Passwort",
             "passwordAgainLabel": "Passwort (Wiederholen)",
             "registerButton": "Registrieren",
@@ -130,6 +129,26 @@
         "phoneNumberPlaceholder": "Telefonnummer",
         "messagePlaceholder": "Ihre Nachricht",
         "sendMessage": "Nachricht senden"
+    },
+    "ExploreVehicles": {
+        "pageTitle": "Fahrzeuge erkunden",
+        "currency": {
+            "label": "Währung",
+            "usd": "USD",
+            "eur": "EUR"
+        },
+        "sortByLabel": "Sortieren nach",
+        "sortBy": "Ergebnisse sortieren nach",
+        "modelYear": "Modelljahr",
+        "price": "Preis",
+        "changeListView": "Listenansicht ändern",
+        "gridView": "Rasteransicht",
+        "listView": "Listenansicht",
+        "filters": "Filter",
+        "filterVehicles": "Fahrzeuge filtern",
+        "booking": "Buchung",
+        "bookingInformation": "Buchungsinformationen",
+        "accordionHeader": "Fahrzeuge filtern"
     },
     "FaqItems": {
         "heading": "FAQ",
@@ -256,5 +275,33 @@
         "rentalTerms": "Mietbedingungen",
         "privacyPolicy": "Datenschutzrichtlinie",
         "contact": "Kontakt"
+    },
+    "VehiclePage": {
+        "pageTitle": "Ihre Buchung",
+        "vehicleValue": "Fahrzeugwert",
+        "optionalItems": "Optionale Artikel",
+        "pricePer": "Preis pro",
+        "days": "Tage",
+        "totalValue": "Gesamtwert",
+        "continueButton": "Weiter",
+        "extraOptionsTab": "Zusätzliche Optionen",
+        "rentalTermsTab": "Mietbedingungen",
+        "allSpecificationsTab": "Alle Spezifikationen",
+        "imageGalleryTab": "Bildergalerie",
+        "childSeat": "Kindersitz",
+        "navigation": "Navigation",
+        "additionalDriver": "Zusätzlicher Fahrer",
+        "damageInsurance": "Schadensversicherung",
+        "daily": "Täglich",
+        "fuelType": "Kraftstoffart",
+        "gearType": "Getriebetyp",
+        "passengerCapacity": "Passagierkapazität",
+        "person": "Person",
+        "modelYear": "Modelljahr",
+        "engineType": "Motortyp",
+        "fuelConsumption": "Kraftstoffverbrauch",
+        "vehicleType": "Fahrzeugtyp",
+        "luggageCapacity": "Gepäckkapazität",
+        "horsepower": "PS (Pferdestärke)"
     }
 }

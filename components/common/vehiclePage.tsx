@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ChildSeatIcon,
   ConsumptionIcon,
@@ -16,10 +18,52 @@ import {
 } from "@/assets/svgs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
-import React from "react";
+import { useCounter } from "../hooks/useCounter";
 import VehicleGallery from "../other/vehicleGallery";
+import { useTranslations } from "next-intl";
+import VehicleSpecs from "../other/vehicleSpecs";
+
+type VehiclePrices = {
+  vehicle: number;
+  childSeat: number;
+  navigation: number;
+  driver: number;
+  insurance: number;
+};
+
+const prices: VehiclePrices = {
+  vehicle: 120.0,
+  childSeat: 24.0,
+  navigation: 15.5,
+  driver: 40.0,
+  insurance: 16.6,
+};
 
 export default function VehiclePage() {
+  const t = useTranslations("VehiclePage");
+
+  const [childSeat, incChildSeat, decChildSeat] = useCounter(0);
+  const [navigation, incNavigation, decNavigation] = useCounter(0);
+  const [driver, incDriver, decDriver] = useCounter(0);
+  const [insurance, incInsurance, decInsurance] = useCounter(0);
+
+  const optionalItems = [
+    { name: t("childSeat"), quantity: childSeat, price: prices.childSeat },
+    { name: t("navigation"), quantity: navigation, price: prices.navigation },
+    { name: t("additionalDriver"), quantity: driver, price: prices.driver },
+    {
+      name: t("damageInsurance"),
+      quantity: insurance,
+      price: prices.insurance,
+    },
+  ];
+
+  const optionalItemsTotal = optionalItems.reduce(
+    (total, item) => total + item.quantity * item.price,
+    0
+  );
+
+  const totalPrice = prices.vehicle + optionalItemsTotal;
   return (
     <div className="bg-bgSecondary w-full h-full px-4 mobile:px-8 py-8 ">
       <div className="flex flex-col tablet:flex-row gap-4">
@@ -86,18 +130,12 @@ export default function VehiclePage() {
           </div>
           <Tabs defaultValue="options" className="p-2 bg-white">
             <TabsList className="gap-6 overflow-auto">
-              <TabsTrigger className="" value="options">
-                Extra options
+              <TabsTrigger value="options">{t("extraOptionsTab")}</TabsTrigger>
+              <TabsTrigger value="terms">{t("rentalTermsTab")}</TabsTrigger>
+              <TabsTrigger value="specs">
+                {t("allSpecificationsTab")}
               </TabsTrigger>
-              <TabsTrigger className="" value="terms">
-                Rental Terms
-              </TabsTrigger>
-              <TabsTrigger className="" value="specs">
-                All specifications
-              </TabsTrigger>
-              <TabsTrigger className="" value="gallery">
-                Image Gallery
-              </TabsTrigger>
+              <TabsTrigger value="gallery">{t("imageGalleryTab")}</TabsTrigger>
             </TabsList>
             <TabsContent value="options">
               <div className="grid laptop:grid-cols-2 desktop:grid-cols-4 border-borderGray border-y border-x w-full">
@@ -105,19 +143,28 @@ export default function VehiclePage() {
                   <div className="w-10 laptop:w-fit">
                     <ChildSeatIcon />
                   </div>
-                  <div className="p-2 flex justify-between gap-8 items-center w-full">
+                  <div className="p-2 flex justify-between items-center w-full">
                     <div className="flex flex-col text-grayFont">
                       <p className="flex items-center text-[10px] font-bold gap-1">
-                        CHILD SEAT <InfoIcon className="text-primary" />
+                        {t("childSeat").toUpperCase()}
+                        <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-graySecondary">$24.00/Daily</p>
+                      <p className="text-sm text-graySecondary">
+                        ${prices.childSeat.toFixed(2)}/{t("daily")}
+                      </p>
                     </div>
                     <div className="flex flex-col items-center">
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
+                      <div
+                        onClick={incChildSeat}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center"
+                      >
                         +
                       </div>
-                      <p className="font-bold">1</p>
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative">
+                      <p className="font-bold">{childSeat}</p>
+                      <div
+                        onClick={decChildSeat}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative"
+                      >
                         &nbsp;
                         <span className="absolute -top-1.5 left-1.5">_</span>
                       </div>
@@ -128,19 +175,28 @@ export default function VehiclePage() {
                   <div className="w-10 laptop:w-fit">
                     <NavigationIcon />
                   </div>
-                  <div className="p-2 flex justify-between gap-8 items-center w-full">
+                  <div className="p-2 flex justify-between items-center w-full">
                     <div className="flex flex-col text-grayFont">
                       <p className="flex items-center text-[10px] font-bold gap-1">
-                        NAVIGATION <InfoIcon className="text-primary" />
+                        {t("navigation").toUpperCase()}
+                        <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-graySecondary">$15.50/Daily</p>
+                      <p className="text-sm text-graySecondary">
+                        ${prices.navigation.toFixed(2)}/{t("daily")}
+                      </p>
                     </div>
                     <div className="flex flex-col items-center">
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
+                      <div
+                        onClick={incNavigation}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center"
+                      >
                         +
                       </div>
-                      <p className="font-bold">1</p>
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative">
+                      <p className="font-bold">{navigation}</p>
+                      <div
+                        onClick={decNavigation}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative"
+                      >
                         &nbsp;
                         <span className="absolute -top-1.5 left-1.5">_</span>
                       </div>
@@ -151,19 +207,28 @@ export default function VehiclePage() {
                   <div className="w-10 laptop:w-fit">
                     <DriverIcon />
                   </div>
-                  <div className="p-2 flex justify-between gap-8 items-center w-full">
+                  <div className="p-2 flex justify-between items-center w-full">
                     <div className="flex flex-col text-grayFont">
                       <p className="flex items-center text-[10px] font-bold gap-1">
-                        ADITIONAL DRIVER <InfoIcon className="text-primary" />
+                        {t("additionalDriver").toUpperCase()}
+                        <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-graySecondary">$40.00/Daily</p>
+                      <p className="text-sm text-graySecondary">
+                        ${prices.driver.toFixed(2)}/{t("daily")}
+                      </p>
                     </div>
                     <div className="flex flex-col items-center">
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
+                      <div
+                        onClick={incDriver}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center"
+                      >
                         +
                       </div>
-                      <p className="font-bold">1</p>
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative">
+                      <p className="font-bold">{driver}</p>
+                      <div
+                        onClick={decDriver}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative"
+                      >
                         &nbsp;
                         <span className="absolute -top-1.5 left-1.5">_</span>
                       </div>
@@ -174,19 +239,28 @@ export default function VehiclePage() {
                   <div className="w-10 laptop:w-fit">
                     <InsuranceIcon className="" />
                   </div>
-                  <div className="p-2 flex justify-between gap-8 items-center w-full">
+                  <div className="p-2 flex justify-between items-center w-full">
                     <div className="flex flex-col text-grayFont">
                       <p className="flex items-center text-[10px] font-bold gap-1">
-                        DAMAGE INSURANCE <InfoIcon className="text-primary" />
+                        {t("damageInsurance").toUpperCase()}
+                        <InfoIcon className="text-primary" />
                       </p>
-                      <p className="text-sm text-graySecondary">$16.60/Daily</p>
+                      <p className="text-sm text-graySecondary">
+                        ${prices.insurance.toFixed(2)}/{t("daily")}
+                      </p>
                     </div>
                     <div className="flex flex-col items-center">
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center">
+                      <div
+                        onClick={incInsurance}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer text-center"
+                      >
                         +
                       </div>
-                      <p className="font-bold">1</p>
-                      <div className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative">
+                      <p className="font-bold">{insurance}</p>
+                      <div
+                        onClick={decInsurance}
+                        className="border-gray-400 border rounded-md text-sm px-1 w-5 cursor-pointer relative"
+                      >
                         &nbsp;
                         <span className="absolute -top-1.5 left-1.5">_</span>
                       </div>
@@ -229,98 +303,63 @@ export default function VehiclePage() {
               </p>
             </TabsContent>
             <TabsContent value="specs">
-              <div className="grid mobile:grid-cols-2 desktop:grid-cols-3 gap-4">
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <FuelIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">FUEL TYPE</span>
-                    <p className="font-medium text-sm">Gasoline</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <TransmissionIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">GEAR TYPE</span>
-                    <p className="font-medium text-sm">Automatic</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <SeatIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">PASSENGER CAPACITY</span>
-                    <p className="font-medium text-sm">5 Person</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <KeyIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">MODEL YEAR</span>
-                    <p className="font-medium text-sm">2018</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <EngineIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">ENGINE TYPE</span>
-                    <p className="font-medium text-sm">3.0 L V6 TFSI</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <ConsumptionIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">FUEL CONSUMPTION</span>
-                    <p className="font-medium text-sm">4,5 lt / 100 km</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <VehicleIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">VEHICLE TYPE</span>
-                    <p className="font-medium text-sm">Sportback</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <LuggageIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">LUGGAGE CAPACITY</span>
-                    <p className="font-medium text-sm">345 lt</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 border-y border-borderGray py-6">
-                  <div className="w-9">
-                    <HorsepowerIcon className="text-graySecondary" />
-                  </div>
-                  <div className="flex justify-between text-grayFont w-full items-center">
-                    <span className="text-[9px] font-bold">HP (HORSE POWER)</span>
-                    <p className="font-medium text-sm">245 hp</p>
-                  </div>
-                </div>
-              </div>
+              <VehicleSpecs />
             </TabsContent>
             <TabsContent value="gallery">
-              <VehicleGallery/>
+              <VehicleGallery />
             </TabsContent>
           </Tabs>
         </div>
-        <div className="sticky top-32 right-8 flex flex-col gap-4 w-full tablet:w-1/4 h-full p-4 bg-white">
-          <div className="">Price:345$</div>
-          <div>Additional options:</div>
+        <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full tablet:w-1/4 h-full p-4 bg-white">
+          <div className="flex flex-col border-b border-borderGray pb-3">
+            <p className="text-xl font-bold">{t("pageTitle")}</p>
+            <p className="font-medium">Volvo XC90 Excellence</p>
+          </div>
+          <div className="flex justify-between text-sm border-b border-borderGray py-3">
+            <p className="font-bold">{t("vehicleValue")}</p>
+            <p className="font-bold text-primary">
+              ${prices.vehicle.toFixed(2)}
+            </p>
+          </div>
+          {optionalItemsTotal > 0 && (
+            <div className="flex flex-col border-b border-borderGray py-3">
+              <div className="flex justify-between text-sm">
+                <p className="font-bold">{t("optionalItems")}</p>
+                <p className="font-bold text-primary">
+                  ${optionalItemsTotal.toFixed(2)}
+                </p>
+              </div>
+              {optionalItems.map(
+                (item) =>
+                  item.quantity > 0 && (
+                    <div
+                      key={item.name}
+                      className="flex justify-between text-xs"
+                    >
+                      <p className="font-light text-sm">{item.name}</p>
+                      <p className="font-light text-sm text-primary">
+                        ${(item.quantity * item.price).toFixed(2)}
+                      </p>
+                    </div>
+                  )
+              )}
+            </div>
+          )}
+          <div className="py-3">
+            <div className="flex justify-between items-center pb-2">
+              <p className="font-light text-sm">{t("pricePer")}</p>
+              <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
+                4 {t("days").toUpperCase()}
+              </p>
+            </div>
+            <div className="flex justify-between">
+              <p className="font-bold">{t("totalValue")}</p>
+              <p className="font-bold text-primary">${totalPrice.toFixed(2)}</p>
+            </div>
+          </div>
+          <button className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all">
+            {t("continueButton")}
+          </button>
         </div>
       </div>
     </div>

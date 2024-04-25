@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import { RentLocIcon, ReturnLocIcon, EditBookingIcon } from "@/assets/svgs";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function BookingInfo({ border }: { border: boolean }) {
+  const t = useTranslations("ExploreVehicles");
+
   const searchParams = useSearchParams();
   const rentLocation = searchParams.get("rentLocation");
   const returnLocation = searchParams.get("returnLocation");
@@ -15,7 +20,7 @@ export default function BookingInfo({ border }: { border: boolean }) {
     ${border ? "border-borderBooking border-2" : ""}`}
     >
       <div className="flex justify-between text-lg text-grayFont font-bold">
-        Booking Information <EditBookingIcon className="cursor-pointer"/>
+      {t("bookingInformation")} <EditBookingIcon className="cursor-pointer" />
       </div>
       {rentLocation && (
         <div className="flex gap-2 items-center">
@@ -26,7 +31,7 @@ export default function BookingInfo({ border }: { border: boolean }) {
           </div>
         </div>
       )}
-      {returnLocation && 
+      {returnLocation && (
         <div className="flex gap-2 items-center">
           <ReturnLocIcon className="w-12" />
           <div className="text-grayFont">
@@ -34,7 +39,7 @@ export default function BookingInfo({ border }: { border: boolean }) {
             <p className="text-xs leading-none">{returnLocation}</p>
           </div>
         </div>
-      }
+      )}
     </div>
   );
 }

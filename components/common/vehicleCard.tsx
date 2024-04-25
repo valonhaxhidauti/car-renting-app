@@ -1,4 +1,21 @@
-import { ChildSeatIcon, ConsumptionIcon, DriverIcon, EngineIcon, FuelIcon, HorsepowerIcon, InsuranceIcon, KeyIcon, LuggageIcon, MostRentedIcon, NavigationIcon, SearchIcon, SeatIcon, TransmissionIcon, VehicleIcon, WarningIcon } from "@/assets/svgs";
+import {
+  ChildSeatIcon,
+  ConsumptionIcon,
+  DriverIcon,
+  EngineIcon,
+  FuelIcon,
+  HorsepowerIcon,
+  InsuranceIcon,
+  KeyIcon,
+  LuggageIcon,
+  MostRentedIcon,
+  NavigationIcon,
+  SearchIcon,
+  SeatIcon,
+  TransmissionIcon,
+  VehicleIcon,
+  WarningIcon,
+} from "@/assets/svgs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -92,7 +109,10 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 Daily Rental Fee
               </p>
             </div>
-            <Link href="/explore/1" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
+            <Link
+              href="/explore/1"
+              className="px-8 py-3 text-white text-xs hover:bg-secondary bg-primary text-nowrap transition-all"
+            >
               Rent Now!
             </Link>
           </div>
@@ -148,11 +168,11 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full hidden mobile:flex tablet:hidden desktop:flex flex-col justify-between items-center border-r">
-                  <TransmissionIcon className="text-graySecondary"/>
+                  <TransmissionIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
                 <div className="text-grayFont p-4 w-full flex flex-col justify-between items-center gap-2">
-                  <ConsumptionIcon className="text-graySecondary"/>
+                  <ConsumptionIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold">DIESEL</p>
                 </div>
               </div>
@@ -187,7 +207,10 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 Daily Rental Fee
               </p>
             </div>
-            <Link href="/explore/1" className="px-8 py-3 text-white text-xs bg-secondary hover:bg-primary text-nowrap">
+            <Link
+              href="/explore/1"
+              className="px-8 py-3 text-white text-xs hover:bg-secondary bg-primary text-nowrap transition-all"
+            >
               Rent Now!
             </Link>
           </div>

@@ -130,6 +130,26 @@
         "messagePlaceholder": "Your Message",
         "sendMessage": "Send Message"
     },
+    "ExploreVehicles": {
+        "pageTitle": "Explore Vehicles",
+        "currency": {
+            "label": "Currency",
+            "usd": "USD",
+            "eur": "EUR"
+        },
+        "sortByLabel": "Sort by",
+        "sortBy": "Sort results by",
+        "modelYear": "Model Year",
+        "price": "Price",
+        "changeListView": "Change List View",
+        "gridView": "Grid View",
+        "listView": "List View",
+        "filters": "Filters",
+        "filterVehicles": "Filter Vehicles",
+        "booking": "Booking",
+        "bookingInformation": "Booking Information",
+        "accordionHeader": "Filter Vehicles"
+    },
     "FaqItems": {
         "heading": "FAQ",
         "breadcrumb": {
@@ -255,5 +275,33 @@
         "rentalTerms": "Rental Terms",
         "privacyPolicy": "Privacy Policy",
         "contact": "Contact"
+    },
+    "VehiclePage": {
+        "pageTitle": "Your Booking",
+        "vehicleValue": "Vehicle Value",
+        "optionalItems": "Optional Items",
+        "pricePer": "Price per",
+        "days": "Days",
+        "totalValue": "Total Value",
+        "continueButton": "Continue",
+        "extraOptionsTab": "Extra options",
+        "rentalTermsTab": "Rental Terms",
+        "allSpecificationsTab": "All specifications",
+        "imageGalleryTab": "Image Gallery",
+        "childSeat": "Child Seat",
+        "navigation": "Navigation",
+        "additionalDriver": "Additional Driver",
+        "damageInsurance": "Damage Insurance",
+        "daily": "Daily",
+        "fuelType": "Fuel Type",
+        "gearType": "Gear Type",
+        "passengerCapacity": "Passenger Capacity",
+        "person": "Person",
+        "modelYear": "Model Year",
+        "engineType": "Engine Type",
+        "fuelConsumption": "Fuel Consumption",
+        "vehicleType": "Vehicle Type",
+        "luggageCapacity": "Luggage Capacity",
+        "horsepower": "Hp (Horse power)"
     }
 }
