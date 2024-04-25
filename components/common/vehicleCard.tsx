@@ -1,28 +1,23 @@
+"use client";
+
 import {
-  ChildSeatIcon,
   ConsumptionIcon,
-  DriverIcon,
-  EngineIcon,
   FuelIcon,
-  HorsepowerIcon,
-  InsuranceIcon,
-  KeyIcon,
   LuggageIcon,
-  MostRentedIcon,
-  NavigationIcon,
   SearchIcon,
   SeatIcon,
   TransmissionIcon,
-  VehicleIcon,
   WarningIcon,
 } from "@/assets/svgs";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 export default function VehicleCard({ viewMode }: { viewMode: string }) {
+  const t = useTranslations("VehicleCard");
+
   return viewMode === "list" ? (
     <div className="bg-white flex flex-col gap-4 pl-4 mobile:pl-8">
       <div className="w-full p-2 flex gap-8">
@@ -47,22 +42,18 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
               </div>
               <div>
                 <p className="border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
-                  25% OFF
+                  25% {t("off")}
                 </p>
               </div>
             </div>
             <div className="flex w-full">
               <div className="w-1/2 py-2 pr-2 border border-l-0 text-grayFont hover:text-primary flex gap-1 items-center">
                 <SearchIcon className="w-4 h-4" />
-                <p className="text-[11px] font-medium">
-                  Filter vehicles of the same specifications
-                </p>
+                <p className="text-[11px] font-medium">{t("filterVehicles")}</p>
               </div>
               <div className="w-1/2 p-2 border border-x-0 text-grayFont flex gap-1 items-center">
                 <WarningIcon className="w-4 h-4" />
-                <p className="text-[11px] font-medium">
-                  The options of the vehicle to be delivered may vary
-                </p>
+                <p className="text-[11px] font-medium">{t("vehicleOptions")}</p>
               </div>
             </div>
             <div className="border-borderGray border-b flex w-full">
@@ -90,7 +81,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 <div className="text-primary p-4 w-1/4 desktop:w-1/6 flex flex-col justify-between items-center gap-2">
                   <ChevronRight size={14} />
                   <p className="text-sm leading-none text-center">
-                    View All Specifications
+                    {t("viewAllSpecs")}
                   </p>
                 </div>
               </div>
@@ -105,15 +96,13 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                   ,99
                 </sup>
               </span>
-              <p className="text-xs font-medium text-center">
-                Daily Rental Fee
-              </p>
+              <p className="text-xs font-medium text-center">{t("dailyFee")}</p>
             </div>
             <Link
               href="/explore/1"
               className="px-8 py-3 text-white text-xs hover:bg-secondary bg-primary text-nowrap transition-all"
             >
-              Rent Now!
+              {t("rentNow")}
             </Link>
           </div>
         </div>
@@ -125,7 +114,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
         <div className="flex w-full justify-between pt-2">
           <div className="flex flex-col gap-4 justify-between">
             <p className="w-fit border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
-              25% OFF
+              25% {t("off")}
             </p>
             <div className="flex flex-col gap-4">
               <p className="text-graySecondary w-fit border-graySecondary border rounded-full font-medium text-[10px] px-12 py-1">
@@ -152,13 +141,13 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 <div className="py-2 pr-2 border-y text-grayFont hover:text-primary flex gap-1 items-center">
                   <SearchIcon className="w-4 h-4" />
                   <p className="text-[11px] font-medium">
-                    Filter vehicles of the same specifications
+                    {t("filterVehicles")}
                   </p>
                 </div>
                 <div className="py-2 pr-2 border-b text-grayFont flex gap-1 items-center">
                   <WarningIcon className="w-4 h-4" />
                   <p className="text-[11px] font-medium">
-                    The options of the vehicle to be delivered may vary
+                    {t("vehicleOptions")}
                   </p>
                 </div>
               </div>
@@ -188,7 +177,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                 <div className="text-primary p-4 w-full flex flex-col justify-between items-center gap-2">
                   <ChevronRight size={14} />
                   <p className="text-sm leading-none text-center">
-                    View All Specifications
+                    {t("viewAllSpecs")}
                   </p>
                 </div>
               </div>
@@ -203,15 +192,13 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
                   ,99
                 </sup>
               </span>
-              <p className="text-xs font-medium text-center">
-                Daily Rental Fee
-              </p>
+              <p className="text-xs font-medium text-center">{t("dailyFee")}</p>
             </div>
             <Link
               href="/explore/1"
               className="px-8 py-3 text-white text-xs hover:bg-secondary bg-primary text-nowrap transition-all"
             >
-              Rent Now!
+              {t("rentNow")}
             </Link>
           </div>
         </div>

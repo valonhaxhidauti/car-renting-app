@@ -23,6 +23,27 @@ const config = {
       },
     },
     extend: {
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "show-filters": "show-filters 0.4s cubic-bezier(.61,1,.88,1)",
+        "hide-filters": "hide-filters 0.4s cubic-bezier(.61,1,.88,1)",
+        "show-booking": "show-booking 0.4s cubic-bezier(.61,1,.88,1)",
+        "hide-booking": "hide-booking 0.4s cubic-bezier(.61,1,.88,1)",
+        "show-overlay": "show-overlay 0.4s cubic-bezier(.61,1,.88,1)",
+      },
+      border: {
+        booking: "2px solid hsl(85deg 54% 51%)",
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        grayPrimary: "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
+        btnShadow: "3.346px 3.716px 15px 0px rgba(0, 0, 0, 0.05)",
+      },
       colors: {
         borderBooking: "hsl(var(--borderBooking))",
         borderForm: "hsl(var(--borderForm))",
@@ -66,14 +87,8 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      boxShadow: {
-        grayPrimary: "15px 16px 60px 0px rgba(0, 0, 0, 0.15)",
-        btnShadow: "3.346px 3.716px 15px 0px rgba(0, 0, 0, 0.05)",
+      height: {
+        "revert": "revert-layer",
       },
       keyframes: {
         "show-filters": {
@@ -104,18 +119,6 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-      },
-      border: {
-        booking: "2px solid hsl(85deg 54% 51%)",
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "show-filters": "show-filters 0.4s cubic-bezier(.61,1,.88,1)",
-        "hide-filters": "hide-filters 0.4s cubic-bezier(.61,1,.88,1)",
-        "show-booking": "show-booking 0.4s cubic-bezier(.61,1,.88,1)",
-        "hide-booking": "hide-booking 0.4s cubic-bezier(.61,1,.88,1)",
-        "show-overlay": "show-overlay 0.4s cubic-bezier(.61,1,.88,1)",
       },
     },
   },

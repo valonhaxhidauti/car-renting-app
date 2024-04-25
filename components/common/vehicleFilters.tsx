@@ -1,11 +1,17 @@
-import React from "react";
+"use client";
+
+import { useTranslations } from "next-intl";
 
 export default function VehicleFilters({ filtersId }: { filtersId: string }) {
+  const t = useTranslations("VehicleFilters");
+
   return (
     <>
       <div className="flex flex-col items-start gap-2 pb-4 border-borderGray border-b">
         <div className="flex space-between w-full">
-          <p className="pb-2 text-sm font-bold w-full">Vehicle Class</p>
+          <p className="pb-2 text-sm font-bold w-full">
+            {t("vehicleClass.title")}
+          </p>
         </div>
         <div className="flex gap-4">
           <input
@@ -17,7 +23,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleClass1_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Economic
+            {t("vehicleClass.economic")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -30,7 +36,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleClass2_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Middle Class
+            {t("vehicleClass.middleClass")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -43,7 +49,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleClass3_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Top Grade
+            {t("vehicleClass.middleClass")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -56,7 +62,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleClass4_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Luxury
+            {t("vehicleClass.luxury")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -69,7 +75,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleClass5_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            7+ Persons
+            {t("vehicleClass.persons7Plus")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -82,12 +88,12 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleClass6_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            SUV
+            {t("vehicleClass.suv")}
           </label>
         </div>
       </div>
       <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-        <p className="pb-2 text-sm font-bold">Vehicle Type</p>
+        <p className="pb-2 text-sm font-bold">{t("vehicleType.title")}</p>
         <div className="flex gap-4">
           <input
             id={`vehicleType1_${filtersId}`}
@@ -98,7 +104,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleType1_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Sedan
+            {t("vehicleType.sedan")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -111,7 +117,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleType2_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Hatchback
+            {t("vehicleType.hatchback")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -124,7 +130,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleType3_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Stationwagon
+            {t("vehicleType.stationwagon")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -137,7 +143,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleType4_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            SUV
+            {t("vehicleType.suv")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -150,12 +156,12 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`vehicleType5_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            VAN
+            {t("vehicleType.van")}
           </label>
         </div>
       </div>
       <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-        <p className="pb-2 text-sm font-bold">Gear Type</p>
+        <p className="pb-2 text-sm font-bold">{t("gearType.title")}</p>
         <div className="flex gap-4">
           <input
             id={`gearType1_${filtersId}`}
@@ -166,7 +172,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`gearType1_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Autoamatic
+            {t("gearType.automatic")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -179,12 +185,12 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`gearType2_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Manual
+            {t("gearType.manual")}
           </label>
         </div>
       </div>
       <div className="flex flex-col items-start gap-2 mt-4">
-        <p className="pb-2 text-sm font-bold">Fuel Type</p>
+        <p className="pb-2 text-sm font-bold">{t("fuelType.title")}</p>
         <div className="flex gap-4">
           <input
             id={`fuelType1_${filtersId}`}
@@ -195,7 +201,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`fuelType1_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Diesel
+            {t("fuelType.diesel")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -208,7 +214,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`fuelType2_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Autogas
+            {t("fuelType.autogas")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -221,7 +227,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`fuelType3_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Hybrid
+            {t("fuelType.hybrid")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -234,7 +240,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`fuelType4_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Gasoline
+            {t("fuelType.gasoline")}
           </label>
         </div>
         <div className="flex gap-4">
@@ -247,7 +253,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
             htmlFor={`fuelType5_${filtersId}`}
             className="text-grayFont text-xs cursor-pointer"
           >
-            Electrical
+            {t("fuelType.electrical")}
           </label>
         </div>
       </div>

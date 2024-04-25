@@ -1,4 +1,4 @@
-import VehiclePage from "@/components/common/vehiclePage";
+import VehiclePage from "@/components/other/vehiclePage";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import React from "react";

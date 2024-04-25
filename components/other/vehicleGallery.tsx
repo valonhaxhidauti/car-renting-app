@@ -23,11 +23,12 @@ export default function VehicleGallery() {
           bound={true}
           preventDefaultOnDrag
           plugins={plugins}
+          className="w-full"
         >
           {[1, 2, 3, 4].map((item) => (
             <div
               key={item}
-              className="mr-4 w-full max-h-48 mobile:w-1/2 laptop:w-1/3"
+              className="mr-4 w-full mobile:w-1/2 laptop:w-1/3"
             >
               <PhotoView src={`/carSwiperPhoto${item}.png`}>
                 <div className="relative group">
@@ -37,7 +38,7 @@ export default function VehicleGallery() {
                     width={300}
                     height={200}
                     loading="lazy"
-                    className="object-cover w-full group-hover:opacity-95 group-hover:cursor-pointer transition-opacity duration-300 ease-in-out"
+                    className="object-fit w-full !h-revert mobile:!h-full"
                   />
                   <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-25 cursor-pointer transition-opacity duration-300 ease-in-out"></div>
                   <ZoomImageIcon className="hidden group-hover:block group-hover:cursor-pointer absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />

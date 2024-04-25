@@ -276,6 +276,46 @@
         "privacyPolicy": "Datenschutzrichtlinie",
         "contact": "Kontakt"
     },
+    "VehicleCard": {
+        "viewAllSpecs": "Alle Spezifikationen anzeigen",
+        "filterVehicles": "Fahrzeuge mit denselben Spezifikationen filtern",
+        "vehicleOptions": "Die Optionen des zu liefernden Fahrzeugs können variieren",
+        "dailyFee": "Tagesmietgebühr",
+        "off": "RABATT",
+        "rentNow": "Jetzt mieten!"
+    },
+    "VehicleFilters": {
+        "vehicleClass": {
+            "title": "Fahrzeugklasse",
+            "economic": "Wirtschaftlich",
+            "middleClass": "Mittelklasse",
+            "topGrade": "Spitzenklasse",
+            "luxury": "Luxus",
+            "persons7Plus": "7+ Personen",
+            "suv": "SUV"
+        },
+        "vehicleType": {
+            "title": "Fahrzeugtyp",
+            "sedan": "Limousine",
+            "hatchback": "Kleinwagen",
+            "stationwagon": "Kombi",
+            "suv": "SUV",
+            "van": "Transporter"
+        },
+        "gearType": {
+            "title": "Getriebetyp",
+            "automatic": "Automatik",
+            "manual": "Manuell"
+        },
+        "fuelType": {
+            "title": "Kraftstoffart",
+            "diesel": "Diesel",
+            "autogas": "Autogas",
+            "hybrid": "Hybrid",
+            "gasoline": "Benzin",
+            "electrical": "Elektrisch"
+        }
+    },
     "VehiclePage": {
         "pageTitle": "Ihre Buchung",
         "vehicleValue": "Fahrzeugwert",
