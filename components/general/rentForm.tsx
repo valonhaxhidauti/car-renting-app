@@ -60,7 +60,7 @@ export default function RentForm({ modal }: { modal: boolean }) {
       const timeDifferenceHours = dropOffDate.diff(pickupDate, "hours");
 
       if (timeDifferenceHours < 1) {
-        <div>test</div>;
+        alert("Drop off date should be at least 1 hour after pickup date.");
         return;
       }
     }
@@ -145,7 +145,7 @@ export default function RentForm({ modal }: { modal: boolean }) {
                             value={pickupDate}
                             onChange={handlePickupDateChange}
                             slotProps={{
-                              textField: { placeholder: "Pickup Date" },
+                              textField: { placeholder: t("pickupDate") },
                             }}
                             sx={{
                               ".MuiInputBase-root input": {
@@ -168,7 +168,7 @@ export default function RentForm({ modal }: { modal: boolean }) {
                             disablePast
                             onChange={handleDropOffDateChange}
                             slotProps={{
-                              textField: { placeholder: "Dropoff Date" },
+                              textField: { placeholder: t("dropOffDate") },
                             }}
                             sx={{
                               ".MuiInputBase-root input": {
@@ -240,13 +240,17 @@ export default function RentForm({ modal }: { modal: boolean }) {
               />
               <input
                 type="text"
-                {...register("returnLocation", { required: true })}
                 {...register(
                   "returnLocation",
                   watchShowReturnLocation
                     ? { required: true }
                     : { required: false }
                 )}
+                placeholder={
+                  errors.returnLocation
+                    ? t("returnLocation.requiredError")
+                    : t("returnLocation.placeholder")
+                }
                 className={`${
                   watchShowReturnLocation
                     ? "h-full transition-all duration-300 w-full border-b p-2"
@@ -263,7 +267,7 @@ export default function RentForm({ modal }: { modal: boolean }) {
                     disablePast
                     value={pickupDate}
                     onChange={handlePickupDateChange}
-                    slotProps={{ textField: { placeholder: "Pickup Date" } }}
+                    slotProps={{ textField: { placeholder: t("pickupDate") } }}
                     sx={{
                       ".MuiInputBase-root input": {
                         padding: "8px 9px",
@@ -284,7 +288,7 @@ export default function RentForm({ modal }: { modal: boolean }) {
                     value={dropOffDate}
                     disablePast
                     onChange={handleDropOffDateChange}
-                    slotProps={{ textField: { placeholder: "Dropoff Date" } }}
+                    slotProps={{ textField: { placeholder: t("dropOffDate") } }}
                     sx={{
                       ".MuiInputBase-root input": {
                         padding: "8px 9px",
@@ -308,11 +312,7 @@ export default function RentForm({ modal }: { modal: boolean }) {
               <SearchIcon className="w-5 h-5" />
             </button>
             <h1
-              className={`hidden tablet:block absolute ${
-                watchShowReturnLocation
-                  ? "bottom-[175px] laptop:bottom-[150px]"
-                  : "bottom-[140px] laptop:bottom-[110px]"
-              }  laptop:bottom-0 -right-2 laptop:-right-9 font-bold text-[72px] laptop:text-[110px] text-gray-100 -z-10`}
+              className="hidden tablet:block absolute -top-16 laptop:-top-24 -right-2 laptop:-right-9 font-bold text-[54px] laptop:text-[84px] text-gray-100 -z-10"
             >
               {t("findNow")}
             </h1>

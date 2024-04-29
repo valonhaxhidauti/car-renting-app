@@ -258,9 +258,11 @@
     },
     "RentForm": {
         "deliverAtDifferentPoint": "Deliver at different point",
+        "dropOffDate": "Dropoff Date",
         "findNow": "Find Now",
         "findYourCar": "Find your car",
         "locale": "en-gb",
+        "pickupDate": "Pickup Date",
         "rentLocation": {
             "placeholder": "Rent Location",
             "requiredError": "Required Rent Location"

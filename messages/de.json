@@ -258,9 +258,11 @@
     },
     "RentForm": {
         "deliverAtDifferentPoint": "An anderer Stelle liefern",
+        "dropOffDate": "Abgabetermin",
         "findNow": "Jetzt finden",
         "findYourCar": "Finden Sie Ihr Auto",
         "locale": "de",
+        "pickupDate": "Abholdatum",
         "rentLocation": {
             "placeholder": "Mietort",
             "requiredError": "Erforderlicher Mietort"
