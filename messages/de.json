@@ -257,16 +257,19 @@
         }
     },
     "RentForm": {
+        "deliverAtDifferentPoint": "An anderer Stelle liefern",
+        "findNow": "Jetzt finden",
         "findYourCar": "Finden Sie Ihr Auto",
+        "locale": "de",
         "rentLocation": {
             "placeholder": "Mietort",
-            "requiredError": "Erforderlich"
+            "requiredError": "Erforderlicher Mietort"
         },
         "returnLocation": {
-            "placeholder": "Rückgabeort"
+            "placeholder": "Rückgabeort",
+            "requiredError": "Erforderlicher Rückgabeort"
         },
-        "deliverAtDifferentPoint": "An anderer Stelle liefern",
-        "findNow": "Jetzt finden"
+        "search": "Suche"
     },
     "SideMenu": {
         "pages": "Seiten",

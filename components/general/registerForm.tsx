@@ -20,6 +20,7 @@ interface FormValues {
   surname: string;
   email: string;
   phone: string;
+  phoneCode: string;
   password: string;
   passwordConfirm: string;
 }
@@ -41,11 +42,16 @@ export default function RegisterForm() {
     passwordsNotMatch: t("validation.passwordsNotMatch"),
   };
 
+  // const [authenticated, setAuthenticated] = useState(
+  //   localStorage.getItem("authenticated") === "true"
+  // );
+  
   const [formData, setFormData] = useState<FormValues>({
     name: "",
     surname: "",
     email: "",
     phone: "",
+    phoneCode: "",
     password: "",
     passwordConfirm: "",
   });
@@ -53,10 +59,23 @@ export default function RegisterForm() {
   const [errors, setErrors] = useState<Partial<RegisterFormValues>>({});
 
   const handleInputChange = (fieldName: keyof FormValues, value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [fieldName]: value,
-    }));
+    if (fieldName === "phone") {
+      const phoneInput = document.querySelector(".react-tel-input input");
+      if (phoneInput) {
+        const countryCode = phoneInput.getAttribute("value")?.split(" ")[0];
+        console.log(countryCode);
+        setFormData((prevData) => ({
+          ...prevData,
+          phoneCode: countryCode || "", 
+          [fieldName]: value,
+        }));
+      }
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [fieldName]: value,
+      }));
+    }
 
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -64,14 +83,49 @@ export default function RegisterForm() {
     }));
   };
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const errors = RegisterFormValidation(formData, translations);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      console.log("Form submitted:", formData);
+      try {
+        const response = await fetch(
+          "https://rent-api.rubik.dev/api/auth/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              first_name: formData.name,
+              last_name: formData.surname,
+              email: formData.email,
+              phone_code: formData.phoneCode, 
+              phone: formData.phone,
+              password: formData.password,
+              password_confirmation: formData.passwordConfirm,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("User registered successfully:", data);
+          // setAuthenticated(true);
+          localStorage.setItem("authenticated", "true");
+          alert("User registered successfully!")
+        } else {
+          const errorData = await response.json();
+          console.error("Registration failed:", errorData);
+          alert("Registration failed!")
+        }
+      } catch (error) {
+        console.error("Error occurred during registration:", error);
+        // Handle network errors or any other unexpected errors.
+      }
     } else {
       console.log("Form not submitted due to errors:", errors);
     }

@@ -4,6 +4,7 @@ import React from "react";
 import { RentLocIcon, ReturnLocIcon, EditBookingIcon } from "@/assets/svgs";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import RentForm from "../general/rentForm";
 
 export default function BookingInfo({ border }: { border: boolean }) {
   const t = useTranslations("ExploreVehicles");
@@ -20,7 +21,7 @@ export default function BookingInfo({ border }: { border: boolean }) {
     ${border ? "border-borderBooking border-2" : ""}`}
     >
       <div className="flex justify-between text-lg text-grayFont font-bold">
-      {t("bookingInformation")} <EditBookingIcon className="cursor-pointer" />
+        {t("bookingInformation")} <RentForm modal={true}/>
       </div>
       {rentLocation && (
         <div className="flex gap-2 items-center">

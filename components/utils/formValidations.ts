@@ -38,7 +38,7 @@ const isPhoneValid = (phone: string) => {
 };
 
 const isPasswordValid = (password: string) => {
-    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
     return password.trim() !== "" && passwordPattern.test(password);
 };
 
@@ -46,7 +46,7 @@ const isPasswordMatched = (password: string, passwordConfirm: string) => {
     return password.trim() !== "" && passwordConfirm.length >= 8 && password === passwordConfirm;
 };
 
-const LoginFormValidation = (value: LoginFormValues,translations: Record<string, string>) => {
+const LoginFormValidation = (value: LoginFormValues, translations: Record<string, string>) => {
     let error: Partial<LoginFormValues> = {};
 
     if (!value.email) {
@@ -64,7 +64,7 @@ const LoginFormValidation = (value: LoginFormValues,translations: Record<string,
     return error;
 }
 
-const RegisterFormValidation = (value: RegisterFormValues,translations: Record<string, string>) => {
+const RegisterFormValidation = (value: RegisterFormValues, translations: Record<string, string>) => {
     let error: Partial<RegisterFormValues> = {};
 
     if (!value.name) {
@@ -106,7 +106,7 @@ const RegisterFormValidation = (value: RegisterFormValues,translations: Record<s
     return error;
 };
 
-const UpdateFormValidation = (value: UpdateFormValues,translations: Record<string, string>) => {
+const UpdateFormValidation = (value: UpdateFormValues, translations: Record<string, string>) => {
     let error: Partial<UpdateFormValues> = {};
 
     if (!value.name) {

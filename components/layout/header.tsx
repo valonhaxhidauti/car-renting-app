@@ -32,6 +32,9 @@ export default function Header({
   fixed: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  // const [authenticated, setAuthenticated] = useState(
+  //   localStorage.getItem("authenticated") === "true"
+  // );
   const currentYear = new Date().getFullYear();
 
   const toggleMenu = () => {
@@ -208,19 +211,36 @@ export default function Header({
                 </SelectContent>
               </Select>
             )}
-            <Link
-              href="/account"
-              className={`${
-                isOpen
-                  ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
-                  : "bg-white hover:bg-slate-50 text-grayFont border-borderGray hidden laptop:flex"
-              } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
-            >
-              <LoginIcon
-                className={`${isOpen ? "text-white" : "text-grayFont"}`}
-              />
-              {t("loginRegister")}
-            </Link>
+            {/* {authenticated ? (
+              <Link
+                href="/account/personal-info"
+                className={`${
+                  isOpen
+                    ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
+                    : "bg-white hover:bg-slate-50 text-primary border-borderGray hidden laptop:flex"
+                } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
+              >
+                <LoginIcon
+                  className={`${isOpen ? "text-white" : "text-primary"}`}
+                />
+                MY ACCOUNT
+              </Link>
+            ) : ( */}
+              <Link
+                href="/account"
+                className={`${
+                  isOpen
+                    ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
+                    : "bg-white hover:bg-slate-50 text-grayFont border-borderGray hidden laptop:flex"
+                } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
+              >
+                <LoginIcon
+                  className={`${isOpen ? "text-white" : "text-grayFont"}`}
+                />
+                {t("loginRegister")}
+              </Link>
+            {/* )} */}
+
             <LanguageSelector
               isOpen={isOpen}
               triggerClass={`${

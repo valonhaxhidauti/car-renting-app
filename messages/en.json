@@ -257,16 +257,19 @@
         }
     },
     "RentForm": {
+        "deliverAtDifferentPoint": "Deliver at different point",
+        "findNow": "Find Now",
         "findYourCar": "Find your car",
+        "locale": "en-gb",
         "rentLocation": {
             "placeholder": "Rent Location",
-            "requiredError": "Required"
+            "requiredError": "Required Rent Location"
         },
         "returnLocation": {
-            "placeholder": "Return Location"
+            "placeholder": "Return Location",
+            "requiredError": "Required Return Location"
         },
-        "deliverAtDifferentPoint": "Deliver at different point",
-        "findNow": "Find Now"
+        "search": "Search"
     },
     "SideMenu": {
         "pages": "Pages",
