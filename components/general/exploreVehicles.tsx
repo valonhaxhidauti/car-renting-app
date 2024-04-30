@@ -183,7 +183,7 @@ export default function ExploreVehicles() {
                   : "hidden"
               }`}
             >
-              <BookingInfo border={false} />
+              <BookingInfo border={false} label="diffLocation2" />
             </div>
 
             <div
@@ -222,10 +222,10 @@ export default function ExploreVehicles() {
                 : "grid grid-cols-1 tablet:grid-cols-2"
             }`}
           >
-            <VehicleCard viewMode={viewMode} />
-            <VehicleCard viewMode={viewMode} />
-            <VehicleCard viewMode={viewMode} />
-            <VehicleCard viewMode={viewMode} />
+            <VehicleCard viewMode={viewMode}/>
+            <VehicleCard viewMode={viewMode}/>
+            <VehicleCard viewMode={viewMode}/>
+            <VehicleCard viewMode={viewMode}/>
           </div>
           <div className="w-1/5  flex-col h-full gap-4 mr-8 hidden laptop:flex">
             <BookingInfo border={true} />

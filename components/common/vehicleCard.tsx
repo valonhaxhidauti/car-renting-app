@@ -13,10 +13,18 @@ import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function VehicleCard({ viewMode }: { viewMode: string }) {
   const t = useTranslations("VehicleCard");
+
+  const searchParams = useSearchParams();
+  const params = {
+    rentLocation: searchParams.get("rentLocation"),
+    returnLocation: searchParams.get("returnLocation"),
+    pickupDate: searchParams.get("pickupDate"),
+    dropOffDate: searchParams.get("dropOffDate")
+  };
 
   return viewMode === "list" ? (
     <div className="bg-white flex flex-col gap-4 pl-4 mobile:pl-8">
@@ -195,7 +203,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
               <p className="text-xs font-medium text-center">{t("dailyFee")}</p>
             </div>
             <Link
-              href="/explore/1"
+              href={{ pathname: "/explore/1", query: params }}
               className="px-8 py-3 text-white text-xs hover:bg-secondary bg-primary text-nowrap transition-all"
             >
               {t("rentNow")}

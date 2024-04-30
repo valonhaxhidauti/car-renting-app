@@ -18,6 +18,10 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
+import BookingInfo from "../common/bookingInfo";
+import VehicleTerms from "./vehicleTerms";
+import { useSearchParams } from "next/navigation";
+import dayjs from "dayjs";
 
 type VehiclePrices = {
   vehicle: number;
@@ -35,8 +39,19 @@ const prices: VehiclePrices = {
   insurance: 16.6,
 };
 
-export default function VehiclePage() {
-  const t = useTranslations("VehiclePage");
+export default function VehicleDetails() {
+  const t = useTranslations("VehicleDetails");
+  const searchParams = useSearchParams();
+
+  const pickUpDateQuery = searchParams.get("pickupDate");
+  const dropOffDateQuery = searchParams.get("dropOffDate");
+
+  const pickupDate = dayjs(pickUpDateQuery, "DD/MM/YYYY");
+  const dropOffDate = dayjs(dropOffDateQuery, "DD/MM/YYYY");
+  const daysDifference =
+    dropOffDate.isValid() && pickupDate.isValid()
+      ? dropOffDate.diff(pickupDate, "day") + 1
+      : 1;
 
   const [childSeat, incChildSeat, decChildSeat] = useCounter(0, 3);
   const [navigation, incNavigation, decNavigation] = useCounter(0, 1);
@@ -55,11 +70,11 @@ export default function VehiclePage() {
   ];
 
   const optionalItemsTotal = optionalItems.reduce(
-    (total, item) => total + item.quantity * item.price,
+    (total, item) => total + item.quantity * item.price * daysDifference,
     0
   );
 
-  const totalPrice = prices.vehicle + optionalItemsTotal;
+  const totalPrice = prices.vehicle * daysDifference + optionalItemsTotal;
   return (
     <div className="bg-bgSecondary w-full h-full mb-8">
       <div className="max-w-[1440px] pt-8 pb-16 m-auto w-full">
@@ -310,99 +325,80 @@ export default function VehiclePage() {
                   </div>
                 </div>
               </TabsContent>
-              <TabsContent value="terms" className="text-grayFont">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.
-                </p>
-                <p className="text-sm mt-2">
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est laborum. Sed ut
-                  perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt.
-                </p>
-                <p className="text-sm mt-2">
-                  Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                  amet, consectetur, adipisci velit, sed quia non numquam eius
-                  modi tempora incidunt ut labore et dolore magnam aliquam
-                  quaerat voluptatem.
-                </p>
-                <p className="text-sm mt-2">
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo.
-                </p>
+              <TabsContent value="terms" className="text-grayFont px-8 pb-8">
+                <VehicleTerms />
               </TabsContent>
-              <TabsContent value="specs">
-                <VehicleSpecs />
+              <TabsContent value="specs" className="px-8 pb-8">
+                <VehicleSpecs translations={t} />
               </TabsContent>
               <TabsContent value="gallery">
                 <VehicleGallery />
               </TabsContent>
             </Tabs>
           </div>
-          <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full tablet:w-1/4 h-full p-4 bg-white">
-            <div className="flex flex-col border-b border-borderGray pb-3">
-              <p className="text-xl font-bold">{t("pageTitle")}</p>
-              <p className="font-medium">Volvo XC90 Excellence</p>
-            </div>
-            <div className="flex justify-between text-sm border-b border-borderGray py-3">
-              <p className="font-bold">{t("vehicleValue")}</p>
-              <p className="font-bold text-primary">
-                ${prices.vehicle.toFixed(2)}
-              </p>
-            </div>
-            {optionalItemsTotal > 0 && (
-              <div className="flex flex-col border-b border-borderGray py-3">
-                <div className="flex justify-between text-sm">
-                  <p className="font-bold">{t("optionalItems")}</p>
-                  <p className="font-bold text-primary">
-                    ${optionalItemsTotal.toFixed(2)}
+          <div className="flex flex-col gap-2 tablet:w-1/4 ">
+            <BookingInfo border={true} />
+            <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
+              <div className="flex flex-col border-b border-borderGray pb-3">
+                <p className="text-xl font-bold">{t("pageTitle")}</p>
+                <p className="font-medium">Volvo XC90 Excellence</p>
+              </div>
+              <div className="flex justify-between text-sm border-b border-borderGray py-3">
+                <p className="font-bold">{t("vehicleValue")}</p>
+                <p className="font-bold text-primary">
+                  ${(prices.vehicle * daysDifference).toFixed(2)}
+                </p>
+              </div>
+              {optionalItemsTotal > 0 && (
+                <div className="flex flex-col border-b border-borderGray py-3">
+                  <div className="flex justify-between text-sm">
+                    <p className="font-bold">{t("optionalItems")}</p>
+                    <p className="font-bold text-primary">
+                      ${optionalItemsTotal.toFixed(2)}
+                    </p>
+                  </div>
+                  {optionalItems.map(
+                    (item) =>
+                      item.quantity > 0 && (
+                        <div
+                          key={item.name}
+                          className="flex justify-between text-xs"
+                        >
+                          <p className="font-light text-sm">{item.name}</p>
+                          <p className="font-light text-sm text-primary">
+                            $
+                            {(
+                              item.quantity *
+                              item.price *
+                              daysDifference
+                            ).toFixed(2)}
+                          </p>
+                        </div>
+                      )
+                  )}
+                </div>
+              )}
+              <div className="py-3">
+                <div className="flex justify-between items-center pb-2">
+                  <p className="font-light text-sm">{t("pricePer")}</p>
+                  <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
+                    {daysDifference} &nbsp;
+                    {daysDifference === 1
+                      ? t("day").toUpperCase()
+                      : t("days").toUpperCase()}
                   </p>
                 </div>
-                {optionalItems.map(
-                  (item) =>
-                    item.quantity > 0 && (
-                      <div
-                        key={item.name}
-                        className="flex justify-between text-xs"
-                      >
-                        <p className="font-light text-sm">{item.name}</p>
-                        <p className="font-light text-sm text-primary">
-                          ${(item.quantity * item.price).toFixed(2)}
-                        </p>
-                      </div>
-                    )
-                )}
+                <div className="flex justify-between">
+                  <p className="font-bold">{t("totalValue")}</p>
+                  <p className="font-bold text-primary">
+                    ${totalPrice.toFixed(2)}
+                  </p>
+                </div>
               </div>
-            )}
-            <div className="py-3">
-              <div className="flex justify-between items-center pb-2">
-                <p className="font-light text-sm">{t("pricePer")}</p>
-                <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
-                  4 {t("days").toUpperCase()}
-                </p>
-              </div>
-              <div className="flex justify-between">
-                <p className="font-bold">{t("totalValue")}</p>
-                <p className="font-bold text-primary">
-                  ${totalPrice.toFixed(2)}
-                </p>
-              </div>
+              <button className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all">
+                {t("continueButton")}
+              </button>
             </div>
-            <button className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all">
-              {t("continueButton")}
-            </button>
           </div>
         </div>
       </div>

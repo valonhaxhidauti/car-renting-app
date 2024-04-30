@@ -147,7 +147,7 @@
         "filters": "Filter",
         "filterVehicles": "Fahrzeuge filtern",
         "booking": "Buchung",
-        "bookingInformation": "Buchungsinformationen",
+        "bookingInformation": "Buchungs Informationen",
         "accordionHeader": "Fahrzeuge filtern"
     },
     "FaqItems": {
@@ -321,11 +321,12 @@
             "electrical": "Elektrisch"
         }
     },
-    "VehiclePage": {
+    "VehicleDetails": {
         "pageTitle": "Ihre Buchung",
         "vehicleValue": "Fahrzeugwert",
         "optionalItems": "Optionale Artikel",
         "pricePer": "Preis pro",
+        "day": "Tag",
         "days": "Tage",
         "totalValue": "Gesamtwert",
         "continueButton": "Weiter",

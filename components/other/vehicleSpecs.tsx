@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ConsumptionIcon,
   EngineIcon,
@@ -11,10 +9,8 @@ import {
   TransmissionIcon,
   VehicleIcon,
 } from "@/assets/svgs";
-import { useTranslations } from "next-intl";
 
-export default function VehicleSpecs() {
-  const t = useTranslations("VehiclePage");
+export default function VehicleSpecs({translations}: {translations: any}) {
 
   return (
     <div className="grid mobile:grid-cols-2 desktop:grid-cols-3 gap-4">
@@ -24,7 +20,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("fuelType").toUpperCase()}
+            {translations("fuelType").toUpperCase()}
           </span>
           <p className="font-medium text-sm">Gasoline</p>
         </div>
@@ -35,7 +31,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("gearType").toUpperCase()}
+            {translations("gearType").toUpperCase()}
           </span>
           <p className="font-medium text-sm">Automatic</p>
         </div>
@@ -46,9 +42,9 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("passengerCapacity").toUpperCase()}
+            {translations("passengerCapacity").toUpperCase()}
           </span>
-          <p className="font-medium text-sm">5 {t("person")}</p>
+          <p className="font-medium text-sm">5 {translations("person")}</p>
         </div>
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6">
@@ -57,7 +53,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("modelYear").toUpperCase()}
+            {translations("modelYear").toUpperCase()}
           </span>
           <p className="font-medium text-sm">2018</p>
         </div>
@@ -68,7 +64,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("engineType").toUpperCase()}
+            {translations("engineType").toUpperCase()}
           </span>
           <p className="font-medium text-sm">3.0 L V6 TFSI</p>
         </div>
@@ -79,7 +75,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("fuelConsumption").toUpperCase()}
+            {translations("fuelConsumption").toUpperCase()}
           </span>
           <p className="font-medium text-sm">4,5 lt / 100 km</p>
         </div>
@@ -90,7 +86,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("vehicleType").toUpperCase()}
+            {translations("vehicleType").toUpperCase()}
           </span>
           <p className="font-medium text-sm">Sportback</p>
         </div>
@@ -101,7 +97,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("luggageCapacity").toUpperCase()}
+            {translations("luggageCapacity").toUpperCase()}
           </span>
           <p className="font-medium text-sm">345 lt</p>
         </div>
@@ -112,7 +108,7 @@ export default function VehicleSpecs() {
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
-            {t("horsepower").toUpperCase()}
+            {translations("horsepower").toUpperCase()}
           </span>
           <p className="font-medium text-sm">245 hp</p>
         </div>

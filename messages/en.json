@@ -321,11 +321,12 @@
             "electrical": "Electrical"
         }
     },
-    "VehiclePage": {
+    "VehicleDetails": {
         "pageTitle": "Your Booking",
         "vehicleValue": "Vehicle Value",
         "optionalItems": "Optional Items",
         "pricePer": "Price per",
+        "day": "Day",
         "days": "Days",
         "totalValue": "Total Value",
         "continueButton": "Continue",
