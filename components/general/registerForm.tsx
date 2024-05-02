@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 import { CheckIcon } from "@/assets/svgs";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
+import { useRouter } from "next/navigation";
 
 interface FormValues {
   name: string;
@@ -45,7 +46,8 @@ export default function RegisterForm() {
   // const [authenticated, setAuthenticated] = useState(
   //   localStorage.getItem("authenticated") === "true"
   // );
-  
+
+  const router = useRouter();
   const [formData, setFormData] = useState<FormValues>({
     name: "",
     surname: "",
@@ -66,7 +68,7 @@ export default function RegisterForm() {
         console.log(countryCode);
         setFormData((prevData) => ({
           ...prevData,
-          phoneCode: countryCode || "", 
+          phoneCode: countryCode || "",
           [fieldName]: value,
         }));
       }
@@ -103,7 +105,7 @@ export default function RegisterForm() {
               first_name: formData.name,
               last_name: formData.surname,
               email: formData.email,
-              phone_code: formData.phoneCode, 
+              phone_code: formData.phoneCode,
               phone: formData.phone,
               password: formData.password,
               password_confirmation: formData.passwordConfirm,
@@ -116,15 +118,14 @@ export default function RegisterForm() {
           console.log("User registered successfully:", data);
           // setAuthenticated(true);
           localStorage.setItem("authenticated", "true");
-          alert("User registered successfully!")
+          router.push("/");
         } else {
           const errorData = await response.json();
           console.error("Registration failed:", errorData);
-          alert("Registration failed!")
+          alert("Registration failed!");
         }
       } catch (error) {
         console.error("Error occurred during registration:", error);
-        // Handle network errors or any other unexpected errors.
       }
     } else {
       console.log("Form not submitted due to errors:", errors);

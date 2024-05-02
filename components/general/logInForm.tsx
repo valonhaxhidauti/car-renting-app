@@ -3,6 +3,7 @@
 import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   LoginFormValidation,
   LoginFormValues,
@@ -17,11 +18,12 @@ interface FormValues {
 
 export default function LoginForm() {
   const t = useTranslations("Account");
+  const router = useRouter();
   const translations = {
     emailRequired: t("validation.emailRequired"),
     emailInvalid: t("validation.emailInvalid"),
     passwordRequired: t("validation.passwordRequired"),
-    passwordInvalid: t("validation.passwordInvalid")
+    passwordInvalid: t("validation.passwordInvalid"),
   };
 
   const [formData, setFormData] = useState<FormValues>({
@@ -43,14 +45,44 @@ export default function LoginForm() {
     }));
   };
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const errors = LoginFormValidation(formData,translations);
+    const errors = LoginFormValidation(formData, translations);
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      console.log("Form submitted:", formData);
+      try {
+        const response = await fetch(
+          "https://rent-api.rubik.dev/api/auth/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              password: formData.password,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("User Logged in successfully:", data);
+          // setAuthenticated(true);
+          localStorage.setItem("authenticated", "true");
+          router.push("/");
+        } else {
+          const errorData = await response.json();
+          console.error("Login failed:", errorData);
+          alert("Login failed!");
+        }
+      } catch (error) {
+        console.error("Error occurred during Login:", error);
+        // Handle network errors or any other unexpected errors.
+      }
     } else {
       console.log("Form not submitted due to errors:", errors);
     }

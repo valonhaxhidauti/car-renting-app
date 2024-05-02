@@ -3,12 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
+  AccountIcon,
   CloseMenuIcon,
   HamburgerIcon,
   LoginIcon,
   Logo,
   LogoLight,
   LogoMenu,
+  LogoutIcon,
+  ReservationIcon,
 } from "@/assets/svgs";
 import {
   Select,
@@ -23,6 +26,7 @@ import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import LanguageSelector from "../common/languageSelector";
+import { useRouter } from "next/navigation";
 
 export default function Header({
   background,
@@ -32,9 +36,20 @@ export default function Header({
   fixed: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  // const [authenticated, setAuthenticated] = useState(
-  //   localStorage.getItem("authenticated") === "true"
-  // );
+  const u = useTranslations("Account.sideMenu");
+
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authenticated");
+    router.push("/account");
+  };
+
+  const authenticated =
+    typeof window !== "undefined" && window.localStorage
+      ? localStorage.getItem("authenticated")
+      : null;
+
   const currentYear = new Date().getFullYear();
 
   const toggleMenu = () => {
@@ -211,21 +226,49 @@ export default function Header({
                 </SelectContent>
               </Select>
             )}
-            {/* {authenticated ? (
-              <Link
-                href="/account/personal-info"
-                className={`${
-                  isOpen
-                    ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
-                    : "bg-white hover:bg-slate-50 text-primary border-borderGray hidden laptop:flex"
-                } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
-              >
-                <LoginIcon
-                  className={`${isOpen ? "text-white" : "text-primary"}`}
-                />
-                MY ACCOUNT
-              </Link>
-            ) : ( */}
+            {authenticated ? (
+              <Select>
+                <SelectTrigger
+                  className={`${
+                    isOpen
+                      ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
+                      : "bg-white hover:bg-slate-50 text-primary border-borderGray hidden laptop:flex"
+                  } font-bold border py-2 px-6 items-center rounded-full`}
+                >
+                  <LoginIcon
+                    className={` ${isOpen ? "text-white" : " text-primary"}`}
+                  />
+                  {t("myAccount")}
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  <SelectGroup className="flex flex-col gap-4 p-4">
+                    <Link
+                      href="/account/personal-info"
+                      className="text-grayFont flex items-center gap-2 group hover:text-primary"
+                    >
+                      <AccountIcon className="text-gray-font group-hover:text-primary" />
+                      {u("personalInformations")}
+                    </Link>
+                    <Link
+                      href="#"
+                      className="text-grayFont flex items-center gap-2 group hover:text-primary"
+                    >
+                      <ReservationIcon className="text-gray-font group-hover:text-primary" />
+                      {u("reservations")}
+                    </Link>
+                    <div
+                      onClick={handleLogout}
+                      className="text-grayFont flex items-center gap-2 cursor-pointer group hover:text-primary"
+                    >
+                      <div className="w-6">
+                        <LogoutIcon className="text-gray-font group-hover:text-primary" />
+                      </div>
+                      {u("logOut")}
+                    </div>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            ) : (
               <Link
                 href="/account"
                 className={`${
@@ -234,12 +277,14 @@ export default function Header({
                     : "bg-white hover:bg-slate-50 text-grayFont border-borderGray hidden laptop:flex"
                 } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
               >
-                <LoginIcon
-                  className={`${isOpen ? "text-white" : "text-grayFont"}`}
-                />
+                <div className="">
+                  <LoginIcon
+                    className={` ${isOpen ? "text-white" : "text-grayFont"}`}
+                  />
+                </div>
                 {t("loginRegister")}
               </Link>
-            {/* )} */}
+            )}
 
             <LanguageSelector
               isOpen={isOpen}

@@ -194,6 +194,7 @@
     },
     "Header": {
         "loginRegister": "LOGIN or REGISTER",
+        "myAccount": "MY ACCOUNT",
         "homepage": "Homepage",
         "exploreVehicles": "Explore Vehicles",
         "aboutUs": "About Us",

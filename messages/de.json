@@ -194,6 +194,7 @@
     },
     "Header": {
         "loginRegister": "ANMELDEN oder REGISTRIEREN",
+        "myAccount": "MEIN KONTO",
         "homepage": "Startseite",
         "exploreVehicles": "Fahrzeuge erkunden",
         "aboutUs": "Über uns",

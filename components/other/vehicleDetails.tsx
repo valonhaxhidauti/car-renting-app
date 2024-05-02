@@ -59,13 +59,29 @@ export default function VehicleDetails() {
   const [insurance, incInsurance, decInsurance] = useCounter(0, 1);
 
   const optionalItems = [
-    { name: t("childSeat"), quantity: childSeat, price: prices.childSeat },
-    { name: t("navigation"), quantity: navigation, price: prices.navigation },
-    { name: t("additionalDriver"), quantity: driver, price: prices.driver },
+    {
+      name: t("childSeat"),
+      quantity: childSeat,
+      price: prices.childSeat,
+      icon: <ChildSeatIcon />,
+    },
+    {
+      name: t("navigation"),
+      quantity: navigation,
+      price: prices.navigation,
+      icon: <NavigationIcon />,
+    },
+    {
+      name: t("additionalDriver"),
+      quantity: driver,
+      price: prices.driver,
+      icon: <DriverIcon />,
+    },
     {
       name: t("damageInsurance"),
       quantity: insurance,
       price: prices.insurance,
+      icon: <InsuranceIcon />,
     },
   ];
 
@@ -78,8 +94,8 @@ export default function VehicleDetails() {
   return (
     <div className="bg-bgSecondary w-full h-full mb-8">
       <div className="max-w-[1440px] pt-8 pb-16 m-auto w-full">
-        <div className="mx-4 mobile:mx-8 flex flex-col tablet:flex-row gap-4">
-          <div className="flex flex-col gap-4 w-full tablet:w-3/4">
+        <div className="mx-4 mobile:mx-8 flex flex-col laptop:flex-row gap-4">
+          <div className="flex flex-col gap-4 w-full laptop:w-3/4">
             <div className=" bg-white flex flex-col gap-4">
               <div className="p-2 flex flex-col mobile:flex-row mobile:gap-8 w-full">
                 <Image
@@ -336,7 +352,7 @@ export default function VehicleDetails() {
               </TabsContent>
             </Tabs>
           </div>
-          <div className="flex flex-col gap-2 tablet:w-1/4 ">
+          <div className="flex flex-col gap-2 laptop:w-1/4 ">
             <BookingInfo border={true} />
             <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
               <div className="flex flex-col border-b border-borderGray pb-3">
@@ -350,7 +366,7 @@ export default function VehicleDetails() {
                 </p>
               </div>
               {optionalItemsTotal > 0 && (
-                <div className="flex flex-col border-b border-borderGray py-3">
+                <div className="flex flex-col border-b border-borderGray py-3 gap-2">
                   <div className="flex justify-between text-sm">
                     <p className="font-bold">{t("optionalItems")}</p>
                     <p className="font-bold text-primary">
@@ -364,15 +380,20 @@ export default function VehicleDetails() {
                           key={item.name}
                           className="flex justify-between text-xs"
                         >
-                          <p className="font-light text-sm">{item.name}</p>
-                          <p className="font-light text-sm text-primary">
-                            $
-                            {(
-                              item.quantity *
-                              item.price *
-                              daysDifference
-                            ).toFixed(2)}
-                          </p>
+                          <div className="w-14 flex justify-center">
+                            {item.icon}
+                          </div>
+                          <div className="flex justify-between w-full">
+                            <p className="font-light text-sm">{item.name}</p>
+                            <p className="font-light text-sm text-primary">
+                              $
+                              {(
+                                item.quantity *
+                                item.price *
+                                daysDifference
+                              ).toFixed(2)}
+                            </p>
+                          </div>
                         </div>
                       )
                   )}

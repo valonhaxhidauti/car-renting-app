@@ -7,9 +7,16 @@ import {
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AccountSideMenu() {
   const t = useTranslations("Account.sideMenu");
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authenticated");
+    router.push('/account');
+  };
 
   return (
     <div className="bg-primary hidden desktop:flex flex-col absolute -top-[60px] right-8 w-64">
@@ -36,13 +43,13 @@ export default function AccountSideMenu() {
         <ReservationIcon />
         {t("reservations")}
       </Link>
-      <Link
-        href="#"
-        className="text-white flex items-center gap-2 p-4 text-xs border-b-borderMenu hover:font-medium border-b"
+      <div
+        onClick={handleLogout}
+        className="text-white flex items-center gap-2 p-4 text-xs border-b-borderMenu hover:font-medium border-b cursor-pointer"
       >
         <LogoutIcon className="w-6" />
         {t("logOut")}
-      </Link>
+      </div>
     </div>
   );
 }
