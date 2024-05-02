@@ -14,7 +14,7 @@ export default function Homepage() {
           alt="Home background image"
           fill
           sizes="width:100%"
-          className="object-cover"
+          className="object-cover !h-[101%]"
           priority
         />
       </div>

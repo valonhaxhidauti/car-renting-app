@@ -21,8 +21,6 @@ export interface UpdateFormValues {
     password: string;
 }
 
-
-
 const isNameValid = (name: string) => {
     return name.trim() !== "" && name.length > 2;
 };

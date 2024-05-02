@@ -1,11 +1,12 @@
+import { Link } from 'next-view-transitions';
 import { Logo } from "@/assets/svgs";
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import dayjs from "dayjs";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
   const t = useTranslations("Footer");
+  const currentYear = dayjs().year();
 
   return (
     <footer className="relative bottom-0 left-0 ">

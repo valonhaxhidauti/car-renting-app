@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import UpdateInfoForm from "./updateInfoForm";
 import AccountSideMenu from "./accountSideMenu";
 

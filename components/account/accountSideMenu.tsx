@@ -6,7 +6,7 @@ import {
 } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import { useRouter } from "next/navigation";
 
 export default function AccountSideMenu() {

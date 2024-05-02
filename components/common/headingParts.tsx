@@ -6,7 +6,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 
 const HeadingTitle = ({ translations }: { translations: string }) => {
   return (

@@ -20,17 +20,10 @@ import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
 import BookingInfo from "../common/bookingInfo";
 import VehicleTerms from "./vehicleTerms";
-import { useSearchParams } from "next/navigation";
+import { getSearchParams } from "../utils/getSearchParams";
 import dayjs from "dayjs";
-import Link from "next/link";
-
-type VehiclePrices = {
-  vehicle: number;
-  childSeat: number;
-  navigation: number;
-  driver: number;
-  insurance: number;
-};
+import { Link } from "next-view-transitions";
+import { VehiclePrices } from "@/lib/types";
 
 const prices: VehiclePrices = {
   vehicle: 120.0,
@@ -42,14 +35,8 @@ const prices: VehiclePrices = {
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
-  const searchParams = useSearchParams();
 
-  const params = {
-    rentLocation: searchParams.get("rentLocation"),
-    returnLocation: searchParams.get("returnLocation"),
-    pickupDate: searchParams.get("pickupDate"),
-    dropOffDate: searchParams.get("dropOffDate")
-  };
+  const params = getSearchParams();
 
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
@@ -422,7 +409,7 @@ export default function VehicleDetails() {
                 </div>
               </div>
               <Link
-                href={{ pathname: "/explore/1/payment", query: params }}
+                href={`/explore/1/payment?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
                 className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
               >
                 {t("continueButton")}
