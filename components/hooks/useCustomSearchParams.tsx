@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
 
-export const getSearchParams = () => {
+export function useCustomSearchParams(){
   const searchParams = useSearchParams();
 
   const params: { [key: string]: string } = {

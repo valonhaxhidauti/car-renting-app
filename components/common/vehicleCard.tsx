@@ -9,15 +9,15 @@ import {
   TransmissionIcon,
   WarningIcon,
 } from "@/assets/svgs";
+import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
-import { getSearchParams } from "../utils/getSearchParams";
 import Image from "next/image";
 
 export default function VehicleCard({ viewMode }: { viewMode: string }) {
   const t = useTranslations("VehicleCard");
-  const params = getSearchParams();
+  const params = useCustomSearchParams();
 
   return viewMode === "list" ? (
     <div className="bg-white flex flex-col gap-4 pl-4 mobile:pl-8">

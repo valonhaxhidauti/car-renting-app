@@ -20,10 +20,10 @@ import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
 import BookingInfo from "../common/bookingInfo";
 import VehicleTerms from "./vehicleTerms";
-import { getSearchParams } from "../utils/getSearchParams";
 import dayjs from "dayjs";
 import { Link } from "next-view-transitions";
 import { VehiclePrices } from "@/lib/types";
+import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 
 const prices: VehiclePrices = {
   vehicle: 120.0,
@@ -36,7 +36,7 @@ const prices: VehiclePrices = {
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
 
-  const params = getSearchParams();
+  const params = useCustomSearchParams();
 
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
