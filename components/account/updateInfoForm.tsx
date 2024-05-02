@@ -125,12 +125,11 @@ export default function UpdateInfoForm() {
       <div className="laptop:justify-self-end">
         <button
           type="submit"
-          className="flex w-full mobile:w-auto justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline-primary"
+          className="flex w-full mobile:w-auto justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary transition focus-visible:outline-primary"
         >
           {t("update")}
         </button>
       </div>
-      <div className="flex justify-between "></div>
     </form>
   );
 }

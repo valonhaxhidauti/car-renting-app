@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   AccountIcon,
@@ -35,20 +35,20 @@ export default function Header({
   background: boolean;
   fixed: boolean;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
   const u = useTranslations("Account.sideMenu");
-
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [authenticated, setAuthenticated] = useState<string | null>(null);
+
+  useEffect(() => {
+    const authValue = window.localStorage.getItem("authenticated");
+    setAuthenticated(authValue);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("authenticated");
     router.push("/account");
   };
-
-  const authenticated =
-    typeof window !== "undefined" && window.localStorage
-      ? localStorage.getItem("authenticated")
-      : null;
 
   const currentYear = new Date().getFullYear();
 
@@ -75,13 +75,51 @@ export default function Header({
           className="object-cover"
         />
         <div className="flex flex-col text-white justify-center relative items-center tablet:items-end w-full h-full gap-2 tablet:gap-4 max-w-[1440px] m-auto">
-          <Link
-            href="/account"
-            className="text-white border-white flex mb-3 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
-          >
-            <LoginIcon className="text-white" />
-            {t("loginRegister")}
-          </Link>
+          {authenticated ? (
+            <Select>
+              <SelectTrigger
+                className={`text-white border-borderGray border w-fit gap-4 flex tablet:hidden font-bold h-[34px] px-6 items-center rounded-full`}
+              >
+                <LoginIcon className="text-white" />
+                {t("myAccount")}
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                <SelectGroup className="flex flex-col gap-4 p-4">
+                  <Link
+                    href="/account/personal-info"
+                    className="text-grayFont flex items-center gap-2 group hover:text-primary"
+                  >
+                    <AccountIcon className="text-gray-font group-hover:text-primary" />
+                    {u("personalInformations")}
+                  </Link>
+                  <Link
+                    href="#"
+                    className="text-grayFont flex items-center gap-2 group hover:text-primary"
+                  >
+                    <ReservationIcon className="text-gray-font group-hover:text-primary" />
+                    {u("reservations")}
+                  </Link>
+                  <div
+                    onClick={handleLogout}
+                    className="text-grayFont flex items-center gap-2 cursor-pointer group hover:text-primary"
+                  >
+                    <div className="w-6">
+                      <LogoutIcon className="text-gray-font group-hover:text-primary" />
+                    </div>
+                    {u("logOut")}
+                  </div>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          ) : (
+            <Link
+              href="/account"
+              className="text-white border-white flex mb-3 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
+            >
+              <LoginIcon className="text-white" />
+              {t("loginRegister")}
+            </Link>
+          )}
           <div className="flex gap-4 mb-3 tablet:mb-0">
             <Select>
               <SelectTrigger className="flex tablet:hidden border-white text-white w-[96px] border rounded-full h-6 py-4 px-2 g-2">
