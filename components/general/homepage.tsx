@@ -19,7 +19,7 @@ export default function Homepage() {
         />
       </div>
       <div className="flex max-w-[1440px] m-auto">
-        <div className="hidden tablet:flex w-1/2 h-screen gap-4 items-start p-8 flex-col justify-center">
+        <div className="hidden tablet:flex w-1/2 h-screen gap-4 items-start p-8 bigDesktop:pl-0 flex-col justify-center">
           <h1 className="text-4xl leading-tight laptop:text-5xl text-white font-bold">
             {t.rich("enjoyJourney.title", { br: () => <br /> })}
           </h1>

@@ -41,37 +41,39 @@ export default function FrequentlyAskedQuestions() {
       <HeadingTitle translations={t("heading")} />
       <div className="bg-bgSecondary w-full pb-16">
         <Breadcrumbs translations={t} />
-        <div className="relative max-w-[1440px] bg-white m-auto px-4 mobile:px-8 pb-8 flex flex-col">
-          <SideMenu />
-          <div className="flex flex-col tablet:flex-row w-full laptop:w-3/4 gap-8 py-8">
-            <Accordion type="multiple" className="w-full">
-              {items.map((item) => (
-                <AccordionItem key={item} value={item}>
-                  <AccordionTrigger
-                    onClick={() => handleClick(item)}
-                    className={`${
-                      isOpen[item]
-                        ? " text-primary font-bold"
-                        : "text-grayFont font-normal"
-                    } text-start`}
-                  >
-                    {/* @ts-ignore */}
-                    {t(`items.${item}.question`)}
-                  </AccordionTrigger>
-                  <AccordionContent
-                    className={`${
-                      isOpen[item] ? "border-primary border-b-2" : ""
-                    } text-sm text-grayFont`}
-                  >
-                    {/* @ts-ignore */}
-                    {t(`items.${item}.answer`)}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-          <div className="desktop:mb-20">
-            <ScrollToTop />
+        <div className=" max-w-[1440px] m-auto">
+          <div className="relative mx-0 mobile:mx-8 bigDesktop:mx-0 bg-white px-4 desktop:px-8 pb-8 flex flex-col">
+            <SideMenu />
+            <div className="flex flex-col tablet:flex-row w-full laptop:w-3/4 gap-8 py-8">
+              <Accordion type="multiple" className="w-full">
+                {items.map((item) => (
+                  <AccordionItem key={item} value={item}>
+                    <AccordionTrigger
+                      onClick={() => handleClick(item)}
+                      className={`${
+                        isOpen[item]
+                          ? " text-primary font-bold"
+                          : "text-grayFont font-normal"
+                      } text-start`}
+                    >
+                      {/* @ts-ignore */}
+                      {t(`items.${item}.question`)}
+                    </AccordionTrigger>
+                    <AccordionContent
+                      className={`${
+                        isOpen[item] ? "border-primary border-b-2" : ""
+                      } text-sm text-grayFont`}
+                    >
+                      {/* @ts-ignore */}
+                      {t(`items.${item}.answer`)}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+            <div className="desktop:mb-20">
+              <ScrollToTop />
+            </div>
           </div>
         </div>
       </div>

@@ -14,6 +14,7 @@ const config = {
       tablet: "768px",
       laptop: "1024px",
       desktop: "1280px",
+      bigDesktop: "1560px",
     },
     container: {
       center: true,

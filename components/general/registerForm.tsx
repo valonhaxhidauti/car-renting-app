@@ -2,13 +2,13 @@
 
 import {
   RegisterFormValidation,
-  RegisterFormValues,
   isNameValid,
   isEmailValid,
   isPhoneValid,
   isPasswordValid,
   isPasswordMatched,
 } from "../utils/formValidations";
+import { RegisterFormValues } from "@/lib/types";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "@/assets/svgs";

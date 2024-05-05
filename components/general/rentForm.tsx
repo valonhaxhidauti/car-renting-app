@@ -1,18 +1,18 @@
 "use client";
 
-import { X } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { X } from "lucide-react";
+import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
 import { usePathname, useRouter } from "next/navigation";
-import dayjs, { Dayjs } from "dayjs";
-import "dayjs/locale/de";
-import "dayjs/locale/en-gb";
 import { FormControl, FormHelperText } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
-import { useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
+import "dayjs/locale/de";
+import "dayjs/locale/en-gb";
 
 interface IFormInputs {
   rentLocation: string;
@@ -236,7 +236,7 @@ export default function RentForm({
       </div>
     </>
   ) : (
-    <div className="w-full tablet:w-1/2 h-screen relative p-4 mobile:p-8 flex flex-col justify-center">
+    <div className="w-full tablet:w-1/2 h-screen relative p-4 mobile:p-8 bigDesktop:pr-0 flex flex-col justify-center">
       <p className="pb-4 font-bold leading-4 text-white tablet:text-grayFont text-lg">
         {t("findYourCar")}
       </p>

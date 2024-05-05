@@ -24,11 +24,18 @@ export default function VehiclePayment() {
 
   return (
     <div className="bg-bgSecondary w-full h-full mb-8">
+      <div className="w-full bg-white ">
+        <div className="max-w-[1440px] m-auto flex justify-between px-4 mobile:px-8 bigDesktop:px-0 py-8">
+          <div className="text-primary font-bold text-4xl w-full items-center flex cursor-default">
+            {u("pageTitle")}
+          </div>
+        </div>
+      </div>
       <div className="max-w-[1440px] pt-8 pb-16 m-auto w-full">
-        <div className="mx-4 mobile:mx-8 flex flex-col laptop:flex-row gap-4">
+        <div className="mx-0 mobile:mx-8 desktop:mx-0 flex flex-col laptop:flex-row gap-4">
           <div className="flex flex-col w-full laptop:w-3/4 gap-4">
             <div className="flex flex-col gap-4 w-full">
-              <div className="flex flex-col gap-4 bg-white p-6">
+              <div className="flex flex-col gap-4 bg-white p-4">
                 <h1 className="text-3xl text-grayFont font-bold">
                   Personal Information
                 </h1>
@@ -123,29 +130,29 @@ export default function VehiclePayment() {
                 </form>
               </div>
             </div>
-            <div className="flex flex-col gap-4 w-full bg-white p-6">
+            <div className="flex flex-col gap-4 w-full bg-white p-4">
               <h1 className="text-3xl text-grayFont font-bold">
                 Discount Code
               </h1>
               <p className="text-grayFont text-sm">
                 Pay less by entering a discount code!
               </p>
-                <form className="flex flex-col mobile:flex-row justify-between gap-4">
-                  <input
-                    type="text"
-                    placeholder="Please enter the discount code"
-                    className="border border-zinc-300 p-3 w-full mobile:w-2/3 rounded-sm leading-none"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-primary hover:bg-secondary transition text-white py-3 w-full mobile:w-44"
-                  >
-                    Check Code
-                  </button>
-                </form>
+              <form className="flex flex-col mobile:flex-row justify-between gap-4">
+                <input
+                  type="text"
+                  placeholder="Please enter the discount code"
+                  className="border border-zinc-300 p-3 w-full mobile:w-2/3 rounded-sm leading-none"
+                />
+                <button
+                  type="submit"
+                  className="bg-primary hover:bg-secondary transition text-white py-3 w-full mobile:w-44"
+                >
+                  Check Code
+                </button>
+              </form>
             </div>
           </div>
-          <div className="flex flex-col gap-2 laptop:w-1/4 ">
+          <div className="flex flex-col gap-4 laptop:w-1/4 ">
             <BookingInfo border={true} />
             <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
               <div className="flex flex-col border-b border-borderGray pb-3">

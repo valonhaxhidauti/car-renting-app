@@ -1,9 +1,19 @@
+"use client";
+
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import LoginForm from "@/components/general/logInForm";
 import RegisterForm from "@/components/general/registerForm";
+import { useRouter } from "next/navigation";
 
 export default function Account() {
+  const router = useRouter();
+  const item = window.localStorage.getItem("authenticated");
+  if (item) {
+    router.push("/account/personal-info");
+    return <>loading</>;
+  }
+
   return (
     <>
       <Header background={false} fixed={false} />

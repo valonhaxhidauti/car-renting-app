@@ -20,7 +20,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
   const params = useCustomSearchParams();
 
   return viewMode === "list" ? (
-    <div className="bg-white flex flex-col gap-4 pl-4 mobile:pl-8">
+    <div className="bg-white flex flex-col gap-4">
       <div className="w-full p-2 flex gap-8">
         <Image
           src="/sampleCar.png"
@@ -32,7 +32,7 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
         />
         <div className="flex justify-between w-full gap-2">
           <div className="w-full flex flex-col justify-between">
-            <div className="flex w-full justify-between pt-2">
+            <div className="flex w-full justify-between mobile:pt-2">
               <div className="flex flex-col gap-4">
                 <p className="text-graySecondary w-fit border-graySecondary border rounded-full font-medium text-[10px] px-12 py-1">
                   SUV
@@ -110,9 +110,9 @@ export default function VehicleCard({ viewMode }: { viewMode: string }) {
       </div>
     </div>
   ) : (
-    <div className="bg-white pl-4 mobile:pl-8">
-      <div className="w-full p-2 flex flex-col gap-8">
-        <div className="flex w-full justify-between pt-2">
+    <div className="bg-white">
+      <div className="w-full p-4 flex flex-col gap-8">
+        <div className="flex w-full justify-between">
           <div className="flex flex-col gap-4 justify-between">
             <p className="w-fit border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
               25% {t("off")}

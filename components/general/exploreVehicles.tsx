@@ -64,7 +64,7 @@ export default function ExploreVehicles() {
   return (
     <div className="bg-bgSecondary w-full pb-16">
       <div className="w-full bg-white ">
-        <div className="max-w-[1440px] m-auto flex justify-between px-4 mobile:px-8 py-8">
+        <div className="max-w-[1440px] m-auto flex justify-between px-4 mobile:px-8 bigDesktop:px-0 py-8">
           <div className="text-primary font-bold text-4xl w-full items-center flex cursor-default">
             {u("pageTitle")}
           </div>
@@ -125,7 +125,7 @@ export default function ExploreVehicles() {
         </div>
       </div>
       <div className="max-w-[1440px] m-auto">
-        <Breadcrumb className="w-full px-4 mobile:px-8 py-8 ">
+        <Breadcrumb className="w-full px-4 mobile:px-8 bigDesktop:px-0 py-8">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
@@ -138,7 +138,7 @@ export default function ExploreVehicles() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="bg-white flex mb-4 py-4 px-4 mobile:px-8 laptop:hidden">
+        <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
           <div className="flex gap-4 mobile:gap-6">
             <div className="flex gap-2 items-center text-sm">
               <Select>
@@ -214,7 +214,7 @@ export default function ExploreVehicles() {
             </div>
           </div>
         </div>
-        <div className="flex gap-4 ">
+        <div className="flex gap-4 mobile:mx-8 bigDesktop:mx-0">
           <div
             className={`w-full laptop:w-4/5 gap-4 ${
               viewMode === "list"
@@ -227,7 +227,7 @@ export default function ExploreVehicles() {
             <VehicleCard viewMode={viewMode}/>
             <VehicleCard viewMode={viewMode}/>
           </div>
-          <div className="w-1/5  flex-col h-full gap-4 mr-8 hidden laptop:flex">
+          <div className="w-1/5 flex-col h-full gap-4 hidden laptop:flex">
             <BookingInfo border={true} />
             <div className="bg-white p-4 flex flex-col gap-4 h-full">
               <Accordion

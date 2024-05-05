@@ -4,9 +4,9 @@ import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { LoginFormValues } from "@/lib/types";
 import {
   LoginFormValidation,
-  LoginFormValues,
   isEmailValid,
   isPasswordValid,
 } from "../utils/formValidations";

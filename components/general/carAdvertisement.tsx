@@ -36,7 +36,7 @@ export default function CarAdvertisement() {
         <p className="text-white text-base font-bold">{t("rentNow")}</p>
         <p className="text-white text-xs">{ADVERTISEMENT_DATA.car}</p>
       </div>
-      <div className="flex max-w-[720px] h-full relative justify-between px-8 py-4 text-white">
+      <div className="flex max-w-[720px] h-full relative justify-between px-8 bigDesktop:pr-0 py-4 text-white">
         <div className="flex flex-col justify-center">
           <p className="text-xs leading-none">{t("carDetails.startFrom")}</p>
           <div className="text-3xl">

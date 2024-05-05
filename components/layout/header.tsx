@@ -188,7 +188,7 @@ export default function Header({
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <div className="absolute bottom-10 left-4 tablet:left-8">
+          <div className="absolute bottom-10 left-4 mobile:left-8 bigDesktop:left-0">
             <p>{t("copyright", { currentYear: currentYear })}</p>
           </div>
         </div>
@@ -205,7 +205,7 @@ export default function Header({
         <div
           className={`${
             isOpen ? "opacity-95" : ""
-          } px-4 mobile:px-8 pt-14 pb-4 flex justify-between w-full max-w-[1440px] m-auto`}
+          } px-4 mobile:px-8 bigDesktop:px-0 pt-14 pb-4 flex justify-between w-full max-w-[1440px] m-auto`}
         >
           <div className="flex justify-start gap-8 items-center ">
             {isOpen ? (
