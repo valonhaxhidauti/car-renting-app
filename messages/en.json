@@ -323,6 +323,11 @@
         }
     },
     "VehicleDetails": {
+        "homepage": "Homepage",
+        "explore": "Explore",
+        "booking": "Booking",
+        "vehicleDetails": "Vehicle Details",
+        "payment": "Payment",
         "pageTitle": "Your Booking",
         "vehicleValue": "Vehicle Value",
         "optionalItems": "Optional Items",

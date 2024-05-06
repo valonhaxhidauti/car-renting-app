@@ -323,6 +323,11 @@
         }
     },
     "VehicleDetails": {
+        "homepage": "Startseite",
+        "explore": "Erkunden",
+        "booking": "Buchung",
+        "vehicleDetails": "Fahrzeugdetails",
+        "payment": "Zahlung",
         "pageTitle": "Ihre Buchung",
         "vehicleValue": "Fahrzeugwert",
         "optionalItems": "Optionale Artikel",

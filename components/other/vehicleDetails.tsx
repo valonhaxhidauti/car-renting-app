@@ -12,6 +12,14 @@ import {
   SeatIcon,
   TransmissionIcon,
 } from "@/assets/svgs";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCounter } from "../hooks/useCounter";
 import { useTranslations } from "next-intl";
@@ -24,6 +32,7 @@ import dayjs from "dayjs";
 import { Link } from "next-view-transitions";
 import { VehiclePrices } from "@/lib/types";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
+import BookingMobile from "../common/bookingMobile";
 
 const prices: VehiclePrices = {
   vehicle: 120.0,
@@ -35,9 +44,8 @@ const prices: VehiclePrices = {
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
-
+  
   const params = useCustomSearchParams();
-
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
   const daysDifference =
@@ -92,7 +100,33 @@ export default function VehicleDetails() {
           </div>
         </div>
       </div>
-      <div className="max-w-[1440px] pt-8 pb-16 m-auto w-full">
+      <div className="max-w-[1440px] pb-16 m-auto w-full">
+        <Breadcrumb className="w-full px-4 mobile:px-8 bigDesktop:px-0 py-8">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/">{t("homepage")}</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link
+                  href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                >
+                  {t("explore")}
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{t("vehicleDetails")}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
+          <BookingMobile />
+        </div>
         <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col laptop:flex-row gap-4">
           <div className="flex flex-col gap-4 w-full laptop:w-3/4">
             <div className=" bg-white flex flex-col gap-4">
@@ -352,7 +386,9 @@ export default function VehicleDetails() {
             </Tabs>
           </div>
           <div className="flex flex-col gap-4 laptop:w-1/4 ">
-            <BookingInfo border={true} />
+            <div className="hidden laptop:block">
+              <BookingInfo border={true} />
+            </div>
             <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
               <div className="flex flex-col border-b border-borderGray pb-3">
                 <p className="text-xl font-bold">{t("pageTitle")}</p>

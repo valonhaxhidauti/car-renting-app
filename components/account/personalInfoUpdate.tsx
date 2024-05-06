@@ -34,7 +34,7 @@ export default function PersonalInfoUpdate() {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/account">{t("title")}</Link>
+                <Link href="#">{t("title")}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
