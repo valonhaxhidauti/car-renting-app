@@ -14,6 +14,7 @@ export default function Account() {
     return <>loading</>;
   }
 
+  
   return (
     <>
       <Header background={false} fixed={false} />

@@ -44,7 +44,7 @@ const prices: VehiclePrices = {
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
-  
+
   const params = useCustomSearchParams();
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
@@ -128,7 +128,7 @@ export default function VehicleDetails() {
           <BookingMobile />
         </div>
         <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col laptop:flex-row gap-4">
-          <div className="flex flex-col gap-4 w-full laptop:w-3/4">
+          <div className="flex flex-col gap-4 w-full laptop:w-3/4 desktop:w-4/5">
             <div className=" bg-white flex flex-col gap-4">
               <div className="p-4 flex flex-col mobile:flex-row mobile:gap-8 w-full">
                 <Image
@@ -149,39 +149,37 @@ export default function VehicleDetails() {
                         SUV
                       </p>
                     </div>
-                    <div>
-                      <div className="flex w-full">
-                        <div className="flex flex-wrap items-center py-2 gap-4">
-                          <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
-                            <FuelIcon className="text-graySecondary" />
-                            <p className="text-xs text-grayFont mobile:text-sm">
-                              Diesel
-                            </p>
-                          </div>
-                          <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
-                            <TransmissionIcon className="text-graySecondary" />
-                            <p className="text-xs text-grayFont mobile:text-sm">
-                              Automatic
-                            </p>
-                          </div>
-                          <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
-                            <ConsumptionIcon className="text-graySecondary" />
-                            <p className="text-xs text-grayFont mobile:text-sm">
-                              6,5 lt
-                            </p>
-                          </div>
-                          <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
-                            <LuggageIcon className="text-graySecondary" />
-                            <p className="text-xs text-grayFont mobile:text-sm">
-                              615 lt
-                            </p>
-                          </div>
-                          <div className="flex gap-2 justify-between w-fit mobile:w-3/4 self-center items-center">
-                            <SeatIcon className="text-graySecondary" />
-                            <p className="text-xs text-grayFont mobile:text-sm">
-                              5
-                            </p>
-                          </div>
+                    <div className="flex w-full">
+                      <div className="flex flex-wrap items-center py-2 gap-4">
+                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                          <FuelIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            Diesel
+                          </p>
+                        </div>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                          <TransmissionIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            Automatic
+                          </p>
+                        </div>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                          <ConsumptionIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            6,5 lt
+                          </p>
+                        </div>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                          <LuggageIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            615 lt
+                          </p>
+                        </div>
+                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                          <SeatIcon className="text-graySecondary" />
+                          <p className="text-xs text-grayFont mobile:text-sm">
+                            5
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -385,7 +383,7 @@ export default function VehicleDetails() {
               </TabsContent>
             </Tabs>
           </div>
-          <div className="flex flex-col gap-4 laptop:w-1/4 ">
+          <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
             <div className="hidden laptop:block">
               <BookingInfo border={true} />
             </div>

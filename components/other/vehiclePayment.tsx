@@ -145,7 +145,7 @@ export default function VehiclePayment() {
           <BookingMobile />
         </div>
         <div className="mx-0 mobile:mx-8 desktop:mx-0 flex flex-col laptop:flex-row gap-4">
-          <div className="flex flex-col w-full laptop:w-3/4 gap-4">
+          <div className="flex flex-col w-full laptop:w-3/4 desktop:w-4/5 gap-4">
             <div className="flex flex-col gap-4 w-full">
               <div className="flex flex-col gap-4 bg-white p-4">
                 <h1 className="text-3xl text-grayFont font-bold">
@@ -272,7 +272,7 @@ export default function VehiclePayment() {
               </h1>
             </div>
           </div>
-          <div className="flex flex-col gap-4 laptop:w-1/4 ">
+          <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
             <div className="hidden laptop:block">
               <BookingInfo border={true} />
             </div>
