@@ -1,261 +1,120 @@
-"use client";
-
+import { Filters } from "@/lib/types";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 export default function VehicleFilters({ filtersId }: { filtersId: string }) {
-  const t = useTranslations("VehicleFilters");
+  const vf = useTranslations("VehicleFilters.vehicleClass");
+  const vt = useTranslations("VehicleFilters.vehicleType");
+  const gt = useTranslations("VehicleFilters.gearType");
+  const ft = useTranslations("VehicleFilters.fuelType");
+
+  const [filters, setFilters] = useState<Filters>({
+    gearType: [],
+    fuelType: [],
+    carClass: [],
+    carType: [],
+  });
+
+  useEffect(() => {
+    const fetchFilters = async () => {
+      try {
+        const url = new URL("https://rent-api.rubik.dev/api/car-filters");
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        const data = await response.json();
+        setFilters(data.data.attributes);
+      } catch (error) {
+        console.error("Error fetching filters:", error);
+      }
+    };
+
+    fetchFilters();
+  }, []);
 
   return (
     <>
       <div className="flex flex-col items-start gap-2 pb-4 border-borderGray border-b">
         <div className="flex space-between w-full">
-          <p className="pb-2 text-sm font-bold w-full">
-            {t("vehicleClass.title")}
-          </p>
+          <p className="pb-2 text-sm font-bold w-full">{vf("title")}</p>
         </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleClass1_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleClass1_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleClass.economic")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleClass2_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleClass2_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleClass.middleClass")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleClass3_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleClass3_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleClass.middleClass")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleClass4_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleClass4_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleClass.luxury")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleClass5_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleClass5_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleClass.persons7Plus")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleClass6_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleClass6_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleClass.suv")}
-          </label>
-        </div>
+        {filters.carClass.map((filter: any) => (
+          <div key={filter.label} className="flex gap-4">
+            <input
+              id={`vehicleClass_${filter.label}_${filtersId}`}
+              type="checkbox"
+              className="cursor-pointer"
+            />
+            <label
+              htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
+              className="text-grayFont text-xs cursor-pointer"
+            >
+              {vf(filter.label)}
+            </label>
+          </div>
+        ))}
       </div>
       <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-        <p className="pb-2 text-sm font-bold">{t("vehicleType.title")}</p>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleType1_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleType1_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleType.sedan")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleType2_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleType2_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleType.hatchback")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleType3_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleType3_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleType.stationwagon")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleType4_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleType4_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleType.suv")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`vehicleType5_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`vehicleType5_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("vehicleType.van")}
-          </label>
-        </div>
+        <p className="pb-2 text-sm font-bold">{vt("title")}</p>
+        {filters.carType.map((filter: any) => (
+          <div key={filter.label} className="flex gap-4">
+            <input
+              id={`vehicleClass_${filter.label}_${filtersId}`}
+              type="checkbox"
+              className="cursor-pointer"
+            />
+            <label
+              htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
+              className="text-grayFont text-xs cursor-pointer"
+            >
+              {vt(filter.label)}
+            </label>
+          </div>
+        ))}
       </div>
       <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-        <p className="pb-2 text-sm font-bold">{t("gearType.title")}</p>
-        <div className="flex gap-4">
-          <input
-            id={`gearType1_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`gearType1_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("gearType.automatic")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`gearType2_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`gearType2_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("gearType.manual")}
-          </label>
-        </div>
+        <p className="pb-2 text-sm font-bold">{gt("title")}</p>
+        {filters.gearType.map((filter: any) => (
+          <div key={filter.label} className="flex gap-4">
+            <input
+              id={`vehicleClass_${filter.label}_${filtersId}`}
+              type="checkbox"
+              className="cursor-pointer"
+            />
+            <label
+              htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
+              className="text-grayFont text-xs cursor-pointer"
+            >
+              {gt(filter.label)}
+            </label>
+          </div>
+        ))}
       </div>
-      <div className="flex flex-col items-start gap-2 mt-4">
-        <p className="pb-2 text-sm font-bold">{t("fuelType.title")}</p>
-        <div className="flex gap-4">
-          <input
-            id={`fuelType1_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`fuelType1_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("fuelType.diesel")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`fuelType2_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`fuelType2_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("fuelType.autogas")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`fuelType3_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`fuelType3_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("fuelType.hybrid")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`fuelType4_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`fuelType4_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("fuelType.gasoline")}
-          </label>
-        </div>
-        <div className="flex gap-4">
-          <input
-            id={`fuelType5_${filtersId}`}
-            type="checkbox"
-            className="cursor-pointer"
-          />
-          <label
-            htmlFor={`fuelType5_${filtersId}`}
-            className="text-grayFont text-xs cursor-pointer"
-          >
-            {t("fuelType.electrical")}
-          </label>
-        </div>
+      <div
+        className={`flex flex-col items-start gap-2 mt-4 ${
+          filtersId === "1" ? "pb-4" : ""
+        }`}
+      >
+        <p className="pb-2 text-sm font-bold">{ft("title")}</p>
+        {filters.fuelType.map((filter: any) => (
+          <div key={filter.label} className="flex gap-4">
+            <input
+              id={`vehicleClass_${filter.label}_${filtersId}`}
+              type="checkbox"
+              className="cursor-pointer"
+            />
+            <label
+              htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
+              className="text-grayFont text-xs cursor-pointer"
+            >
+              {ft(filter.label)}
+            </label>
+          </div>
+        ))}
       </div>
     </>
   );

@@ -28,3 +28,16 @@ export interface UpdateFormValues {
   birthday: string;
   password: string;
 }
+
+export interface Filters {
+  gearType: any[];
+  fuelType: any[];
+  carClass: any[];
+  carType: any[];
+}
+
+export interface VehicleData {
+  data: any[];
+  links: any;
+  meta: any;
+}

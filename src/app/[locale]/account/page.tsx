@@ -13,7 +13,6 @@ export default function Account() {
     router.push("/account/personal-info");
     return <>loading</>;
   }
-
   
   return (
     <>

@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link } from 'next-view-transitions';
+import { Link } from "next-view-transitions";
 import {
   Select,
   SelectContent,
@@ -34,13 +34,42 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VehicleFilters from "../common/vehicleFilters";
 import BookingInfo from "../common/bookingInfo";
+import { VehicleData } from "@/lib/types";
 
 export default function ExploreVehicles() {
   const t = useTranslations("Header");
   const u = useTranslations("ExploreVehicles");
+
+  const [vehicles, setVehicles] = useState<VehicleData>({
+    data: [],
+    links: {},
+    meta: {},
+  });
+
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const url = new URL("https://rent-api.rubik.dev/api/cars");
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+        setVehicles(data);
+      } catch (error) {
+        console.error("Error fetching vehicles:", error);
+      }
+    };
+
+    fetchVehicles();
+  }, []);
 
   const [showFilters, setShowFilters] = useState(false);
   const [showFiltersAnimation, setShowFiltersAnimation] = useState(false);
@@ -201,9 +230,9 @@ export default function ExploreVehicles() {
                   : "hidden"
               }`}
             >
-              <div className="bg-white p-4 h-screen ">
+              <div className="bg-white p-4 h-screen">
                 <div className="flex justify-between text-lg text-grayFont font-bold mb-4">
-                {u("filterVehicles")}
+                  {u("filterVehicles")}
                   <CloseMenuIcon
                     className="text-primary cursor-pointer"
                     onClick={toggleFilters}
@@ -222,10 +251,13 @@ export default function ExploreVehicles() {
                 : "grid grid-cols-1 tablet:grid-cols-2"
             }`}
           >
-            <VehicleCard viewMode={viewMode}/>
-            <VehicleCard viewMode={viewMode}/>
-            <VehicleCard viewMode={viewMode}/>
-            <VehicleCard viewMode={viewMode}/>
+            {vehicles.data.map((vehicle: any) => (
+              <VehicleCard
+                viewMode={viewMode}
+                vehicle={vehicle}
+                key={vehicle.id}
+              />
+            ))}
           </div>
           <div className="w-1/5 flex-col h-full gap-4 hidden laptop:flex">
             <BookingInfo border={true} />
@@ -237,9 +269,9 @@ export default function ExploreVehicles() {
                 className="w-full py-0"
               >
                 <AccordionItem value="filters" className="border-none">
-                  <AccordionTrigger className="pb-4 pt-0">
+                  <AccordionTrigger>
                     <div className="flex justify-between cursor-pointer text-lg text-grayFont font-bold">
-                    {u("filterVehicles")}
+                      {u("filterVehicles")}
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>

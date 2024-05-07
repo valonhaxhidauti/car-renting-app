@@ -290,38 +290,6 @@
         "off": "OFF",
         "rentNow": "Rent Now!"
     },
-    "VehicleFilters": {
-        "vehicleClass": {
-            "title": "Vehicle Class",
-            "economic": "Economic",
-            "middleClass": "Middle Class",
-            "topGrade": "Top Grade",
-            "luxury": "Luxury",
-            "persons7Plus": "7+ Persons",
-            "suv": "SUV"
-        },
-        "vehicleType": {
-            "title": "Vehicle Type",
-            "sedan": "Sedan",
-            "hatchback": "Hatchback",
-            "stationwagon": "Stationwagon",
-            "suv": "SUV",
-            "van": "VAN"
-        },
-        "gearType": {
-            "title": "Gear Type",
-            "automatic": "Automatic",
-            "manual": "Manual"
-        },
-        "fuelType": {
-            "title": "Fuel Type",
-            "diesel": "Diesel",
-            "autogas": "Autogas",
-            "hybrid": "Hybrid",
-            "gasoline": "Gasoline",
-            "electrical": "Electrical"
-        }
-    },
     "VehicleDetails": {
         "homepage": "Homepage",
         "explore": "Explore",
@@ -355,5 +323,43 @@
         "vehicleType": "Vehicle Type",
         "luggageCapacity": "Luggage Capacity",
         "horsepower": "Hp (Horse power)"
+    },
+    "VehicleFilters": {
+        "vehicleClass": {
+            "title": "Vehicle Class",
+            "Economy": "Economic",
+            "Compact": "Compact",
+            "Intermediate/Mid-size": "Intermediate/Mid-size",
+            "Luxury": "Luxury",
+            "Full-size": "Full-size"
+        },
+        "vehicleType": {
+            "title": "Vehicle Type",
+            "Sedan/Saloon": "Sedan/Saloon",
+            "Estate": "Estate",
+            "Hatchback/Small": "Hatchback/Small",
+            "SUV": "SUV",
+            "Crossover": "Crossover",
+            "Coupe": "Coupe",
+            "Sports": "Sports",
+            "Convertible/Cabriolet": "Convertible/Cabriolet",
+            "Minivan": "Minivan"
+        },
+        "gearType": {
+            "title": "Gear Type",
+            "Manual": "Manual",
+            "Automatic": "Automatic",
+            "Semi-Automatic": "Semi-Automatic",
+            "Dual-Clutch Automatic (DCT)": "Dual-Clutch Automatic (DCT)"
+        },
+        "fuelType": {
+            "title": "Fuel Type",
+            "Petrol": "Petrol",
+            "Diesel": "Diesel",
+            "Electric": "Electric",
+            "Hybrid": "Hybrid",
+            "Plug-in Hybrid (PHEV)": "Plug-in Hybrid (PHEV)",
+            "Hydrogen Fuel Cell": "Hydrogen Fuel Cell"
+        }
     }
 }

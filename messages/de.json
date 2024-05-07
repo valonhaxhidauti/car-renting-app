@@ -290,38 +290,6 @@
         "off": "RABATT",
         "rentNow": "Jetzt mieten!"
     },
-    "VehicleFilters": {
-        "vehicleClass": {
-            "title": "Fahrzeugklasse",
-            "economic": "Wirtschaftlich",
-            "middleClass": "Mittelklasse",
-            "topGrade": "Spitzenklasse",
-            "luxury": "Luxus",
-            "persons7Plus": "7+ Personen",
-            "suv": "SUV"
-        },
-        "vehicleType": {
-            "title": "Fahrzeugtyp",
-            "sedan": "Limousine",
-            "hatchback": "Kleinwagen",
-            "stationwagon": "Kombi",
-            "suv": "SUV",
-            "van": "Transporter"
-        },
-        "gearType": {
-            "title": "Getriebetyp",
-            "automatic": "Automatik",
-            "manual": "Manuell"
-        },
-        "fuelType": {
-            "title": "Kraftstoffart",
-            "diesel": "Diesel",
-            "autogas": "Autogas",
-            "hybrid": "Hybrid",
-            "gasoline": "Benzin",
-            "electrical": "Elektrisch"
-        }
-    },
     "VehicleDetails": {
         "homepage": "Startseite",
         "explore": "Erkunden",
@@ -355,5 +323,43 @@
         "vehicleType": "Fahrzeugtyp",
         "luggageCapacity": "Gepäckkapazität",
         "horsepower": "PS (Pferdestärke)"
+    },
+    "VehicleFilters": {
+        "vehicleClass": {
+            "title": "Fahrzeugklasse",
+            "Economy": "Wirtschaftlich",
+            "Compact": "Kompakt",
+            "Intermediate/Mid-size": "Mittelklasse",
+            "Luxury": "Luxus",
+            "Full-size": "Groß"
+        },
+        "vehicleType": {
+            "title": "Fahrzeugtyp",
+            "Sedan/Saloon": "Limousine",
+            "Estate": "Kombi",
+            "Hatchback/Small": "Kleinwagen",
+            "SUV": "SUV",
+            "Crossover": "Crossover",
+            "Coupe": "Coupé",
+            "Sports": "Sportwagen",
+            "Convertible/Cabriolet": "Cabriolet",
+            "Minivan": "Minivan"
+        },
+        "gearType": {
+            "title": "Getriebetyp",
+            "Manual": "Manuell",
+            "Automatic": "Automatisch",
+            "Semi-Automatic": "Halbautomatisch",
+            "Dual-Clutch Automatic (DCT)": "Doppelkupplungsgetriebe (DCT)"
+        },
+        "fuelType": {
+            "title": "Kraftstoffart",
+            "Petrol": "Benzin",
+            "Diesel": "Diesel",
+            "Electric": "Elektrisch",
+            "Hybrid": "Hybrid",
+            "Plug-in Hybrid (PHEV)": "Plug-in-Hybrid (PHEV)",
+            "Hydrogen Fuel Cell": "Wasserstoff-Brennstoffzelle"
+        }
     }
 }
