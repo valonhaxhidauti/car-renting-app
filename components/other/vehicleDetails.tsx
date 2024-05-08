@@ -33,6 +33,7 @@ import { Link } from "next-view-transitions";
 import { VehiclePrices } from "@/lib/types";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import BookingMobile from "../common/bookingMobile";
+import { useEffect, useState } from "react";
 
 const prices: VehiclePrices = {
   vehicle: 120.0,
@@ -46,12 +47,37 @@ export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
 
   const params = useCustomSearchParams();
+  const vehicleId = params.vehicleId;
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
   const daysDifference =
     dropOffDate.isValid() && pickupDate.isValid()
       ? dropOffDate.diff(pickupDate, "day") + 1
       : 1;
+
+  const [vehicle, setVehicle] = useState<any>({});
+
+  useEffect(() => {
+    const fetchVehicle = async () => {
+      try {
+        const url = new URL(`https://rent-api.rubik.dev/api/cars/${vehicleId}`);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        const data = await response.json();
+        console.log(data.data);
+        setVehicle(data.data);
+      } catch (error) {
+        console.error("Error fetching vehicles:", error);
+      }
+    };
+
+    fetchVehicle();
+  }, []);
 
   const [childSeat, incChildSeat, decChildSeat] = useCounter(0, 3);
   const [navigation, incNavigation, decNavigation] = useCounter(0, 1);
@@ -129,259 +155,282 @@ export default function VehicleDetails() {
         </div>
         <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col laptop:flex-row gap-4">
           <div className="flex flex-col gap-4 w-full laptop:w-3/4 desktop:w-4/5">
-            <div className=" bg-white flex flex-col gap-4">
-              <div className="p-4 flex flex-col mobile:flex-row mobile:gap-8 w-full">
-                <Image
-                  src="/sampleCar.png"
-                  alt="vehicle"
-                  width="300"
-                  height="150"
-                  className="py-12 self-center mobile:self-start"
-                  priority
-                />
-                <div className="flex justify-between gap-2">
-                  <div className="flex flex-col">
-                    <div className="flex flex-col justify-between pt-2 mb-2">
-                      <p className="text-grayFont font-medium text-lg ">
-                        Volvo XC90 Excellence
-                      </p>
-                      <p className="text-graySecondary font-medium text-xs">
-                        SUV
-                      </p>
-                    </div>
-                    <div className="flex w-full">
-                      <div className="flex flex-wrap items-center py-2 gap-4">
-                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                          <FuelIcon className="text-graySecondary" />
-                          <p className="text-xs text-grayFont mobile:text-sm">
-                            Diesel
+            {vehicle && vehicle.attributes ? (
+              <>
+                <div className=" bg-white flex flex-col gap-4">
+                  <div className="p-4 flex flex-col mobile:flex-row mobile:gap-8 w-full">
+                    <Image
+                      src="/sampleCar.png"
+                      alt="vehicle"
+                      width="300"
+                      height="150"
+                      className="py-12 self-center mobile:self-start"
+                      priority
+                    />
+                    <div className="flex justify-between gap-2">
+                      <div className="flex flex-col">
+                        <div className="flex flex-col justify-between pt-2 mb-2">
+                          <p className="text-grayFont font-medium text-lg ">
+                            {vehicle.attributes.name.split(" (")[0]}
+                          </p>
+                          <p className="text-graySecondary font-medium text-xs">
+                            {vehicle.relationships.carType.attributes.name}
                           </p>
                         </div>
-                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                          <TransmissionIcon className="text-graySecondary" />
-                          <p className="text-xs text-grayFont mobile:text-sm">
-                            Automatic
-                          </p>
-                        </div>
-                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                          <ConsumptionIcon className="text-graySecondary" />
-                          <p className="text-xs text-grayFont mobile:text-sm">
-                            6,5 lt
-                          </p>
-                        </div>
-                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                          <LuggageIcon className="text-graySecondary" />
-                          <p className="text-xs text-grayFont mobile:text-sm">
-                            615 lt
-                          </p>
-                        </div>
-                        <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                          <SeatIcon className="text-graySecondary" />
-                          <p className="text-xs text-grayFont mobile:text-sm">
-                            5
-                          </p>
+                        <div className="flex w-full">
+                          <div className="flex flex-wrap items-center py-2 gap-4">
+                            <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <FuelIcon className="text-graySecondary" />
+                              <p className="text-xs text-grayFont mobile:text-sm">
+                                {vehicle.relationships.fuelType.attributes.name}
+                              </p>
+                            </div>
+                            <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <TransmissionIcon className="text-graySecondary" />
+                              <p className="text-xs text-grayFont mobile:text-sm">
+                                {vehicle.relationships.gearType.attributes.name}
+                              </p>
+                            </div>
+                            <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <ConsumptionIcon className="text-graySecondary" />
+                              <p className="text-xs text-grayFont mobile:text-sm">
+                                6,5 lt
+                              </p>
+                            </div>
+                            <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <LuggageIcon className="text-graySecondary" />
+                              <p className="text-xs text-grayFont mobile:text-sm">
+                                615 lt
+                              </p>
+                            </div>
+                            <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <SeatIcon className="text-graySecondary" />
+                              <p className="text-xs text-grayFont mobile:text-sm">
+                                {vehicle.attributes.seat_capacity}
+                              </p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <Tabs defaultValue="options" className="p-4 bg-white">
-              <TabsList className="gap-6 overflow-auto">
-                <TabsTrigger value="options">
-                  {t("extraOptionsTab").toUpperCase()}
-                </TabsTrigger>
-                <TabsTrigger value="terms">
-                  {t("rentalTermsTab").toUpperCase()}
-                </TabsTrigger>
-                <TabsTrigger value="specs">
-                  {t("allSpecificationsTab").toUpperCase()}
-                </TabsTrigger>
-                <TabsTrigger value="gallery">
-                  {t("imageGalleryTab").toUpperCase()}
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="options">
-                <div className="grid laptop:grid-cols-2 desktop:grid-cols-4 border-borderGray border-y border-x w-full">
-                  <div className="flex gap-2 items-center pl-4 border-b desktop:border-b-0 laptop:border-r">
-                    <div className="w-10 laptop:w-fit">
-                      <ChildSeatIcon />
-                    </div>
-                    <div className="p-2 flex justify-between items-center w-full">
-                      <div className="flex flex-col text-grayFont">
-                        <p className="flex items-center text-[10px] font-bold gap-1">
-                          {t("childSeat").toUpperCase()}
-                          <InfoIcon className="text-primary" />
-                        </p>
-                        <p className="text-sm text-graySecondary">
-                          ${prices.childSeat.toFixed(2)}/{t("daily")}
-                        </p>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <div
-                          onClick={incChildSeat}
-                          className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
+                <Tabs defaultValue="options" className="p-4 bg-white">
+                  <TabsList className="gap-6 overflow-auto">
+                    <TabsTrigger value="options">
+                      {t("extraOptionsTab").toUpperCase()}
+                    </TabsTrigger>
+                    <TabsTrigger value="terms">
+                      {t("rentalTermsTab").toUpperCase()}
+                    </TabsTrigger>
+                    <TabsTrigger value="specs">
+                      {t("allSpecificationsTab").toUpperCase()}
+                    </TabsTrigger>
+                    <TabsTrigger value="gallery">
+                      {t("imageGalleryTab").toUpperCase()}
+                    </TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="options">
+                    <div className="grid laptop:grid-cols-2 desktop:grid-cols-4 border-borderGray border-y border-x w-full">
+                      <div className="flex gap-2 items-center pl-4 border-b desktop:border-b-0 laptop:border-r">
+                        <div className="w-10 laptop:w-fit">
+                          <ChildSeatIcon />
+                        </div>
+                        <div className="p-2 flex justify-between items-center w-full">
+                          <div className="flex flex-col text-grayFont">
+                            <p className="flex items-center text-[10px] font-bold gap-1">
+                              {t("childSeat").toUpperCase()}
+                              <InfoIcon className="text-primary" />
+                            </p>
+                            <p className="text-sm text-graySecondary">
+                              ${prices.childSeat.toFixed(2)}/{t("daily")}
+                            </p>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <div
+                              onClick={incChildSeat}
+                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
                           ${
                             childSeat === 3
                               ? "cursor-not-allowed text-gray-400"
                               : "cursor-pointer hover:bg-slate-200"
                           }`}
-                        >
-                          +
-                        </div>
-                        <p className="font-bold text-grayFont">{childSeat}</p>
-                        <div
-                          onClick={decChildSeat}
-                          className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative 
+                            >
+                              +
+                            </div>
+                            <p className="font-bold text-grayFont">
+                              {childSeat}
+                            </p>
+                            <div
+                              onClick={decChildSeat}
+                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative 
                           ${
                             childSeat === 0
                               ? "cursor-not-allowed text-gray-400"
                               : "cursor-pointer hover:bg-slate-200"
                           }`}
-                        >
-                          &nbsp;
-                          <span className="absolute -top-1.5 left-1.5">_</span>
+                            >
+                              &nbsp;
+                              <span className="absolute -top-1.5 left-1.5">
+                                _
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 items-center pl-4 border-b desktop:border-b-0 desktop:border-r">
-                    <div className="w-10 laptop:w-fit">
-                      <NavigationIcon />
-                    </div>
-                    <div className="p-2 flex justify-between items-center w-full">
-                      <div className="flex flex-col text-grayFont">
-                        <p className="flex items-center text-[10px] font-bold gap-1">
-                          {t("navigation").toUpperCase()}
-                          <InfoIcon className="text-primary" />
-                        </p>
-                        <p className="text-sm text-graySecondary">
-                          ${prices.navigation.toFixed(2)}/{t("daily")}
-                        </p>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <div
-                          onClick={incNavigation}
-                          className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
+                      <div className="flex gap-2 items-center pl-4 border-b desktop:border-b-0 desktop:border-r">
+                        <div className="w-10 laptop:w-fit">
+                          <NavigationIcon />
+                        </div>
+                        <div className="p-2 flex justify-between items-center w-full">
+                          <div className="flex flex-col text-grayFont">
+                            <p className="flex items-center text-[10px] font-bold gap-1">
+                              {t("navigation").toUpperCase()}
+                              <InfoIcon className="text-primary" />
+                            </p>
+                            <p className="text-sm text-graySecondary">
+                              ${prices.navigation.toFixed(2)}/{t("daily")}
+                            </p>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <div
+                              onClick={incNavigation}
+                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
                           ${
                             navigation === 1
                               ? "cursor-not-allowed text-gray-400"
                               : "cursor-pointer hover:bg-slate-200"
                           }`}
-                        >
-                          +
-                        </div>
-                        <p className="font-bold text-grayFont">{navigation}</p>
-                        <div
-                          onClick={decNavigation}
-                          className={`text-grayFont border-gray-400 bg-white border rounded-md text-sm px-1 w-5 relative ${
-                            navigation === 0
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          } `}
-                        >
-                          &nbsp;
-                          <span className="absolute -top-1.5 left-1.5">_</span>
+                            >
+                              +
+                            </div>
+                            <p className="font-bold text-grayFont">
+                              {navigation}
+                            </p>
+                            <div
+                              onClick={decNavigation}
+                              className={`text-grayFont border-gray-400 bg-white border rounded-md text-sm px-1 w-5 relative ${
+                                navigation === 0
+                                  ? "cursor-not-allowed text-gray-400"
+                                  : "cursor-pointer hover:bg-slate-200"
+                              } `}
+                            >
+                              &nbsp;
+                              <span className="absolute -top-1.5 left-1.5">
+                                _
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 items-center pl-4 border-b laptop:border-b-0 laptop:border-r">
-                    <div className="w-10 laptop:w-fit">
-                      <DriverIcon />
-                    </div>
-                    <div className="p-2 flex justify-between items-center w-full">
-                      <div className="flex flex-col text-grayFont">
-                        <p className="flex items-center text-[10px] font-bold gap-1">
-                          {t("additionalDriver").toUpperCase()}
-                          <InfoIcon className="text-primary" />
-                        </p>
-                        <p className="text-sm text-graySecondary">
-                          ${prices.driver.toFixed(2)}/{t("daily")}
-                        </p>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <div
-                          onClick={incDriver}
-                          className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center
+                      <div className="flex gap-2 items-center pl-4 border-b laptop:border-b-0 laptop:border-r">
+                        <div className="w-10 laptop:w-fit">
+                          <DriverIcon />
+                        </div>
+                        <div className="p-2 flex justify-between items-center w-full">
+                          <div className="flex flex-col text-grayFont">
+                            <p className="flex items-center text-[10px] font-bold gap-1">
+                              {t("additionalDriver").toUpperCase()}
+                              <InfoIcon className="text-primary" />
+                            </p>
+                            <p className="text-sm text-graySecondary">
+                              ${prices.driver.toFixed(2)}/{t("daily")}
+                            </p>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <div
+                              onClick={incDriver}
+                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center
                           ${
                             driver === 1
                               ? "cursor-not-allowed text-gray-400"
                               : "cursor-pointer hover:bg-slate-200"
                           }`}
-                        >
-                          +
-                        </div>
-                        <p className="font-bold text-grayFont">{driver}</p>
-                        <div
-                          onClick={decDriver}
-                          className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative *:${
-                            driver === 0
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          }`}
-                        >
-                          &nbsp;
-                          <span className="absolute -top-1.5 left-1.5">_</span>
+                            >
+                              +
+                            </div>
+                            <p className="font-bold text-grayFont">{driver}</p>
+                            <div
+                              onClick={decDriver}
+                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative *:${
+                                driver === 0
+                                  ? "cursor-not-allowed text-gray-400"
+                                  : "cursor-pointer hover:bg-slate-200"
+                              }`}
+                            >
+                              &nbsp;
+                              <span className="absolute -top-1.5 left-1.5">
+                                _
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 items-center pl-4">
-                    <div className="w-10 laptop:w-fit">
-                      <InsuranceIcon className="" />
-                    </div>
-                    <div className="p-2 flex justify-between items-center w-full">
-                      <div className="flex flex-col text-grayFont">
-                        <p className="flex items-center text-[10px] font-bold gap-1">
-                          {t("damageInsurance").toUpperCase()}
-                          <InfoIcon className="text-primary" />
-                        </p>
-                        <p className="text-sm text-graySecondary">
-                          ${prices.insurance.toFixed(2)}/{t("daily")}
-                        </p>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <div
-                          onClick={incInsurance}
-                          className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
+                      <div className="flex gap-2 items-center pl-4">
+                        <div className="w-10 laptop:w-fit">
+                          <InsuranceIcon className="" />
+                        </div>
+                        <div className="p-2 flex justify-between items-center w-full">
+                          <div className="flex flex-col text-grayFont">
+                            <p className="flex items-center text-[10px] font-bold gap-1">
+                              {t("damageInsurance").toUpperCase()}
+                              <InfoIcon className="text-primary" />
+                            </p>
+                            <p className="text-sm text-graySecondary">
+                              ${prices.insurance.toFixed(2)}/{t("daily")}
+                            </p>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <div
+                              onClick={incInsurance}
+                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
                           ${
                             insurance === 1
                               ? "cursor-not-allowed text-gray-400"
                               : "cursor-pointer hover:bg-slate-200"
                           }`}
-                        >
-                          +
-                        </div>
-                        <p className="font-bold text-grayFont">{insurance}</p>
-                        <div
-                          onClick={decInsurance}
-                          className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative 
+                            >
+                              +
+                            </div>
+                            <p className="font-bold text-grayFont">
+                              {insurance}
+                            </p>
+                            <div
+                              onClick={decInsurance}
+                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative 
                           ${
                             insurance === 0
                               ? "cursor-not-allowed text-gray-400"
                               : "cursor-pointer hover:bg-slate-200"
                           }`}
-                        >
-                          &nbsp;
-                          <span className="absolute -top-1.5 left-1.5">_</span>
+                            >
+                              &nbsp;
+                              <span className="absolute -top-1.5 left-1.5">
+                                _
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </TabsContent>
-              <TabsContent value="terms" className="text-grayFont px-8 pb-8">
-                <VehicleTerms />
-              </TabsContent>
-              <TabsContent value="specs" className="px-8 pb-8">
-                <VehicleSpecs translations={t} />
-              </TabsContent>
-              <TabsContent value="gallery">
-                <VehicleGallery />
-              </TabsContent>
-            </Tabs>
+                  </TabsContent>
+                  <TabsContent
+                    value="terms"
+                    className="text-grayFont px-8 pb-8"
+                  >
+                    <VehicleTerms />
+                  </TabsContent>
+                  <TabsContent value="specs" className="px-8 pb-8">
+                    <VehicleSpecs translations={t} allSpecifications={vehicle}/>
+                  </TabsContent>
+                  <TabsContent value="gallery">
+                    <VehicleGallery />
+                  </TabsContent>
+                </Tabs>
+              </>
+            ) : (
+              <div>loading</div>
+            )}
           </div>
           <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
             <div className="hidden laptop:block">
@@ -460,5 +509,8 @@ export default function VehicleDetails() {
         </div>
       </div>
     </div>
+    //   </>
+    // ) : (
+    //   <div>Loading...</div>
   );
 }

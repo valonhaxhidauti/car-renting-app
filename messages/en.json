@@ -317,6 +317,7 @@
         "gearType": "Gear Type",
         "passengerCapacity": "Passenger Capacity",
         "person": "Person",
+        "persons": "Persons",
         "modelYear": "Model Year",
         "engineType": "Engine Type",
         "fuelConsumption": "Fuel Consumption",
