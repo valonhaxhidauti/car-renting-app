@@ -9,45 +9,48 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import BookingInfo from "../common/bookingInfo";
 import {
   ChildSeatIcon,
   DriverIcon,
   InsuranceIcon,
   NavigationIcon,
 } from "@/assets/svgs";
-import BirthdaySelector from "../account/birthdaySelector";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/semantic-ui.css";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
-import BookingMobile from "../common/bookingMobile";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { VehiclePrices } from "@/lib/types";
-import dayjs from "dayjs";
 import { useCounter } from "../hooks/useCounter";
+import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
+import dayjs from "dayjs";
+import BirthdaySelector from "../account/birthdaySelector";
+import BookingInfo from "../common/bookingInfo";
+import BookingMobile from "../common/bookingMobile";
 import Image from "next/image";
-
-const prices: VehiclePrices = {
-  vehicle: 120.0,
-  childSeat: 24.0,
-  navigation: 15.5,
-  driver: 40.0,
-  insurance: 16.6,
-};
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/semantic-ui.css";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
   const u = useTranslations("VehicleDetails");
 
   const params = useCustomSearchParams();
+  const vehicleId = params.vehicleId;
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
   const daysDifference =
     dropOffDate.isValid() && pickupDate.isValid()
       ? dropOffDate.diff(pickupDate, "day") + 1
       : 1;
+
+  const vehicle = useFetchedVehicle(vehicleId);
+  const prices: VehiclePrices = {
+    vehicle: vehicle.attributes?.base_price_in_cents || 0.0,
+    childSeat: 24.0,
+    navigation: 15.5,
+    driver: 40.0,
+    insurance: 16.6,
+  };
 
   const [childSeat, incChildSeat, decChildSeat] = useCounter(0, 3);
   const [navigation, incNavigation, decNavigation] = useCounter(0, 1);
@@ -129,7 +132,7 @@ export default function VehiclePayment() {
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
                 <Link
-                  href={`/explore/1/?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                  href={`/explore/vehicle?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
                 >
                   {u("vehicleDetails")}
                 </Link>
@@ -276,93 +279,101 @@ export default function VehiclePayment() {
             <div className="hidden laptop:block">
               <BookingInfo border={true} />
             </div>
-            <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
-              <Image
-                src="/sampleCar.png"
-                alt="vehicle"
-                width="300"
-                height="150"
-                className="py-12 self-center"
-                priority
-              />
-              <div className="flex flex-col border-b border-borderGray pb-3">
-                <p className="text-xl font-bold">{u("pageTitle")}</p>
-                <p className="font-medium">Volvo XC90 Excellence</p>
-              </div>
-              <div className="flex justify-between text-sm border-b border-borderGray py-3">
-                <p className="font-bold">{u("vehicleValue")}</p>
-                <p className="font-bold text-primary">
-                  ${(prices.vehicle * daysDifference).toFixed(2)}
-                </p>
-              </div>
-              {optionalItemsTotal > 0 && (
-                <div className="flex flex-col border-b border-borderGray py-3 gap-2">
-                  <div className="flex justify-between text-sm">
-                    <p className="font-bold">{u("optionalItems")}</p>
-                    <p className="font-bold text-primary">
-                      ${optionalItemsTotal.toFixed(2)}
+            {vehicle && vehicle.attributes ? (
+              <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
+                <Image
+                  src="/sampleCar.png"
+                  alt="vehicle"
+                  width="300"
+                  height="150"
+                  className="py-12 self-center"
+                  priority
+                />
+                <div className="flex flex-col border-b border-borderGray pb-3">
+                  <p className="text-xl font-bold">{u("pageTitle")}</p>
+                  <p className="font-medium">
+                    {vehicle.attributes.name.split(" (")[0]}
+                  </p>
+                </div>
+                <div className="flex justify-between text-sm border-b border-borderGray py-3">
+                  <p className="font-bold">{u("vehicleValue")}</p>
+                  <p className="font-bold text-primary">
+                    ${(prices.vehicle * daysDifference).toFixed(2)}
+                  </p>
+                </div>
+                {optionalItemsTotal > 0 && (
+                  <div className="flex flex-col border-b border-borderGray py-3 gap-2">
+                    <div className="flex justify-between text-sm">
+                      <p className="font-bold">{u("optionalItems")}</p>
+                      <p className="font-bold text-primary">
+                        ${optionalItemsTotal.toFixed(2)}
+                      </p>
+                    </div>
+                    {optionalItems.map(
+                      (item) =>
+                        item.quantity > 0 && (
+                          <div
+                            key={item.name}
+                            className="flex justify-between text-xs"
+                          >
+                            <div className="w-14 flex justify-center">
+                              {item.icon}
+                            </div>
+                            <div className="flex justify-between w-full">
+                              <p className="font-light text-sm">{item.name}</p>
+                              <p className="font-light text-sm text-primary">
+                                $
+                                {(
+                                  item.quantity *
+                                  item.price *
+                                  daysDifference
+                                ).toFixed(2)}
+                              </p>
+                            </div>
+                          </div>
+                        )
+                    )}
+                  </div>
+                )}
+                <div className="py-3 border-b border-borderGray">
+                  <div className="flex justify-between items-center pb-2">
+                    <p className="font-light text-sm">{u("pricePer")}</p>
+                    <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
+                      {daysDifference} &nbsp;
+                      {daysDifference === 1
+                        ? u("day").toUpperCase()
+                        : u("days").toUpperCase()}
                     </p>
                   </div>
-                  {optionalItems.map(
-                    (item) =>
-                      item.quantity > 0 && (
-                        <div
-                          key={item.name}
-                          className="flex justify-between text-xs"
-                        >
-                          <div className="w-14 flex justify-center">
-                            {item.icon}
-                          </div>
-                          <div className="flex justify-between w-full">
-                            <p className="font-light text-sm">{item.name}</p>
-                            <p className="font-light text-sm text-primary">
-                              $
-                              {(
-                                item.quantity *
-                                item.price *
-                                daysDifference
-                              ).toFixed(2)}
-                            </p>
-                          </div>
-                        </div>
-                      )
-                  )}
+                  <div className="flex justify-between">
+                    <p className="font-bold">{u("totalValue")}</p>
+                    <p className="font-bold text-primary">
+                      ${totalPrice.toFixed(2)}
+                    </p>
+                  </div>
                 </div>
-              )}
-              <div className="py-3 border-b border-borderGray">
-                <div className="flex justify-between items-center pb-2">
-                  <p className="font-light text-sm">{u("pricePer")}</p>
-                  <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
-                    {daysDifference} &nbsp;
-                    {daysDifference === 1
-                      ? u("day").toUpperCase()
-                      : u("days").toUpperCase()}
-                  </p>
-                </div>
-                <div className="flex justify-between">
-                  <p className="font-bold">{u("totalValue")}</p>
-                  <p className="font-bold text-primary">
-                    ${totalPrice.toFixed(2)}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-2 border-primary border">
-                <div className="py-10 flex flex-col items-center">
-                  <p className="text-primary font-medium">Total Price</p>
-                  <div className="text-3xl text-primary">
-                    <sup className="text-xl font-bold -top-0.5">$</sup>
-                    <span className="text-5xl font-bold">
-                      {Math.floor(totalPrice)}
-                    </span>
-                    <span className="inline-block text-2xl">
-                      <sub className="relative block leading-none font-bold bottom-5">
-                        ,{getDecimalPart(totalPrice)}
-                      </sub>
-                    </span>
+                <div className="mt-2 border-primary border">
+                  <div className="py-10 flex flex-col items-center">
+                    <p className="text-primary font-medium">Total Price</p>
+                    <div className="text-3xl text-primary">
+                      <sup className="text-xl font-bold -top-0.5">$</sup>
+                      <span className="text-5xl font-bold">
+                        {Math.floor(totalPrice)}
+                      </span>
+                      <span className="inline-block text-2xl">
+                        <sub className="relative block leading-none font-bold bottom-5">
+                          ,{getDecimalPart(totalPrice)}
+                        </sub>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex flex-col w-full bg-white p-4">
+                <p className="text-grayFont text-sm">loading..</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

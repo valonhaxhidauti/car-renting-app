@@ -23,25 +23,17 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCounter } from "../hooks/useCounter";
 import { useTranslations } from "next-intl";
+import { Link } from "next-view-transitions";
+import { VehiclePrices } from "@/lib/types";
+import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
+import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
 import Image from "next/image";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
 import BookingInfo from "../common/bookingInfo";
+import BookingMobile from "../common/bookingMobile";
 import VehicleTerms from "./vehicleTerms";
 import dayjs from "dayjs";
-import { Link } from "next-view-transitions";
-import { VehiclePrices } from "@/lib/types";
-import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
-import BookingMobile from "../common/bookingMobile";
-import { useEffect, useState } from "react";
-
-const prices: VehiclePrices = {
-  vehicle: 120.0,
-  childSeat: 24.0,
-  navigation: 15.5,
-  driver: 40.0,
-  insurance: 16.6,
-};
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
@@ -55,30 +47,15 @@ export default function VehicleDetails() {
       ? dropOffDate.diff(pickupDate, "day") + 1
       : 1;
 
-  const [vehicle, setVehicle] = useState<any>({});
+  const vehicle = useFetchedVehicle(vehicleId);
 
-  useEffect(() => {
-    const fetchVehicle = async () => {
-      try {
-        const url = new URL(`https://rent-api.rubik.dev/api/cars/${vehicleId}`);
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        });
-        const data = await response.json();
-        console.log(data.data);
-        setVehicle(data.data);
-      } catch (error) {
-        console.error("Error fetching vehicles:", error);
-      }
-    };
-
-    fetchVehicle();
-  }, []);
-
+  const prices: VehiclePrices = {
+    vehicle: vehicle.attributes?.base_price_in_cents || 0.0,
+    childSeat: 24.0,
+    navigation: 15.5,
+    driver: 40.0,
+    insurance: 16.6,
+  };
   const [childSeat, incChildSeat, decChildSeat] = useCounter(0, 3);
   const [navigation, incNavigation, decNavigation] = useCounter(0, 1);
   const [driver, incDriver, decDriver] = useCounter(0, 1);
@@ -421,7 +398,10 @@ export default function VehicleDetails() {
                     <VehicleTerms />
                   </TabsContent>
                   <TabsContent value="specs" className="px-8 pb-8">
-                    <VehicleSpecs translations={t} allSpecifications={vehicle}/>
+                    <VehicleSpecs
+                      translations={t}
+                      allSpecifications={vehicle}
+                    />
                   </TabsContent>
                   <TabsContent value="gallery">
                     <VehicleGallery />
@@ -499,7 +479,7 @@ export default function VehicleDetails() {
                 </div>
               </div>
               <Link
-                href={`/explore/1/payment?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                href={`/explore/vehicle/payment?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
                 className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
               >
                 {t("continueButton")}
@@ -509,8 +489,5 @@ export default function VehicleDetails() {
         </div>
       </div>
     </div>
-    //   </>
-    // ) : (
-    //   <div>Loading...</div>
   );
 }
