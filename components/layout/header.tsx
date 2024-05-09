@@ -323,7 +323,6 @@ export default function Header({
                 {t("loginRegister")}
               </Link>
             )}
-
             <LanguageSelector
               isOpen={isOpen}
               triggerClass={`${

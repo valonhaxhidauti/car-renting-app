@@ -15,7 +15,6 @@ export function useFetchedVehicle(vehicleId: string) {
           },
         });
         const data = await response.json();
-        console.log(data.data);
         setVehicle(data.data);
       } catch (error) {
         console.error("Error fetching vehicles:", error);

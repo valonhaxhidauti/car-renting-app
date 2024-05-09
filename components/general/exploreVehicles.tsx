@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "../ui/breadcrumb";
 import { Link } from "next-view-transitions";
 import {
   Select,
@@ -18,6 +18,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
@@ -48,11 +57,14 @@ export default function ExploreVehicles() {
     links: {},
     meta: {},
   });
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        const url = new URL("https://rent-api.rubik.dev/api/cars");
+        const url = new URL(
+          `https://rent-api.rubik.dev/api/cars?page=${currentPage}`
+        );
         const response = await fetch(url, {
           method: "GET",
           headers: {
@@ -61,7 +73,6 @@ export default function ExploreVehicles() {
           },
         });
         const data = await response.json();
-        console.log(data);
         setVehicles(data);
       } catch (error) {
         console.error("Error fetching vehicles:", error);
@@ -69,7 +80,13 @@ export default function ExploreVehicles() {
     };
 
     fetchVehicles();
-  }, []);
+  }, [currentPage]);
+
+  const totalPages = vehicles.meta.last_page;
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   const [showFilters, setShowFilters] = useState(false);
   const [showFiltersAnimation, setShowFiltersAnimation] = useState(false);
@@ -244,20 +261,51 @@ export default function ExploreVehicles() {
           </div>
         </div>
         <div className="flex gap-4 mobile:mx-8 bigDesktop:mx-0">
-          <div
-            className={`w-full laptop:w-4/5 gap-4 ${
-              viewMode === "list"
-                ? "flex flex-col"
-                : "grid grid-cols-1 tablet:grid-cols-2"
-            }`}
-          >
-            {vehicles.data.map((vehicle: any) => (
-              <VehicleCard
-                viewMode={viewMode}
-                vehicle={vehicle}
-                key={vehicle.id}
-              />
-            ))}
+          <div className="flex flex-col w-full laptop:w-4/5 gap-4">
+            <div
+              className={`w-full gap-4 ${
+                viewMode === "list"
+                  ? "flex flex-col"
+                  : "grid grid-cols-1 tablet:grid-cols-2"
+              }`}
+            >
+              {vehicles.data.map((vehicle: any) => (
+                <VehicleCard
+                  viewMode={viewMode}
+                  vehicle={vehicle}
+                  key={vehicle.id}
+                />
+              ))}
+            </div>
+            <Pagination className="self-center">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  // href="#"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  // disabled={currentPage === 1}
+                />
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <PaginationItem key={index}>
+                  <PaginationLink
+                    // href="#"
+                    isActive={index + 1 === currentPage}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  // href="#"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  // disabled={currentPage === totalPages}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
           </div>
           <div className="w-1/5 flex-col h-full gap-4 hidden laptop:flex">
             <BookingInfo border={true} />

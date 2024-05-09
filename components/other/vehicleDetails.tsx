@@ -416,75 +416,81 @@ export default function VehicleDetails() {
             <div className="hidden laptop:block">
               <BookingInfo border={true} />
             </div>
-            <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
-              <div className="flex flex-col border-b border-borderGray pb-3">
-                <p className="text-xl font-bold">{t("pageTitle")}</p>
-                <p className="font-medium">Volvo XC90 Excellence</p>
-              </div>
-              <div className="flex justify-between text-sm border-b border-borderGray py-3">
-                <p className="font-bold">{t("vehicleValue")}</p>
-                <p className="font-bold text-primary">
-                  ${(prices.vehicle * daysDifference).toFixed(2)}
-                </p>
-              </div>
-              {optionalItemsTotal > 0 && (
-                <div className="flex flex-col border-b border-borderGray py-3 gap-2">
-                  <div className="flex justify-between text-sm">
-                    <p className="font-bold">{t("optionalItems")}</p>
-                    <p className="font-bold text-primary">
-                      ${optionalItemsTotal.toFixed(2)}
+            {vehicle && vehicle.attributes ? (
+              <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
+                <div className="flex flex-col border-b border-borderGray pb-3">
+                  <p className="text-xl font-bold">{t("pageTitle")}</p>
+                  <p className="font-medium">
+                    {vehicle.attributes.name.split(" (")[0]}
+                  </p>
+                </div>
+                <div className="flex justify-between text-sm border-b border-borderGray py-3">
+                  <p className="font-bold">{t("vehicleValue")}</p>
+                  <p className="font-bold text-primary">
+                    ${(prices.vehicle * daysDifference).toFixed(2)}
+                  </p>
+                </div>
+                {optionalItemsTotal > 0 && (
+                  <div className="flex flex-col border-b border-borderGray py-3 gap-2">
+                    <div className="flex justify-between text-sm">
+                      <p className="font-bold">{t("optionalItems")}</p>
+                      <p className="font-bold text-primary">
+                        ${optionalItemsTotal.toFixed(2)}
+                      </p>
+                    </div>
+                    {optionalItems.map(
+                      (item) =>
+                        item.quantity > 0 && (
+                          <div
+                            key={item.name}
+                            className="flex justify-between text-xs"
+                          >
+                            <div className="w-14 flex justify-center">
+                              {item.icon}
+                            </div>
+                            <div className="flex justify-between w-full">
+                              <p className="font-light text-sm">{item.name}</p>
+                              <p className="font-light text-sm text-primary">
+                                $
+                                {(
+                                  item.quantity *
+                                  item.price *
+                                  daysDifference
+                                ).toFixed(2)}
+                              </p>
+                            </div>
+                          </div>
+                        )
+                    )}
+                  </div>
+                )}
+                <div className="py-3">
+                  <div className="flex justify-between items-center pb-2">
+                    <p className="font-light text-sm">{t("pricePer")}</p>
+                    <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
+                      {daysDifference} &nbsp;
+                      {daysDifference === 1
+                        ? t("day").toUpperCase()
+                        : t("days").toUpperCase()}
                     </p>
                   </div>
-                  {optionalItems.map(
-                    (item) =>
-                      item.quantity > 0 && (
-                        <div
-                          key={item.name}
-                          className="flex justify-between text-xs"
-                        >
-                          <div className="w-14 flex justify-center">
-                            {item.icon}
-                          </div>
-                          <div className="flex justify-between w-full">
-                            <p className="font-light text-sm">{item.name}</p>
-                            <p className="font-light text-sm text-primary">
-                              $
-                              {(
-                                item.quantity *
-                                item.price *
-                                daysDifference
-                              ).toFixed(2)}
-                            </p>
-                          </div>
-                        </div>
-                      )
-                  )}
+                  <div className="flex justify-between">
+                    <p className="font-bold">{t("totalValue")}</p>
+                    <p className="font-bold text-primary">
+                      ${totalPrice.toFixed(2)}
+                    </p>
+                  </div>
                 </div>
-              )}
-              <div className="py-3">
-                <div className="flex justify-between items-center pb-2">
-                  <p className="font-light text-sm">{t("pricePer")}</p>
-                  <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
-                    {daysDifference} &nbsp;
-                    {daysDifference === 1
-                      ? t("day").toUpperCase()
-                      : t("days").toUpperCase()}
-                  </p>
-                </div>
-                <div className="flex justify-between">
-                  <p className="font-bold">{t("totalValue")}</p>
-                  <p className="font-bold text-primary">
-                    ${totalPrice.toFixed(2)}
-                  </p>
-                </div>
+                <Link
+                  href={`/explore/vehicle/payment?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                  className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
+                >
+                  {t("continueButton")}
+                </Link>
               </div>
-              <Link
-                href={`/explore/vehicle/payment?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
-                className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
-              >
-                {t("continueButton")}
-              </Link>
-            </div>
+            ) : (
+              <div>loading</div>
+            )}
           </div>
         </div>
       </div>

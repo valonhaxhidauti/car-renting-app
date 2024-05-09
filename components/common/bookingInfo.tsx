@@ -12,7 +12,6 @@ export default function BookingInfo({
 }) {
   const t = useTranslations("ExploreVehicles");
   const params = useCustomSearchParams();
-  console.log(params);
 
   return (
     <div

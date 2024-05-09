@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-} from "../ui/select"
+} from "../ui/select";
 import { ChevronDown } from "lucide-react";
 import { FlagDeIcon, FlagUkIcon } from "@/assets/svgs";
 
@@ -23,27 +23,36 @@ export default function LanguageSelector({
 }) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const localActive = useLocale();
+  const activeLocale = useLocale();
   const pathname = usePathname();
-  
+
   function onSelectChange(nextLocale: string) {
     startTransition(() => {
-      const newPathname = pathname.replace(`/${localActive}`, `/${nextLocale}`);
-      router.replace(newPathname);
+      const url = new URL(window.location.href);
+      const searchParams = new URLSearchParams(url.search);
+      const newPathname = pathname.replace(
+        `/${activeLocale}`,
+        `/${nextLocale}`
+      );
+      const newUrl = `${
+        window.location.origin
+      }${newPathname}?${searchParams.toString()}`;
+
+      router.replace(newUrl);
     });
   }
-  
+
   const t = useTranslations("Header");
 
   return (
     <>
       <Select
         onValueChange={onSelectChange}
-        defaultValue={localActive}
+        defaultValue={activeLocale}
         disabled={isPending}
       >
         <SelectTrigger className={triggerClass}>
-          {localActive === "en" ? <FlagUkIcon /> : <FlagDeIcon />}
+          {activeLocale === "en" ? <FlagUkIcon /> : <FlagDeIcon />}
           <ChevronDown className={`${isOpen ? "text-white" : ""} h-4 w-4`} />
         </SelectTrigger>
         <SelectContent className="bg-white">
