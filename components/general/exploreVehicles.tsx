@@ -47,10 +47,12 @@ import { useEffect, useState } from "react";
 import VehicleFilters from "../common/vehicleFilters";
 import BookingInfo from "../common/bookingInfo";
 import { VehicleData } from "@/lib/types";
+import { Skeleton } from "../ui/skeleton";
 
 export default function ExploreVehicles() {
   const t = useTranslations("Header");
   const u = useTranslations("ExploreVehicles");
+  const [loading, setLoading] = useState(true);
 
   const [vehicles, setVehicles] = useState<VehicleData>({
     data: [],
@@ -74,8 +76,10 @@ export default function ExploreVehicles() {
         });
         const data = await response.json();
         setVehicles(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching vehicles:", error);
+        setLoading(false); 
       }
     };
 
@@ -269,43 +273,69 @@ export default function ExploreVehicles() {
                   : "grid grid-cols-1 tablet:grid-cols-2"
               }`}
             >
-              {vehicles.data.map((vehicle: any) => (
-                <VehicleCard
-                  viewMode={viewMode}
-                  vehicle={vehicle}
-                  key={vehicle.id}
-                />
-              ))}
+              {loading
+                ? Array.from({ length: 12 }, (_, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col bg-white p-4 gap-4"
+                    >
+                      <Skeleton className="h-[196px] w-full" />
+                      <div className="flex gap-2 w-full">
+                        <div className="flex flex-col gap-2 w-[60%] mobile:w-[70%]">
+                          <div className="flex flex-col gap-2">
+                            <Skeleton className="h-8 w-full" />
+                            <Skeleton className="h-8 w-full" />
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                              <Skeleton className="h-[78px] w-full" />
+                              <Skeleton className="h-[78px] w-full" />
+                              <Skeleton className="h-[78px] w-full" />
+                              <Skeleton className="h-[78px] w-full" />
+                          </div>
+                        </div>
+                        <div className="w-[40%] mobile:w-[29%]">
+                          <Skeleton className="h-full w-full" />
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                : vehicles.data.map((vehicle: any) => (
+                    <VehicleCard
+                      viewMode={viewMode}
+                      vehicle={vehicle}
+                      key={vehicle.id}
+                    />
+                  ))}
             </div>
             <Pagination className="self-center">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  // href="#"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  // disabled={currentPage === 1}
-                />
-              </PaginationItem>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
                     // href="#"
-                    isActive={index + 1 === currentPage}
-                    onClick={() => handlePageChange(index + 1)}
-                  >
-                    {index + 1}
-                  </PaginationLink>
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    // disabled={currentPage === 1}
+                  />
                 </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationNext
-                  // href="#"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  // disabled={currentPage === totalPages}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <PaginationItem key={index}>
+                    <PaginationLink
+                      // href="#"
+                      isActive={index + 1 === currentPage}
+                      onClick={() => handlePageChange(index + 1)}
+                    >
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext
+                    // href="#"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    // disabled={currentPage === totalPages}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
           <div className="w-1/5 flex-col h-full gap-4 hidden laptop:flex">
             <BookingInfo border={true} />

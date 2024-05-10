@@ -1,4 +1,5 @@
 import {
+  EngineIcon,
   FuelIcon,
   SearchIcon,
   SeatIcon,
@@ -6,7 +7,6 @@ import {
   WarningIcon,
 } from "@/assets/svgs";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
-import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
@@ -66,28 +66,28 @@ export default function VehicleCard({
               </div>
               <div className="border-borderGray border-b flex w-full">
                 <div className="flex w-full">
-                  <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 justify-between items-center border-r">
+                  <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
                     <FuelIcon className="text-graySecondary" />
                     <p className="text-sm leading-none font-bold text-center">
                       {vehicle.relationships.fuelType.attributes.name}
                     </p>
                   </div>
-                  <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 justify-between items-center border-r">
+                  <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
                     <TransmissionIcon className="text-graySecondary" />
                     <p className="text-sm leading-none font-bold text-center">
                       {vehicle.relationships.gearType.attributes.name}
                     </p>
                   </div>
-                  <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 justify-between items-center border-r">
+                  <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
                     <SeatIcon className="text-graySecondary" />
                     <p className="text-sm leading-none font-bold text-center">
-                      {vehicle.attributes.seat_capacity} PERSONS
+                      {vehicle.attributes.seat_capacity} {t("persons")}
                     </p>
                   </div>
-                  <div className="text-primary p-4 w-1/4 flex flex-col justify-between items-center gap-2">
-                    <ChevronRight size={14} />
-                    <p className="text-sm leading-none text-center">
-                      {t("viewAllSpecs")}
+                  <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center">
+                    <EngineIcon className="text-graySecondary" />
+                    <p className="text-sm leading-none font-bold text-center">
+                      {vehicle.attributes.engine_displacement_in_metric_cubic}
                     </p>
                   </div>
                 </div>
@@ -178,13 +178,13 @@ export default function VehicleCard({
                 <div className="text-grayFont p-4 w-full flex flex-col gap-2 justify-between items-center border-r">
                   <SeatIcon className="text-graySecondary" />
                   <p className="text-sm leading-none font-bold text-center">
-                    {vehicle.attributes.seat_capacity} PERSONS
+                    {vehicle.attributes.seat_capacity} {t("persons")}
                   </p>
                 </div>
-                <div className="text-primary p-4 w-full flex flex-col justify-between items-center gap-2">
-                  <ChevronRight size={14} />
-                  <p className="text-sm leading-none text-center">
-                    {t("viewAllSpecs")}
+                <div className="text-grayFont p-4 w-full flex flex-col gap-2 justify-between items-center">
+                  <EngineIcon className="text-graySecondary" />
+                  <p className="text-sm leading-none font-bold text-center">
+                    {vehicle.attributes.year}
                   </p>
                 </div>
               </div>

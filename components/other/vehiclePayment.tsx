@@ -29,6 +29,7 @@ import BookingMobile from "../common/bookingMobile";
 import Image from "next/image";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
+import { Skeleton } from "../ui/skeleton";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
@@ -370,8 +371,14 @@ export default function VehiclePayment() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col w-full bg-white p-4">
-                <p className="text-grayFont text-sm">loading..</p>
+              <div className="flex flex-col bg-white p-4 w-full h-fit gap-2">
+                <Skeleton className="h-48 w-full" />
+                <Skeleton className="h-6 w-1/2" />
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-4 my-1 w-full" />
+                <Skeleton className="h-4 mt-1 w-full" />
+                <Skeleton className="h-4 mb-1 w-full" />
+                <Skeleton className="h-40 w-full" />
               </div>
             )}
           </div>
