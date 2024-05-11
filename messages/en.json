@@ -363,5 +363,16 @@
             "Plug-in Hybrid (PHEV)": "Plug-in Hybrid (PHEV)",
             "Hydrogen Fuel Cell": "Hydrogen Fuel Cell"
         }
+    },
+    "VerifyEmail": {
+        "breadcrumb": {
+            "homepage": "Homepage"
+        },
+        "heading": "Verify Email",
+        "emailVerification": {
+            "title": "Email Verification",
+            "verificationFailed": "Email verification failed!",
+            "verifiedEmail": "Email that got verified:"
+        }
     }
 }

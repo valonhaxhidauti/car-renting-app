@@ -67,3 +67,7 @@
 .flicking-arrow-disabled::after {
   background-color: hsl(var(--borderGray)) !important;
 }
+
+.w-60 input:placeholder-shown {
+  text-overflow: ellipsis;
+}
