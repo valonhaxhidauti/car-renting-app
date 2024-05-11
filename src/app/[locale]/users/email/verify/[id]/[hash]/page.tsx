@@ -77,7 +77,8 @@ export default function VerifyEmail({
               </h1>
               {loading ? (
                 <div className="flex flex-col gap-2 w-full">
-                  <Skeleton className="h-6 rounded-md w-60" />
+                  <Skeleton className="h-4 w-48" />
+                  <Skeleton className="h-10 rounded-md w-60" />
                 </div>
               ) : (
                 <>
