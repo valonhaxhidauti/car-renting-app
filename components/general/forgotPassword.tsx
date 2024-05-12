@@ -86,7 +86,7 @@ export default function ForgotPassword() {
                       required
                       value={formData}
                       onChange={(e) => handleInputChange(e.target.value)}
-                      className="rounded-sm mt-2 mobile:w-80 border-zinc-300 border px-3 py-2 text-grayFont focus-visible:outline-primary"
+                      className="rounded-sm mt-2 w-[304px]  border-zinc-300 border px-3 py-2 text-grayFont focus-visible:outline-primary"
                     />
                   </div>
                   <CheckIcon
