@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   Select,
   SelectContent,
@@ -21,10 +21,25 @@ export default function LanguageSelector({
   isOpen: boolean;
   triggerClass: string;
 }) {
+  const t = useTranslations("Header");
+
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const activeLocale = useLocale();
   const pathname = usePathname();
+  const [shown, setShown] = useState(false); 
+  
+  useEffect(() => {
+    if (shown) {
+      document.body.style.setProperty('overflow-y', 'auto', 'important');
+    } else {
+      document.body.style.removeProperty('overflow-y');
+    }
+  }, [shown]);
+
+  function onSelectClicked(){
+    setShown(!shown)
+  }
 
   function onSelectChange(nextLocale: string) {
     startTransition(() => {
@@ -42,13 +57,13 @@ export default function LanguageSelector({
     });
   }
 
-  const t = useTranslations("Header");
 
   return (
     <>
       <Select
         onValueChange={onSelectChange}
         defaultValue={activeLocale}
+        onOpenChange={onSelectClicked}
         disabled={isPending}
       >
         <SelectTrigger className={triggerClass}>

@@ -26,7 +26,7 @@ export default function VehicleCard({
       <div className="w-full p-2 flex gap-8">
         <Image
           src="/sampleCar.png"
-          alt="vehicle"
+          alt={vehicle.attributes.name.split(" (")[0]}
           width="240"
           height="120"
           className="py-12"
@@ -136,7 +136,7 @@ export default function VehicleCard({
           </div>
           <Image
             src="/sampleCar.png"
-            alt="vehicle"
+            alt={vehicle.attributes.name.split(" (")[0]}
             width="200"
             height="100"
             className="py-12"

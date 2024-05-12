@@ -35,10 +35,21 @@ export default function Header({
   background: boolean;
   fixed: boolean;
 }) {
+  const t = useTranslations("Header");
   const u = useTranslations("Account.sideMenu");
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [authenticated, setAuthenticated] = useState<string | null>(null);
+  const [shown, setShown] = useState(false); 
+  
+  useEffect(() => {
+    if (shown) {
+      document.body.style.setProperty('overflow-y', 'auto', 'important');
+    } else {
+      document.body.style.removeProperty('overflow-y');
+    }
+  }, [shown]);
 
   useEffect(() => {
     const authValue = window.localStorage.getItem("authenticated");
@@ -56,8 +67,9 @@ export default function Header({
     setIsOpen(!isOpen);
   };
 
-  const t = useTranslations("Header");
-
+  function onSelectClicked(){
+    setShown(!shown)
+  }
   return (
     <>
       <nav
@@ -76,7 +88,7 @@ export default function Header({
         />
         <div className="flex flex-col text-white justify-center relative items-center tablet:items-end w-full h-full gap-2 tablet:gap-4 max-w-[1440px] m-auto">
           {authenticated ? (
-            <Select>
+            <Select onOpenChange={onSelectClicked}>
               <SelectTrigger
                 className={`text-white border-borderGray border w-fit gap-4 flex tablet:hidden font-bold h-[34px] px-6 items-center rounded-full`}
               >
@@ -213,7 +225,7 @@ export default function Header({
                 <LogoMenu />
               </Link>
             ) : (
-              <Link href="/">{background ? <LogoLight /> : <Logo />}</Link>
+              <Link aria-label="homepage" href="/">{background ? <LogoLight /> : <Logo />}</Link>
             )}
             <div
               className={
@@ -265,7 +277,7 @@ export default function Header({
               </Select>
             )}
             {authenticated ? (
-              <Select>
+              <Select onOpenChange={onSelectClicked}>
                 <SelectTrigger
                   className={`${
                     isOpen

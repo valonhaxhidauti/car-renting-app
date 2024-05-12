@@ -29,6 +29,11 @@ export interface UpdateFormValues {
   password: string;
 }
 
+export interface ResetPasswordValues {
+  password: string;
+  passwordConfirm: string;
+}
+
 export interface Filters {
   gearType: any[];
   fuelType: any[];

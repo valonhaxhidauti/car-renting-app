@@ -85,8 +85,7 @@ export default function RentForm({
     }
     if (isHomePage) {
       router.push(`/explore?${queryParams}`);
-    }
-    else {
+    } else {
       router.push(`?${queryParams}`);
     }
   };
@@ -103,21 +102,22 @@ export default function RentForm({
         onClick={toggleModal}
       />
       <div
-        className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards	${
+        className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards rounded	${
           showModal ? "animate-show-overlay" : "hidden"
         }`}
         onClick={toggleModal}
       ></div>
       <div
-        className={`fixed z-50 max-w-lg bg-white w-[90vw] top-1/2 right-1/2 p-8 translate-x-1/2 -translate-y-1/2 ${
+        className={`fixed z-50 max-w-lg bg-white w-[90vw] top-1/2 right-1/2 p-8 translate-x-1/2 -translate-y-1/2 rounded-xl ${
           showModal ? "block" : "hidden"
         }`}
       >
         <div className="w-full text-xl text-center">{t("search")}</div>
-        <X
-          className="absolute top-4 right-4 cursor-pointer"
-          onClick={toggleModal}
-        />
+        <div className="absolute top-4 right-4 rounded-full p-2 flex hover:bg-neutral-100 active:bg-neutral-200 cursor-pointer">
+          <X
+            onClick={toggleModal}
+          />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full desktop:rounded-none">
             <div className="flex flex-col w-full gap-2">
@@ -321,6 +321,7 @@ export default function RentForm({
             </div>
             <button
               type="submit"
+              aria-label="Search"
               className="w-fit mt-4 flex items-center justify-center bg-primary hover:bg-secondary text-white px-10 py-2 transition"
             >
               <SearchIcon className="w-5 h-5" />

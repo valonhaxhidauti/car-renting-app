@@ -27,6 +27,7 @@ import { Link } from "next-view-transitions";
 import { VehiclePrices } from "@/lib/types";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
+import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
@@ -34,7 +35,6 @@ import BookingInfo from "../common/bookingInfo";
 import BookingMobile from "../common/bookingMobile";
 import VehicleTerms from "./vehicleTerms";
 import dayjs from "dayjs";
-import { Skeleton } from "../ui/skeleton";
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
@@ -139,7 +139,7 @@ export default function VehicleDetails() {
                   <div className="p-4 flex flex-col mobile:flex-row mobile:gap-8 w-full">
                     <Image
                       src="/sampleCar.png"
-                      alt="vehicle"
+                      alt={vehicle.attributes.name.split(" (")[0]}
                       width="300"
                       height="150"
                       className="py-12 self-center mobile:self-start"

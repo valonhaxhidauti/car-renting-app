@@ -66,11 +66,12 @@
             "month": "Monat",
             "year": "Jahr"
         },
+        "emailSent": "Weitere anweisungen zum zurücksetzen ihres passworts finden sie in ihrem Email posteingang.",
         "passwordReset": {
             "title": "Passwort vergessen?",
             "description1": "Geben Sie Ihre registrierte E-Mail-Adresse ein, um ein neues Passwort festzulegen.",
             "description2": "Wir senden Ihnen den Link zur Passwortänderung an Ihre E-Mail-Adresse.",
-            "emailLabel": "E-Mail-Adresse",
+            "emailLabel": "Email ",
             "passwordResetButton": "Passwort zurücksetzen"
         },
         "register": {
@@ -274,6 +275,23 @@
         },
         "search": "Suche"
     },
+    "ResetPassword": {
+        "heading": "Passwort zurücksetzen",
+        "breadcrumb": {
+            "homepage": "Startseite"
+        },
+        "title": "Passwort zurücksetzen",
+        "email": "Email",
+        "confirmPassword": "Passwort bestätigen",
+        "newPassword": "Neues Passwort",
+        "resetPassword": "Passwort zurücksetzen",
+        "validation": {
+            "passwordRequired": "Passwort ist erforderlich",
+            "passwordWeak": "Passwort ist nicht stark genug",
+            "passwordsNotMatched": "Passwörter stimmen nicht überein",
+            "passwordConfirmRequired": "Passwort bestätigen"
+        }
+    },
     "SideMenu": {
         "pages": "Seiten",
         "about": "Über uns",
@@ -349,7 +367,7 @@
         },
         "gearType": {
             "title": "Getriebetyp",
-            "Manual": "Manuell",
+            "Manual": "Schaltgetriebe",
             "Automatic": "Automatisch",
             "Semi-Automatic": "Halbautomatisch",
             "Dual-Clutch Automatic (DCT)": "Doppelkupplungsgetriebe (DCT)"
@@ -372,7 +390,7 @@
         "emailVerification": {
             "title": "Email Verifizierung",
             "verificationFailed": "Email verifizierung fehlgeschlagen!",
-            "verifiedEmail": "Email, die verifiziert wurde:"
+            "verifiedEmail": "Email erfolgreich verifiziert!"
         }
     }
 }

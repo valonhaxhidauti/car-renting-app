@@ -22,6 +22,7 @@ import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { VehiclePrices } from "@/lib/types";
 import { useCounter } from "../hooks/useCounter";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
+import { Skeleton } from "../ui/skeleton";
 import dayjs from "dayjs";
 import BirthdaySelector from "../account/birthdaySelector";
 import BookingInfo from "../common/bookingInfo";
@@ -29,7 +30,6 @@ import BookingMobile from "../common/bookingMobile";
 import Image from "next/image";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
-import { Skeleton } from "../ui/skeleton";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
@@ -284,7 +284,7 @@ export default function VehiclePayment() {
               <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
                 <Image
                   src="/sampleCar.png"
-                  alt="vehicle"
+                  alt={vehicle.attributes.name.split(" (")[0]}
                   width="300"
                   height="150"
                   className="py-12 self-center"

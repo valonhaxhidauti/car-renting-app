@@ -1,15 +1,16 @@
 "use client";
 
-import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { LoginFormValues } from "@/lib/types";
 import {
   LoginFormValidation,
   isEmailValid,
   isPasswordValid,
 } from "../utils/formValidations";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Link } from "next-view-transitions";
+import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
+import { useTranslations } from "next-intl";
+import { LoginFormValues } from "@/lib/types";
 
 interface FormValues {
   email: string;
@@ -123,8 +124,8 @@ export default function LoginForm() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className={`block w-full rounded-sm border-zinc-300 border p-4 text-grayFont focus-visible:outline-primary pr-8 ${
-                      errors.email && "outline outline-2 outline-red-500"
+                    className={`block w-full rounded-sm text-grayFont p-4 focus-visible:outline-primary pr-8 ${
+                      errors.email ? "outline outline-2 outline-red-500" : "border-zinc-300 border"
                     }`}
                   />
                   <CheckIcon
@@ -152,8 +153,8 @@ export default function LoginForm() {
                       onChange={(e) =>
                         handleInputChange("password", e.target.value)
                       }
-                      className={`block w-full rounded-sm border-zinc-300 border p-4 text-grayFont focus-visible:outline-primary pr-8 ${
-                        errors.password && "outline outline-2 outline-red-500"
+                      className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8 ${
+                        errors.password ? "outline outline-2 outline-red-500" : "border-zinc-300 border"
                       }`}
                     />
                     <CheckIcon
@@ -174,12 +175,12 @@ export default function LoginForm() {
               </div>
               <div className="flex justify-between items-center">
                 <div className="text-sm">
-                  <a
-                    href="/account/password-reset"
+                  <Link
+                    href="/account/forgot-password"
                     className="font-bold text-grayFont hover:underline"
                   >
                     {t("login.forgotPassword")}
-                  </a>
+                  </Link>
                 </div>
                 <button
                   type="submit"

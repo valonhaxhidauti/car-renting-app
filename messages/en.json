@@ -66,11 +66,12 @@
             "month": "Month",
             "year": "Year"
         },
+        "emailSent": "Please check your email inbox for further instructions on how to reset your password.",
         "passwordReset": {
             "title": "Forgot Your Password?",
             "description1": "Enter your registered email address to set a new password.",
             "description2": "We will send the password change link to your email address.",
-            "emailLabel": "E-mail Address",
+            "emailLabel": "Email",
             "passwordResetButton": "Password Reset"
         },
         "register": {
@@ -274,6 +275,23 @@
         },
         "search": "Search"
     },
+    "ResetPassword": {
+        "heading": "Reset Password",
+        "breadcrumb": {
+            "homepage": "Homepage"
+        },
+        "title": "Password Resetting",
+        "email": "Email",
+        "confirmPassword": "Confirm Password",
+        "newPassword": "New Password",
+        "resetPassword": "Reset Password",
+        "validation": {
+            "passwordRequired": "Password is required",
+            "passwordWeak": "Password is not strong enough",
+            "passwordsNotMatched": "Passwords are not matched",
+            "passwordConfirmRequired": "Confirm password"
+        }
+    },
     "SideMenu": {
         "pages": "Pages",
         "about": "About Us",
@@ -372,7 +390,7 @@
         "emailVerification": {
             "title": "Email Verification",
             "verificationFailed": "Email verification failed!",
-            "verifiedEmail": "Email that got verified:"
+            "verifiedEmail": "Email successfully verified!"
         }
     }
 }

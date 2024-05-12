@@ -58,11 +58,11 @@ export default function CarAdvertisement() {
           </p>
           <div className="flex gap-4 text-[10px]">
             <span className="flex gap-1 items-center">
-              <FuelIcon />
+              <FuelIcon className="h-6 w-6"/>
               {fuelTypeText}
             </span>
             <span className="flex gap-1 items-center">
-              <TransmissionIcon />
+              <TransmissionIcon className="h-6 w-6"/>
               {ADVERTISEMENT_DATA.transmissionType === ("Automatic" || "Automatik") 
                 ? t("carDetails.transmissionType.automaticTransmission")
                 : t("carDetails.transmissionType.manualTransmission")}
