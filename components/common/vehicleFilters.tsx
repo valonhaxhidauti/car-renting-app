@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { Filters } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -9,7 +10,17 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
   const gt = useTranslations("VehicleFilters.gearType");
   const ft = useTranslations("VehicleFilters.fuelType");
 
+  const router = useRouter();
+
   const [loading, setLoading] = useState(true);
+  const [appliedFilters, setAppliedFilters] = useState<{
+    [key: string]: string[];
+  }>({
+    carClass: [],
+    carType: [],
+    gearType: [],
+    fuelType: [],
+  });
 
   const [filters, setFilters] = useState<Filters>({
     gearType: [],
@@ -41,6 +52,35 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
     fetchFilters();
   }, []);
 
+  const handleFilterClick = (filterType: string, filterId: string) => {
+    const updatedFilters = { ...appliedFilters };
+    const index = updatedFilters[filterType].indexOf(filterId);
+    if (index === -1) {
+      updatedFilters[filterType].push(filterId);
+    } else {
+      updatedFilters[filterType].splice(index, 1);
+    }
+    setAppliedFilters(updatedFilters);
+
+    generateQueryParams()
+  };
+
+  const generateQueryParams = () => {
+    const queryStrings: string[] = [];
+  
+    for (const filterType in appliedFilters) {
+      if (appliedFilters[filterType].length > 0) {
+        const joinedValues = appliedFilters[filterType].join(",");
+        queryStrings.push(`filter[${filterType}]=${joinedValues}`);
+      }
+    }
+  
+    const queryParams = queryStrings.join("&");
+    console.log(queryParams);
+  
+    router.push(`?${queryParams}`);
+  };
+
   return (
     <>
       <div className="flex flex-col items-start gap-2 pb-4 border-borderGray border-b">
@@ -59,6 +99,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
+                  onClick={() => handleFilterClick("carClass", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
@@ -83,6 +124,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
+                  onClick={() => handleFilterClick("carType", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
@@ -108,6 +150,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
+                  onClick={() => handleFilterClick("gearType", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
@@ -136,6 +179,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
+                  onClick={() => handleFilterClick("fuelType", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}

@@ -48,16 +48,26 @@ import VehicleFilters from "../common/vehicleFilters";
 import BookingInfo from "../common/bookingInfo";
 import { VehicleData } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
+import { useSearchParams } from "next/navigation";
 
 export default function ExploreVehicles() {
   const t = useTranslations("Header");
   const u = useTranslations("ExploreVehicles");
   const [loading, setLoading] = useState(true);
 
+  const searchParams = useSearchParams();
+
+  const params: { [key: string]: string } = {
+    "filter[carType]": searchParams.get("filter[carType]") || "",
+    "filter[carClass]": searchParams.get("filter[carClass]") || "",
+    "filter[gearType]": searchParams.get("filter[gearType]") || "",
+    "filter[fuelType]": searchParams.get("filter[fuelType]") || "",
+  };
+
   const [vehicles, setVehicles] = useState<VehicleData>({
     data: [],
     links: {},
-    meta: {},
+    meta: { last_page: 1 },
   });
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -67,6 +77,11 @@ export default function ExploreVehicles() {
         const url = new URL(
           `https://rent-api.rubik.dev/api/cars?page=${currentPage}`
         );
+
+        Object.keys(params).forEach((key) =>
+          url.searchParams.append(key, params[key])
+        );
+
         const response = await fetch(url, {
           method: "GET",
           headers: {
@@ -75,6 +90,8 @@ export default function ExploreVehicles() {
           },
         });
         const data = await response.json();
+        // console.log("API Response:", data); 
+
         setVehicles(data);
         setLoading(false);
       } catch (error) {
@@ -84,9 +101,9 @@ export default function ExploreVehicles() {
     };
 
     fetchVehicles();
-  }, [currentPage]);
+  }, [currentPage,searchParams]);
 
-  const totalPages = vehicles.meta.last_page;
+  const totalPages = vehicles.meta?.last_page || 1;
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
