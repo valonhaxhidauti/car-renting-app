@@ -128,6 +128,7 @@ export default function ExploreVehicles() {
     setShowBooking(!showBooking);
     setShowBookingAnimation(true);
   };
+
   return (
     <div className="bg-bgSecondary w-full pb-16">
       <div className="w-full bg-white ">

@@ -68,25 +68,33 @@ export default function RentForm({
       }
     }
 
-    if (!pickupDate && !dropOffDate) {
-      alert("fill the dates");
+    if (!pickupDate || !dropOffDate) {
+      alert("Please fill in the dates.");
       return;
     }
 
-    const queryParams = new URLSearchParams({
-      rentLocation,
-      returnLocation: showReturnLocation ? returnLocation : rentLocation,
-      pickupDate: pickupDate ? pickupDate.format("DD/MM/YYYY HH:mm") : "",
-      dropOffDate: dropOffDate ? dropOffDate.format("DD/MM/YYYY HH:mm") : "",
-    }).toString();
+    const queryParams = new URLSearchParams(window.location.search);
+
+    queryParams.set("rentLocation", rentLocation);
+    queryParams.set("pickupDate", pickupDate.format("DD/MM/YYYY HH:mm"));
+    queryParams.set("dropOffDate", dropOffDate.format("DD/MM/YYYY HH:mm"));
+
+    if (showReturnLocation) {
+      queryParams.set("returnLocation", returnLocation);
+    } else {
+      queryParams.set("returnLocation",rentLocation);
+    }
+
+    const queryString = queryParams.toString();
+
+    if (isHomePage) {
+      router.push(`/explore?${queryString}`);
+    } else {
+      router.push(`?${queryString}`);
+    }
 
     if (showModal && Object.keys(errors).length === 0) {
       setShowModal(false);
-    }
-    if (isHomePage) {
-      router.push(`/explore?${queryParams}`);
-    } else {
-      router.push(`?${queryParams}`);
     }
   };
 
@@ -114,9 +122,7 @@ export default function RentForm({
       >
         <div className="w-full text-xl text-center">{t("search")}</div>
         <div className="absolute top-4 right-4 rounded-full p-2 flex hover:bg-neutral-100 active:bg-neutral-200 cursor-pointer">
-          <X
-            onClick={toggleModal}
-          />
+          <X onClick={toggleModal} />
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full desktop:rounded-none">

@@ -10,30 +10,70 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   ChildSeatIcon,
   DriverIcon,
   InsuranceIcon,
   NavigationIcon,
 } from "@/assets/svgs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { VehiclePrices } from "@/lib/types";
 import { useCounter } from "../hooks/useCounter";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
-import { Skeleton } from "../ui/skeleton";
 import dayjs from "dayjs";
 import BirthdaySelector from "../account/birthdaySelector";
-import BookingInfo from "../common/bookingInfo";
 import BookingMobile from "../common/bookingMobile";
-import Image from "next/image";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
+import BookingPrice from "../common/bookingPrice";
+import { ChevronDown } from "lucide-react";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
   const u = useTranslations("VehicleDetails");
+
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    if (shown) {
+      document.body.style.setProperty("overflow-y", "auto", "important");
+    } else {
+      document.body.style.removeProperty("overflow-y");
+    }
+  }, [shown]);
+
+  function onSelectClicked() {
+    setShown(!shown);
+  }
+
+  const keys = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ] as const;
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 15 }, (_, index) => currentYear + index);
 
   const params = useCustomSearchParams();
   const vehicleId = params.vehicleId;
@@ -271,117 +311,156 @@ export default function VehiclePayment() {
               <h1 className="text-3xl text-grayFont font-bold">
                 Payment methods
               </h1>
-              <h1 className="text-xl text-grayFont font-bold">
+              <div className="flex gap-8 my-8">
+                <div className="flex gap-2">
+                  <input type="radio" id="card" name="radio" />
+                  <label className="text-grayFont text-sm" htmlFor="card">
+                    Credit Card
+                  </label>
+                </div>
+                <div className="flex gap-2">
+                  <input type="radio" id="bankTransfer" name="radio" />
+                  <label
+                    className="text-grayFont text-sm"
+                    htmlFor="bankTransfer"
+                  >
+                    Direct Bank Transfer
+                  </label>
+                </div>
+                <div className="flex gap-2">
+                  <input type="radio" id="paypal" name="radio" />
+                  <label className="text-grayFont text-sm" htmlFor="paypal">
+                    Paypal
+                  </label>
+                </div>
+              </div>
+              <h1 className="text-grayFont font-bold">
                 Credit Card Information
               </h1>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
-            <div className="hidden laptop:block">
-              <BookingInfo border={true} />
-            </div>
-            {vehicle && vehicle.attributes ? (
-              <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
-                <Image
-                  src="/sampleCar.png"
-                  alt={vehicle.attributes.name.split(" (")[0]}
-                  width="300"
-                  height="150"
-                  className="py-12 self-center"
-                  priority
-                />
-                <div className="flex flex-col border-b border-borderGray pb-3">
-                  <p className="text-xl font-bold">{u("pageTitle")}</p>
-                  <p className="font-medium">
-                    {vehicle.attributes.name.split(" (")[0]}
-                  </p>
-                </div>
-                <div className="flex justify-between text-sm border-b border-borderGray py-3">
-                  <p className="font-bold">{u("vehicleValue")}</p>
-                  <p className="font-bold text-primary">
-                    ${(prices.vehicle * daysDifference).toFixed(2)}
-                  </p>
-                </div>
-                {optionalItemsTotal > 0 && (
-                  <div className="flex flex-col border-b border-borderGray py-3 gap-2">
-                    <div className="flex justify-between text-sm">
-                      <p className="font-bold">{u("optionalItems")}</p>
-                      <p className="font-bold text-primary">
-                        ${optionalItemsTotal.toFixed(2)}
-                      </p>
+              <form>
+                <div className="flex justify-between">
+                  <div>
+                    <label
+                      className="text-grayFont text-sm"
+                      htmlFor="cardOwner"
+                    >
+                      Card Owner
+                    </label>
+                    <input
+                      type="text"
+                      id="cardOwner"
+                      name="cardOwner"
+                      className="w-full text-grayFont rounded-sm px-3 py-2 focus-visible:outline-primary pr-8 border-gray border"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="text-grayFont text-sm"
+                      htmlFor="cardNumber"
+                    >
+                      Card Number
+                    </label>
+                    <input
+                      type="text"
+                      pattern="[0-9]*"
+                      inputMode="numeric"
+                      maxLength={16}
+                      id="cardNumber"
+                      name="cardNumber"
+                      onChange={(e) => {
+                        e.target.value = e.target.value.replace(/\D/, "");
+                      }}
+                      className="w-full text-grayFont rounded-sm px-3 py-2 focus-visible:outline-primary pr-8 border-gray border"
+                      required
+                    />
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="flex flex-col">
+                      <label className="text-grayFont text-sm">
+                        Expiry Date
+                      </label>
+                      <div className="flex gap-2">
+                        <Select onOpenChange={onSelectClicked}>
+                          <SelectTrigger className="w-16 text-grayFont h-[42px] gap-3 rounded-sm px-3 py-2 focus-visible:outline-primary border-gray border">
+                            <SelectValue className="px-2" />
+                            <ChevronDown size={12} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel>Month</SelectLabel>
+                              {keys.map((month) => (
+                                <SelectItem key={month} value={month}>
+                                  {month}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                        <Select onOpenChange={onSelectClicked}>
+                          <SelectTrigger className="w-20 text-grayFont h-[42px] gap-3 rounded-sm px-3 py-2 focus-visible:outline-primary border-gray border">
+                            <SelectValue className="px-2" />
+                            <ChevronDown size={12} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel>Year</SelectLabel>
+                              {years.map((year) => (
+                                <SelectItem key={year} value={year.toString()}>
+                                  {year}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
-                    {optionalItems.map(
-                      (item) =>
-                        item.quantity > 0 && (
-                          <div
-                            key={item.name}
-                            className="flex justify-between text-xs"
-                          >
-                            <div className="w-14 flex justify-center">
-                              {item.icon}
-                            </div>
-                            <div className="flex justify-between w-full">
-                              <p className="font-light text-sm">{item.name}</p>
-                              <p className="font-light text-sm text-primary">
-                                $
-                                {(
-                                  item.quantity *
-                                  item.price *
-                                  daysDifference
-                                ).toFixed(2)}
-                              </p>
-                            </div>
-                          </div>
-                        )
-                    )}
-                  </div>
-                )}
-                <div className="py-3 border-b border-borderGray">
-                  <div className="flex justify-between items-center pb-2">
-                    <p className="font-light text-sm">{u("pricePer")}</p>
-                    <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
-                      {daysDifference} &nbsp;
-                      {daysDifference === 1
-                        ? u("day").toUpperCase()
-                        : u("days").toUpperCase()}
-                    </p>
-                  </div>
-                  <div className="flex justify-between">
-                    <p className="font-bold">{u("totalValue")}</p>
-                    <p className="font-bold text-primary">
-                      ${totalPrice.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-2 border-primary border">
-                  <div className="py-10 flex flex-col items-center">
-                    <p className="text-primary font-medium">Total Price</p>
-                    <div className="text-3xl text-primary">
-                      <sup className="text-xl font-bold -top-0.5">$</sup>
-                      <span className="text-5xl font-bold">
-                        {Math.floor(totalPrice)}
-                      </span>
-                      <span className="inline-block text-2xl">
-                        <sub className="relative block leading-none font-bold bottom-5">
-                          ,{getDecimalPart(totalPrice)}
-                        </sub>
-                      </span>
+                    <div className="flex flex-col">
+                      <label className="text-grayFont text-sm" htmlFor="cvv">
+                        CVV
+                      </label>
+                      <input
+                        type="password"
+                        maxLength={3}
+                        id="cvv"
+                        name="cvv"
+                        className="w-24 text-grayFont rounded-sm px-3 py-2 focus-visible:outline-primary pr-8 border-gray border"
+                        required
+                      />
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-col bg-white p-4 w-full h-fit gap-2">
-                <Skeleton className="h-48 w-full" />
-                <Skeleton className="h-6 w-1/2" />
-                <Skeleton className="h-4 w-1/2" />
-                <Skeleton className="h-4 my-1 w-full" />
-                <Skeleton className="h-4 mt-1 w-full" />
-                <Skeleton className="h-4 mb-1 w-full" />
-                <Skeleton className="h-40 w-full" />
-              </div>
-            )}
+                <div className="w-full flex justify-between mt-12">
+                  <div className="flex items-center mt-4">
+                    <input type="checkbox" id="terms" name="terms" className="cursor-pointer" required />
+                    <label
+                      htmlFor="terms"
+                      className="text-sm text-grayFont ml-2 cursor-pointer"
+                    >
+                      I have read and agree to the Terms and Conditions
+                    </label>
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-primary hover:bg-secondary transition text-white py-3 px-16 w-fit"
+                  >
+                    Pay
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
+          <BookingPrice
+            {...{
+              prices,
+              vehicle,
+              daysDifference,
+              optionalItems,
+              optionalItemsTotal,
+              totalPrice,
+              params,
+            }}
+          />
         </div>
       </div>
     </div>

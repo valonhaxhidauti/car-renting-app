@@ -5,7 +5,6 @@ import {
   ConsumptionIcon,
   DriverIcon,
   FuelIcon,
-  InfoIcon,
   InsuranceIcon,
   LuggageIcon,
   NavigationIcon,
@@ -27,14 +26,15 @@ import { Link } from "next-view-transitions";
 import { VehiclePrices } from "@/lib/types";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
-import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
-import BookingInfo from "../common/bookingInfo";
 import BookingMobile from "../common/bookingMobile";
-import VehicleTerms from "./vehicleTerms";
 import dayjs from "dayjs";
+import VehicleOptions from "./vehicleOptions";
+import BookingPrice from "../common/bookingPrice";
+import VehicleTerms from "./vehicleTerms";
+import VehicleDetailsSkeleton from "../loader/vehicleDetailsSkeleton";
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
@@ -209,188 +209,23 @@ export default function VehicleDetails() {
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="options">
-                    <div className="grid laptop:grid-cols-2 desktop:grid-cols-4 border-borderGray border-y border-x w-full">
-                      <div className="flex gap-2 items-center pl-4 border-b desktop:border-b-0 laptop:border-r">
-                        <div className="w-10 laptop:w-fit">
-                          <ChildSeatIcon />
-                        </div>
-                        <div className="p-2 flex justify-between items-center w-full">
-                          <div className="flex flex-col text-grayFont">
-                            <p className="flex items-center text-[10px] font-bold gap-1">
-                              {t("childSeat").toUpperCase()}
-                              <InfoIcon className="text-primary" />
-                            </p>
-                            <p className="text-sm text-graySecondary">
-                              ${prices.childSeat.toFixed(2)}/{t("daily")}
-                            </p>
-                          </div>
-                          <div className="flex flex-col items-center">
-                            <div
-                              onClick={incChildSeat}
-                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
-                          ${
-                            childSeat === 3
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          }`}
-                            >
-                              +
-                            </div>
-                            <p className="font-bold text-grayFont">
-                              {childSeat}
-                            </p>
-                            <div
-                              onClick={decChildSeat}
-                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative 
-                          ${
-                            childSeat === 0
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          }`}
-                            >
-                              &nbsp;
-                              <span className="absolute -top-1.5 left-1.5">
-                                _
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2 items-center pl-4 border-b desktop:border-b-0 desktop:border-r">
-                        <div className="w-10 laptop:w-fit">
-                          <NavigationIcon />
-                        </div>
-                        <div className="p-2 flex justify-between items-center w-full">
-                          <div className="flex flex-col text-grayFont">
-                            <p className="flex items-center text-[10px] font-bold gap-1">
-                              {t("navigation").toUpperCase()}
-                              <InfoIcon className="text-primary" />
-                            </p>
-                            <p className="text-sm text-graySecondary">
-                              ${prices.navigation.toFixed(2)}/{t("daily")}
-                            </p>
-                          </div>
-                          <div className="flex flex-col items-center">
-                            <div
-                              onClick={incNavigation}
-                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
-                          ${
-                            navigation === 1
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          }`}
-                            >
-                              +
-                            </div>
-                            <p className="font-bold text-grayFont">
-                              {navigation}
-                            </p>
-                            <div
-                              onClick={decNavigation}
-                              className={`text-grayFont border-gray-400 bg-white border rounded-md text-sm px-1 w-5 relative ${
-                                navigation === 0
-                                  ? "cursor-not-allowed text-gray-400"
-                                  : "cursor-pointer hover:bg-slate-200"
-                              } `}
-                            >
-                              &nbsp;
-                              <span className="absolute -top-1.5 left-1.5">
-                                _
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2 items-center pl-4 border-b laptop:border-b-0 laptop:border-r">
-                        <div className="w-10 laptop:w-fit">
-                          <DriverIcon />
-                        </div>
-                        <div className="p-2 flex justify-between items-center w-full">
-                          <div className="flex flex-col text-grayFont">
-                            <p className="flex items-center text-[10px] font-bold gap-1">
-                              {t("additionalDriver").toUpperCase()}
-                              <InfoIcon className="text-primary" />
-                            </p>
-                            <p className="text-sm text-graySecondary">
-                              ${prices.driver.toFixed(2)}/{t("daily")}
-                            </p>
-                          </div>
-                          <div className="flex flex-col items-center">
-                            <div
-                              onClick={incDriver}
-                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center
-                          ${
-                            driver === 1
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          }`}
-                            >
-                              +
-                            </div>
-                            <p className="font-bold text-grayFont">{driver}</p>
-                            <div
-                              onClick={decDriver}
-                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative *:${
-                                driver === 0
-                                  ? "cursor-not-allowed text-gray-400"
-                                  : "cursor-pointer hover:bg-slate-200"
-                              }`}
-                            >
-                              &nbsp;
-                              <span className="absolute -top-1.5 left-1.5">
-                                _
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2 items-center pl-4">
-                        <div className="w-10 laptop:w-fit">
-                          <InsuranceIcon className="" />
-                        </div>
-                        <div className="p-2 flex justify-between items-center w-full">
-                          <div className="flex flex-col text-grayFont">
-                            <p className="flex items-center text-[10px] font-bold gap-1">
-                              {t("damageInsurance").toUpperCase()}
-                              <InfoIcon className="text-primary" />
-                            </p>
-                            <p className="text-sm text-graySecondary">
-                              ${prices.insurance.toFixed(2)}/{t("daily")}
-                            </p>
-                          </div>
-                          <div className="flex flex-col items-center">
-                            <div
-                              onClick={incInsurance}
-                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
-                          ${
-                            insurance === 1
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          }`}
-                            >
-                              +
-                            </div>
-                            <p className="font-bold text-grayFont">
-                              {insurance}
-                            </p>
-                            <div
-                              onClick={decInsurance}
-                              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative 
-                          ${
-                            insurance === 0
-                              ? "cursor-not-allowed text-gray-400"
-                              : "cursor-pointer hover:bg-slate-200"
-                          }`}
-                            >
-                              &nbsp;
-                              <span className="absolute -top-1.5 left-1.5">
-                                _
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <VehicleOptions
+                      {...{
+                        prices,
+                        childSeat,
+                        incChildSeat,
+                        decChildSeat,
+                        navigation,
+                        incNavigation,
+                        decNavigation,
+                        driver,
+                        incDriver,
+                        decDriver,
+                        insurance,
+                        incInsurance,
+                        decInsurance,
+                      }}
+                    />
                   </TabsContent>
                   <TabsContent
                     value="terms"
@@ -410,132 +245,20 @@ export default function VehicleDetails() {
                 </Tabs>
               </>
             ) : (
-              <div className="flex flex-col gap-4">
-                <div className="bg-white p-4">
-                  <div className="flex flex-col mobile:flex-row gap-4">
-                    <Skeleton className="h-64 w-full mobile:w-[300px]" />
-                    <div className="flex flex-col w-full mobile:w-3/4 justify-between">
-                      <Skeleton className="h-6 w-full" />
-                      <Skeleton className="h-6 w-full" />
-                      <Skeleton className="h-6 w-full" />
-                      <Skeleton className="h-6 w-full" />
-                      <Skeleton className="h-6 w-full" />
-                      <Skeleton className="h-6 w-full" />
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white p-4 h-[190px] flex flex-col gap-4">
-                  <div className="flex gap-2 h-1/4 w-full mobile:w-1/2">
-                    <div className="h-full w-1/4">
-                      <Skeleton className="h-full w-full" />
-                    </div>
-                    <div className="w-1/4">
-                      <Skeleton className="h-full w-full" />
-                    </div>
-                    <div className="w-1/4">
-                      <Skeleton className="h-full w-full" />
-                    </div>
-                    <div className="w-1/4">
-                      <Skeleton className="h-full w-full" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col mobile:flex-row gap-4 h-3/4">
-                    <Skeleton className="h-full w-full mobile:w-1/4" />
-                    <Skeleton className="h-full w-full mobile:w-1/4" />
-                    <Skeleton className="h-full w-full mobile:w-1/4" />
-                    <Skeleton className="h-full w-full mobile:w-1/4" />
-                  </div>
-                </div>
-              </div>
+              <VehicleDetailsSkeleton />
             )}
           </div>
-          <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
-            <div className="hidden laptop:block">
-              <BookingInfo border={true} />
-            </div>
-            {vehicle && vehicle.attributes ? (
-              <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
-                <div className="flex flex-col border-b border-borderGray pb-3">
-                  <p className="text-xl font-bold">{t("pageTitle")}</p>
-                  <p className="font-medium">
-                    {vehicle.attributes.name.split(" (")[0]}
-                  </p>
-                </div>
-                <div className="flex justify-between text-sm border-b border-borderGray py-3">
-                  <p className="font-bold">{t("vehicleValue")}</p>
-                  <p className="font-bold text-primary">
-                    ${(prices.vehicle * daysDifference).toFixed(2)}
-                  </p>
-                </div>
-                {optionalItemsTotal > 0 && (
-                  <div className="flex flex-col border-b border-borderGray py-3 gap-2">
-                    <div className="flex justify-between text-sm">
-                      <p className="font-bold">{t("optionalItems")}</p>
-                      <p className="font-bold text-primary">
-                        ${optionalItemsTotal.toFixed(2)}
-                      </p>
-                    </div>
-                    {optionalItems.map(
-                      (item) =>
-                        item.quantity > 0 && (
-                          <div
-                            key={item.name}
-                            className="flex justify-between text-xs"
-                          >
-                            <div className="w-14 flex justify-center">
-                              {item.icon}
-                            </div>
-                            <div className="flex justify-between w-full">
-                              <p className="font-light text-sm">{item.name}</p>
-                              <p className="font-light text-sm text-primary">
-                                $
-                                {(
-                                  item.quantity *
-                                  item.price *
-                                  daysDifference
-                                ).toFixed(2)}
-                              </p>
-                            </div>
-                          </div>
-                        )
-                    )}
-                  </div>
-                )}
-                <div className="py-3">
-                  <div className="flex justify-between items-center pb-2">
-                    <p className="font-light text-sm">{t("pricePer")}</p>
-                    <p className="text-xs text-white px-2 py-0.5 bg-primary rounded-sm">
-                      {daysDifference} &nbsp;
-                      {daysDifference === 1
-                        ? t("day").toUpperCase()
-                        : t("days").toUpperCase()}
-                    </p>
-                  </div>
-                  <div className="flex justify-between">
-                    <p className="font-bold">{t("totalValue")}</p>
-                    <p className="font-bold text-primary">
-                      ${totalPrice.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-                <Link
-                  href={`/explore/vehicle/payment?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
-                  className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
-                >
-                  {t("continueButton")}
-                </Link>
-              </div>
-            ) : (
-              <div className="flex flex-col bg-white p-4 w-full h-fit gap-2">
-                <Skeleton className="h-6 w-1/2" />
-                <Skeleton className="h-4 w-1/2" />
-                <Skeleton className="h-4 my-1 w-full" />
-                <Skeleton className="h-4 mt-1 w-full" />
-                <Skeleton className="h-4 mb-1 w-full" />
-                <Skeleton className="h-10 w-full" />
-              </div>
-            )}
-          </div>
+          <BookingPrice
+            {...{
+              prices,
+              vehicle,
+              daysDifference,
+              optionalItems,
+              optionalItemsTotal,
+              totalPrice,
+              params,
+            }}
+          />
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Filters } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
+import debounce from "lodash.debounce";
 
 export default function VehicleFilters({ filtersId }: { filtersId: string }) {
   const vf = useTranslations("VehicleFilters.vehicleClass");
@@ -61,25 +62,37 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
       updatedFilters[filterType].splice(index, 1);
     }
     setAppliedFilters(updatedFilters);
-
-    generateQueryParams()
+  
+    if (updatedFilters[filterType].length === 0) {
+      removeQueryParam(filterType);
+    } else {
+      debouncedQueryParams();
+    }
+  };
+  
+  const removeQueryParam = (filterType: string) => {
+    const existingParams = new URLSearchParams(window.location.search);
+    existingParams.delete(`filter[${filterType}]`);
+    const queryParams = existingParams.toString();
+    router.push(`?${queryParams}`);
   };
 
   const generateQueryParams = () => {
-    const queryStrings: string[] = [];
-  
+    const existingParams = new URLSearchParams(window.location.search);
+    const updatedParams = new URLSearchParams(existingParams.toString());
+
     for (const filterType in appliedFilters) {
       if (appliedFilters[filterType].length > 0) {
         const joinedValues = appliedFilters[filterType].join(",");
-        queryStrings.push(`filter[${filterType}]=${joinedValues}`);
+        updatedParams.set(`filter[${filterType}]`, joinedValues);
       }
     }
-  
-    const queryParams = queryStrings.join("&");
-    console.log(queryParams);
-  
+
+    const queryParams = updatedParams.toString();
     router.push(`?${queryParams}`);
   };
+
+  const debouncedQueryParams = debounce(generateQueryParams, 300);
 
   return (
     <>
