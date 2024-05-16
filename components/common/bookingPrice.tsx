@@ -6,6 +6,14 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function BookingPrice(props: any) {
   const t = useTranslations("VehicleDetails");
+  const { params } = props;
+  const paramsSet =
+    params &&
+    Object.values(params).every(
+      (param) => typeof param === "string" && param.trim() !== ""
+    );
+
+  console.log(paramsSet);
 
   return (
     <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
@@ -35,7 +43,7 @@ export default function BookingPrice(props: any) {
                 </p>
               </div>
               {props.optionalItems.map(
-                (item:any) =>
+                (item: any) =>
                   item.quantity > 0 && (
                     <div
                       key={item.name}
@@ -77,12 +85,24 @@ export default function BookingPrice(props: any) {
               </p>
             </div>
           </div>
-          <Link
-            href={`/explore/vehicle/payment?vehicleId=${props.params.vehicleId}&rentLocation=${props.params.rentLocation}&returnLocation=${props.params.returnLocation}&pickupDate=${props.params.pickupDate}&dropOffDate=${props.params.dropOffDate}`}
-            className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
-          >
-            {t("continueButton")}
-          </Link>
+          {paramsSet ? (
+            <Link
+              href={`/explore/vehicle/payment?vehicleId=${props.params.vehicleId}&rentLocation=${props.params.rentLocation}&returnLocation=${props.params.returnLocation}&pickupDate=${props.params.pickupDate}&dropOffDate=${props.params.dropOffDate}`}
+              className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
+            >
+              {t("continueButton")}
+            </Link>
+          ) : (
+            <button
+              className="px-8 py-3 text-white bg-gray-300 cursor-not-allowed relative"
+              disabled
+            >
+              {t("continueButton")}
+              <span className="tooltipText absolute bg-primary text-white text-xs py-1 px-2 rounded-md opacity-0 pointer-events-none transition-opacity duration-300">
+                {t("fillBookingTooltip")}
+              </span>
+            </button>
+          )}
         </div>
       ) : (
         <div className="flex flex-col bg-white p-4 w-full h-fit gap-2">
@@ -94,6 +114,29 @@ export default function BookingPrice(props: any) {
           <Skeleton className="h-10 w-full" />
         </div>
       )}
+      <style jsx>{`
+        .tooltipText {
+          bottom: calc(100% + 5px);
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .tooltipText::before {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent;
+          border-top-color: #1e7ff6;
+          transform: translateX(-50%);
+        }
+
+        button:hover .tooltipText, a:hover .tooltipText {
+          opacity: 1;
+        }
+      `}</style>
     </div>
   );
 }

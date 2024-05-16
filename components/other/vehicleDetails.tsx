@@ -158,31 +158,31 @@ export default function VehicleDetails() {
                         <div className="flex w-full">
                           <div className="flex flex-wrap items-center py-2 gap-4">
                             <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                              <FuelIcon className="text-graySecondary" />
+                              <FuelIcon className="w-10 text-graySecondary" />
                               <p className="text-xs text-grayFont mobile:text-sm">
                                 {vehicle.relationships.fuelType.attributes.name}
                               </p>
                             </div>
                             <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                              <TransmissionIcon className="text-graySecondary" />
+                              <TransmissionIcon className="w-10 text-graySecondary" />
                               <p className="text-xs text-grayFont mobile:text-sm">
                                 {vehicle.relationships.gearType.attributes.name}
                               </p>
                             </div>
                             <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                              <ConsumptionIcon className="text-graySecondary" />
+                              <ConsumptionIcon className="w-10 text-graySecondary" />
                               <p className="text-xs text-grayFont mobile:text-sm">
                                 6,5 lt
                               </p>
                             </div>
                             <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                              <LuggageIcon className="text-graySecondary" />
+                              <LuggageIcon className="w-10 text-graySecondary" />
                               <p className="text-xs text-grayFont mobile:text-sm">
                                 615 lt
                               </p>
                             </div>
                             <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                              <SeatIcon className="text-graySecondary" />
+                              <SeatIcon className="w-10 text-graySecondary" />
                               <p className="text-xs text-grayFont mobile:text-sm">
                                 {vehicle.attributes.seat_capacity}
                               </p>

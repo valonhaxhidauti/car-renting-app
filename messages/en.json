@@ -342,7 +342,8 @@
         "fuelConsumption": "Fuel Consumption",
         "vehicleType": "Vehicle Type",
         "luggageCapacity": "Luggage Capacity",
-        "horsepower": "Hp (Horse power)"
+        "horsepower": "Hp (Horse power)",
+        "fillBookingTooltip": "Fill the booking information"
     },
     "VehicleFilters": {
         "vehicleClass": {

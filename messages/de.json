@@ -342,7 +342,8 @@
         "fuelConsumption": "Kraftstoffverbrauch",
         "vehicleType": "Fahrzeugtyp",
         "luggageCapacity": "Gepäckkapazität",
-        "horsepower": "PS (Pferdestärke)"
+        "horsepower": "PS (Pferdestärke)",
+        "fillBookingTooltip": "Füllen Sie die Buchungsinformationen aus"
     },
     "VehicleFilters": {
         "vehicleClass": {
