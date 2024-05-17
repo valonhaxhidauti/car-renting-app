@@ -18,15 +18,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
@@ -49,6 +40,8 @@ import BookingInfo from "../common/bookingInfo";
 import { VehicleData } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
 import { useSearchParams } from "next/navigation";
+import VehicleSort from "../common/vehicleSort";
+import { VehiclePagination } from "../other/vehiclePagination";
 
 export default function ExploreVehicles() {
   const t = useTranslations("Header");
@@ -82,6 +75,26 @@ export default function ExploreVehicles() {
           url.searchParams.append(key, params[key])
         );
 
+        const sortBy = searchParams.get("sort");
+        if (sortBy) {
+          switch (sortBy) {
+            case "yearDesc":
+              url.searchParams.append("sort", "-year");
+              break;
+            case "yearAsc":
+              url.searchParams.append("sort", "year");
+              break;
+            case "priceDesc":
+              url.searchParams.append("sort", "-base_price_in_cents");
+              break;
+            case "priceAsc":
+              url.searchParams.append("sort", "base_price_in_cents");
+              break;
+            default:
+              break;
+          }
+        }
+
         const response = await fetch(url, {
           method: "GET",
           headers: {
@@ -90,24 +103,20 @@ export default function ExploreVehicles() {
           },
         });
         const data = await response.json();
-        // console.log("API Response:", data); 
+        // console.log("API Response:", data);
 
         setVehicles(data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching vehicles:", error);
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchVehicles();
-  }, [currentPage,searchParams]);
+  }, [currentPage, searchParams]);
 
   const totalPages = vehicles.meta?.last_page || 1;
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
 
   const [showFilters, setShowFilters] = useState(false);
   const [showFiltersAnimation, setShowFiltersAnimation] = useState(false);
@@ -129,6 +138,29 @@ export default function ExploreVehicles() {
     setShowBookingAnimation(true);
   };
 
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    if (currentPage !== pageNumber) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handlePrevChange = (pageNumber: number) => {
+    if (pageNumber === 1) return;
+    else {
+      setCurrentPage(pageNumber - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleNextChange = (pageNumber: number) => {
+    if (pageNumber === totalPages) return;
+    else {
+      setCurrentPage(pageNumber + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="bg-bgSecondary w-full pb-16">
       <div className="w-full bg-white ">
@@ -137,6 +169,9 @@ export default function ExploreVehicles() {
             {u("pageTitle")}
           </div>
           <div className="laptop:flex gap-6 hidden">
+            <div className="flex gap-2 items-center text-sm">
+              <VehicleSort />
+            </div>
             <div className="flex gap-2 items-center">
               <p className="text-grayFont font-medium text-sm">
                 {u("currency.label")}
@@ -151,21 +186,6 @@ export default function ExploreVehicles() {
                     <SelectLabel>{t("currencies.label")}</SelectLabel>
                     <SelectItem value="usd">{t("currencies.usd")}</SelectItem>
                     <SelectItem value="eur">{t("currencies.eur")}</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex gap-2 items-center text-sm">
-              <Select>
-                <SelectTrigger className="flex border-borderGray border-2 text-grayFont text-xs font-medium rounded-full w-36 h-8 gap-2 px-2">
-                  <SelectValue placeholder={u("sortByLabel")} />
-                  <ChevronDown className="text-grayFont font-medium h-4 w-4" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectGroup>
-                    <SelectLabel>{u("sortBy")}</SelectLabel>
-                    <SelectItem value="price">{u("modelYear")}</SelectItem>
-                    <SelectItem value="year">{u("price")}</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -208,21 +228,7 @@ export default function ExploreVehicles() {
         </Breadcrumb>
         <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
           <div className="flex gap-4 mobile:gap-6">
-            <div className="flex gap-2 items-center text-sm">
-              <Select>
-                <SelectTrigger className="flex border-borderGray border-2 text-grayFont text-xs font-medium rounded-full tablet:w-36 h-8 gap-2 px-2">
-                  <SelectValue placeholder={u("sortByLabel")} />
-                  <ChevronDown className="text-grayFont font-medium h-4 w-4" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectGroup>
-                    <SelectLabel>{u("sortBy")}</SelectLabel>
-                    <SelectItem value="price">{u("modelYear")}</SelectItem>
-                    <SelectItem value="year">{u("price")}</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
+            <VehicleSort />
             <div
               className="flex gap-2 p-2 h-8 text-xs text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full self-center"
               onClick={toggleBooking}
@@ -305,10 +311,10 @@ export default function ExploreVehicles() {
                             <Skeleton className="h-8 w-full" />
                           </div>
                           <div className="grid grid-cols-2 gap-2">
-                              <Skeleton className="h-[78px] w-full" />
-                              <Skeleton className="h-[78px] w-full" />
-                              <Skeleton className="h-[78px] w-full" />
-                              <Skeleton className="h-[78px] w-full" />
+                            <Skeleton className="h-[78px] w-full" />
+                            <Skeleton className="h-[78px] w-full" />
+                            <Skeleton className="h-[78px] w-full" />
+                            <Skeleton className="h-[78px] w-full" />
                           </div>
                         </div>
                         <div className="w-[40%] mobile:w-[29%]">
@@ -325,35 +331,13 @@ export default function ExploreVehicles() {
                     />
                   ))}
             </div>
-            <Pagination className="self-center">
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    // href="#"
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    // disabled={currentPage === 1}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      // href="#"
-                      isActive={index + 1 === currentPage}
-                      onClick={() => handlePageChange(index + 1)}
-                    >
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <PaginationNext
-                    // href="#"
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    // disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+            <VehiclePagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              onNextChange={handleNextChange}
+              onPrevChange={handlePrevChange}
+            />
           </div>
           <div className="w-1/5 flex-col h-full gap-4 hidden laptop:flex">
             <BookingInfo border={true} />
