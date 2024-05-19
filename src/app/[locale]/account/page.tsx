@@ -8,12 +8,13 @@ import { useRouter } from "next/navigation";
 
 export default function Account() {
   const router = useRouter();
-  const item = window.localStorage.getItem("authenticated");
-  if (item) {
-    router.push("/account/personal-info");
-    return <>loading</>;
+  if (typeof window !== "undefined") {
+    const item = window.localStorage.getItem("authenticated");
+    if (item) {
+      router.push("/account/personal-info");
+    }
   }
-  
+
   return (
     <>
       <Header background={false} fixed={false} />

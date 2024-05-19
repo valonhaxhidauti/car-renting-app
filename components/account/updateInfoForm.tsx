@@ -6,11 +6,93 @@ import { useState } from "react";
 import BirthdaySelector from "@/components/account/birthdaySelector";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
+import { UpdateFormValues } from "@/lib/types";
+import { UpdateFormValidation } from "../utils/formValidations";
+
+interface FormValues {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+  phoneCode: string;
+  birthday: string;
+  password: string;
+}
 
 export default function UpdateInfoForm() {
   const t = useTranslations("Account");
+  const translations = {
+    nameRequired: t("validation.nameRequired"),
+    nameInvalid: t("validation.nameInvalid"),
+    surnameRequired: t("validation.surnameRequired"),
+    surnameInvalid: t("validation.surnameInvalid"),
+    emailRequired: t("validation.emailRequired"),
+    emailInvalid: t("validation.emailInvalid"),
+    phoneRequired: t("validation.phoneRequired"),
+    phoneInvalid: t("validation.phoneInvalid"),
+    passwordRequired: t("validation.passwordRequired"),
+    passwordWeak: t("validation.passwordWeak"),
+    passwordConfirmRequired: t("validation.passwordConfirmRequired"),
+    passwordsNotMatch: t("validation.passwordsNotMatch"),
+  };
+  const [errors, setErrors] = useState<Partial<UpdateFormValues>>({});
+
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+
+  const [formData, setFormData] = useState<FormValues>({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    phoneCode: "",
+    birthday: "",
+    password: "",
+  });
+
+  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const errors = UpdateFormValidation(formData, translations);
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      try {
+        const response = await fetch(
+          "",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              first_name: formData.name,
+              last_name: formData.surname,
+              email: formData.email,
+              phone_code: formData.phoneCode,
+              phone: formData.phone,
+              birthday: formData.birthday,
+              password: formData.password,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("User updated successfully:", data);
+        } else {
+          const errorData = await response.json();
+          console.error("Update failed:", errorData);
+          alert("Update failed!");
+        }
+      } catch (error) {
+        console.error("Error occurred during update:", error);
+      }
+    } else {
+      console.log("Form not submitted due to errors:", errors);
+    }
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -20,36 +102,18 @@ export default function UpdateInfoForm() {
     setPassword(e.target.value);
   };
   return (
-    <form className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end">
-      {/* <div className="flex gap-4 w-full">
-        <RadioGroup defaultValue="mr" className="flex w-full">
-          <div className="w-full">
-            <Label
-              htmlFor="r1"
-              className="border-borderForm h-[57px] border p-4 flex items-center rounded-sm gap-4 w-full cursor-pointer"
-            >
-              <RadioGroupItem value="mr" id="r1" />
-              {t("register.mrLabel")}
-            </Label>
-          </div>
-          <div className="w-full">
-            <Label
-              htmlFor="r2"
-              className="border-borderForm h-[57px] border p-4 flex items-center rounded-sm gap-4 w-full cursor-pointer"
-            >
-              <RadioGroupItem value="mrs" id="r2" />
-              {t("register.mrsLabel")}
-            </Label>
-          </div>
-        </RadioGroup>
-      </div> */}
+    <form
+      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end"
+      onSubmit={submitForm}
+    >
       <div className="relative">
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.nameLabel")}
         </label>
         <input
           type="text"
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary 
+          ${errors.name && " outline outline-2 outline-red-500"}`}
         />
       </div>
       <div>

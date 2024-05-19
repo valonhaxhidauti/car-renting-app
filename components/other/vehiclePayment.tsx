@@ -324,13 +324,7 @@ export default function VehiclePayment() {
                     className="text-grayFont text-sm"
                     htmlFor="bankTransfer"
                   >
-                    Direct Bank Transfer
-                  </label>
-                </div>
-                <div className="flex gap-2">
-                  <input type="radio" id="paypal" name="radio" />
-                  <label className="text-grayFont text-sm" htmlFor="paypal">
-                    Paypal
+                    Cash
                   </label>
                 </div>
               </div>
@@ -378,7 +372,7 @@ export default function VehiclePayment() {
                   <div className="flex gap-4 w-full mobile:w-auto">
                     <div className="flex flex-col  w-3/4">
                       <label className="text-grayFont text-sm">
-                        Expiry Date
+                        Expire Date
                       </label>
                       <div className="flex gap-2">
                         <Select onOpenChange={onSelectClicked}>
