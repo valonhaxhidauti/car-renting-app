@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
@@ -13,6 +13,7 @@ import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/de";
 import "dayjs/locale/en-gb";
+// import LocationsModal from "./locationsModal";
 
 interface IFormInputs {
   rentLocation: string;
@@ -36,10 +37,14 @@ export default function RentForm({
     watch,
     formState: { errors },
     handleSubmit,
+    setValue,
   } = useForm<IFormInputs>();
   const watchShowReturnLocation = watch("showReturnLocation", false);
   const [pickupDate, setPickupDate] = useState<Dayjs | null>(null);
   const [dropOffDate, setDropOffDate] = useState<Dayjs | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState("");
+  const [locations, setLocations] = useState([]);
 
   const isHomePage = usePathname() === ("/en" || "/de");
 
@@ -62,7 +67,6 @@ export default function RentForm({
       const timeDifferenceHours = dropOffDate.diff(pickupDate, "hours");
 
       if (timeDifferenceHours < 1) {
-        // replace alert
         alert("Drop off date should be at least 1 hour after pickup date.");
         return;
       }
@@ -82,7 +86,7 @@ export default function RentForm({
     if (showReturnLocation) {
       queryParams.set("returnLocation", returnLocation);
     } else {
-      queryParams.set("returnLocation",rentLocation);
+      queryParams.set("returnLocation", rentLocation);
     }
 
     const queryString = queryParams.toString();
@@ -98,9 +102,39 @@ export default function RentForm({
     }
   };
 
-  const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  // const handleLocationSelect = (location) => {
+  //   if (modalType === "rentLocation") {
+  //     setValue("rentLocation", location);
+  //   } else if (modalType === "returnLocation") {
+  //     setValue("returnLocation", location);
+  //   }
+  //   setShowModal(false);
+  // };
+
+  // const handleFocus = (type) => {
+  //   setModalType(type);
+  //   fetchLocations();
+  //   setShowModal(true);
+  // };
+
+  const fetchLocations = async () => {
+    const url = new URL("https://rent-api.rubik.dev/api/locations");
+    // const params = { "filter[search]": "Latvia" };
+    // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+    const headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+
+    const response = await fetch(url, { method: "GET", headers });
+    const data = await response.json();
+    console.log(data);
+    setLocations(data.data); // Assuming the API response is an array of locations
   };
 
   return modal ? (
@@ -110,7 +144,7 @@ export default function RentForm({
         onClick={toggleModal}
       />
       <div
-        className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards rounded	${
+        className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards rounded ${
           showModal ? "animate-show-overlay" : "hidden"
         }`}
         onClick={toggleModal}
@@ -143,6 +177,7 @@ export default function RentForm({
                   className={`w-full text-base p-2 border-b font-light ${
                     errors.rentLocation ? "placeholder:text-red-500" : ""
                   }`}
+                  // onFocus={() => handleFocus("rentLocation")}
                 />
                 <input
                   type="text"
@@ -162,13 +197,13 @@ export default function RentForm({
                       ? "h-full w-full p-2 text-base border-b font-light"
                       : "w-0 h-0"
                   } ${errors.returnLocation ? "placeholder:text-red-500" : ""}`}
+                  // onFocus={() => handleFocus("returnLocation")}
                 />
                 <LocalizationProvider
                   dateAdapter={AdapterDayjs}
                   adapterLocale={t("locale")}
                 >
                   <div className="w-full border-b">
-                    <FormControl fullWidth error={!errors.pickupDate}>
                       <MobileDateTimePicker
                         className="w-full"
                         disablePast
@@ -188,10 +223,6 @@ export default function RentForm({
                           },
                         }}
                       />
-                      {errors.pickupDate && (
-                        <FormHelperText>error</FormHelperText>
-                      )}
-                    </FormControl>
                   </div>
                   <div className="w-full border-b">
                     <MobileDateTimePicker
@@ -250,37 +281,63 @@ export default function RentForm({
         <div className="shadow-grayPrimary w-full p-4 pt-2 rounded-md bg-white">
           <div className="flex flex-col relative w-full">
             <div className="w-full flex flex-col bg-white items-start">
-              <input
-                type="text"
-                {...register("rentLocation", { required: true })}
-                placeholder={
-                  errors.rentLocation
-                    ? t("rentLocation.requiredError")
-                    : t("rentLocation.placeholder")
-                }
-                className={`w-full p-2 border-b ${
-                  errors.rentLocation ? "placeholder:text-red-500" : ""
-                }`}
-              />
-              <input
-                type="text"
-                {...register(
-                  "returnLocation",
+              <div className="w-full relative border-b">
+                <input
+                  type="text"
+                  autoComplete="off"
+                  {...register("rentLocation", { required: true })}
+                  placeholder={
+                    errors.rentLocation
+                      ? t("rentLocation.requiredError")
+                      : t("rentLocation.placeholder")
+                  }
+                  className={`w-full p-2 ${
+                    errors.rentLocation ? "placeholder:text-red-500" : ""
+                  }`}
+                  // onFocus={() => handleFocus("rentLocation")}
+                />
+                {/* <LocationsModal
+                  showModal={showModal}
+                  toggleModal={toggleModal}
+                  locations={locations}
+                  handleLocationSelect={handleLocationSelect}
+                /> */}
+              </div>
+              <div
+                className={`w-full relative ${
                   watchShowReturnLocation
-                    ? { required: true }
-                    : { required: false }
-                )}
-                placeholder={
-                  errors.returnLocation
-                    ? t("returnLocation.requiredError")
-                    : t("returnLocation.placeholder")
-                }
-                className={`${
-                  watchShowReturnLocation
-                    ? "h-full transition-all duration-300 w-full border-b p-2"
+                    ? "h-full transition-all duration-300 w-full border-b "
                     : "w-0 h-0 transition-all duration-100"
-                } ${errors.returnLocation ? "placeholder:text-red-500" : ""}`}
-              />
+                } `}
+              >
+                <input
+                  type="text"
+                  autoComplete="off"
+                  {...register(
+                    "returnLocation",
+                    watchShowReturnLocation
+                      ? { required: true }
+                      : { required: false }
+                  )}
+                  placeholder={
+                    errors.returnLocation
+                      ? t("returnLocation.requiredError")
+                      : t("returnLocation.placeholder")
+                  }
+                  className={` ${
+                    watchShowReturnLocation
+                      ? "h-full transition-all duration-300 w-full p-2"
+                      : "w-0 h-0 transition-all duration-100"
+                  } ${errors.returnLocation ? "placeholder:text-red-500" : ""}`}
+                  // onFocus={() => handleFocus("returnLocation")}
+                />
+                {/* <LocationsModal
+                  showModal={showModal}
+                  toggleModal={toggleModal}
+                  locations={locations}
+                  handleLocationSelect={handleLocationSelect}
+                /> */}
+              </div>
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
                 adapterLocale={t("locale")}
