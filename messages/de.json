@@ -129,19 +129,27 @@
         "emailPlaceholder": "E-Mail-Adresse",
         "phoneNumberPlaceholder": "Telefonnummer",
         "messagePlaceholder": "Ihre Nachricht",
-        "sendMessage": "Nachricht senden"
+        "sendMessage": "Nachricht senden",
+        "successMessageTitle": "Vielen Dank für Ihre Nachricht!"
     },
     "ExploreVehicles": {
-        "pageTitle": "Fahrzeuge erkunden",
+        "heading": "Fahrzeuge erkunden",
+        "breadcrumb": {
+            "homepage": "Startseite"
+        },
         "currency": {
             "label": "Währung",
             "usd": "USD",
             "eur": "EUR"
         },
+        "notFound": {
+            "title": "Keine Fahrzeuge gefunden",
+            "description": "Versuche, die Filter anzupassen, um zu finden, wonach du suchst."
+        },
         "sortBy": "Sortieren nach:",
         "default": "Standard",
-        "modelYearAsc": "Modelljahr: Aufsteigend",
-        "modelYearDesc": "Modelljahr: Absteigend",
+        "modelYearAsc": "Modelljahr: Von alt nach neu",
+        "modelYearDesc": "Modelljahr: Von neu nach alt",
         "priceDesc": "Preis: Absteigend",
         "priceAsc": "Preis: Aufsteigend",
         "changeListView": "Listenansicht ändern",

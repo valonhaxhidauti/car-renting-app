@@ -1,25 +1,11 @@
 "use client";
 
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "../ui/breadcrumb";
-import { Link } from "next-view-transitions";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { ChevronDown } from "lucide-react";
-import { useTranslations } from "next-intl";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../ui/accordion";
 import {
   CloseMenuIcon,
   EditBookingIcon,
@@ -27,25 +13,21 @@ import {
   GridViewIcon,
   ListViewIcon,
 } from "@/assets/svgs";
-import VehicleCard from "../common/vehicleCard";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion";
 import { useEffect, useState } from "react";
-import VehicleFilters from "../common/vehicleFilters";
-import BookingInfo from "../common/bookingInfo";
-import { VehicleData } from "@/lib/types";
-import { Skeleton } from "../ui/skeleton";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import VehicleSort from "../common/vehicleSort";
+import { Breadcrumbs } from "../common/headingParts";
+import { VehicleData } from "@/lib/types";
 import { VehiclePagination } from "../other/vehiclePagination";
+import BookingInfo from "../common/bookingInfo";
+import VehicleCard from "../common/vehicleCard";
+import VehicleFilters from "../common/vehicleFilters";
+import VehicleSort from "../common/vehicleSort";
+import ExploreVehiclesSkeleton from "../loader/exploreVehiclesSkeleton";
+import NoVehiclesFound from "../loader/noVehiclesFound";
 
 export default function ExploreVehicles() {
-  const t = useTranslations("Header");
-  const u = useTranslations("ExploreVehicles");
+  const t = useTranslations("ExploreVehicles");
   const [loading, setLoading] = useState(true);
 
   const searchParams = useSearchParams();
@@ -166,33 +148,15 @@ export default function ExploreVehicles() {
       <div className="w-full bg-white ">
         <div className="max-w-[1440px] m-auto flex justify-between px-4 mobile:px-8 bigDesktop:px-0 py-8">
           <div className="text-primary font-bold text-4xl w-full items-center flex cursor-default">
-            {u("pageTitle")}
+            {t("heading")}
           </div>
           <div className="laptop:flex gap-6 hidden">
             <div className="flex gap-2 items-center text-sm">
               <VehicleSort />
             </div>
-            <div className="flex gap-2 items-center">
-              <p className="text-grayFont font-medium text-sm">
-                {u("currency.label")}
-              </p>
-              <Select>
-                <SelectTrigger className="flex border-borderGray border-2 text-grayFont text-xs font-medium rounded-full w-24 h-8 gap-2 px-2">
-                  <SelectValue placeholder={t("currencies.usd")} />
-                  <ChevronDown className="text-grayFont font-medium h-4 w-4" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectGroup>
-                    <SelectLabel>{t("currencies.label")}</SelectLabel>
-                    <SelectItem value="usd">{t("currencies.usd")}</SelectItem>
-                    <SelectItem value="eur">{t("currencies.eur")}</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
             <div className="flex gap-4 items-center text-sm">
               <p className="text-grayFont font-medium text-nowrap">
-                {u("changeListView")}
+                {t("changeListView")}
               </p>
               <div className="flex gap-2">
                 <GridViewIcon
@@ -213,34 +177,21 @@ export default function ExploreVehicles() {
         </div>
       </div>
       <div className="max-w-[1440px] m-auto">
-        <Breadcrumb className="w-full px-4 mobile:px-8 bigDesktop:px-0 py-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/">{t("homepage")}</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{u("pageTitle")}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <Breadcrumbs translations={t} />
         <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
-          <div className="flex gap-4 mobile:gap-6">
-            <VehicleSort />
+          <div className="flex gap-4 mobile:gap-6 overflow-auto p-1">
             <div
               className="flex gap-2 p-2 h-8 text-xs text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full self-center"
               onClick={toggleBooking}
             >
               <EditBookingIcon />
-              {u("booking")}
+              {t("booking")}
             </div>
             <div
               className="border-borderGray h-8 border-2 cursor-pointer rounded-full px-2 text-grayFont font-medium text-xs flex gap-2 items-center"
               onClick={toggleFilters}
             >
-              <FilterIcon className="text-primary" /> {u("filters")}
+              <FilterIcon className="text-primary" /> {t("filters")}
             </div>
             <div
               className={`fixed top-0 right-0 left-0 bottom-0 z-10 w-full fill-mode-forwards	${
@@ -259,7 +210,6 @@ export default function ExploreVehicles() {
             >
               <BookingInfo border={false} label="diffLocation2" />
             </div>
-
             <div
               className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards	${
                 showFilters ? "animate-show-overlay" : "hidden"
@@ -277,7 +227,7 @@ export default function ExploreVehicles() {
             >
               <div className="bg-white p-4 h-screen">
                 <div className="flex justify-between text-lg text-grayFont font-bold mb-4">
-                  {u("filterVehicles")}
+                  {t("filterVehicles")}
                   <CloseMenuIcon
                     className="text-primary cursor-pointer"
                     onClick={toggleFilters}
@@ -286,10 +236,12 @@ export default function ExploreVehicles() {
                 <VehicleFilters filtersId="1" />
               </div>
             </div>
+            <VehicleSort />
           </div>
         </div>
         <div className="flex gap-4 mobile:mx-8 bigDesktop:mx-0">
           <div className="flex flex-col w-full laptop:w-4/5 gap-4">
+            {!loading && vehicles.data.length === 0 && <NoVehiclesFound />}
             <div
               className={`w-full gap-4 ${
                 viewMode === "list"
@@ -303,24 +255,7 @@ export default function ExploreVehicles() {
                       key={index}
                       className="flex flex-col bg-white p-4 gap-4"
                     >
-                      <Skeleton className="h-[196px] w-full" />
-                      <div className="flex gap-2 w-full">
-                        <div className="flex flex-col gap-2 w-[60%] mobile:w-[70%]">
-                          <div className="flex flex-col gap-2">
-                            <Skeleton className="h-8 w-full" />
-                            <Skeleton className="h-8 w-full" />
-                          </div>
-                          <div className="grid grid-cols-2 gap-2">
-                            <Skeleton className="h-[78px] w-full" />
-                            <Skeleton className="h-[78px] w-full" />
-                            <Skeleton className="h-[78px] w-full" />
-                            <Skeleton className="h-[78px] w-full" />
-                          </div>
-                        </div>
-                        <div className="w-[40%] mobile:w-[29%]">
-                          <Skeleton className="h-full w-full" />
-                        </div>
-                      </div>
+                      <ExploreVehiclesSkeleton />
                     </div>
                   ))
                 : vehicles.data.map((vehicle: any) => (
@@ -351,7 +286,7 @@ export default function ExploreVehicles() {
                 <AccordionItem value="filters" className="border-none">
                   <AccordionTrigger>
                     <div className="flex justify-between cursor-pointer text-lg text-grayFont font-bold">
-                      {u("filterVehicles")}
+                      {t("filterVehicles")}
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>

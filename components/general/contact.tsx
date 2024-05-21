@@ -1,7 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 import {
   CallUsIcon,
   CheckIcon,
@@ -9,15 +7,17 @@ import {
   MailIcon,
   VisitUsIcon,
 } from "@/assets/svgs";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 import Image from "next/image";
 import ScrollToTop from "../common/scrollToTop";
 import SideMenu from "../common/sideMenu";
-import { useState } from "react";
 
 interface FormValues {
-  fullName: string;
+  name: string;
   email: string;
-  phoneNumber: string;
+  phone: string;
   message: string;
 }
 
@@ -25,11 +25,12 @@ export default function Contact() {
   const t = useTranslations("Contact");
 
   const [formData, setFormData] = useState<FormValues>({
-    fullName: "",
+    name: "",
     email: "",
-    phoneNumber: "",
+    phone: "",
     message: "",
   });
+  const [isSubmited, setIsSubmitted] = useState(false);
 
   const handleInputChange = (fieldName: keyof FormValues, value: string) => {
     setFormData((prevData) => ({
@@ -38,9 +39,36 @@ export default function Contact() {
     }));
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+
+    const url = "https://rent-api.rubik.dev/api/contact-forms";
+    const headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        console.error("Error sending message:", response.statusText);
+      }
+    } catch (error: any) {
+      console.error("Fetch error:", error.message);
+    }
   };
 
   return (
@@ -121,6 +149,15 @@ export default function Contact() {
                   <p className="text-grayFontSecondary text-sm mt-2 mb-10">
                     {t("formDescription")}
                   </p>
+                  <div
+                    className={`p-2 px-8 mb-4 border-2 border-primary transition-opacity duration-300 ${
+                      isSubmited ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <p className="text-sm text-left">
+                      {t("successMessageTitle")}
+                    </p>
+                  </div>
                   <form
                     onSubmit={onSubmit}
                     className="flex flex-col gap-2 text-right"
@@ -130,15 +167,16 @@ export default function Contact() {
                         type="text"
                         placeholder={t("fullNamePlaceholder")}
                         className="w-full px-8 py-3 border border-borderGray rounded outline-primary"
-                        value={formData.fullName}
+                        value={formData.name}
+                        required
                         onChange={(e) =>
-                          handleInputChange("fullName", e.target.value)
+                          handleInputChange("name", e.target.value)
                         }
                       />
                       <CheckIcon
                         className={`absolute transition-opacity right-5 top-5
                       ${
-                        formData.fullName.trim() !== ""
+                        formData.name.trim() !== ""
                           ? "opacity-100"
                           : "opacity-0"
                       }`}
@@ -150,6 +188,7 @@ export default function Contact() {
                         placeholder={t("emailPlaceholder")}
                         className="w-full px-8 py-3 border border-borderGray rounded outline-primary"
                         value={formData.email}
+                        required
                         onChange={(e) =>
                           handleInputChange("email", e.target.value)
                         }
@@ -157,7 +196,10 @@ export default function Contact() {
                       <CheckIcon
                         className={`absolute transition-opacity right-5 top-5
                       ${
-                        formData.email.trim() !== ""
+                        formData.email &&
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$|^[^\s@]+@[^\s@]+$/.test(
+                          formData.email
+                        )
                           ? "opacity-100"
                           : "opacity-0"
                       }`}
@@ -168,27 +210,28 @@ export default function Contact() {
                         type="text"
                         placeholder={t("phoneNumberPlaceholder")}
                         className="w-full px-8 py-3 border border-borderGray rounded outline-primary"
-                        value={formData.phoneNumber}
+                        value={formData.phone}
+                        required
                         onChange={(e) =>
-                          handleInputChange("phoneNumber", e.target.value)
+                          handleInputChange("phone", e.target.value)
                         }
                       />
                       <CheckIcon
                         className={`absolute transition-opacity right-5 top-5
                       ${
-                        formData.phoneNumber.trim() !== ""
+                        formData.phone.trim() !== ""
                           ? "opacity-100"
                           : "opacity-0"
                       }`}
                       />
                     </div>
-
                     <div className="relative">
                       <textarea
                         placeholder={t("messagePlaceholder")}
                         rows={4}
                         className="w-full px-8 py-3 border border-borderGray rounded outline-primary resize-none"
                         value={formData.message}
+                        required
                         onChange={(e) =>
                           handleInputChange("message", e.target.value)
                         }

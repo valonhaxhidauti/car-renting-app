@@ -90,7 +90,7 @@ export default function Header({
           {authenticated ? (
             <Select onOpenChange={onSelectClicked}>
               <SelectTrigger
-                className={`text-white border-borderGray border w-fit gap-4 flex tablet:hidden font-bold h-[34px] px-6 items-center rounded-full`}
+                className={`text-white border-borderGray border w-fit gap-4 flex tablet:hidden font-bold h-[34px] px-6 items-center rounded-full mb-2 tablet:mb-0`}
               >
                 <LoginIcon className="text-white" />
                 {t("myAccount")}
@@ -126,13 +126,13 @@ export default function Header({
           ) : (
             <Link
               href="/account"
-              className="text-white border-white flex mb-3 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
+              className="text-white border-white flex mb-2 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
             >
               <LoginIcon className="text-white" />
               {t("loginRegister")}
             </Link>
           )}
-          <div className="flex gap-4 mb-3 tablet:mb-0">
+          {/* <div className="flex gap-4 mb-3 tablet:mb-0">
             <Select>
               <SelectTrigger className="flex tablet:hidden border-white text-white w-[96px] border rounded-full h-6 py-4 px-2 g-2">
                 <SelectValue placeholder={t("currencies.usd")} />
@@ -145,12 +145,12 @@ export default function Header({
                   <SelectItem value="eur">{t("currencies.eur")}</SelectItem>
                 </SelectGroup>
               </SelectContent>
-            </Select>
+            </Select> */}
             <LanguageSelector
               isOpen={isOpen}
-              triggerClass="border-white text-white flex tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2 g-2"
+              triggerClass="border-white text-white flex mb-2 tablet:mb-0 tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2"
             />
-          </div>
+          {/* </div> */}
           <Link href="/" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("homepage")}</p>
             <div className="hidden tablet:block rotate-180">
@@ -259,7 +259,7 @@ export default function Header({
             </div>
           </div>
           <div className="flex justify-end gap-8 items-center">
-            {isOpen && (
+            {/* {isOpen && (
               <Select>
                 <SelectTrigger className="hidden tablet:flex border-white hover:opacity-75 text-white w-[96px] border rounded-full ">
                   <SelectValue placeholder={t("currencies.usd")} />
@@ -275,7 +275,7 @@ export default function Header({
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            )}
+            )} */}
             {authenticated ? (
               <Select onOpenChange={onSelectClicked}>
                 <SelectTrigger

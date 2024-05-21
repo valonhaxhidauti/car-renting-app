@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 import { EasyIcon, EconomicIcon, EverywhereIcon } from "@/assets/svgs";
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import ScrollToTop from "../common/scrollToTop";
 import SideMenu from "../common/sideMenu";
@@ -143,9 +144,12 @@ export default function AboutUs() {
                     })}
                   </h1>
                   <p className="text-sm">{t("callToAction.description")}</p>
-                  <button className="px-10 py-3 hover:bg-slate-50 bg-white text-primary text-sm w-fit font-medium">
+                  <Link
+                    href="/explore"
+                    className="px-10 py-3 hover:bg-slate-50 bg-white text-primary text-sm w-fit font-medium"
+                  >
                     {t("callToAction.button")}
-                  </button>
+                  </Link>
                   <Image
                     src="/aboutUsCar.png"
                     alt="Car Photo"

@@ -129,19 +129,27 @@
         "emailPlaceholder": "E-Mail Address",
         "phoneNumberPlaceholder": "Phone Number",
         "messagePlaceholder": "Your Message",
-        "sendMessage": "Send Message"
+        "sendMessage": "Send Message",
+        "successMessageTitle": "Thank you for your message!"
     },
     "ExploreVehicles": {
-        "pageTitle": "Explore Vehicles",
+        "heading": "Explore Vehicles",
+        "breadcrumb": {
+            "homepage": "Homepage"
+        },
         "currency": {
             "label": "Currency",
             "usd": "USD",
             "eur": "EUR"
         },
+        "notFound": {
+            "title": "No vehicles found",
+            "description": "Try adjusting the filters to find what you're looking for."
+        },
         "sortBy": "Sort by:",
         "default": "Default",
-        "modelYearAsc": "Model Year: Low to High",
-        "modelYearDesc": "Model Year: High to Low",
+        "modelYearAsc": "Model Year: Old to New",
+        "modelYearDesc": "Model Year: New to Old",
         "priceDesc": "Price: High to Low",
         "priceAsc": "Price: Low to High",
         "changeListView": "Change List View",
@@ -297,7 +305,7 @@
     "SideMenu": {
         "pages": "Pages",
         "about": "About Us",
-        "faq": "Faq",
+        "faq": "FAQ",
         "rentalTerms": "Rental Terms",
         "privacyPolicy": "Privacy Policy",
         "contact": "Contact"
