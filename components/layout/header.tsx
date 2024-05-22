@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from 'next-view-transitions'
+import { Link } from "next-view-transitions";
 import {
   AccountIcon,
   CloseMenuIcon,
@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useTranslations } from "next-intl";
 import LanguageSelector from "../common/languageSelector";
 import { useRouter } from "next/navigation";
@@ -41,13 +41,14 @@ export default function Header({
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [authenticated, setAuthenticated] = useState<string | null>(null);
-  const [shown, setShown] = useState(false); 
-  
+  const [shown, setShown] = useState(false);
+  const params = useCustomSearchParams();
+
   useEffect(() => {
     if (shown) {
-      document.body.style.setProperty('overflow-y', 'auto', 'important');
+      document.body.style.setProperty("overflow-y", "auto", "important");
     } else {
-      document.body.style.removeProperty('overflow-y');
+      document.body.style.removeProperty("overflow-y");
     }
   }, [shown]);
 
@@ -67,9 +68,10 @@ export default function Header({
     setIsOpen(!isOpen);
   };
 
-  function onSelectClicked(){
-    setShown(!shown)
+  function onSelectClicked() {
+    setShown(!shown);
   }
+
   return (
     <>
       <nav
@@ -146,10 +148,10 @@ export default function Header({
                 </SelectGroup>
               </SelectContent>
             </Select> */}
-            <LanguageSelector
-              isOpen={isOpen}
-              triggerClass="border-white text-white flex mb-2 tablet:mb-0 tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2"
-            />
+          <LanguageSelector
+            isOpen={isOpen}
+            triggerClass="border-white text-white flex mb-2 tablet:mb-0 tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2"
+          />
           {/* </div> */}
           <Link href="/" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("homepage")}</p>
@@ -158,7 +160,10 @@ export default function Header({
               <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
             </div>
           </Link>
-          <Link href="/explore" className="flex group items-center gap-12">
+          <Link
+            href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+            className="flex group items-center gap-12 cursor-pointer"
+          >
             <p className="group-hover:font-bold">{t("exploreVehicles")}</p>
             <div className="hidden tablet:block rotate-180">
               <div className="w-40 h-1"></div>
@@ -225,7 +230,9 @@ export default function Header({
                 <LogoMenu />
               </Link>
             ) : (
-              <Link aria-label="homepage" href="/">{background ? <LogoLight /> : <Logo />}</Link>
+              <Link aria-label="homepage" href="/">
+                {background ? <LogoLight /> : <Logo />}
+              </Link>
             )}
             <div
               className={
@@ -241,8 +248,8 @@ export default function Header({
                 {t("homepage")}
               </Link>
               <Link
-                href="/explore"
-                className={`hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
+                href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                className={`cursor-pointer hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
                   background ? "text-white" : "text-grayFont"
                 }`}
               >

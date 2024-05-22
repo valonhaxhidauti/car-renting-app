@@ -129,7 +129,7 @@ export default function VehicleCard({
                   </p>
                 </div>
                 <Link
-                  href={`/explore/1?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                  href={`/explore/vehicle/?vehicleId=${vehicle.id}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
                   className="px-8 py-3 text-white text-xs hover:bg-secondary bg-primary text-nowrap transition-all"
                 >
                   {t("rentNow")}
