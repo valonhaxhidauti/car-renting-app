@@ -134,25 +134,10 @@ export default function Header({
               {t("loginRegister")}
             </Link>
           )}
-          {/* <div className="flex gap-4 mb-3 tablet:mb-0">
-            <Select>
-              <SelectTrigger className="flex tablet:hidden border-white text-white w-[96px] border rounded-full h-6 py-4 px-2 g-2">
-                <SelectValue placeholder={t("currencies.usd")} />
-                <ChevronDown className="text-white h-4 w-4" />
-              </SelectTrigger>
-              <SelectContent className="bg-white">
-                <SelectGroup>
-                  <SelectLabel>{t("currencies.label")}</SelectLabel>
-                  <SelectItem value="usd">{t("currencies.usd")}</SelectItem>
-                  <SelectItem value="eur">{t("currencies.eur")}</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select> */}
           <LanguageSelector
             isOpen={isOpen}
             triggerClass="border-white text-white flex mb-2 tablet:mb-0 tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2"
           />
-          {/* </div> */}
           <Link href="/" className="flex group items-center gap-12">
             <p className="group-hover:font-bold">{t("homepage")}</p>
             <div className="hidden tablet:block rotate-180">
@@ -266,23 +251,6 @@ export default function Header({
             </div>
           </div>
           <div className="flex justify-end gap-8 items-center">
-            {/* {isOpen && (
-              <Select>
-                <SelectTrigger className="hidden tablet:flex border-white hover:opacity-75 text-white w-[96px] border rounded-full ">
-                  <SelectValue placeholder={t("currencies.usd")} />
-                  <ChevronDown
-                    className={`${isOpen ? "text-white" : ""} h-4 w-4`}
-                  />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectGroup>
-                    <SelectLabel>{t("currencies.label")}</SelectLabel>
-                    <SelectItem value="usd">{t("currencies.usd")}</SelectItem>
-                    <SelectItem value="eur">{t("currencies.eur")}</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            )} */}
             {authenticated ? (
               <Select onOpenChange={onSelectClicked}>
                 <SelectTrigger

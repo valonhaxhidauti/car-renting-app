@@ -115,7 +115,7 @@ export default function VehicleCard({
               </div>
               <div className="flex flex-col justify-between items-center p-4 bg-primary-background text-secondary">
                 <div className="h-full content-center">
-                  <sup className="text-xl font-bold top-0">$</sup>
+                  <sup className="text-xs font-bold top-0">CHF</sup>
                   <span className="text-4xl font-bold">
                     {vehicle.attributes.base_price_in_cents}
                   </span>
@@ -213,7 +213,7 @@ export default function VehicleCard({
               </div>
               <div className="flex flex-col justify-between items-center p-4 bg-primary-background text-secondary">
                 <div className="h-full content-center">
-                  <sup className="text-xl font-bold top-0">$</sup>
+                  <sup className="text-xs font-bold top-0">CHF</sup>
                   <span className="text-4xl font-bold">
                     {vehicle.attributes.base_price_in_cents}
                   </span>

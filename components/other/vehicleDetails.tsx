@@ -148,7 +148,7 @@ export default function VehicleDetails() {
                     <div className="flex justify-between gap-2">
                       <div className="flex flex-col">
                         <div className="flex flex-col justify-between pt-2 mb-2">
-                          <p className="text-grayFont font-medium text-lg ">
+                          <p className="text-grayFont font-medium text-lg">
                             {vehicle.attributes.name.split(" (")[0]}
                           </p>
                           <p className="text-graySecondary font-medium text-xs">
@@ -185,6 +185,14 @@ export default function VehicleDetails() {
                               <SeatIcon className="w-10 text-graySecondary" />
                               <p className="text-xs text-grayFont mobile:text-sm">
                                 {vehicle.attributes.seat_capacity}
+                              </p>
+                            </div>
+                            <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <p className="text-sm font-medium text-grayFont mobile:text-base">
+                                {t("vehiclePrice")}
+                              </p>
+                              <p className="text-sm font-bold text-primary mobile:text-base">
+                                CHF {vehicle.attributes.base_price_in_cents},00
                               </p>
                             </div>
                           </div>

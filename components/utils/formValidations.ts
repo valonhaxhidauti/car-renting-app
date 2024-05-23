@@ -15,7 +15,7 @@ const isEmailValid = (email: string) => {
 };
 
 const isPhoneValid = (phone: string) => {
-  const phonePattern = /^\d{12,}$/;
+  const phonePattern = /^\d{10,}$/;
   return phone.trim() !== "" && phonePattern.test(phone.trim());
 };
 

@@ -37,7 +37,7 @@ export default function BookingPrice(props: any) {
           <div className="flex justify-between text-sm border-b border-borderGray py-3">
             <p className="font-bold">{t("vehicleValue")}</p>
             <p className="font-bold text-primary">
-              ${(props.prices.vehicle * props.daysDifference).toFixed(2)}
+              CHF {(props.prices.vehicle * props.daysDifference).toFixed(2)}
             </p>
           </div>
           {props.optionalItemsTotal > 0 && (
@@ -45,7 +45,7 @@ export default function BookingPrice(props: any) {
               <div className="flex justify-between text-sm">
                 <p className="font-bold">{t("optionalItems")}</p>
                 <p className="font-bold text-primary">
-                  ${props.optionalItemsTotal.toFixed(2)}
+                  CHF {props.optionalItemsTotal.toFixed(2)}
                 </p>
               </div>
               {props.optionalItems.map(
@@ -61,7 +61,7 @@ export default function BookingPrice(props: any) {
                       <div className="flex justify-between w-full">
                         <p className="font-light text-sm">{item.name}</p>
                         <p className="font-light text-sm text-primary">
-                          $
+                          CHF{" "}
                           {(
                             item.quantity *
                             item.price *
@@ -87,7 +87,7 @@ export default function BookingPrice(props: any) {
             <div className="flex justify-between">
               <p className="font-bold">{t("totalValue")}</p>
               <p className="font-bold text-primary">
-                ${props.totalPrice.toFixed(2)}
+                CHF {props.totalPrice.toFixed(2)}
               </p>
             </div>
           </div>

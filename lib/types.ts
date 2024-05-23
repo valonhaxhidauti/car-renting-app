@@ -41,6 +41,15 @@ export interface Filters {
   carType: any[];
 }
 
+export interface CarAdData {
+  id: string;
+  attributes: {
+    name: string;
+    base_price_in_cents: string;
+  };
+  relationships: any;
+}
+
 export interface VehicleData {
   data: any[];
   links: any;

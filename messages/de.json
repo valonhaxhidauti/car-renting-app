@@ -142,11 +142,6 @@
         "breadcrumb": {
             "homepage": "Startseite"
         },
-        "currency": {
-            "label": "Währung",
-            "usd": "USD",
-            "eur": "EUR"
-        },
         "notFound": {
             "title": "Keine Fahrzeuge gefunden",
             "description": "Versuche, die Filter anzupassen, um zu finden, wonach du suchst."
@@ -218,11 +213,6 @@
         "rentalTerms": "Mietbedingungen",
         "privacyPolicy": "Datenschutzrichtlinie",
         "contact": "Kontakt",
-        "currencies": {
-            "label": "Währungen",
-            "usd": "USD ($)",
-            "eur": "EUR (€)"
-        },
         "languages": {
             "label": "Sprachen",
             "english": "Englisch",
@@ -330,6 +320,7 @@
         "booking": "Buchung",
         "vehicleDetails": "Fahrzeugdetails",
         "payment": "Zahlung",
+        "vehiclePrice": "Fahrzeugpreis",
         "pageTitle": "Ihre Buchung",
         "vehicleValue": "Fahrzeugwert",
         "optionalItems": "Optionale Artikel",
