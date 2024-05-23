@@ -7,14 +7,23 @@ import {
   isPhoneValid,
   isPasswordValid,
   isPasswordMatched,
+  isPasswordStrong,
 } from "../utils/formValidations";
 import { RegisterFormValues } from "@/lib/types";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "@/assets/svgs";
+import { ShieldAlert } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
-import { useRouter } from "next/navigation";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 interface FormValues {
   name: string;
@@ -39,10 +48,14 @@ export default function RegisterForm() {
     phoneInvalid: t("validation.phoneInvalid"),
     passwordRequired: t("validation.passwordRequired"),
     passwordWeak: t("validation.passwordWeak"),
+    passwordShortLength: t("validation.passwordShortLength"),
+    passwordNoLowercase: t("validation.passwordNoLowercase"),
+    passwordNoUppercase: t("validation.passwordNoUppercase"),
+    passwordNoNumber: t("validation.passwordNoNumber"),
+    passwordNoSpecialChar: t("validation.passwordNoSpecialChar"),
     passwordConfirmRequired: t("validation.passwordConfirmRequired"),
     passwordsNotMatch: t("validation.passwordsNotMatch"),
   };
-
   // const [authenticated, setAuthenticated] = useState(
   //   localStorage.getItem("authenticated") === "true"
   // );
@@ -59,6 +72,7 @@ export default function RegisterForm() {
   });
 
   const [errors, setErrors] = useState<Partial<RegisterFormValues>>({});
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleInputChange = (fieldName: keyof FormValues, value: string) => {
     if (fieldName === "phone") {
@@ -90,6 +104,7 @@ export default function RegisterForm() {
 
     const errors = RegisterFormValidation(formData, translations);
     setErrors(errors);
+    setFormSubmitted(true);
 
     if (Object.keys(errors).length === 0) {
       try {
@@ -274,10 +289,37 @@ export default function RegisterForm() {
                   onChange={(e) =>
                     handleInputChange("password", e.target.value)
                   }
-                  className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
+                  className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-9${
                     errors.password && " outline outline-2 outline-red-500"
                   }`}
                 />
+                {isPasswordStrong(formData.password, translations) &&
+                  formSubmitted && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger
+                          id="passwordTooltip"
+                          className="absolute z-50 cursor-help right-3 bottom-[16px]"
+                        >
+                          <ShieldAlert
+                            size={24}
+                            className={`text-primary 
+                          ${
+                            isPasswordStrong(formData.password, translations)
+                              ? "block"
+                              : "hidden"
+                          }`}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-primary">
+                          <p className="text-white">
+                            {isPasswordStrong(formData.password, translations)}
+                          </p>
+                          <TooltipArrow className="fill-primary" />
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                 <CheckIcon
                   className={`absolute transition-opacity right-4 bottom-[22px] ${
                     isPasswordValid(formData.password)

@@ -1,8 +1,14 @@
-import React from "react";
-import BookingInfo from "./bookingInfo";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import { Skeleton } from "../ui/skeleton";
+import BookingInfo from "./bookingInfo";
 
 export default function BookingPrice(props: any) {
   const t = useTranslations("VehicleDetails");
@@ -93,15 +99,22 @@ export default function BookingPrice(props: any) {
               {t("continueButton")}
             </Link>
           ) : (
-            <button
-              className="px-8 py-3 text-white bg-gray-300 cursor-not-allowed relative"
-              disabled
-            >
-              {t("continueButton")}
-              <span className="tooltipText absolute bg-primary text-white text-xs py-1 px-2 rounded-md opacity-0 pointer-events-none transition-opacity duration-300">
-                {t("fillBookingTooltip")}
-              </span>
-            </button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <button
+                    className="px-8 py-3 text-white cursor-help bg-gray-300 relative w-full"
+                    disabled
+                  >
+                    {t("continueButton")}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-primary">
+                  <p className="text-white">{t("fillBookingTooltip")}</p>
+                  <TooltipArrow className="fill-primary" />
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
       ) : (
@@ -114,29 +127,6 @@ export default function BookingPrice(props: any) {
           <Skeleton className="h-10 w-full" />
         </div>
       )}
-      <style jsx>{`
-        .tooltipText {
-          bottom: calc(100% + 5px);
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .tooltipText::before {
-          content: '';
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          border-width: 5px;
-          border-style: solid;
-          border-color: transparent;
-          border-top-color: #1e7ff6;
-          transform: translateX(-50%);
-        }
-
-        button:hover .tooltipText, a:hover .tooltipText {
-          opacity: 1;
-        }
-      `}</style>
     </div>
   );
 }

@@ -105,6 +105,11 @@
             "passwordRequired": "Password is required",
             "passwordInvalid": "Password is invalid",
             "passwordWeak": "Password is not strong enough",
+            "passwordShortLength": "Password must be at least 8 characters long",
+            "passwordNoLowercase": "Password must contain at least one lowercase letter",
+            "passwordNoUppercase": "Password must contain at least one uppercase letter",
+            "passwordNoNumber": "Password must contain at least one number",
+            "passwordNoSpecialChar": "Password must contain at least one special character",
             "passwordConfirmRequired": "Confirm password",
             "passwordsNotMatch": "Passwords do not match"
         },

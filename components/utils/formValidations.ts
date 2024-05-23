@@ -15,7 +15,7 @@ const isEmailValid = (email: string) => {
 };
 
 const isPhoneValid = (phone: string) => {
-  const phonePattern = /^\d{9,}$/;
+  const phonePattern = /^\d{12,}$/;
   return phone.trim() !== "" && phonePattern.test(phone.trim());
 };
 
@@ -24,10 +24,37 @@ const isPasswordValid = (password: string) => {
   return password.trim() !== "" && passwordPattern.test(password);
 };
 
+const isPasswordStrong = (
+  password: string,
+  translations: Record<string, string>
+): string | null => {
+
+  if (password.length < 8) {
+    return translations.passwordShortLength;
+  }
+
+  if (!/[a-z]/.test(password)) {
+    return translations.passwordNoLowercase;
+  }
+
+  if (!/[A-Z]/.test(password)) {
+    return translations.passwordNoUppercase;
+  }
+
+  if (!/\d/.test(password)) {
+    return translations.passwordNoNumber;
+  }
+
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    return translations.passwordNoSpecialChar;
+  }
+
+  return null; 
+};
+
 const isPasswordMatched = (password: string, passwordConfirm: string) => {
   return (
     password.trim() !== "" &&
-    passwordConfirm.length >= 8 &&
     password === passwordConfirm
   );
 };
@@ -167,5 +194,6 @@ export {
   isEmailValid,
   isPhoneValid,
   isPasswordValid,
+  isPasswordStrong,
   isPasswordMatched,
 };
