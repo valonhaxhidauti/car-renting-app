@@ -270,6 +270,8 @@
         "findYourCar": "Find your car",
         "locale": "en-gb",
         "pickupDate": "Pickup Date",
+        "invalidDateError":"Drop off date should be at least 1 hour after pickup date.",
+        "noDateError":"Please fill in the dates.",
         "rentLocation": {
             "placeholder": "Rent Location",
             "requiredError": "Required Rent Location"

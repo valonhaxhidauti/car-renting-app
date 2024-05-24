@@ -1,8 +1,26 @@
 // "use client"
-// import { X } from "lucide-react";
-// import React from "react";
 
-// const LocationsModal = ({ showModal, toggleModal, locations, handleLocationSelect }) => {
+// import { X } from "lucide-react";
+// import React, { useState } from "react";
+
+// const LocationsModal = ({ showModal, toggleModal,  handleLocationSelect }) => {
+//     const [locations, setLocations] = useState([]);
+
+//     const fetchLocations = async () => {
+//         const url = new URL("https://rent-api.rubik.dev/api/locations");
+//         // const params = { "filter[search]": "Latvia" };
+//         // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+    
+//         const headers = {
+//           "Content-Type": "application/json",
+//           Accept: "application/json",
+//         };
+    
+//         const response = await fetch(url, { method: "GET", headers });
+//         const data = await response.json();
+//         console.log(data);
+//         setLocations(data.data); // Assuming the API response is an array of locations
+//       };
   
 //   return (
 //     <div className={`absolute z-50 max-w-lg bg-white shadow-xl border-borderGray border w-[90vw] top-12 p-8 rounded-xl ${showModal ? "block" : "hidden"}`}>

@@ -19,7 +19,7 @@ export default function BookingInfo({
     ${border ? "border-borderBooking border-2" : ""}`}
     >
       <div className="flex justify-between text-lg text-grayFont font-bold">
-        {t("bookingInformation")} <RentForm modal={true} id={label} />
+        {t("bookingInformation")} <RentForm isModal={true} id={label} />
       </div>
       {params.rentLocation &&
         params.returnLocation &&

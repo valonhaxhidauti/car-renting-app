@@ -1,15 +1,13 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
 import { usePathname, useRouter } from "next/navigation";
-import { FormControl, FormHelperText } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/de";
 import "dayjs/locale/en-gb";
@@ -17,63 +15,60 @@ import "dayjs/locale/en-gb";
 
 interface IFormInputs {
   rentLocation: string;
-  showReturnLocation: boolean;
   returnLocation: string;
-  pickupDate: string;
-  dropOffDate: string;
+  pickupDate: Dayjs | null;
+  dropOffDate: Dayjs | null;
 }
 
 export default function RentForm({
-  modal,
+  isModal,
   id,
 }: {
-  modal: boolean;
+  isModal: boolean;
   id?: string;
 }) {
   const t = useTranslations("RentForm");
   const router = useRouter();
-  const {
-    register,
-    watch,
-    formState: { errors },
-    handleSubmit,
-    setValue,
-  } = useForm<IFormInputs>();
-  const watchShowReturnLocation = watch("showReturnLocation", false);
-  const [pickupDate, setPickupDate] = useState<Dayjs | null>(null);
-  const [dropOffDate, setDropOffDate] = useState<Dayjs | null>(null);
+
+  const [showReturnLocation, setShowReturnLocation] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState("");
-  const [locations, setLocations] = useState([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const [formData, setFormData] = useState<IFormInputs>({
+    rentLocation: "",
+    returnLocation: "",
+    pickupDate: dayjs().add(1, "day").set("hour", 10).set("minute", 0),
+    dropOffDate: dayjs().add(2, "day").set("hour", 18).set("minute", 0),
+  });
 
   const isHomePage = usePathname() === ("/en" || "/de");
 
-  const handlePickupDateChange = (date: Dayjs | null) => {
-    if (date) {
-      setPickupDate(dayjs(date));
-    }
-  };
+  const handleInputChange =
+    (field: keyof IFormInputs) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, [field]: event.target.value });
+    };
 
-  const handleDropOffDateChange = (date: Dayjs | null) => {
-    if (date) {
-      setDropOffDate(dayjs(date));
-    }
-  };
+  const handleDateChange =
+    (field: keyof IFormInputs) => (date: Dayjs | null) => {
+      setFormData({ ...formData, [field]: date });
+    };
 
-  const onSubmit = (data: IFormInputs) => {
-    const { rentLocation, showReturnLocation, returnLocation } = data;
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { rentLocation, returnLocation, pickupDate, dropOffDate } = formData;
 
     if (pickupDate && dropOffDate) {
       const timeDifferenceHours = dropOffDate.diff(pickupDate, "hours");
 
       if (timeDifferenceHours < 1) {
-        alert("Drop off date should be at least 1 hour after pickup date.");
+        setErrorMessage(t("invalidDateError"));
         return;
       }
     }
 
     if (!pickupDate || !dropOffDate) {
-      alert("Please fill in the dates.");
+      setErrorMessage(t("noDateError"));
       return;
     }
 
@@ -97,7 +92,7 @@ export default function RentForm({
       router.push(`?${queryString}`);
     }
 
-    if (showModal && Object.keys(errors).length === 0) {
+    if (showModal) {
       setShowModal(false);
     }
   };
@@ -106,38 +101,11 @@ export default function RentForm({
     setShowModal(!showModal);
   };
 
-  // const handleLocationSelect = (location) => {
-  //   if (modalType === "rentLocation") {
-  //     setValue("rentLocation", location);
-  //   } else if (modalType === "returnLocation") {
-  //     setValue("returnLocation", location);
-  //   }
-  //   setShowModal(false);
-  // };
-
-  // const handleFocus = (type) => {
-  //   setModalType(type);
-  //   fetchLocations();
-  //   setShowModal(true);
-  // };
-
-  const fetchLocations = async () => {
-    const url = new URL("https://rent-api.rubik.dev/api/locations");
-    // const params = { "filter[search]": "Latvia" };
-    // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-
-    const headers = {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-
-    const response = await fetch(url, { method: "GET", headers });
-    const data = await response.json();
-    console.log(data);
-    setLocations(data.data); // Assuming the API response is an array of locations
+  const handleCheckboxClick = () => {
+    setShowReturnLocation(!showReturnLocation);
   };
 
-  return modal ? (
+  return isModal ? (
     <>
       <EditBookingIcon
         className="w-6 h-6 cursor-pointer"
@@ -158,78 +126,77 @@ export default function RentForm({
         <div className="absolute top-4 right-4 rounded-full p-2 flex hover:bg-neutral-100 active:bg-neutral-200 cursor-pointer">
           <X onClick={toggleModal} />
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={submitForm}>
           <div className="w-full desktop:rounded-none">
             <div className="flex flex-col w-full gap-2">
               <div
                 className={`flex flex-col ${
-                  watchShowReturnLocation ? "gap-2" : "gap-0"
+                  showReturnLocation ? "gap-2" : "gap-0"
                 }`}
               >
-                <input
-                  type="text"
-                  {...register("rentLocation", { required: true })}
-                  placeholder={
-                    errors.rentLocation
-                      ? t("rentLocation.requiredError")
-                      : t("rentLocation.placeholder")
-                  }
-                  className={`w-full text-base p-2 border-b font-light ${
-                    errors.rentLocation ? "placeholder:text-red-500" : ""
-                  }`}
-                  // onFocus={() => handleFocus("rentLocation")}
-                />
-                <input
-                  type="text"
-                  {...register(
-                    "returnLocation",
-                    watchShowReturnLocation
-                      ? { required: true }
-                      : { required: false }
-                  )}
-                  placeholder={
-                    errors.returnLocation
-                      ? t("returnLocation.requiredError")
-                      : t("returnLocation.placeholder")
-                  }
-                  className={`${
-                    watchShowReturnLocation
-                      ? "h-full w-full p-2 text-base border-b font-light"
-                      : "w-0 h-0"
-                  } ${errors.returnLocation ? "placeholder:text-red-500" : ""}`}
-                  // onFocus={() => handleFocus("returnLocation")}
-                />
+                <div className="w-full relative border-b font-light text-base">
+                  <input
+                    type="text"
+                    autoComplete="off"
+                    required
+                    placeholder={t("rentLocation.placeholder")}
+                    className="w-full p-2"
+                    value={formData.rentLocation}
+                    onChange={handleInputChange("rentLocation")}
+                  />
+                </div>
+                <div
+                  className={`w-full relative font-light text-base ${
+                    showReturnLocation
+                      ? "h-full duration-300 w-full border-b "
+                      : "w-0 h-0 duration-100"
+                  } `}
+                >
+                  <input
+                    type="text"
+                    autoComplete="off"
+                    placeholder={t("returnLocation.placeholder")}
+                    required={showReturnLocation}
+                    className={` ${
+                      showReturnLocation
+                        ? "h-full duration-300 w-full p-2"
+                        : "w-0 h-0 duration-100"
+                    } `}
+                    value={formData.returnLocation}
+                    onChange={handleInputChange("returnLocation")}
+                  />
+                </div>
                 <LocalizationProvider
                   dateAdapter={AdapterDayjs}
                   adapterLocale={t("locale")}
                 >
                   <div className="w-full border-b">
-                      <MobileDateTimePicker
-                        className="w-full"
-                        disablePast
-                        value={pickupDate}
-                        onChange={handlePickupDateChange}
-                        slotProps={{
-                          textField: { placeholder: t("pickupDate") },
-                        }}
-                        sx={{
-                          ".MuiInputBase-root input": {
-                            padding: "8px",
-                            fontWeight: "300",
-                            cursor: "pointer",
-                          },
-                          ".MuiInputBase-root fieldset": {
-                            border: "none !important",
-                          },
-                        }}
-                      />
+                    <DateTimePicker
+                      className="w-full"
+                      disablePast
+                      value={formData.pickupDate}
+                      onChange={handleDateChange("pickupDate")}
+                      slotProps={{
+                        textField: { placeholder: t("pickupDate") },
+                      }}
+                      sx={{
+                        ".MuiInputBase-root input": {
+                          padding: "8px",
+                          fontWeight: "300",
+                          cursor: "pointer",
+                        },
+                        ".MuiInputBase-root fieldset": {
+                          border: "none !important",
+                        },
+                      }}
+                    />
                   </div>
                   <div className="w-full border-b">
-                    <MobileDateTimePicker
+                    <DateTimePicker
                       className="w-full"
-                      value={dropOffDate}
+                      value={formData.dropOffDate}
                       disablePast
-                      onChange={handleDropOffDateChange}
+                      onChange={handleDateChange("dropOffDate")}
                       slotProps={{
                         textField: { placeholder: t("dropOffDate") },
                       }}
@@ -247,6 +214,13 @@ export default function RentForm({
                   </div>
                 </LocalizationProvider>
               </div>
+              <p
+                className={`mt-2 text-base font-medium transition-opacity text-primary ${
+                  errorMessage ? "opacity-100" : "opacity-0"
+                } `}
+              >
+                {errorMessage}
+              </p>
               <button
                 type="submit"
                 className="w-24 flex items-center justify-center bg-primary hover:bg-secondary text-white px-4 py-2 transition"
@@ -260,7 +234,7 @@ export default function RentForm({
               id={id}
               type="checkbox"
               className="w-4 h-4 cursor-pointer"
-              {...register("showReturnLocation")}
+              onClick={handleCheckboxClick}
             />
             <label
               htmlFor={id}
@@ -277,7 +251,7 @@ export default function RentForm({
       <p className="pb-4 font-bold leading-4 text-white tablet:text-grayFont text-lg">
         {t("findYourCar")}
       </p>
-      <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-full" onSubmit={submitForm}>
         <div className="shadow-grayPrimary w-full p-4 pt-2 rounded-md bg-white">
           <div className="flex flex-col relative w-full">
             <div className="w-full flex flex-col bg-white items-start">
@@ -285,27 +259,16 @@ export default function RentForm({
                 <input
                   type="text"
                   autoComplete="off"
-                  {...register("rentLocation", { required: true })}
-                  placeholder={
-                    errors.rentLocation
-                      ? t("rentLocation.requiredError")
-                      : t("rentLocation.placeholder")
-                  }
-                  className={`w-full p-2 ${
-                    errors.rentLocation ? "placeholder:text-red-500" : ""
-                  }`}
-                  // onFocus={() => handleFocus("rentLocation")}
+                  required
+                  placeholder={t("rentLocation.placeholder")}
+                  className="w-full p-2"
+                  value={formData.rentLocation}
+                  onChange={handleInputChange("rentLocation")}
                 />
-                {/* <LocationsModal
-                  showModal={showModal}
-                  toggleModal={toggleModal}
-                  locations={locations}
-                  handleLocationSelect={handleLocationSelect}
-                /> */}
               </div>
               <div
                 className={`w-full relative ${
-                  watchShowReturnLocation
+                  showReturnLocation
                     ? "h-full transition-all duration-300 w-full border-b "
                     : "w-0 h-0 transition-all duration-100"
                 } `}
@@ -313,41 +276,27 @@ export default function RentForm({
                 <input
                   type="text"
                   autoComplete="off"
-                  {...register(
-                    "returnLocation",
-                    watchShowReturnLocation
-                      ? { required: true }
-                      : { required: false }
-                  )}
-                  placeholder={
-                    errors.returnLocation
-                      ? t("returnLocation.requiredError")
-                      : t("returnLocation.placeholder")
-                  }
+                  required={showReturnLocation}
+                  placeholder={t("returnLocation.placeholder")}
                   className={` ${
-                    watchShowReturnLocation
+                    showReturnLocation
                       ? "h-full transition-all duration-300 w-full p-2"
                       : "w-0 h-0 transition-all duration-100"
-                  } ${errors.returnLocation ? "placeholder:text-red-500" : ""}`}
-                  // onFocus={() => handleFocus("returnLocation")}
+                  } `}
+                  value={formData.returnLocation}
+                  onChange={handleInputChange("returnLocation")}
                 />
-                {/* <LocationsModal
-                  showModal={showModal}
-                  toggleModal={toggleModal}
-                  locations={locations}
-                  handleLocationSelect={handleLocationSelect}
-                /> */}
               </div>
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
                 adapterLocale={t("locale")}
               >
                 <div className="w-full border-b">
-                  <MobileDateTimePicker
+                  <DateTimePicker
                     className="w-full"
                     disablePast
-                    value={pickupDate}
-                    onChange={handlePickupDateChange}
+                    value={formData.pickupDate}
+                    onChange={handleDateChange("pickupDate")}
                     slotProps={{ textField: { placeholder: t("pickupDate") } }}
                     sx={{
                       ".MuiInputBase-root input": {
@@ -362,11 +311,11 @@ export default function RentForm({
                   />
                 </div>
                 <div className="w-full border-b">
-                  <MobileDateTimePicker
+                  <DateTimePicker
                     className="w-full"
-                    value={dropOffDate}
+                    value={formData.dropOffDate}
                     disablePast
-                    onChange={handleDropOffDateChange}
+                    onChange={handleDateChange("dropOffDate")}
                     slotProps={{ textField: { placeholder: t("dropOffDate") } }}
                     sx={{
                       ".MuiInputBase-root input": {
@@ -382,6 +331,13 @@ export default function RentForm({
                 </div>
               </LocalizationProvider>
             </div>
+            <p
+              className={`pl-2 mt-2 transition-opacity text-primary ${
+                errorMessage ? "opacity-100" : "opacity-0"
+              } `}
+            >
+              {errorMessage}
+            </p>
             <button
               type="submit"
               aria-label="Search"
@@ -399,7 +355,7 @@ export default function RentForm({
             id="diffLocation"
             type="checkbox"
             className="w-4 h-4 cursor-pointer"
-            {...register("showReturnLocation")}
+            onClick={handleCheckboxClick}
           />
           <label
             htmlFor="diffLocation"

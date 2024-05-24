@@ -27,7 +27,7 @@ export default function Homepage() {
             {t("enjoyJourney.subtitle")}
           </p>
         </div>
-        <RentForm modal={false}/>
+        <RentForm isModal={false}/>
         <CarAdvertisement />
       </div>
     </>

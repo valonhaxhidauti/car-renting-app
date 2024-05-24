@@ -270,6 +270,8 @@
         "findYourCar": "Finden Sie Ihr Auto",
         "locale": "de",
         "pickupDate": "Abholdatum",
+        "invalidDateError": "Das Rückgabedatum sollte mindestens 1 Stunde nach dem Abholdatum liegen.",
+        "noDateError": "Bitte füllen Sie die Daten aus.",
         "rentLocation": {
             "placeholder": "Mietort",
             "requiredError": "Erforderlicher Mietort"
