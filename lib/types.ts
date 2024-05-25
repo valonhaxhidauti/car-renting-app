@@ -6,13 +6,11 @@ export type VehiclePrices = {
   insurance: number;
 };
 
-export interface RegisterFormValues {
+export interface ContactFormValues {
   name: string;
-  surname: string;
   email: string;
   phone: string;
-  password: string;
-  passwordConfirm: string;
+  message: string;
 }
 
 export interface LoginFormValues {
@@ -20,18 +18,29 @@ export interface LoginFormValues {
   password: string;
 }
 
-export interface UpdateFormValues {
+export interface RegisterFormValues {
   name: string;
   surname: string;
   email: string;
   phone: string;
-  birthday: string;
+  phoneCode: string;
   password: string;
+  passwordConfirm: string;
 }
 
 export interface ResetPasswordValues {
   password: string;
   passwordConfirm: string;
+}
+
+export interface UpdateFormValues {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+  phoneCode: string;
+  birthday: string;
+  password: string;
 }
 
 export interface Filters {

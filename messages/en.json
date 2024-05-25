@@ -44,7 +44,9 @@
             "emailLabel": "E-mail address",
             "passwordLabel": "Password",
             "forgotPassword": "Forgot your password?",
-            "loginButton": "Login"
+            "loginButton": "Login",
+            "errorDuringLogin": "Error occurred during Login:",
+            "formErrors": "Form not submitted due to errors:"
         },
         "birthdaySelect": {
             "label": "Birth Day",
@@ -86,7 +88,9 @@
             "passwordLabel": "Password",
             "passwordAgainLabel": "Password (Again)",
             "registerButton": "Register",
-            "updateButton": "Update"
+            "updateButton": "Update",
+            "errorDuringRegister": "Error occurred during registration:",
+            "formErrors": "Form not submitted due to errors:"
         },
         "sideMenu": {
             "personalInformations": "My Personal Informations",
@@ -270,8 +274,8 @@
         "findYourCar": "Find your car",
         "locale": "en-gb",
         "pickupDate": "Pickup Date",
-        "invalidDateError":"Drop off date should be at least 1 hour after pickup date.",
-        "noDateError":"Please fill in the dates.",
+        "invalidDateError": "Drop off date should be at least 1 hour after pickup date.",
+        "noDateError": "Please fill in the dates.",
         "rentLocation": {
             "placeholder": "Rent Location",
             "requiredError": "Required Rent Location"

@@ -9,14 +9,6 @@ import {
   isPasswordMatched,
   isPasswordStrong,
 } from "../utils/formValidations";
-import { RegisterFormValues } from "@/lib/types";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { CheckIcon } from "@/assets/svgs";
-import { ShieldAlert } from "lucide-react";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/semantic-ui.css";
 import {
   Tooltip,
   TooltipArrow,
@@ -24,16 +16,24 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { RegisterFormValues } from "@/lib/types";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { CheckIcon } from "@/assets/svgs";
+import { ShieldAlert } from "lucide-react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/semantic-ui.css";
 
-interface FormValues {
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-  phoneCode: string;
-  password: string;
-  passwordConfirm: string;
-}
+// interface RegisterFormValues {
+//   name: string;
+//   surname: string;
+//   email: string;
+//   phone: string;
+//   phoneCode: string;
+//   password: string;
+//   passwordConfirm: string;
+// }
 
 export default function RegisterForm() {
   const t = useTranslations("Account");
@@ -55,13 +55,15 @@ export default function RegisterForm() {
     passwordNoSpecialChar: t("validation.passwordNoSpecialChar"),
     passwordConfirmRequired: t("validation.passwordConfirmRequired"),
     passwordsNotMatch: t("validation.passwordsNotMatch"),
+    errorDuringRegister: t("register.errorDuringRegister"),
+    formErrors: t("register.formErrors"),
   };
   // const [authenticated, setAuthenticated] = useState(
   //   localStorage.getItem("authenticated") === "true"
   // );
 
   const router = useRouter();
-  const [formData, setFormData] = useState<FormValues>({
+  const [formData, setFormData] = useState<RegisterFormValues>({
     name: "",
     surname: "",
     email: "",
@@ -73,19 +75,21 @@ export default function RegisterForm() {
 
   const [errors, setErrors] = useState<Partial<RegisterFormValues>>({});
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [networkErrorMessage, setNetworkErrorMessage] = useState("");
+  const phoneInputRef = useRef<HTMLInputElement>(null);
 
-  const handleInputChange = (fieldName: keyof FormValues, value: string) => {
-    if (fieldName === "phone") {
-      const phoneInput = document.querySelector(".react-tel-input input");
-      if (phoneInput) {
-        const countryCode = phoneInput.getAttribute("value")?.split(" ")[0];
-        console.log(countryCode);
-        setFormData((prevData) => ({
-          ...prevData,
-          phoneCode: countryCode || "",
-          [fieldName]: value,
-        }));
-      }
+  const handleInputChange = (fieldName: keyof RegisterFormValues, value: string) => {
+    if (fieldName === "phone" && phoneInputRef.current) {
+      const phoneInputValue = phoneInputRef.current.value;
+
+      const countryCode = phoneInputValue?.split(" ")[0];
+      const phoneNumber = phoneInputValue;
+
+      setFormData((prevData) => ({
+        ...prevData,
+        phoneCode: countryCode,
+        [fieldName]: phoneNumber,
+      }));
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -130,20 +134,18 @@ export default function RegisterForm() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("User registered successfully:", data);
           // setAuthenticated(true);
           localStorage.setItem("authenticated", "true");
           router.push("/");
         } else {
           const errorData = await response.json();
-          console.error("Registration failed:", errorData);
-          alert("Registration failed!");
+          setNetworkErrorMessage(errorData.detail);
         }
       } catch (error) {
-        console.error("Error occurred during registration:", error);
+        console.error(translations.errorDuringRegister, error);
       }
     } else {
-      console.log("Form not submitted due to errors:", errors);
+      console.log(translations.formErrors, errors);
     }
   };
 
@@ -156,6 +158,13 @@ export default function RegisterForm() {
         <div className="w-20 h-0.5 bg-primary"></div>
         <p className="text-grayFont">{t("register.description")}</p>
         <div className="w-full">
+          <div
+            className={`text-red-500 font-medium my-2 transition-opacity duration-300 ${
+              networkErrorMessage ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {networkErrorMessage}
+          </div>
           <form
             className="grid grid-cols-1 mobile:grid-cols-2 gap-4"
             onSubmit={submitForm}
@@ -261,6 +270,7 @@ export default function RegisterForm() {
                   }}
                   inputProps={{
                     required: true,
+                    ref: phoneInputRef,
                     className: `block w-full rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary
                       ${errors.phone && " outline outline-2 outline-red-500"}`,
                   }}

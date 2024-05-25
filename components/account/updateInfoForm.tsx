@@ -9,16 +9,6 @@ import "react-phone-input-2/lib/semantic-ui.css";
 import { UpdateFormValues } from "@/lib/types";
 import { UpdateFormValidation } from "../utils/formValidations";
 
-interface FormValues {
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-  phoneCode: string;
-  birthday: string;
-  password: string;
-}
-
 export default function UpdateInfoForm() {
   const t = useTranslations("Account");
   const translations = {
@@ -40,7 +30,7 @@ export default function UpdateInfoForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
-  const [formData, setFormData] = useState<FormValues>({
+  const [formData, setFormData] = useState<UpdateFormValues>({
     name: "",
     surname: "",
     email: "",

@@ -12,11 +12,6 @@ import { useTranslations } from "next-intl";
 import { ResetPasswordValues } from "@/lib/types";
 import { CheckIcon } from "@/assets/svgs";
 
-interface FormValues {
-  password: string;
-  passwordConfirm: string;
-}
-
 export default function ResetPasswordForm({
   params,
 }: {
@@ -28,7 +23,7 @@ export default function ResetPasswordForm({
   const searchParams = useSearchParams();
   const emailParameter = searchParams.get("email") || "";
 
-  const [formData, setFormData] = useState<FormValues>({
+  const [formData, setFormData] = useState<ResetPasswordValues>({
     password: "",
     passwordConfirm: "",
   });
@@ -41,7 +36,7 @@ export default function ResetPasswordForm({
 
   const [errors, setErrors] = useState<Partial<ResetPasswordValues>>({});
 
-  const handleInputChange = (fieldName: keyof FormValues, value: string) => {
+  const handleInputChange = (fieldName: keyof ResetPasswordValues, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: value,

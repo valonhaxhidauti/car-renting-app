@@ -10,21 +10,15 @@ import {
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
+import { ContactFormValues } from "@/lib/types";
 import Image from "next/image";
 import ScrollToTop from "../common/scrollToTop";
 import SideMenu from "../common/sideMenu";
 
-interface FormValues {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-}
-
 export default function Contact() {
   const t = useTranslations("Contact");
 
-  const [formData, setFormData] = useState<FormValues>({
+  const [formData, setFormData] = useState<ContactFormValues>({
     name: "",
     email: "",
     phone: "",
@@ -32,7 +26,7 @@ export default function Contact() {
   });
   const [isSubmited, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (fieldName: keyof FormValues, value: string) => {
+  const handleInputChange = (fieldName: keyof ContactFormValues, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: value,

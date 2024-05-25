@@ -12,10 +12,6 @@ import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import { LoginFormValues } from "@/lib/types";
 
-interface FormValues {
-  email: string;
-  password: string;
-}
 
 export default function LoginForm() {
   const t = useTranslations("Account");
@@ -25,16 +21,19 @@ export default function LoginForm() {
     emailInvalid: t("validation.emailInvalid"),
     passwordRequired: t("validation.passwordRequired"),
     passwordInvalid: t("validation.passwordInvalid"),
+    errorDuringLogin: t("login.errorDuringLogin"),
+    formErrors: t("login.formErrors"),
   };
 
-  const [formData, setFormData] = useState<FormValues>({
+  const [formData, setFormData] = useState<LoginFormValues>({
     email: "",
     password: "",
   });
 
   const [errors, setErrors] = useState<Partial<LoginFormValues>>({});
+  const [networkErrorMessage, setNetworkErrorMessage] = useState("");
 
-  const handleInputChange = (fieldName: keyof FormValues, value: string) => {
+  const handleInputChange = (fieldName: keyof LoginFormValues, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: value,
@@ -71,21 +70,18 @@ export default function LoginForm() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("User Logged in successfully:", data);
           // setAuthenticated(true);
           localStorage.setItem("authenticated", "true");
           router.push("/");
         } else {
           const errorData = await response.json();
-          console.error("Login failed:", errorData);
-          alert("Login failed!");
+          setNetworkErrorMessage(errorData.detail);
         }
       } catch (error) {
-        console.error("Error occurred during Login:", error);
-        // Handle network errors or any other unexpected errors.
+        console.error(translations.errorDuringLogin, error);
       }
     } else {
-      console.log("Form not submitted due to errors:", errors);
+      console.log(translations.formErrors, errors);
     }
   };
 
@@ -113,6 +109,13 @@ export default function LoginForm() {
             <span className="px-4 text-slate-400 italic">{t("login.or")}</span>
             <div className=" border-b border-zinc-200 w-full"></div>
           </div>
+          <div
+            className={`text-red-500 font-medium transition-opacity duration-300 ${
+              networkErrorMessage ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {networkErrorMessage}
+          </div>
           <div className="w-full">
             <form className="flex flex-col gap-4" onSubmit={submitForm}>
               <div>
@@ -125,7 +128,9 @@ export default function LoginForm() {
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     className={`block w-full rounded-sm text-grayFont p-4 focus-visible:outline-primary pr-8 ${
-                      errors.email ? "outline outline-2 outline-red-500" : "border-zinc-300 border"
+                      errors.email
+                        ? "outline outline-2 outline-red-500"
+                        : "border-zinc-300 border"
                     }`}
                   />
                   <CheckIcon
@@ -154,7 +159,9 @@ export default function LoginForm() {
                         handleInputChange("password", e.target.value)
                       }
                       className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8 ${
-                        errors.password ? "outline outline-2 outline-red-500" : "border-zinc-300 border"
+                        errors.password
+                          ? "outline outline-2 outline-red-500"
+                          : "border-zinc-300 border"
                       }`}
                     />
                     <CheckIcon

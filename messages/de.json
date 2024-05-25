@@ -44,7 +44,9 @@
             "emailLabel": "E-Mail-Adresse",
             "passwordLabel": "Passwort",
             "forgotPassword": "Passwort vergessen?",
-            "loginButton": "Einloggen"
+            "loginButton": "Einloggen",
+            "errorDuringLogin": "Fehler beim Login aufgetreten:",
+            "formErrors": "Formular aufgrund von Fehlern nicht eingereicht:"
         },
         "birthdaySelect": {
             "label": "Geburtstag",
@@ -86,7 +88,9 @@
             "passwordLabel": "Passwort",
             "passwordAgainLabel": "Passwort (Wiederholen)",
             "registerButton": "Registrieren",
-            "updateButton": "Aktualisieren"
+            "updateButton": "Aktualisieren",
+            "errorDuringRegister": "Fehler bei der Registrierung aufgetreten:",
+            "formErrors": "Formular aufgrund von Fehlern nicht eingereicht:"
         },
         "sideMenu": {
             "personalInformations": "Meine persönlichen Informationen",
