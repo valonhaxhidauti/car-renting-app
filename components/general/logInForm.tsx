@@ -11,7 +11,7 @@ import { Link } from "next-view-transitions";
 import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import { LoginFormValues } from "@/lib/types";
-
+import { Loader2 } from "lucide-react";
 
 export default function LoginForm() {
   const t = useTranslations("Account");
@@ -32,8 +32,12 @@ export default function LoginForm() {
 
   const [errors, setErrors] = useState<Partial<LoginFormValues>>({});
   const [networkErrorMessage, setNetworkErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (fieldName: keyof LoginFormValues, value: string) => {
+  const handleInputChange = (
+    fieldName: keyof LoginFormValues,
+    value: string
+  ) => {
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: value,
@@ -52,6 +56,7 @@ export default function LoginForm() {
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
+      setIsSubmitting(true);
       try {
         const response = await fetch(
           "https://rent-api.rubik.dev/api/auth/login",
@@ -70,15 +75,22 @@ export default function LoginForm() {
 
         if (response.ok) {
           const data = await response.json();
+          // if (data.data.attributes.email_verified_at===null) {
+          //   setNetworkErrorMessage("Please check your email and verify it first!");
+          // }
+          // else {
           // setAuthenticated(true);
           localStorage.setItem("authenticated", "true");
           router.push("/");
+          // }
         } else {
           const errorData = await response.json();
           setNetworkErrorMessage(errorData.detail);
         }
       } catch (error) {
         console.error(translations.errorDuringLogin, error);
+      } finally {
+        setIsSubmitting(false);
       }
     } else {
       console.log(translations.formErrors, errors);
@@ -191,9 +203,21 @@ export default function LoginForm() {
                 </div>
                 <button
                   type="submit"
-                  className="flex justify-center bg-primary w-[150px] mobile:w-[200px] p-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
+                  disabled={isSubmitting}
+                  className={`flex justify-center bg-primary w-[150px] mobile:w-[200px] p-3 text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary ${
+                    isSubmitting
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-secondary"
+                  }`}
                 >
-                  {t("login.loginButton")}
+                  {isSubmitting ? (
+                    <Loader2
+                      size={20}
+                      className="self-center my-0.5 animate-spin"
+                    />
+                  ) : (
+                    t("login.loginButton")
+                  )}
                 </button>
               </div>
             </form>

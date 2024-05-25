@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "@/assets/svgs";
-import { ShieldAlert } from "lucide-react";
+import { Loader2, ShieldAlert } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
@@ -75,10 +75,14 @@ export default function RegisterForm() {
 
   const [errors, setErrors] = useState<Partial<RegisterFormValues>>({});
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [networkErrorMessage, setNetworkErrorMessage] = useState("");
   const phoneInputRef = useRef<HTMLInputElement>(null);
 
-  const handleInputChange = (fieldName: keyof RegisterFormValues, value: string) => {
+  const handleInputChange = (
+    fieldName: keyof RegisterFormValues,
+    value: string
+  ) => {
     if (fieldName === "phone" && phoneInputRef.current) {
       const phoneInputValue = phoneInputRef.current.value;
 
@@ -111,6 +115,7 @@ export default function RegisterForm() {
     setFormSubmitted(true);
 
     if (Object.keys(errors).length === 0) {
+      setIsSubmitting(true);
       try {
         const response = await fetch(
           "https://rent-api.rubik.dev/api/auth/register",
@@ -143,6 +148,8 @@ export default function RegisterForm() {
         }
       } catch (error) {
         console.error(translations.errorDuringRegister, error);
+      } finally {
+        setIsSubmitting(false);
       }
     } else {
       console.log(translations.formErrors, errors);
@@ -383,9 +390,21 @@ export default function RegisterForm() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="flex justify-center bg-primary w-[150px] mobile:w-[200px] p-3 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline-primary"
+                disabled={isSubmitting}
+                className={`flex justify-center bg-primary w-[150px] mobile:w-[200px] p-3 text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary ${
+                  isSubmitting
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-secondary"
+                }`}
               >
-                {t("register.registerButton")}
+                {isSubmitting ? (
+                  <Loader2
+                    size={20}
+                    className="self-center my-0.5 animate-spin"
+                  />
+                ) : (
+                  t("register.registerButton")
+                )}
               </button>
             </div>
           </form>
