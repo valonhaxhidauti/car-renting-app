@@ -23,9 +23,7 @@ interface IFormInputs {
 interface Location {
   attributes: {
     name: string;
-    // Add other attributes if needed
   };
-  // Add other properties if needed
 }
 
 export default function RentForm({
@@ -37,6 +35,7 @@ export default function RentForm({
 }) {
   const t = useTranslations("RentForm");
   const router = useRouter();
+  const isHomePage = usePathname() === ("/en" || "/de");
 
   const [showReturnLocation, setShowReturnLocation] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -53,8 +52,6 @@ export default function RentForm({
     dropOffDate: dayjs().add(2, "day").set("hour", 18).set("minute", 0),
   });
 
-  const isHomePage = usePathname() === ("/en" || "/de");
-
   const handleInputChange =
     (field: keyof IFormInputs) =>
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,19 +59,13 @@ export default function RentForm({
       setFormData({ ...formData, [field]: value });
 
       if (value.length >= 3) {
-        if (field === "rentLocation") {
-          await fetchLocations(value, "rent");
-          setShowRentSelect(true);
-        } else if (field === "returnLocation") {
-          await fetchLocations(value, "return");
-          setShowReturnSelect(true);
-        }
+        const type = field === "rentLocation" ? "rent" : "return";
+        await fetchLocations(value, type);
+        if (type === "rent") setShowRentSelect(true);
+        else setShowReturnSelect(true);
       } else {
-        if (field === "rentLocation") {
-          setShowRentSelect(false);
-        } else if (field === "returnLocation") {
-          setShowReturnSelect(false);
-        }
+        if (field === "rentLocation") setShowRentSelect(false);
+        else setShowReturnSelect(false);
       }
     };
 
@@ -97,7 +88,7 @@ export default function RentForm({
     console.log(data);
 
     if (type === "rent") {
-      setRentLocations(data.data); // Assuming the API response is an array of locations
+      setRentLocations(data.data);
     } else {
       setReturnLocations(data.data);
     }
@@ -115,14 +106,10 @@ export default function RentForm({
     );
 
     if (rentLocation.length < 3) {
-      setErrorMessage(
-        "Enter the first three letters of the rent location and wait to see results"
-      );
+      setErrorMessage(t("rentLocation.minLength"));
       return;
     } else if (showReturnLocation && returnLocation.length < 3) {
-      setErrorMessage(
-        "Enter the first three letters of the return location and wait to see results"
-      );
+      setErrorMessage(t("returnLocation.minLength"));
       return;
     } else if (
       !isValidRentLocation ||
@@ -171,30 +158,15 @@ export default function RentForm({
     setShowReturnSelect(false);
   };
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
-  const toggleRentSelect = () => {
-    setShowRentSelect(!showRentSelect);
-  };
-
-  const toggleReturnSelect = () => {
-    setShowReturnSelect(!showReturnSelect);
-  };
-
-  const handleCheckboxClick = () => {
-    setShowReturnLocation(!showReturnLocation);
-  };
-
+  const toggleModal = () => setShowModal(!showModal);
+  const toggleRentSelect = () => setShowRentSelect(!showRentSelect);
+  const toggleReturnSelect = () => setShowReturnSelect(!showReturnSelect);
+  const handleCheckboxClick = () => setShowReturnLocation(!showReturnLocation);
   const handleLocationSelect = (location: Location) => {
-    if (showRentSelect) {
-      setFormData({ ...formData, rentLocation: location.attributes.name });
-      setShowRentSelect(false);
-    } else if (showReturnSelect) {
-      setFormData({ ...formData, returnLocation: location.attributes.name });
-      setShowReturnSelect(false);
-    }
+    const updatedField = showRentSelect ? "rentLocation" : "returnLocation";
+    setFormData({ ...formData, [updatedField]: location.attributes.name });
+    if (showRentSelect) setShowRentSelect(false);
+    else setShowReturnSelect(false);
   };
 
   return isModal ? (
@@ -226,16 +198,14 @@ export default function RentForm({
                   showReturnLocation ? "gap-2" : "gap-0"
                 }`}
               >
-                <div className="w-full relative border-b font-light text-base">
+                <div className="w-full relative border-b font-normal text-base">
                   <input
                     type="text"
                     autoComplete="off"
-                    required
                     placeholder={t("rentLocation.placeholder")}
                     className="w-full p-2"
                     value={formData.rentLocation}
                     onChange={handleInputChange("rentLocation")}
-                    onFocus={() => handleInputChange("rentLocation")}
                   />
                   <LocationsSelect
                     showSelect={showRentSelect}
@@ -245,7 +215,7 @@ export default function RentForm({
                   />
                 </div>
                 <div
-                  className={`w-full relative font-light text-base ${
+                  className={`w-full relative font-normal text-base ${
                     showReturnLocation
                       ? "h-full duration-300 w-full border-b "
                       : "w-0 h-0 duration-100"
@@ -255,7 +225,6 @@ export default function RentForm({
                     type="text"
                     autoComplete="off"
                     placeholder={t("returnLocation.placeholder")}
-                    required={showReturnLocation}
                     className={` ${
                       showReturnLocation
                         ? "h-full duration-300 w-full p-2"
@@ -263,7 +232,6 @@ export default function RentForm({
                     } `}
                     value={formData.returnLocation}
                     onChange={handleInputChange("returnLocation")}
-                    onFocus={() => handleInputChange("returnLocation")}
                   />
                   <LocationsSelect
                     showSelect={showReturnSelect}
@@ -369,7 +337,6 @@ export default function RentForm({
                   className="w-full p-2"
                   value={formData.rentLocation}
                   onChange={handleInputChange("rentLocation")}
-                  onFocus={() => handleInputChange("rentLocation")}
                 />
                 <LocationsSelect
                   showSelect={showRentSelect}
@@ -396,7 +363,6 @@ export default function RentForm({
                   } `}
                   value={formData.returnLocation}
                   onChange={handleInputChange("returnLocation")}
-                  onFocus={() => handleInputChange("returnLocation")}
                 />
                 <LocationsSelect
                   showSelect={showReturnSelect}

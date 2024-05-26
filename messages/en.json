@@ -280,11 +280,17 @@
         "noDateError": "Please fill in the dates.",
         "rentLocation": {
             "placeholder": "Rent Location",
-            "requiredError": "Required Rent Location"
+            "requiredError": "Required Rent Location",
+            "minLength": "Enter the first three letters of the rent location and wait to see results"
         },
         "returnLocation": {
             "placeholder": "Return Location",
-            "requiredError": "Required Return Location"
+            "requiredError": "Required Return Location",
+            "minLength": "Enter the first three letters of the return location and wait to see results"
+        },
+        "locationSelect": {
+            "selectLocation": "Select Location",
+            "noLocationsFound": "No locations found. Try again"
         },
         "search": "Search"
     },

@@ -280,11 +280,17 @@
         "noDateError": "Bitte füllen Sie die Daten aus.",
         "rentLocation": {
             "placeholder": "Mietort",
-            "requiredError": "Erforderlicher Mietort"
+            "requiredError": "Erforderlicher Mietort",
+            "minLength": "Geben Sie die ersten drei Buchstaben des Mietorts ein und warten Sie auf Ergebnisse"
         },
         "returnLocation": {
             "placeholder": "Rückgabeort",
-            "requiredError": "Erforderlicher Rückgabeort"
+            "requiredError": "Erforderlicher Rückgabeort",
+            "minLength": "Geben Sie die ersten drei Buchstaben des Rückgabeorts ein und warten Sie auf Ergebnisse"
+        },
+        "locationSelect": {
+            "selectLocation": "Ort auswählen",
+            "noLocationsFound": "Keine Orte gefunden. Bitte versuchen Sie es erneut."
         },
         "search": "Suche"
     },
