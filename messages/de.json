@@ -41,12 +41,13 @@
             "facebookButton": "Mit Facebook anmelden",
             "googleButton": "Mit Google anmelden",
             "or": "oder",
-            "emailLabel": "E-Mail-Adresse",
+            "emailLabel": "Email Adresse",
             "passwordLabel": "Passwort",
             "forgotPassword": "Passwort vergessen?",
             "loginButton": "Einloggen",
             "errorDuringLogin": "Fehler beim Login aufgetreten:",
-            "formErrors": "Formular aufgrund von Fehlern nicht eingereicht:"
+            "formErrors": "Formular aufgrund von Fehlern nicht eingereicht:",
+            "verifyEmail": "Bitte überprüfen Sie Ihre Email und bestätigen Sie sie zuerst!"
         },
         "birthdaySelect": {
             "label": "Geburtstag",
@@ -71,8 +72,8 @@
         "emailSent": "Weitere anweisungen zum zurücksetzen ihres passworts finden sie in ihrem Email posteingang.",
         "passwordReset": {
             "title": "Passwort vergessen?",
-            "description1": "Geben Sie Ihre registrierte E-Mail-Adresse ein, um ein neues Passwort festzulegen.",
-            "description2": "Wir senden Ihnen den Link zur Passwortänderung an Ihre E-Mail-Adresse.",
+            "description1": "Geben Sie Ihre registrierte Email Adresse ein, um ein neues Passwort festzulegen.",
+            "description2": "Wir senden Ihnen den Link zur Passwortänderung an Ihre Email Adresse.",
             "emailLabel": "Email ",
             "passwordResetButton": "Passwort zurücksetzen"
         },
@@ -83,7 +84,7 @@
             "mrsLabel": "Frau",
             "nameLabel": "Name",
             "surnameLabel": "Nachname",
-            "emailAddressLabel": "E-Mail-Adresse",
+            "emailAddressLabel": "Email Adresse",
             "phoneNumberLabel": "Telefonnummer",
             "passwordLabel": "Passwort",
             "passwordAgainLabel": "Passwort (Wiederholen)",
@@ -102,8 +103,8 @@
             "nameInvalid": "Name ist ungültig",
             "surnameRequired": "Nachname ist erforderlich",
             "surnameInvalid": "Nachname ist ungültig",
-            "emailRequired": "E-Mail ist erforderlich",
-            "emailInvalid": "E-Mail ist ungültig",
+            "emailRequired": "Email ist erforderlich",
+            "emailInvalid": "Email ist ungültig",
             "phoneRequired": "Telefon ist erforderlich",
             "phoneInvalid": "Telefon ist ungültig",
             "passwordRequired": "Passwort ist erforderlich",
@@ -135,7 +136,7 @@
         "formHeading": "Kontaktformular",
         "formDescription": "Rufen Sie uns an oder kommen Sie jederzeit vorbei. Wir bemühen uns, alle Anfragen innerhalb von 24 Stunden an Werktagen zu beantworten.",
         "fullNamePlaceholder": "Vollständiger Name",
-        "emailPlaceholder": "E-Mail-Adresse",
+        "emailPlaceholder": "Email Adresse",
         "phoneNumberPlaceholder": "Telefonnummer",
         "messagePlaceholder": "Ihre Nachricht",
         "sendMessage": "Nachricht senden",
@@ -274,6 +275,7 @@
         "findYourCar": "Finden Sie Ihr Auto",
         "locale": "de",
         "pickupDate": "Abholdatum",
+        "invalidLocationError": "Bitte wählen Sie eine der Dropdown-Optionen aus",
         "invalidDateError": "Das Rückgabedatum sollte mindestens 1 Stunde nach dem Abholdatum liegen.",
         "noDateError": "Bitte füllen Sie die Daten aus.",
         "rentLocation": {

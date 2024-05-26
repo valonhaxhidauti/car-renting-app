@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
@@ -8,16 +8,24 @@ import { usePathname, useRouter } from "next/navigation";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import LocationsSelect from "./locationsSelect";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/de";
 import "dayjs/locale/en-gb";
-// import LocationsModal from "./locationsModal";
 
 interface IFormInputs {
   rentLocation: string;
   returnLocation: string;
   pickupDate: Dayjs | null;
   dropOffDate: Dayjs | null;
+}
+
+interface Location {
+  attributes: {
+    name: string;
+    // Add other attributes if needed
+  };
+  // Add other properties if needed
 }
 
 export default function RentForm({
@@ -32,7 +40,11 @@ export default function RentForm({
 
   const [showReturnLocation, setShowReturnLocation] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showRentSelect, setShowRentSelect] = useState(false);
+  const [showReturnSelect, setShowReturnSelect] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [rentLocations, setRentLocations] = useState<Location[]>([]);
+  const [returnLocations, setReturnLocations] = useState<Location[]>([]);
 
   const [formData, setFormData] = useState<IFormInputs>({
     rentLocation: "",
@@ -45,8 +57,25 @@ export default function RentForm({
 
   const handleInputChange =
     (field: keyof IFormInputs) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({ ...formData, [field]: event.target.value });
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setFormData({ ...formData, [field]: value });
+
+      if (value.length >= 3) {
+        if (field === "rentLocation") {
+          await fetchLocations(value, "rent");
+          setShowRentSelect(true);
+        } else if (field === "returnLocation") {
+          await fetchLocations(value, "return");
+          setShowReturnSelect(true);
+        }
+      } else {
+        if (field === "rentLocation") {
+          setShowRentSelect(false);
+        } else if (field === "returnLocation") {
+          setShowReturnSelect(false);
+        }
+      }
     };
 
   const handleDateChange =
@@ -54,9 +83,54 @@ export default function RentForm({
       setFormData({ ...formData, [field]: date });
     };
 
+  const fetchLocations = async (query: string, type: "rent" | "return") => {
+    const url = new URL("https://rent-api.rubik.dev/api/locations");
+    url.searchParams.append("filter[search]", query);
+
+    const headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+
+    const response = await fetch(url, { method: "GET", headers });
+    const data = await response.json();
+    console.log(data);
+
+    if (type === "rent") {
+      setRentLocations(data.data); // Assuming the API response is an array of locations
+    } else {
+      setReturnLocations(data.data);
+    }
+  };
+
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { rentLocation, returnLocation, pickupDate, dropOffDate } = formData;
+
+    const isValidRentLocation = rentLocations.some(
+      (location) => location.attributes.name === rentLocation
+    );
+    const isValidReturnLocation = returnLocations.some(
+      (location) => location.attributes.name === returnLocation
+    );
+
+    if (rentLocation.length < 3) {
+      setErrorMessage(
+        "Enter the first three letters of the rent location and wait to see results"
+      );
+      return;
+    } else if (showReturnLocation && returnLocation.length < 3) {
+      setErrorMessage(
+        "Enter the first three letters of the return location and wait to see results"
+      );
+      return;
+    } else if (
+      !isValidRentLocation ||
+      (!isValidReturnLocation && showReturnLocation)
+    ) {
+      setErrorMessage(t("invalidLocationError"));
+      return;
+    }
 
     if (pickupDate && dropOffDate) {
       const timeDifferenceHours = dropOffDate.diff(pickupDate, "hours");
@@ -92,17 +166,35 @@ export default function RentForm({
       router.push(`?${queryString}`);
     }
 
-    if (showModal) {
-      setShowModal(false);
-    }
+    setShowModal(false);
+    setShowRentSelect(false);
+    setShowReturnSelect(false);
   };
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
+  const toggleRentSelect = () => {
+    setShowRentSelect(!showRentSelect);
+  };
+
+  const toggleReturnSelect = () => {
+    setShowReturnSelect(!showReturnSelect);
+  };
+
   const handleCheckboxClick = () => {
     setShowReturnLocation(!showReturnLocation);
+  };
+
+  const handleLocationSelect = (location: Location) => {
+    if (showRentSelect) {
+      setFormData({ ...formData, rentLocation: location.attributes.name });
+      setShowRentSelect(false);
+    } else if (showReturnSelect) {
+      setFormData({ ...formData, returnLocation: location.attributes.name });
+      setShowReturnSelect(false);
+    }
   };
 
   return isModal ? (
@@ -143,6 +235,13 @@ export default function RentForm({
                     className="w-full p-2"
                     value={formData.rentLocation}
                     onChange={handleInputChange("rentLocation")}
+                    onFocus={() => handleInputChange("rentLocation")}
+                  />
+                  <LocationsSelect
+                    showSelect={showRentSelect}
+                    toggleSelect={toggleRentSelect}
+                    locations={rentLocations}
+                    handleLocationSelect={handleLocationSelect}
                   />
                 </div>
                 <div
@@ -164,6 +263,13 @@ export default function RentForm({
                     } `}
                     value={formData.returnLocation}
                     onChange={handleInputChange("returnLocation")}
+                    onFocus={() => handleInputChange("returnLocation")}
+                  />
+                  <LocationsSelect
+                    showSelect={showReturnSelect}
+                    toggleSelect={toggleReturnSelect}
+                    locations={returnLocations}
+                    handleLocationSelect={handleLocationSelect}
                   />
                 </div>
                 <LocalizationProvider
@@ -259,11 +365,17 @@ export default function RentForm({
                 <input
                   type="text"
                   autoComplete="off"
-                  required
                   placeholder={t("rentLocation.placeholder")}
                   className="w-full p-2"
                   value={formData.rentLocation}
                   onChange={handleInputChange("rentLocation")}
+                  onFocus={() => handleInputChange("rentLocation")}
+                />
+                <LocationsSelect
+                  showSelect={showRentSelect}
+                  toggleSelect={toggleRentSelect}
+                  locations={rentLocations}
+                  handleLocationSelect={handleLocationSelect}
                 />
               </div>
               <div
@@ -276,7 +388,6 @@ export default function RentForm({
                 <input
                   type="text"
                   autoComplete="off"
-                  required={showReturnLocation}
                   placeholder={t("returnLocation.placeholder")}
                   className={` ${
                     showReturnLocation
@@ -285,6 +396,13 @@ export default function RentForm({
                   } `}
                   value={formData.returnLocation}
                   onChange={handleInputChange("returnLocation")}
+                  onFocus={() => handleInputChange("returnLocation")}
+                />
+                <LocationsSelect
+                  showSelect={showReturnSelect}
+                  toggleSelect={toggleReturnSelect}
+                  locations={returnLocations}
+                  handleLocationSelect={handleLocationSelect}
                 />
               </div>
               <LocalizationProvider

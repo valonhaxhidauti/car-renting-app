@@ -23,6 +23,7 @@ export default function LoginForm() {
     passwordInvalid: t("validation.passwordInvalid"),
     errorDuringLogin: t("login.errorDuringLogin"),
     formErrors: t("login.formErrors"),
+    verifyEmail: t("login.verifyEmail"),
   };
 
   const [formData, setFormData] = useState<LoginFormValues>({
@@ -75,14 +76,14 @@ export default function LoginForm() {
 
         if (response.ok) {
           const data = await response.json();
-          // if (data.data.attributes.email_verified_at===null) {
-          //   setNetworkErrorMessage("Please check your email and verify it first!");
-          // }
-          // else {
+          if (data.data.attributes.email_verified_at===null) {
+            setNetworkErrorMessage(translations.verifyEmail);
+          }
+          else {
           // setAuthenticated(true);
           localStorage.setItem("authenticated", "true");
           router.push("/");
-          // }
+          }
         } else {
           const errorData = await response.json();
           setNetworkErrorMessage(errorData.detail);

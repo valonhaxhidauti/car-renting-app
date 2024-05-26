@@ -46,7 +46,8 @@
             "forgotPassword": "Forgot your password?",
             "loginButton": "Login",
             "errorDuringLogin": "Error occurred during Login:",
-            "formErrors": "Form not submitted due to errors:"
+            "formErrors": "Form not submitted due to errors:",
+            "verifyEmail": "Please check your email and verify it first!"
         },
         "birthdaySelect": {
             "label": "Birth Day",
@@ -274,6 +275,7 @@
         "findYourCar": "Find your car",
         "locale": "en-gb",
         "pickupDate": "Pickup Date",
+        "invalidLocationError": "Please select one of the dropdown locations",
         "invalidDateError": "Drop off date should be at least 1 hour after pickup date.",
         "noDateError": "Please fill in the dates.",
         "rentLocation": {
