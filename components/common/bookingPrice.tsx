@@ -19,8 +19,6 @@ export default function BookingPrice(props: any) {
       (param) => typeof param === "string" && param.trim() !== ""
     );
 
-  console.log(paramsSet);
-
   return (
     <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
       <div className="hidden laptop:block">

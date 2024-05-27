@@ -76,12 +76,15 @@ export default function LoginForm() {
 
         if (response.ok) {
           const data = await response.json();
+          const token = data.data.attributes.token;
+          
           if (data.data.attributes.email_verified_at===null) {
             setNetworkErrorMessage(translations.verifyEmail);
           }
           else {
           // setAuthenticated(true);
           localStorage.setItem("authenticated", "true");
+          localStorage.setItem("token", token);
           router.push("/");
           }
         } else {

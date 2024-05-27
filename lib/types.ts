@@ -38,9 +38,9 @@ export interface UpdateFormValues {
   surname: string;
   email: string;
   phone: string;
-  phoneCode: string;
-  birthday: string;
-  password: string;
+  // phoneCode: string;
+  // birthday: string;
+  // password: string;
 }
 
 export interface Filters {

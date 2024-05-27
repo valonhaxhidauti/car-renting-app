@@ -25,16 +25,6 @@ import { Loader2, ShieldAlert } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
-// interface RegisterFormValues {
-//   name: string;
-//   surname: string;
-//   email: string;
-//   phone: string;
-//   phoneCode: string;
-//   password: string;
-//   passwordConfirm: string;
-// }
-
 export default function RegisterForm() {
   const t = useTranslations("Account");
   const translations = {

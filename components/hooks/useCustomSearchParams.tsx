@@ -17,5 +17,19 @@ export function useCustomSearchParams() {
     }
   });
 
-  return params;
+  const filters: { [key: string]: string } = {
+    sort: searchParams.get("sort") || "",
+    carClass: searchParams.get("filter[carClass]") || "",
+    carType: searchParams.get("filter[carType]") || "",
+    gearType: searchParams.get("filter[gearType]") || "",
+    fuelType: searchParams.get("filter[fuelType]") || "",
+  };
+
+  Object.keys(filters).forEach((key) => {
+    if (filters[key] === null) {
+      filters[key] = "";
+    }
+  });
+
+  return { params, filters };
 }

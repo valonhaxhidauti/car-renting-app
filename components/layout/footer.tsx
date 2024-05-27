@@ -1,8 +1,11 @@
+"use client";
+
 import { Link } from "next-view-transitions";
 import { Logo } from "@/assets/svgs";
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { useTranslations } from "next-intl";
 import dayjs from "dayjs";
+import { clearAppliedFilters } from "@/lib/utils";
 
 export default function Footer() {
   const t = useTranslations("Footer");
@@ -36,6 +39,7 @@ export default function Footer() {
                 </Link>
                 <Link
                   href="/explore"
+                  onClick={clearAppliedFilters}
                   className="text-grayFont hover:font-medium text-sm leading-none"
                 >
                   {t("pages.exploreVehicles")}

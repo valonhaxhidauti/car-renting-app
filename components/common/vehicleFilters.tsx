@@ -22,7 +22,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
     gearType: [],
     fuelType: [],
   });
-
+  
   const [filters, setFilters] = useState<Filters>({
     gearType: [],
     fuelType: [],
@@ -51,6 +51,11 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
     };
 
     fetchFilters();
+
+    const savedFilters = localStorage.getItem("appliedFilters");
+    if (savedFilters) {
+      setAppliedFilters(JSON.parse(savedFilters));
+    }
   }, []);
 
   const handleFilterClick = (filterType: string, filterId: string) => {
@@ -62,14 +67,16 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
       updatedFilters[filterType].splice(index, 1);
     }
     setAppliedFilters(updatedFilters);
-  
+
+    localStorage.setItem('appliedFilters', JSON.stringify(updatedFilters));
+
     if (updatedFilters[filterType].length === 0) {
       removeQueryParam(filterType);
     } else {
       debouncedQueryParams();
     }
   };
-  
+
   const removeQueryParam = (filterType: string) => {
     const existingParams = new URLSearchParams(window.location.search);
     existingParams.delete(`filter[${filterType}]`);
@@ -112,7 +119,8 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
-                  onClick={() => handleFilterClick("carClass", filter.value)}
+                  checked={appliedFilters.carClass.includes(filter.value)}
+                  onChange={() => handleFilterClick("carClass", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
@@ -137,7 +145,8 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
-                  onClick={() => handleFilterClick("carType", filter.value)}
+                  checked={appliedFilters.carType.includes(filter.value)}
+                  onChange={() => handleFilterClick("carType", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
@@ -163,7 +172,8 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
-                  onClick={() => handleFilterClick("gearType", filter.value)}
+                  checked={appliedFilters.gearType.includes(filter.value)}
+                  onChange={() => handleFilterClick("gearType", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
@@ -192,7 +202,8 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   id={`vehicleClass_${filter.label}_${filtersId}`}
                   type="checkbox"
                   className="cursor-pointer"
-                  onClick={() => handleFilterClick("fuelType", filter.value)}
+                  checked={appliedFilters.fuelType.includes(filter.value)}
+                  onChange={() => handleFilterClick("fuelType", filter.value)}
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}

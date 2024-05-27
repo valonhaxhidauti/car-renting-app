@@ -5,18 +5,13 @@ import {
   ReservationIcon,
 } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
+import { useHandleLogout } from "../hooks/useHandleLogout";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
-import { Link } from 'next-view-transitions'
-import { useRouter } from "next/navigation";
 
 export default function AccountSideMenu() {
   const t = useTranslations("Account.sideMenu");
-  const router = useRouter();
-
-  const handleLogout = () => {
-    localStorage.removeItem("authenticated");
-    router.push('/account');
-  };
+  const handleLogout = useHandleLogout();
 
   return (
     <div className="bg-primary hidden desktop:flex flex-col absolute -top-[60px] right-8 w-64">

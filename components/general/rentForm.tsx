@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { clearAppliedFilters } from "@/lib/utils";
 import { X } from "lucide-react";
 import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
 import { usePathname, useRouter } from "next/navigation";
@@ -35,7 +36,8 @@ export default function RentForm({
 }) {
   const t = useTranslations("RentForm");
   const router = useRouter();
-  const isHomePage = usePathname() === ("/en" || "/de");
+
+  const isHomePage = usePathname() === "/en" || usePathname() === "/de";
 
   const [showReturnLocation, setShowReturnLocation] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -171,10 +173,12 @@ export default function RentForm({
 
   return isModal ? (
     <>
-      <EditBookingIcon
-        className="w-6 h-6 cursor-pointer"
-        onClick={toggleModal}
-      />
+      <span title={t("editBooking")}>
+        <EditBookingIcon
+          className="w-6 h-6 cursor-pointer"
+          onClick={toggleModal}
+        />
+      </span>
       <div
         className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards rounded ${
           showModal ? "animate-show-overlay" : "hidden"
@@ -424,6 +428,7 @@ export default function RentForm({
             </p>
             <button
               type="submit"
+              onClick={clearAppliedFilters}
               aria-label="Search"
               className="w-fit mt-4 flex items-center justify-center bg-primary hover:bg-secondary text-white px-10 py-2 transition"
             >

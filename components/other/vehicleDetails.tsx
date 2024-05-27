@@ -21,11 +21,12 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCounter } from "../hooks/useCounter";
-import { useTranslations } from "next-intl";
-import { Link } from "next-view-transitions";
-import { VehiclePrices } from "@/lib/types";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
+import { useTranslations } from "next-intl";
+import { clearAppliedFilters } from "@/lib/utils";
+import { Link } from "next-view-transitions";
+import { VehiclePrices } from "@/lib/types";
 import Image from "next/image";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
@@ -39,7 +40,7 @@ import VehicleDetailsSkeleton from "../loader/vehicleDetailsSkeleton";
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
 
-  const params = useCustomSearchParams();
+  const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
@@ -117,6 +118,7 @@ export default function VehicleDetails() {
               <BreadcrumbLink asChild>
                 <Link
                   href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                  onClick={clearAppliedFilters}
                 >
                   {t("explore")}
                 </Link>

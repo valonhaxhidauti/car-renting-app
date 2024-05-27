@@ -17,16 +17,15 @@ import {
   Select,
   SelectContent,
   SelectGroup,
-  SelectItem,
-  SelectLabel,
   SelectTrigger,
-  SelectValue,
 } from "../ui/select";
 import Image from "next/image";
+import { clearAppliedFilters } from "@/lib/utils";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
+import { useHandleLogout } from "../hooks/useHandleLogout";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LanguageSelector from "../common/languageSelector";
-import { useRouter } from "next/navigation";
 
 export default function Header({
   background,
@@ -38,11 +37,18 @@ export default function Header({
   const t = useTranslations("Header");
   const u = useTranslations("Account.sideMenu");
 
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [authenticated, setAuthenticated] = useState<string | null>(null);
   const [shown, setShown] = useState(false);
-  const params = useCustomSearchParams();
+  const { params, filters } = useCustomSearchParams();
+  const handleLogout = useHandleLogout();
+  const isExplorePage = usePathname() === "/en/explore" || usePathname() === "/de/explore";
+
+  const clearFilters = () => {
+    if (!isExplorePage) {
+      clearAppliedFilters();
+    } else return;
+  };
 
   useEffect(() => {
     if (shown) {
@@ -56,11 +62,6 @@ export default function Header({
     const authValue = window.localStorage.getItem("authenticated");
     setAuthenticated(authValue);
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("authenticated");
-    router.push("/account");
-  };
 
   const currentYear = new Date().getFullYear();
 
@@ -146,7 +147,8 @@ export default function Header({
             </div>
           </Link>
           <Link
-            href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+            onClick={clearFilters}
+            href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}&sort=${filters.sort}&filter[carClass]=${filters.carClass}&filter[carType]=${filters.carType}&filter[gearType]=${filters.gearType}&filter[fuelType]=${filters.fuelType}`}
             className="flex group items-center gap-12 cursor-pointer"
           >
             <p className="group-hover:font-bold">{t("exploreVehicles")}</p>
@@ -233,7 +235,8 @@ export default function Header({
                 {t("homepage")}
               </Link>
               <Link
-                href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                onClick={clearFilters}
+                href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}&sort=${filters.sort}&filter[carClass]=${filters.carClass}&filter[carType]=${filters.carType}&filter[gearType]=${filters.gearType}&filter[fuelType]=${filters.fuelType}`}
                 className={`cursor-pointer hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
                   background ? "text-white" : "text-grayFont"
                 }`}

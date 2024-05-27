@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { clearAppliedFilters } from "@/lib/utils";
 import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 import { EasyIcon, EconomicIcon, EverywhereIcon } from "@/assets/svgs";
 import { Facebook, Instagram, Twitter } from "lucide-react";
@@ -146,6 +147,7 @@ export default function AboutUs() {
                   <p className="text-sm">{t("callToAction.description")}</p>
                   <Link
                     href="/explore"
+                    onClick={clearAppliedFilters}
                     className="px-10 py-3 hover:bg-slate-50 bg-white text-primary text-sm w-fit font-medium"
                   >
                     {t("callToAction.button")}

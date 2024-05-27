@@ -159,18 +159,22 @@ export default function ExploreVehicles() {
                 {t("changeListView")}
               </p>
               <div className="flex gap-2">
-                <GridViewIcon
-                  onClick={() => viewMode !== "grid" && toggleViewMode()}
-                  className={`text-[#c2c2c2] hover:text-primary cursor-pointer ${
-                    viewMode === "grid" && "text-primary"
-                  }`}
-                />
-                <ListViewIcon
-                  onClick={() => viewMode !== "list" && toggleViewMode()}
-                  className={`text-[#c2c2c2] hover:text-primary cursor-pointer ${
-                    viewMode === "list" && "text-primary"
-                  }`}
-                />
+                <div title={t("gridView")}>
+                  <GridViewIcon
+                    onClick={() => viewMode !== "grid" && toggleViewMode()}
+                    className={`text-[#c2c2c2] hover:text-primary cursor-pointer ${
+                      viewMode === "grid" && "text-primary"
+                    }`}
+                  />
+                </div>
+                <div title={t("listView")}>
+                  <ListViewIcon
+                    onClick={() => viewMode !== "list" && toggleViewMode()}
+                    className={`text-[#c2c2c2] hover:text-primary cursor-pointer ${
+                      viewMode === "list" && "text-primary"
+                    }`}
+                  />
+                </div>
               </div>
             </div>
           </div>

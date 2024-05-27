@@ -1,5 +1,5 @@
 import {
-  EngineIcon,
+  VehicleIcon,
   FuelIcon,
   SearchIcon,
   SeatIcon,
@@ -20,7 +20,7 @@ export default function VehicleCard({
   vehicle: any;
 }) {
   const t = useTranslations("VehicleCard");
-  const params = useCustomSearchParams();
+  const { params } = useCustomSearchParams();
   const [showCard, setShowCard] = useState(false);
 
   useEffect(() => {
@@ -60,9 +60,9 @@ export default function VehicleCard({
                     </p>
                   </div>
                   <div>
-                    <p className="border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
+                    {/* <p className="border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
                       25% {t("off")}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
                 <div className="flex flex-col">
@@ -83,25 +83,33 @@ export default function VehicleCard({
                   <div className="border-borderGray border-b flex w-full">
                     <div className="flex w-full">
                       <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
-                        <FuelIcon className="text-graySecondary" />
+                        <div className="w-6 h-6">
+                          <FuelIcon className="w-full h-full text-graySecondary" />
+                        </div>
                         <p className="text-sm leading-none font-bold text-center">
                           {vehicle.relationships.fuelType.attributes.name}
                         </p>
                       </div>
                       <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
-                        <TransmissionIcon className="text-graySecondary" />
+                        <div className="w-6 h-6">
+                          <TransmissionIcon className="w-full h-full text-graySecondary" />
+                        </div>
                         <p className="text-sm leading-none font-bold text-center">
                           {vehicle.relationships.gearType.attributes.name}
                         </p>
                       </div>
                       <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
-                        <SeatIcon className="text-graySecondary" />
+                        <div className="w-6 h-6">
+                          <SeatIcon className="w-full h-full text-graySecondary" />
+                        </div>
                         <p className="text-sm leading-none font-bold text-center">
                           {vehicle.attributes.seat_capacity} {t("persons")}
                         </p>
                       </div>
                       <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center">
-                        <EngineIcon className="text-graySecondary" />
+                        <div className="w-[33px]">
+                          <VehicleIcon className="w-full h-full text-graySecondary" />
+                        </div>
                         <p className="text-sm leading-none font-bold text-center">
                           {
                             vehicle.attributes
@@ -143,9 +151,9 @@ export default function VehicleCard({
           <div className="w-full p-4 flex flex-col gap-8">
             <div className="flex w-full justify-between">
               <div className="flex flex-col gap-4 justify-between">
-                <p className="w-fit border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
+                {/* <p className="w-fit border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
                   25% {t("off")}
-                </p>
+                </p> */}
                 <div className="flex flex-col gap-4">
                   <p className="text-graySecondary text-center w-32 border-graySecondary border rounded-full font-medium text-[10px] px-4 py-1">
                     {vehicle.relationships.carType.attributes.name}
@@ -183,13 +191,17 @@ export default function VehicleCard({
                   </div>
                   <div className="border-borderGray border-b grid grid-cols-2 w-full">
                     <div className="text-grayFont p-4 w-full flex flex-col gap-2 justify-between items-center border-r">
-                      <FuelIcon className="text-graySecondary" />
+                      <div className="w-6 h-6">
+                        <FuelIcon className="w-full h-full text-graySecondary" />
+                      </div>
                       <p className="text-sm leading-none font-bold text-center">
                         {vehicle.relationships.fuelType.attributes.name}
                       </p>
                     </div>
                     <div className="text-grayFont p-4 w-full flex flex-col gap-2 justify-between items-center">
-                      <TransmissionIcon className="text-graySecondary" />
+                      <div className="w-6 h-6">
+                        <TransmissionIcon className="w-full h-full text-graySecondary" />
+                      </div>
                       <p className="text-sm leading-none font-bold text-center">
                         {vehicle.relationships.gearType.attributes.name}
                       </p>
@@ -197,13 +209,17 @@ export default function VehicleCard({
                   </div>
                   <div className="border-borderGray border-b grid grid-cols-2 w-full">
                     <div className="text-grayFont p-4 w-full flex flex-col gap-2 justify-between items-center border-r">
-                      <SeatIcon className="text-graySecondary" />
+                      <div className="w-6 h-6">
+                        <SeatIcon className="w-full h-full text-graySecondary" />
+                      </div>
                       <p className="text-sm leading-none font-bold text-center">
                         {vehicle.attributes.seat_capacity} {t("persons")}
                       </p>
                     </div>
                     <div className="text-grayFont p-4 w-full flex flex-col gap-2 justify-between items-center">
-                      <EngineIcon className="text-graySecondary" />
+                      <div className="w-[33px] h-6">
+                        <VehicleIcon className="w-full h-full text-graySecondary" />
+                      </div>
                       <p className="text-sm leading-none font-bold text-center">
                         {vehicle.attributes.year}
                       </p>

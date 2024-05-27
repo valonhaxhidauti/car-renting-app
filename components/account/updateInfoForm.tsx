@@ -2,12 +2,12 @@ import { CheckIcon, FlagUkIcon } from "@/assets/svgs";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { UpdateFormValues } from "@/lib/types";
+import { UpdateFormValidation } from "../utils/formValidations";
 import BirthdaySelector from "@/components/account/birthdaySelector";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
-import { UpdateFormValues } from "@/lib/types";
-import { UpdateFormValidation } from "../utils/formValidations";
 
 export default function UpdateInfoForm() {
   const t = useTranslations("Account");
@@ -35,10 +35,82 @@ export default function UpdateInfoForm() {
     surname: "",
     email: "",
     phone: "",
-    phoneCode: "",
-    birthday: "",
-    password: "",
   });
+
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+
+  const handleInputChange = (
+    fieldName: keyof UpdateFormValues,
+    value: string
+  ) => {
+    if (fieldName === "phone" && phoneInputRef.current) {
+      const phoneInputValue = phoneInputRef.current.value;
+
+      // const countryCode = phoneInputValue?.split(" ")[0];
+      const phoneNumber = phoneInputValue;
+
+      setFormData((prevData) => ({
+        ...prevData,
+        // phoneCode: countryCode,
+        [fieldName]: phoneNumber,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [fieldName]: value,
+      }));
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: "",
+    }));
+  };
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        try {
+          const response = await fetch(
+            "https://rent-api.rubik.dev/api/my-profiles",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            const userProfile = data.data.attributes;
+
+            setFormData({
+              name: userProfile.first_name,
+              surname: userProfile.last_name,
+              email: userProfile.email,
+              phone: userProfile.phone,
+              // phoneCode: "", not part of the profile data
+              // birthday: "", not part of the profile data
+              // password: "", not part of the profile data
+            });
+          } else {
+            console.error("Failed to fetch profile data");
+          }
+        } catch (error) {
+          console.error("Error fetching profile data:", error);
+        }
+      } else {
+        console.error("No token found");
+      }
+    };
+
+    fetchProfileData();
+  }, []);
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,25 +120,21 @@ export default function UpdateInfoForm() {
 
     if (Object.keys(errors).length === 0) {
       try {
-        const response = await fetch(
-          "",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({
-              first_name: formData.name,
-              last_name: formData.surname,
-              email: formData.email,
-              phone_code: formData.phoneCode,
-              phone: formData.phone,
-              birthday: formData.birthday,
-              password: formData.password,
-            }),
-          }
-        );
+        const token = localStorage.getItem("token");
+        const response = await fetch("https://rent-api.rubik.dev/api/my-profiles", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            first_name: formData.name,
+            last_name: formData.surname,
+            email: formData.email,
+            phone: formData.phone,
+          }),
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -102,6 +170,8 @@ export default function UpdateInfoForm() {
         </label>
         <input
           type="text"
+          value={formData.name}
+          onChange={(e) => handleInputChange("name", e.target.value)}
           className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary 
           ${errors.name && " outline outline-2 outline-red-500"}`}
         />
@@ -112,6 +182,8 @@ export default function UpdateInfoForm() {
         </label>
         <input
           type="text"
+          value={formData.surname}
+          onChange={(e) => handleInputChange("surname", e.target.value)}
           className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
         />
       </div>
@@ -122,6 +194,8 @@ export default function UpdateInfoForm() {
         <div className="mt-2">
           <input
             type="email"
+            value={formData.email}
+            onChange={(e) => handleInputChange("email", e.target.value)}
             className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
           />
         </div>
@@ -133,6 +207,8 @@ export default function UpdateInfoForm() {
         <div className="mt-2">
           <PhoneInput
             country={"de"}
+            value={formData.phone}
+            onChange={(value) => handleInputChange("phone", value)}
             buttonStyle={{
               border: "none",
               background: "white",
@@ -145,6 +221,7 @@ export default function UpdateInfoForm() {
             }}
             inputProps={{
               required: true,
+              ref: phoneInputRef,
               className:
                 "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
             }}
@@ -158,7 +235,6 @@ export default function UpdateInfoForm() {
         </label>
         <input
           type={showPassword ? "text" : "password"}
-          required
           onChange={handlePasswordChange}
           className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28"
         />

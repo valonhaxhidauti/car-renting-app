@@ -75,7 +75,7 @@ export default function VehiclePayment() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 15 }, (_, index) => currentYear + index);
 
-  const params = useCustomSearchParams();
+  const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
   const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
   const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
@@ -313,7 +313,7 @@ export default function VehiclePayment() {
               </h1>
               <div className="flex gap-8 my-8">
                 <div className="flex gap-2">
-                  <input type="radio" id="card" name="radio" checked/>
+                  <input type="radio" id="card" name="radio" defaultChecked />
                   <label className="text-grayFont text-sm" htmlFor="card">
                     Credit Card
                   </label>

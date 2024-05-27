@@ -271,6 +271,7 @@
     "RentForm": {
         "deliverAtDifferentPoint": "An anderer Stelle liefern",
         "dropOffDate": "Abgabetermin",
+        "editBooking": "Buchungsinformationen bearbeiten",
         "findNow": "Jetzt finden",
         "findYourCar": "Finden Sie Ihr Auto",
         "locale": "de",
@@ -330,7 +331,7 @@
     },
     "VehicleDetails": {
         "homepage": "Startseite",
-        "explore": "Erkunden",
+        "explore": "Fahrzeuge erkunden",
         "booking": "Buchung",
         "vehicleDetails": "Fahrzeugdetails",
         "payment": "Zahlung",
