@@ -11,7 +11,7 @@ export default function BookingInfo({
   label?: string;
 }) {
   const t = useTranslations("ExploreVehicles");
-  const params = useCustomSearchParams();
+  const { params } = useCustomSearchParams();
 
   return (
     <div

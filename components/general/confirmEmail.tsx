@@ -59,7 +59,7 @@ export default function ConfirmEmail({
     };
 
     verifyEmail();
-  }, []);
+  }, [params.id, params.hash, searchParams]);
 
   return (
     <div className="bg-bgSecondary w-full pb-16">

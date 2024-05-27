@@ -36,8 +36,8 @@ export default function RentForm({
 }) {
   const t = useTranslations("RentForm");
   const router = useRouter();
-
-  const isHomePage = usePathname() === "/en" || usePathname() === "/de";
+  const pathname = usePathname();  
+  const isHomePage = pathname === "/en" || pathname === "/de";
 
   const [showReturnLocation, setShowReturnLocation] = useState(false);
   const [showModal, setShowModal] = useState(false);

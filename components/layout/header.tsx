@@ -42,7 +42,8 @@ export default function Header({
   const [shown, setShown] = useState(false);
   const { params, filters } = useCustomSearchParams();
   const handleLogout = useHandleLogout();
-  const isExplorePage = usePathname() === "/en/explore" || usePathname() === "/de/explore";
+  const pathname = usePathname(); 
+  const isExplorePage = pathname === "/en/explore" || pathname === "/de/explore";
 
   const clearFilters = () => {
     if (!isExplorePage) {

@@ -96,7 +96,7 @@ export default function ExploreVehicles() {
     };
 
     fetchVehicles();
-  }, [currentPage, searchParams]);
+  }, [currentPage,searchParams, params]);
 
   const totalPages = vehicles.meta?.last_page || 1;
 
