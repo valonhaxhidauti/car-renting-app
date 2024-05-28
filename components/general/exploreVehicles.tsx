@@ -13,7 +13,7 @@ import {
   GridViewIcon,
   ListViewIcon,
 } from "@/assets/svgs";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Breadcrumbs } from "../common/headingParts";
@@ -32,12 +32,15 @@ export default function ExploreVehicles() {
 
   const searchParams = useSearchParams();
 
-  const params: { [key: string]: string } = {
-    "filter[carType]": searchParams.get("filter[carType]") || "",
-    "filter[carClass]": searchParams.get("filter[carClass]") || "",
-    "filter[gearType]": searchParams.get("filter[gearType]") || "",
-    "filter[fuelType]": searchParams.get("filter[fuelType]") || "",
-  };
+  const params: { [key: string]: string } = useMemo(
+    () => ({
+      "filter[carType]": searchParams.get("filter[carType]") || "",
+      "filter[carClass]": searchParams.get("filter[carClass]") || "",
+      "filter[gearType]": searchParams.get("filter[gearType]") || "",
+      "filter[fuelType]": searchParams.get("filter[fuelType]") || "",
+    }),
+    [searchParams]
+  );
 
   const [vehicles, setVehicles] = useState<VehicleData>({
     data: [],
@@ -85,7 +88,6 @@ export default function ExploreVehicles() {
           },
         });
         const data = await response.json();
-        // console.log("API Response:", data);
 
         setVehicles(data);
         setLoading(false);
@@ -96,7 +98,7 @@ export default function ExploreVehicles() {
     };
 
     fetchVehicles();
-  }, [currentPage,searchParams, params]);
+  }, [currentPage, params, searchParams]);
 
   const totalPages = vehicles.meta?.last_page || 1;
 
