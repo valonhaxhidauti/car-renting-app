@@ -119,6 +119,7 @@
             "passwordsNotMatch": "Passwörter stimmen nicht überein"
         },
         "update": "Aktualisieren",
+        "userUpdated": "Benutzer erfolgreich aktualisiert!",
         "viewPassword": "Passwort anzeigen"
     },
     "Contact": {

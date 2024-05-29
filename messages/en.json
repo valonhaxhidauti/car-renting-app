@@ -119,6 +119,7 @@
             "passwordsNotMatch": "Passwords do not match"
         },
         "update": "Update",
+        "userUpdated": "User updated successfully!",
         "viewPassword": "View Password"
     },
     "Contact": {

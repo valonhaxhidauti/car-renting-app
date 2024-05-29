@@ -1,31 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { clearAppliedFilters } from "@/lib/utils";
 import { X } from "lucide-react";
 import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
-import { usePathname, useRouter } from "next/navigation";
+import { Location, RentFormData } from "@/lib/types";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import LocationsSelect from "./locationsSelect";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/de";
 import "dayjs/locale/en-gb";
-
-interface IFormInputs {
-  rentLocation: string;
-  returnLocation: string;
-  pickupDate: Dayjs | null;
-  dropOffDate: Dayjs | null;
-}
-
-interface Location {
-  attributes: {
-    name: string;
-  };
-}
 
 export default function RentForm({
   isModal,
@@ -36,10 +25,9 @@ export default function RentForm({
 }) {
   const t = useTranslations("RentForm");
   const router = useRouter();
-  const pathname = usePathname();  
+  const pathname = usePathname();
   const isHomePage = pathname === "/en" || pathname === "/de";
 
-  const [showReturnLocation, setShowReturnLocation] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showRentSelect, setShowRentSelect] = useState(false);
   const [showReturnSelect, setShowReturnSelect] = useState(false);
@@ -47,15 +35,42 @@ export default function RentForm({
   const [rentLocations, setRentLocations] = useState<Location[]>([]);
   const [returnLocations, setReturnLocations] = useState<Location[]>([]);
 
-  const [formData, setFormData] = useState<IFormInputs>({
-    rentLocation: "",
-    returnLocation: "",
-    pickupDate: dayjs().add(1, "day").set("hour", 10).set("minute", 0),
-    dropOffDate: dayjs().add(2, "day").set("hour", 18).set("minute", 0),
-  });
+  const { params } = useCustomSearchParams();
+
+  const parseDate = (dateString: string): Dayjs => dayjs(dateString, "DD/MM/YYYY HH:mm");
+
+  const defaultFormData: RentFormData = {
+    rentLocation: params.rentLocation || "",
+    returnLocation: params.returnLocation || "",
+    pickupDate: params.pickupDate
+      ? parseDate(params.pickupDate)
+      : dayjs().add(1, "day").set("hour", 10).set("minute", 0),
+    dropOffDate: params.dropOffDate
+      ? parseDate(params.dropOffDate)
+      : dayjs().add(2, "day").set("hour", 18).set("minute", 0),
+  };
+
+  const [formData, setFormData] = useState<RentFormData>(defaultFormData);
+
+  const isLocationDifferent = () => {
+    return formData.rentLocation !== formData.returnLocation;
+  };
+
+  const [showReturnLocation, setShowReturnLocation] = useState(
+    isLocationDifferent()
+  );
+
+  useEffect(() => {
+    if (showModal) {
+      fetchLocations(formData.rentLocation, "rent");
+      if (isLocationDifferent()) {
+        fetchLocations(formData.returnLocation, "return");
+      }
+    }
+  }, [showModal]);
 
   const handleInputChange =
-    (field: keyof IFormInputs) =>
+    (field: keyof RentFormData) =>
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
       setFormData({ ...formData, [field]: value });
@@ -72,7 +87,7 @@ export default function RentForm({
     };
 
   const handleDateChange =
-    (field: keyof IFormInputs) => (date: Dayjs | null) => {
+    (field: keyof RentFormData) => (date: Dayjs | null) => {
       setFormData({ ...formData, [field]: date });
     };
 
@@ -87,7 +102,6 @@ export default function RentForm({
 
     const response = await fetch(url, { method: "GET", headers });
     const data = await response.json();
-    console.log(data);
 
     if (type === "rent") {
       setRentLocations(data.data);
@@ -96,16 +110,17 @@ export default function RentForm({
     }
   };
 
+  const validateLocation = (location: string, type: "rent" | "return") => {
+    const locations = type === "rent" ? rentLocations : returnLocations;
+    return locations.some((loc) => loc.attributes.name === location);
+  };
+
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { rentLocation, returnLocation, pickupDate, dropOffDate } = formData;
 
-    const isValidRentLocation = rentLocations.some(
-      (location) => location.attributes.name === rentLocation
-    );
-    const isValidReturnLocation = returnLocations.some(
-      (location) => location.attributes.name === returnLocation
-    );
+    const isValidRentLocation = validateLocation(rentLocation, "rent");
+    const isValidReturnLocation = validateLocation(returnLocation, "return");
 
     if (rentLocation.length < 3) {
       setErrorMessage(t("rentLocation.minLength"));
@@ -158,9 +173,17 @@ export default function RentForm({
     setShowModal(false);
     setShowRentSelect(false);
     setShowReturnSelect(false);
+    setErrorMessage(null);
   };
 
-  const toggleModal = () => setShowModal(!showModal);
+  const toggleModal = () => {
+    setFormData((prevFormData) => ({
+      ...defaultFormData,
+      ...prevFormData,
+    }));
+    setShowModal(!showModal);
+  };
+
   const toggleRentSelect = () => setShowRentSelect(!showRentSelect);
   const toggleReturnSelect = () => setShowReturnSelect(!showReturnSelect);
   const handleCheckboxClick = () => setShowReturnLocation(!showReturnLocation);
@@ -180,7 +203,7 @@ export default function RentForm({
         />
       </span>
       <div
-        className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards rounded ${
+        className={`fixed top-0 right-0 left-0 bottom-0 z-10 w-full fill-mode-forwards rounded ${
           showModal ? "animate-show-overlay" : "hidden"
         }`}
         onClick={toggleModal}
@@ -249,7 +272,7 @@ export default function RentForm({
                   adapterLocale={t("locale")}
                 >
                   <div className="w-full border-b">
-                    <DateTimePicker
+                    <MobileDateTimePicker
                       className="w-full"
                       disablePast
                       value={formData.pickupDate}
@@ -270,7 +293,7 @@ export default function RentForm({
                     />
                   </div>
                   <div className="w-full border-b">
-                    <DateTimePicker
+                    <MobileDateTimePicker
                       className="w-full"
                       value={formData.dropOffDate}
                       disablePast
@@ -311,8 +334,9 @@ export default function RentForm({
             <input
               id={id}
               type="checkbox"
+              checked={showReturnLocation}
               className="w-4 h-4 cursor-pointer"
-              onClick={handleCheckboxClick}
+              onChange={handleCheckboxClick}
             />
             <label
               htmlFor={id}
@@ -380,7 +404,7 @@ export default function RentForm({
                 adapterLocale={t("locale")}
               >
                 <div className="w-full border-b">
-                  <DateTimePicker
+                  <MobileDateTimePicker
                     className="w-full"
                     disablePast
                     value={formData.pickupDate}
@@ -399,7 +423,7 @@ export default function RentForm({
                   />
                 </div>
                 <div className="w-full border-b">
-                  <DateTimePicker
+                  <MobileDateTimePicker
                     className="w-full"
                     value={formData.dropOffDate}
                     disablePast
@@ -443,8 +467,9 @@ export default function RentForm({
           <input
             id="diffLocation"
             type="checkbox"
+            checked={showReturnLocation}
             className="w-4 h-4 cursor-pointer"
-            onClick={handleCheckboxClick}
+            onChange={handleCheckboxClick}
           />
           <label
             htmlFor="diffLocation"

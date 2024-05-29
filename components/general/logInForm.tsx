@@ -32,7 +32,7 @@ export default function LoginForm() {
   });
 
   const [errors, setErrors] = useState<Partial<LoginFormValues>>({});
-  const [networkErrorMessage, setNetworkErrorMessage] = useState("");
+  const [unprocessableErrorMessage, setUnprocessableErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
@@ -79,7 +79,7 @@ export default function LoginForm() {
           const token = data.data.attributes.token;
           
           if (data.data.attributes.email_verified_at===null) {
-            setNetworkErrorMessage(translations.verifyEmail);
+            setUnprocessableErrorMessage(translations.verifyEmail);
           }
           else {
           // setAuthenticated(true);
@@ -89,7 +89,7 @@ export default function LoginForm() {
           }
         } else {
           const errorData = await response.json();
-          setNetworkErrorMessage(errorData.detail);
+          setUnprocessableErrorMessage(errorData.detail);
         }
       } catch (error) {
         console.error(translations.errorDuringLogin, error);
@@ -127,10 +127,10 @@ export default function LoginForm() {
           </div>
           <div
             className={`text-red-500 font-medium transition-opacity duration-300 ${
-              networkErrorMessage ? "opacity-100" : "opacity-0"
+              unprocessableErrorMessage ? "opacity-100" : "opacity-0"
             }`}
           >
-            {networkErrorMessage}
+            {unprocessableErrorMessage}
           </div>
           <div className="w-full">
             <form className="flex flex-col gap-4" onSubmit={submitForm}>

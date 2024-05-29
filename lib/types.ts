@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 export type VehiclePrices = {
   vehicle: number;
   childSeat: number;
@@ -63,4 +65,18 @@ export interface VehicleData {
   data: any[];
   links: any;
   meta: any;
+}
+
+
+export interface RentFormData {
+  rentLocation: string;
+  returnLocation: string;
+  pickupDate: Dayjs | null;
+  dropOffDate: Dayjs | null;
+}
+
+export interface Location {
+  attributes: {
+    name: string;
+  };
 }

@@ -66,7 +66,7 @@ export default function RegisterForm() {
   const [errors, setErrors] = useState<Partial<RegisterFormValues>>({});
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [networkErrorMessage, setNetworkErrorMessage] = useState("");
+  const [unprocessableErrorMessage, setUnprocessableErrorMessage] = useState("");
   const phoneInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (
@@ -134,7 +134,7 @@ export default function RegisterForm() {
           router.push("/");
         } else {
           const errorData = await response.json();
-          setNetworkErrorMessage(errorData.detail);
+          setUnprocessableErrorMessage(errorData.detail);
         }
       } catch (error) {
         console.error(translations.errorDuringRegister, error);
@@ -157,10 +157,10 @@ export default function RegisterForm() {
         <div className="w-full">
           <div
             className={`text-red-500 font-medium my-2 transition-opacity duration-300 ${
-              networkErrorMessage ? "opacity-100" : "opacity-0"
+              unprocessableErrorMessage ? "opacity-100" : "opacity-0"
             }`}
           >
-            {networkErrorMessage}
+            {unprocessableErrorMessage}
           </div>
           <form
             className="grid grid-cols-1 mobile:grid-cols-2 gap-4"
