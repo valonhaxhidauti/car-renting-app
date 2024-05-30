@@ -1,18 +1,27 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import LoginForm from "@/components/general/logInForm";
 import RegisterForm from "@/components/general/registerForm";
-import { useRouter } from "next/navigation";
 
 export default function Account() {
   const router = useRouter();
-  if (typeof window !== "undefined") {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
     const item = window.localStorage.getItem("authenticated");
     if (item) {
-      router.push("/account/personal-info");
+      router.replace("/account/personal-info");
+    } else {
+      setIsAuthenticated(false);
     }
+  }, [router]);
+
+  if (isAuthenticated === null) {
+    return null; 
   }
 
   return (

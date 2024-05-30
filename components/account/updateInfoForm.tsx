@@ -26,6 +26,7 @@ export default function UpdateInfoForm() {
   };
   const [errors, setErrors] = useState<Partial<UpdateFormValues>>({});
   const [internalServerError, setInternalServerError] = useState("");
+  const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
   const [unprocessedErrorMessage, setUnprocessedErrorMessage] = useState("");
   const { toast } = useToast();
@@ -101,16 +102,22 @@ export default function UpdateInfoForm() {
               // birthday: "", not part of the profile data
               // password: "", not part of the profile data
             });
+            setLoading(false);
           } else {
             const errorData = await response.json();
             setInternalServerError(errorData.detail);
             console.error("Failed to fetch profile data", errorData.detail);
+            setLoading(false); 
           }
         } catch (error) {
           console.error("Error fetching profile data:", error);
+          setInternalServerError("An error occurred while fetching profile data.");
+          setLoading(false); 
         }
       } else {
         console.error("No token found");
+        setInternalServerError("No token found.");
+        setLoading(false);
       }
     };
 
@@ -165,11 +172,9 @@ export default function UpdateInfoForm() {
         if (response.ok) {
           const data = await response.json();
           setSuccessMessage(t("userUpdated"));
-          // console.log("User updated successfully:", data);
         } else {
           const errorData = await response.json();
           setUnprocessedErrorMessage(errorData.detail);
-          // console.error("Update failed:", errorData.detail);
         }
       } catch (error) {
         console.error("Error occurred during update:", error);
@@ -186,109 +191,115 @@ export default function UpdateInfoForm() {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  return internalServerError ? (
-    <p className="text-primary text-lg font-bold">{internalServerError}</p>
-  ) : (
-      <form
-        className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end"
-        onSubmit={submitForm}
-      >
-        <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
-            {t("register.nameLabel")}
-          </label>
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => handleInputChange("name", e.target.value)}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary 
+
+  if (loading) {
+    return null;
+  }
+
+  if (internalServerError) {
+    return <p className="text-primary text-lg font-bold">{internalServerError}</p>;
+  }
+
+  return (
+    <form
+      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end"
+      onSubmit={submitForm}
+    >
+      <div className="relative">
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("register.nameLabel")}
+        </label>
+        <input
+          type="text"
+          value={formData.name}
+          onChange={(e) => handleInputChange("name", e.target.value)}
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary 
           ${errors.name && " outline outline-2 outline-red-500"}`}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium leading-6 text-grayFont">
-            {t("register.surnameLabel")}
-          </label>
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("register.surnameLabel")}
+        </label>
+        <input
+          type="text"
+          value={formData.surname}
+          onChange={(e) => handleInputChange("surname", e.target.value)}
+          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("register.emailAddressLabel")}
+        </label>
+        <div className="mt-2">
           <input
-            type="text"
-            value={formData.surname}
-            onChange={(e) => handleInputChange("surname", e.target.value)}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            type="email"
+            value={formData.email}
+            onChange={(e) => handleInputChange("email", e.target.value)}
+            className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium leading-6 text-grayFont">
-            {t("register.emailAddressLabel")}
-          </label>
-          <div className="mt-2">
-            <input
-              type="email"
-              value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
-            />
-          </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium leading-6 text-grayFont">
-            {t("register.phoneNumberLabel")}
-          </label>
-          <div className="mt-2">
-            <PhoneInput
-              country={"de"}
-              value={formData.phone}
-              onChange={(value) => handleInputChange("phone", value)}
-              buttonStyle={{
-                border: "none",
-                background: "white",
-                margin: "2px",
-              }}
-              dropdownStyle={{
-                border: "none",
-                marginTop: "4px",
-                maxWidth: "272px",
-              }}
-              inputProps={{
-                required: true,
-                ref: phoneInputRef,
-                className:
-                  "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
-              }}
-            />
-          </div>
-        </div>
-        <BirthdaySelector />
-        <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
-            {t("register.passwordLabel")}
-          </label>
-          <input
-            type={showPassword ? "text" : "password"}
-            onChange={handlePasswordChange}
-            className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28"
+      </div>
+      <div>
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("register.phoneNumberLabel")}
+        </label>
+        <div className="mt-2">
+          <PhoneInput
+            country={"de"}
+            value={formData.phone}
+            onChange={(value) => handleInputChange("phone", value)}
+            buttonStyle={{
+              border: "none",
+              background: "white",
+              margin: "2px",
+            }}
+            dropdownStyle={{
+              border: "none",
+              marginTop: "4px",
+              maxWidth: "272px",
+            }}
+            inputProps={{
+              required: true,
+              ref: phoneInputRef,
+              className:
+                "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
+            }}
           />
-          {password && (
-            <div className="flex gap-2 items-center absolute right-4 bottom-[20px]">
-              <p
-                className="text-primary text-sm cursor-pointer"
-                onClick={togglePasswordVisibility}
-              >
-                {t("viewPassword")}
-              </p>
-              {/* <CheckIcon /> */}
-            </div>
-          )}
         </div>
-        <div className="hidden laptop:block"></div>
-        <div className="hidden laptop:block"></div>
-        <div className="laptop:justify-self-end">
-          <button
-            type="submit"
-            className="flex w-full mobile:w-auto justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary transition focus-visible:outline-primary"
-          >
-            {t("update")}
-          </button>
-        </div>
-      </form>
+      </div>
+      <BirthdaySelector />
+      <div className="relative">
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("register.passwordLabel")}
+        </label>
+        <input
+          type={showPassword ? "text" : "password"}
+          onChange={handlePasswordChange}
+          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28"
+        />
+        {password && (
+          <div className="flex gap-2 items-center absolute right-4 bottom-[20px]">
+            <p
+              className="text-primary text-sm cursor-pointer"
+              onClick={togglePasswordVisibility}
+            >
+              {t("viewPassword")}
+            </p>
+          </div>
+        )}
+      </div>
+      <div className="hidden laptop:block"></div>
+      <div className="hidden laptop:block"></div>
+      <div className="laptop:justify-self-end">
+        <button
+          type="submit"
+          className="flex w-full mobile:w-auto justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary transition focus-visible:outline-primary"
+        >
+          {t("update")}
+        </button>
+      </div>
+    </form>
   );
 }
