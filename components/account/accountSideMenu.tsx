@@ -32,7 +32,7 @@ export default function AccountSideMenu() {
         {t("personalInformations")}
       </Link>
       <Link
-        href="#"
+        href="/account/my-reservations"
         className="text-white flex items-center gap-2 p-4 text-xs border-b-borderMenu hover:font-medium border-b"
       >
         <ReservationIcon />

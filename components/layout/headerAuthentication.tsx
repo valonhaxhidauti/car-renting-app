@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import {
   AccountIcon,
   LoginIcon,
@@ -13,15 +10,26 @@ import {
   SelectGroup,
   SelectTrigger,
 } from "../ui/select";
+import { useEffect, useState } from "react";
 import { useHandleLogout } from "../hooks/useHandleLogout";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 
-export default function HeaderAuthentication({isOpen}:{isOpen:boolean}) {
+interface HeaderAuthenticationProps {
+  isOpen: boolean;
+  triggerClassName: string;
+  linkClassName: string;
+}
+
+export default function HeaderAuthentication({
+  isOpen,
+  triggerClassName,
+  linkClassName,
+}: HeaderAuthenticationProps) {
   const t = useTranslations("Header");
   const u = useTranslations("Account.sideMenu");
-  const [shown, setShown] = useState(false);
 
+  const [shown, setShown] = useState(false);
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const handleLogout = useHandleLogout();
 
@@ -30,6 +38,14 @@ export default function HeaderAuthentication({isOpen}:{isOpen:boolean}) {
     setAuthenticated(authValue === "true");
   }, []);
 
+  useEffect(() => {
+    if (shown) {
+      document.body.style.setProperty("overflow-y", "auto", "important");
+    } else {
+      document.body.style.removeProperty("overflow-y");
+    }
+  }, [shown]);
+  
   function onSelectClicked() {
     setShown(!shown);
   }
@@ -40,14 +56,8 @@ export default function HeaderAuthentication({isOpen}:{isOpen:boolean}) {
 
   return authenticated ? (
     <Select onOpenChange={onSelectClicked}>
-      <SelectTrigger
-        className={`${
-          isOpen
-            ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
-            : "bg-white hover:bg-slate-50 text-primary border-borderGray hidden laptop:flex"
-        } font-bold border py-2 px-6 items-center rounded-full`}
-      >
-        <LoginIcon className={` ${isOpen ? "text-white" : " text-primary"}`} />
+      <SelectTrigger className={triggerClassName}>
+        <LoginIcon className={` ${isOpen ? "text-white" : "text-primary"}`} />
         {t("myAccount")}
       </SelectTrigger>
       <SelectContent className="bg-white">
@@ -60,7 +70,7 @@ export default function HeaderAuthentication({isOpen}:{isOpen:boolean}) {
             {u("personalInformations")}
           </Link>
           <Link
-            href="#"
+            href="/account/my-reservations"
             className="text-grayFont flex items-center gap-2 group hover:text-primary"
           >
             <ReservationIcon className="text-gray-font group-hover:text-primary" />
@@ -79,17 +89,8 @@ export default function HeaderAuthentication({isOpen}:{isOpen:boolean}) {
       </SelectContent>
     </Select>
   ) : (
-    <Link
-      href="/account"
-      className={`${
-        isOpen
-          ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
-          : "bg-white hover:bg-slate-50 text-grayFont border-borderGray hidden laptop:flex"
-      } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
-    >
-      <div className="">
-        <LoginIcon className={` ${isOpen ? "text-white" : "text-grayFont"}`} />
-      </div>
+    <Link href="/account" className={linkClassName}>
+      <LoginIcon className={` ${isOpen ? "text-white" : "text-grayFont"}`} />
       {t("loginRegister")}
     </Link>
   );

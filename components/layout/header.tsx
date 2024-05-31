@@ -1,28 +1,17 @@
 "use client";
 
 import {
-  AccountIcon,
   CloseMenuIcon,
   HamburgerIcon,
-  LoginIcon,
   Logo,
   LogoLight,
   LogoMenu,
-  LogoutIcon,
-  ReservationIcon,
 } from "@/assets/svgs";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectTrigger,
-} from "../ui/select";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { clearAppliedFilters } from "@/lib/utils";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
-import { useHandleLogout } from "../hooks/useHandleLogout";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LanguageSelector from "../common/languageSelector";
@@ -36,15 +25,13 @@ export default function Header({
   fixed: boolean;
 }) {
   const t = useTranslations("Header");
-  const u = useTranslations("Account.sideMenu");
 
   const [isOpen, setIsOpen] = useState(false);
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
-  const [shown, setShown] = useState(false);
+
   const { params, filters } = useCustomSearchParams();
-  const handleLogout = useHandleLogout();
-  const pathname = usePathname(); 
-  const isExplorePage = pathname === "/en/explore" || pathname === "/de/explore";
+  const pathname = usePathname();
+  const isExplorePage =
+    pathname === "/en/explore" || pathname === "/de/explore";
 
   const clearFilters = () => {
     if (!isExplorePage) {
@@ -52,28 +39,25 @@ export default function Header({
     } else return;
   };
 
-  useEffect(() => {
-    if (shown) {
-      document.body.style.setProperty("overflow-y", "auto", "important");
-    } else {
-      document.body.style.removeProperty("overflow-y");
-    }
-  }, [shown]);
-
-  useEffect(() => {
-    const authValue = window.localStorage.getItem("authenticated");
-    setAuthenticated(authValue === "true");
-  }, []);
-
   const currentYear = new Date().getFullYear();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  function onSelectClicked() {
-    setShown(!shown);
-  }
+  const navLinks = [
+    { href: "/", label: t("homepage") },
+    {
+      href: `/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}&sort=${filters.sort}&filter[carClass]=${filters.carClass}&filter[carType]=${filters.carType}&filter[gearType]=${filters.gearType}&filter[fuelType]=${filters.fuelType}`,
+      label: t("exploreVehicles"),
+      onClick: clearFilters,
+    },
+    { href: "/about", label: t("aboutUs") },
+    { href: "/faq", label: t("faq") },
+    { href: "/terms", label: t("rentalTerms") },
+    { href: "/policy", label: t("privacyPolicy") },
+    { href: "/contact", label: t("contact") },
+  ];
 
   return (
     <>
@@ -92,108 +76,29 @@ export default function Header({
           className="object-cover"
         />
         <div className="flex flex-col text-white justify-center relative items-center tablet:items-end w-full h-full gap-2 tablet:gap-4 max-w-[1440px] m-auto">
-          {authenticated ? (
-            <Select onOpenChange={onSelectClicked}>
-              <SelectTrigger
-                className={`text-white border-borderGray border w-fit gap-4 flex tablet:hidden font-bold h-[34px] px-6 items-center rounded-full mb-2 tablet:mb-0`}
-              >
-                <LoginIcon className="text-white" />
-                {t("myAccount")}
-              </SelectTrigger>
-              <SelectContent className="bg-white">
-                <SelectGroup className="flex flex-col gap-4 p-4">
-                  <Link
-                    href="/account/personal-info"
-                    className="text-grayFont flex items-center gap-2 group hover:text-primary"
-                  >
-                    <AccountIcon className="text-gray-font group-hover:text-primary" />
-                    {u("personalInformations")}
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-grayFont flex items-center gap-2 group hover:text-primary"
-                  >
-                    <ReservationIcon className="text-gray-font group-hover:text-primary" />
-                    {u("reservations")}
-                  </Link>
-                  <div
-                    onClick={handleLogout}
-                    className="text-grayFont flex items-center gap-2 cursor-pointer group hover:text-primary"
-                  >
-                    <div className="w-6">
-                      <LogoutIcon className="text-gray-font group-hover:text-primary" />
-                    </div>
-                    {u("logOut")}
-                  </div>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          ) : (
-            <Link
-              href="/account"
-              className="text-white border-white flex mb-2 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
-            >
-              <LoginIcon className="text-white" />
-              {t("loginRegister")}
-            </Link>
-          )}
+          <HeaderAuthentication
+            isOpen={isOpen}
+            triggerClassName="text-white border-borderGray border w-fit gap-4 flex tablet:hidden font-bold h-[34px] px-6 items-center rounded-full mb-2 tablet:mb-0"
+            linkClassName="text-white border-white flex mb-2 tablet:mb-0 tablet:hidden font-bold border items-center gap-3 rounded-full h-6 p-4 text-sm"
+          />
           <LanguageSelector
             isOpen={isOpen}
             triggerClass="border-white text-white flex mb-2 tablet:mb-0 tablet:hidden w-[65px] border rounded-full h-6 py-4 px-2"
           />
-          <Link href="/" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">{t("homepage")}</p>
-            <div className="hidden tablet:block rotate-180">
-              <div className="w-40 h-1"></div>
-              <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
-            </div>
-          </Link>
-          <Link
-            onClick={clearFilters}
-            href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}&sort=${filters.sort}&filter[carClass]=${filters.carClass}&filter[carType]=${filters.carType}&filter[gearType]=${filters.gearType}&filter[fuelType]=${filters.fuelType}`}
-            className="flex group items-center gap-12 cursor-pointer"
-          >
-            <p className="group-hover:font-bold">{t("exploreVehicles")}</p>
-            <div className="hidden tablet:block rotate-180">
-              <div className="w-40 h-1"></div>
-              <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
-            </div>
-          </Link>
-          <Link href="/about" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">{t("aboutUs")}</p>
-            <div className="hidden tablet:block rotate-180">
-              <div className="w-40 h-1"></div>
-              <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
-            </div>
-          </Link>
-          <Link href="/faq" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">{t("faq")}</p>
-            <div className="hidden tablet:block rotate-180">
-              <div className="w-40 h-1"></div>
-              <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
-            </div>
-          </Link>
-          <Link href="/terms" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">{t("rentalTerms")}</p>
-            <div className="hidden tablet:block rotate-180">
-              <div className="w-40 h-1"></div>
-              <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
-            </div>
-          </Link>
-          <Link href="/policy" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">{t("privacyPolicy")}</p>
-            <div className="hidden tablet:block rotate-180">
-              <div className="w-40 h-1"></div>
-              <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
-            </div>
-          </Link>
-          <Link href="/contact" className="flex group items-center gap-12">
-            <p className="group-hover:font-bold">{t("contact")}</p>
-            <div className="hidden tablet:block rotate-180">
-              <div className="w-40 h-1"></div>
-              <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
-            </div>
-          </Link>
+          {navLinks.map((link, index) => (
+            <Link
+              key={index}
+              href={link.href}
+              onClick={link.onClick}
+              className="flex group items-center gap-12"
+            >
+              <p className="group-hover:font-bold">{link.label}</p>
+              <div className="hidden tablet:block rotate-180">
+                <div className="w-40 h-1"></div>
+                <div className="transition-all w-0 h-0.5 group-hover:w-40 bg-white"></div>
+              </div>
+            </Link>
+          ))}
           <div className="absolute bottom-10 left-4 mobile:left-8 bigDesktop:left-0">
             <p>{t("copyright", { currentYear: currentYear })}</p>
           </div>
@@ -256,7 +161,19 @@ export default function Header({
             </div>
           </div>
           <div className="flex justify-end gap-8 items-center">
-            <HeaderAuthentication isOpen={isOpen}/>
+            <HeaderAuthentication
+              isOpen={isOpen}
+              triggerClassName={`${
+                isOpen
+                  ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
+                  : "bg-white hover:bg-slate-50 text-primary border-borderGray hidden laptop:flex"
+              } font-bold border py-2 px-6 items-center rounded-full`}
+              linkClassName={`${
+                isOpen
+                  ? "bg-none hover:opacity-75 text-white border-white hidden tablet:flex"
+                  : "bg-white hover:bg-slate-50 text-grayFont border-borderGray hidden laptop:flex"
+              } font-bold border py-2 px-6 items-center gap-3 rounded-full`}
+            />
             <LanguageSelector
               isOpen={isOpen}
               triggerClass={`${

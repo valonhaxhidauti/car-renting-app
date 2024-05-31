@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
-import LoginForm from "@/components/general/logInForm";
-import RegisterForm from "@/components/general/registerForm";
+import LoginForm from "@/components/account/loginForm";
+import RegisterForm from "@/components/account/registerForm";
 
 export default function Account() {
   const router = useRouter();

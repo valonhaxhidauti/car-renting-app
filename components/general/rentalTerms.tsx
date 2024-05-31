@@ -15,7 +15,7 @@ export default function RentalTerms() {
 
   return (
     <>
-      <HeadingTitle translations={t("heading")} />
+      <HeadingTitle title={t("heading")} />
       <div className="bg-bgSecondary w-full pb-16">
         <Breadcrumbs translations={t} />
         <div className=" max-w-[1440px] m-auto">

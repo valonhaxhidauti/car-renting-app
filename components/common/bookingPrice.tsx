@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import { Skeleton } from "../ui/skeleton";
 import BookingInfo from "./bookingInfo";
+import { usePathname } from "next/navigation";
 
 export default function BookingPrice(props: any) {
   const t = useTranslations("VehicleDetails");
@@ -18,6 +19,11 @@ export default function BookingPrice(props: any) {
     Object.values(params).every(
       (param) => typeof param === "string" && param.trim() !== ""
     );
+
+  const pathname = usePathname();
+  const isPaymentPage =
+    usePathname() === "/en/explore/vehicle/payment" ||
+    pathname === "/de/explore/vehicle/payment";
 
   return (
     <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
@@ -89,7 +95,9 @@ export default function BookingPrice(props: any) {
               </p>
             </div>
           </div>
-          {paramsSet ? (
+          {isPaymentPage ? (
+            <div></div>
+          ) : paramsSet ? (
             <Link
               href={`/explore/vehicle/payment?vehicleId=${props.params.vehicleId}&rentLocation=${props.params.rentLocation}&returnLocation=${props.params.returnLocation}&pickupDate=${props.params.pickupDate}&dropOffDate=${props.params.dropOffDate}`}
               className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
