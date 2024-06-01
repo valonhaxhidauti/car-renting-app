@@ -15,7 +15,7 @@ export function useAuthRedirect(
     } else {
       setIsAuthenticated(true);
     }
-  }, [router]);
+  }, []);
 
   return isAuthenticated;
 }

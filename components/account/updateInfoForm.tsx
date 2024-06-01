@@ -140,7 +140,7 @@ export default function UpdateInfoForm() {
 
       setUnprocessedErrorMessage("");
     }
-  }, [successMessage, unprocessedErrorMessage]);
+  }, [successMessage, unprocessedErrorMessage,toast]);
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

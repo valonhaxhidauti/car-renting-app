@@ -67,7 +67,7 @@ export default function RentForm({
         fetchLocations(formData.returnLocation, "return");
       }
     }
-  }, [showModal]);
+  }, []);
 
   const handleInputChange =
     (field: keyof RentFormData) =>
