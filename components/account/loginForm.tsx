@@ -32,7 +32,7 @@ export default function LoginForm() {
   });
 
   const [errors, setErrors] = useState<Partial<LoginFormValues>>({});
-  const [unprocessableErrorMessage, setUnprocessableErrorMessage] = useState("");
+  const [unprocessedErrorMessage, setUnprocessedErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
@@ -77,19 +77,18 @@ export default function LoginForm() {
         if (response.ok) {
           const data = await response.json();
           const token = data.data.attributes.token;
-          
-          if (data.data.attributes.email_verified_at===null) {
-            setUnprocessableErrorMessage(translations.verifyEmail);
-          }
-          else {
-          // setAuthenticated(true);
-          localStorage.setItem("authenticated", "true");
-          localStorage.setItem("token", token);
-          router.push("/");
+
+          if (data.data.attributes.email_verified_at === null) {
+            setUnprocessedErrorMessage(translations.verifyEmail);
+          } else {
+            // setAuthenticated(true);
+            localStorage.setItem("authenticated", "true");
+            localStorage.setItem("token", token);
+            router.push("/");
           }
         } else {
           const errorData = await response.json();
-          setUnprocessableErrorMessage(errorData.detail);
+          setUnprocessedErrorMessage(errorData.detail);
         }
       } catch (error) {
         console.error(translations.errorDuringLogin, error);
@@ -127,10 +126,10 @@ export default function LoginForm() {
           </div>
           <div
             className={`text-red-500 font-medium transition-opacity duration-300 ${
-              unprocessableErrorMessage ? "opacity-100" : "opacity-0"
+              unprocessedErrorMessage ? "opacity-100" : "opacity-0"
             }`}
           >
-            {unprocessableErrorMessage}
+            {unprocessedErrorMessage}
           </div>
           <div className="w-full">
             <form className="flex flex-col gap-4" onSubmit={submitForm}>
@@ -215,10 +214,13 @@ export default function LoginForm() {
                   }`}
                 >
                   {isSubmitting ? (
-                    <Loader2
-                      size={20}
-                      className="self-center my-0.5 animate-spin"
-                    />
+                    <div className="flex gap-2">
+                      <Loader2
+                        size={20}
+                        className="self-center my-0.5 animate-spin"
+                      />
+                      {t("login.loginButton")}
+                    </div>
                   ) : (
                     t("login.loginButton")
                   )}

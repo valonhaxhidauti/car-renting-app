@@ -96,7 +96,7 @@ export default function BookingPrice(props: any) {
             </div>
           </div>
           {isPaymentPage ? (
-            <div></div>
+            <></>
           ) : paramsSet ? (
             <Link
               href={`/explore/vehicle/payment?vehicleId=${props.params.vehicleId}&rentLocation=${props.params.rentLocation}&returnLocation=${props.params.returnLocation}&pickupDate=${props.params.pickupDate}&dropOffDate=${props.params.dropOffDate}`}

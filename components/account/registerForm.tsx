@@ -66,7 +66,7 @@ export default function RegisterForm() {
   const [errors, setErrors] = useState<Partial<RegisterFormValues>>({});
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [unprocessableErrorMessage, setUnprocessableErrorMessage] = useState("");
+  const [unprocessedErrorMessage, setUnprocessedErrorMessage] = useState("");
   const phoneInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (
@@ -134,7 +134,7 @@ export default function RegisterForm() {
           router.push("/");
         } else {
           const errorData = await response.json();
-          setUnprocessableErrorMessage(errorData.detail);
+          setUnprocessedErrorMessage(errorData.detail);
         }
       } catch (error) {
         console.error(translations.errorDuringRegister, error);
@@ -157,10 +157,10 @@ export default function RegisterForm() {
         <div className="w-full">
           <div
             className={`text-red-500 font-medium my-2 transition-opacity duration-300 ${
-              unprocessableErrorMessage ? "opacity-100" : "opacity-0"
+              unprocessedErrorMessage ? "opacity-100" : "opacity-0"
             }`}
           >
-            {unprocessableErrorMessage}
+            {unprocessedErrorMessage}
           </div>
           <form
             className="grid grid-cols-1 mobile:grid-cols-2 gap-4"
@@ -388,10 +388,13 @@ export default function RegisterForm() {
                 }`}
               >
                 {isSubmitting ? (
-                  <Loader2
-                    size={20}
-                    className="self-center my-0.5 animate-spin"
-                  />
+                  <div className="flex gap-2">
+                    <Loader2
+                      size={20}
+                      className="self-center my-0.5 animate-spin"
+                    />
+                    {t("register.registerButton")}
+                  </div>
                 ) : (
                   t("register.registerButton")
                 )}

@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 
-export const useHandleLogout = () => {
+export function useHandleLogout() {
   const router = useRouter();
 
   const handleLogout = () => {
@@ -10,4 +10,4 @@ export const useHandleLogout = () => {
   };
 
   return handleLogout;
-};
+}
