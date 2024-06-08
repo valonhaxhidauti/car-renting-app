@@ -70,7 +70,7 @@ export default function BookingConfirmation() {
         </p>
         <Link
           href="/account/personal-info"
-          className="bg-primary text-center hover:bg-secondary transition text-white py-3 w-full mobile:w-40"
+          className="bg-primary text-center hover:bg-secondary transition text-white py-3 mt-6 w-full mobile:w-40"
         >
           Go to My Account
         </Link>
