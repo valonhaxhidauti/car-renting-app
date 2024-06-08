@@ -107,12 +107,14 @@ export default function UpdateInfoForm() {
             const errorData = await response.json();
             setInternalServerError(errorData.detail);
             console.error("Failed to fetch profile data", errorData.detail);
-            setLoading(false); 
+            setLoading(false);
           }
         } catch (error) {
           console.error("Error fetching profile data:", error);
-          setInternalServerError("An error occurred while fetching profile data.");
-          setLoading(false); 
+          setInternalServerError(
+            "An error occurred while fetching profile data."
+          );
+          setLoading(false);
         }
       } else {
         console.error("No token found");
@@ -140,7 +142,7 @@ export default function UpdateInfoForm() {
 
       setUnprocessedErrorMessage("");
     }
-  }, [successMessage, unprocessedErrorMessage,toast]);
+  }, [successMessage, unprocessedErrorMessage, toast]);
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -197,7 +199,9 @@ export default function UpdateInfoForm() {
   }
 
   if (internalServerError) {
-    return <p className="text-primary text-lg font-bold">{internalServerError}</p>;
+    return (
+      <p className="text-primary text-lg font-bold">{internalServerError}</p>
+    );
   }
 
   return (

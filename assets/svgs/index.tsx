@@ -1,4 +1,5 @@
 export { default as AccountIcon } from "./accountIcon.svg";
+export { default as BookingConfirmed } from "./bookingConfirmed.svg";
 export { default as CalendarIcon } from "./calendarIcon.svg";
 export { default as CallUsIcon } from "./callUsIcon.svg";
 export { default as CheckIcon } from "./checkIcon.svg";
