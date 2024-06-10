@@ -41,7 +41,6 @@ export default function BookingConfirmation() {
         return response.json();
       })
       .then((data) => {
-        console.log(data.data[1]);
         setBookings(data.data);
         setLoading(false);
       })
@@ -95,6 +94,7 @@ export default function BookingConfirmation() {
                     width={330}
                     height={285}
                     alt="booked car"
+                    className="pointer-events-none"
                   />
                   <div className="flex flex-col gap-4 justify-center">
                     <p className="text-grayFont text-xl font-medium">

@@ -19,7 +19,7 @@ export default function VehicleSpecs({
 }) {
   return (
     <div className="grid mobile:grid-cols-2 desktop:grid-cols-3 gap-4">
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <FuelIcon className="text-graySecondary" />
         </div>
@@ -32,7 +32,7 @@ export default function VehicleSpecs({
           </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <TransmissionIcon className="text-graySecondary" />
         </div>
@@ -45,7 +45,7 @@ export default function VehicleSpecs({
           </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <SeatIcon className="text-graySecondary" />
         </div>
@@ -59,7 +59,7 @@ export default function VehicleSpecs({
           </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <KeyIcon className="text-graySecondary" />
         </div>
@@ -72,7 +72,7 @@ export default function VehicleSpecs({
           </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <EngineIcon className="text-graySecondary" />
         </div>
@@ -80,10 +80,13 @@ export default function VehicleSpecs({
           <span className="text-[9px] font-bold">
             {translations("engineType").toUpperCase()}
           </span>
-          <p className="font-medium text-sm">3.0 L V6 TFSI ?</p>
+          <p className="font-medium text-sm">
+            {allSpecifications.attributes.engine_displacement_in_metric_cubic}{" "}
+            {translations("cubic")}
+          </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <ConsumptionIcon className="text-graySecondary" />
         </div>
@@ -92,12 +95,11 @@ export default function VehicleSpecs({
             {translations("fuelConsumption").toUpperCase()}
           </span>
           <p className="font-medium text-sm">
-            old 4,5 lt / 100 km ?
             {allSpecifications.attributes.fuel_tank_capacity_in_liters} lt
           </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <VehicleIcon className="text-graySecondary" />
         </div>
@@ -110,7 +112,7 @@ export default function VehicleSpecs({
           </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <LuggageIcon className="text-graySecondary" />
         </div>
@@ -123,7 +125,7 @@ export default function VehicleSpecs({
           </p>
         </div>
       </div>
-      <div className="flex gap-4 border-y border-borderGray py-6">
+      <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
           <HorsepowerIcon className="text-graySecondary" />
         </div>

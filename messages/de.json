@@ -354,6 +354,7 @@
         "additionalDriver": "Zusätzlicher Fahrer",
         "damageInsurance": "Schadensversicherung",
         "daily": "Täglich",
+        "cubic": "Kubik",
         "fuelType": "Kraftstoffart",
         "gearType": "Getriebetyp",
         "passengerCapacity": "Passagierkapazität",
@@ -365,7 +366,8 @@
         "vehicleType": "Fahrzeugtyp",
         "luggageCapacity": "Gepäckkapazität",
         "horsepower": "PS (Pferdestärke)",
-        "fillBookingTooltip": "Füllen Sie die Buchungsinformationen aus"
+        "fillBookingTooltip": "Füllen Sie die Buchungsinformationen aus",
+        "noImages": "Für dieses Fahrzeug sind derzeit keine Bilder verfügbar."
     },
     "VehicleFilters": {
         "vehicleClass": {

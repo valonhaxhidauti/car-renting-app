@@ -157,7 +157,7 @@ export default function AboutUs() {
                     alt="Car Photo"
                     width="300"
                     height="200"
-                    className="hidden mobile:block absolute -bottom-10 right-0"
+                    className="hidden mobile:block absolute -bottom-10 right-0 pointer-events-none "
                   />
                 </div>
               </div>

@@ -40,14 +40,25 @@ export default function VehicleCard({
       {viewMode === "list" ? (
         <div className="bg-white flex flex-col gap-4">
           <div className="w-full p-2 flex gap-8">
-            <Image
-              src="/sampleCar.png"
-              alt={vehicle.attributes.name.split(" (")[0]}
-              width="240"
-              height="120"
-              className="py-12"
-              priority
-            />
+            {vehicle.relationships.media ? (
+              <Image
+                src={`${vehicle.relationships.media[0].attributes.public_url}`}
+                alt={vehicle.attributes.name.split(" (")[0]}
+                width="240"
+                height="120"
+                className="pointer-events-none py-12 w-auto h-auto"
+                priority
+              />
+            ) : (
+              <Image
+                src="/sampleCar.png"
+                alt={vehicle.attributes.name.split(" (")[0]}
+                width="240"
+                height="120"
+                className="pointer-events-none py-12"
+                priority
+              />
+            )}
             <div className="flex justify-between w-full gap-2">
               <div className="w-full flex flex-col justify-between">
                 <div className="flex w-full justify-between mobile:pt-2">
@@ -58,11 +69,6 @@ export default function VehicleCard({
                     <p className="text-grayFont font-medium text-2xl">
                       {vehicle.attributes.name.split(" (")[0]}
                     </p>
-                  </div>
-                  <div>
-                    {/* <p className="border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
-                      25% {t("off")}
-                    </p> */}
                   </div>
                 </div>
                 <div className="flex flex-col">
@@ -147,13 +153,10 @@ export default function VehicleCard({
           </div>
         </div>
       ) : (
-        <div className="bg-white">
-          <div className="w-full p-4 flex flex-col gap-8">
+        <div className="bg-white h-full">
+          <div className="w-full h-full justify-between p-4 flex flex-col gap-8">
             <div className="flex w-full justify-between">
               <div className="flex flex-col gap-4 justify-between">
-                {/* <p className="w-fit border-2 border-red-500 text-red-500 font-bold p-1 text-sm rounded-lg">
-                  25% {t("off")}
-                </p> */}
                 <div className="flex flex-col gap-4">
                   <p className="text-graySecondary text-center w-32 border-graySecondary border rounded-full font-medium text-[10px] px-4 py-1">
                     {vehicle.relationships.carType.attributes.name}
@@ -163,14 +166,25 @@ export default function VehicleCard({
                   </p>
                 </div>
               </div>
-              <Image
-                src="/sampleCar.png"
-                alt={vehicle.attributes.name.split(" (")[0]}
-                width="200"
-                height="100"
-                className="py-12"
-                priority
-              />
+              {vehicle.relationships.media ? (
+                <Image
+                  src={`${vehicle.relationships.media[0].attributes.public_url}`}
+                  alt={vehicle.attributes.name.split(" (")[0]}
+                  width="240"
+                  height="120"
+                  className="pointer-events-none py-12 w-auto h-auto"
+                  priority
+                />
+              ) : (
+                <Image
+                  src="/sampleCar.png"
+                  alt={vehicle.attributes.name.split(" (")[0]}
+                  width="240"
+                  height="120"
+                  className="pointer-events-none py-12"
+                  priority
+                />
+              )}
             </div>
             <div className="flex justify-between w-full gap-2">
               <div className="w-full flex flex-col justify-between">

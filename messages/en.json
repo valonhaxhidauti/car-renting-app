@@ -354,6 +354,7 @@
         "additionalDriver": "Additional Driver",
         "damageInsurance": "Damage Insurance",
         "daily": "Daily",
+        "cubic": "Cubic",
         "fuelType": "Fuel Type",
         "gearType": "Gear Type",
         "passengerCapacity": "Passenger Capacity",
@@ -365,7 +366,8 @@
         "vehicleType": "Vehicle Type",
         "luggageCapacity": "Luggage Capacity",
         "horsepower": "Hp (Horse power)",
-        "fillBookingTooltip": "Fill the booking information"
+        "fillBookingTooltip": "Fill the booking information",
+        "noImages": "There are currently no images available for this vehicle."
     },
     "VehicleFilters": {
         "vehicleClass": {

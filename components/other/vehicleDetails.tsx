@@ -4,9 +4,9 @@ import {
   ChildSeatIcon,
   ConsumptionIcon,
   DriverIcon,
+  EngineIcon,
   FuelIcon,
   InsuranceIcon,
-  LuggageIcon,
   NavigationIcon,
   SeatIcon,
   TransmissionIcon,
@@ -27,6 +27,7 @@ import { useTranslations } from "next-intl";
 import { clearAppliedFilters } from "@/lib/utils";
 import { Link } from "next-view-transitions";
 import { VehiclePrices } from "@/lib/types";
+import { HeadingTitle } from "../common/headingParts";
 import Image from "next/image";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
@@ -36,7 +37,6 @@ import VehicleOptions from "./vehicleOptions";
 import BookingPrice from "../common/bookingPrice";
 import VehicleTerms from "./vehicleTerms";
 import VehicleDetailsSkeleton from "../loader/vehicleDetailsSkeleton";
-import { HeadingTitle } from "../common/headingParts";
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
@@ -134,15 +134,26 @@ export default function VehicleDetails() {
               {vehicle && vehicle.attributes ? (
                 <>
                   <div className=" bg-white flex flex-col gap-4">
-                    <div className="p-4 flex flex-col mobile:flex-row mobile:gap-8 w-full">
-                      <Image
-                        src="/sampleCar.png"
-                        alt={vehicle.attributes.name.split(" (")[0]}
-                        width="300"
-                        height="150"
-                        className="py-12 self-center mobile:self-start"
-                        priority
-                      />
+                    <div className="p-4 flex flex-col tablet:flex-row mobile:gap-8 w-full">
+                      {vehicle.relationships.media ? (
+                        <Image
+                          src={`${vehicle.relationships.media[0].attributes.public_url}`}
+                          alt={vehicle.attributes.name.split(" (")[0]}
+                          width="300"
+                          height="150"
+                          className="py-4 tablet:py-0 pointer-events-none self-center tablet:self-start"
+                          priority
+                        />
+                      ) : (
+                        <Image
+                          src="/sampleCar.png"
+                          alt={vehicle.attributes.name.split(" (")[0]}
+                          width="300"
+                          height="150"
+                          className="pointer-events-none py-12 self-center mobile:self-start"
+                          priority
+                        />
+                      )}
                       <div className="flex justify-between gap-2">
                         <div className="flex flex-col">
                           <div className="flex flex-col justify-between pt-2 mb-2">
@@ -155,47 +166,53 @@ export default function VehicleDetails() {
                           </div>
                           <div className="flex w-full">
                             <div className="flex flex-wrap items-center py-2 gap-4">
-                              <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                                <FuelIcon className="w-10 text-graySecondary" />
-                                <p className="text-xs text-grayFont mobile:text-sm">
+                              <div className="flex gap-2 justify-between w-fit tablet:w-4/5 self-center items-center">
+                                <FuelIcon className="w-10 h-6 text-graySecondary" />
+                                <p className="text-xs text-grayFont tablet:text-sm">
                                   {
                                     vehicle.relationships.fuelType.attributes
                                       .name
                                   }
                                 </p>
                               </div>
-                              <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                                <TransmissionIcon className="w-10 text-graySecondary" />
-                                <p className="text-xs text-grayFont mobile:text-sm">
+                              <div className="flex gap-2 justify-between w-fit tablet:w-4/5 self-center items-center">
+                                <TransmissionIcon className="w-10 h-6 text-graySecondary" />
+                                <p className="text-xs text-grayFont tablet:text-sm">
                                   {
                                     vehicle.relationships.gearType.attributes
                                       .name
                                   }
                                 </p>
                               </div>
-                              <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <div className="flex gap-2 justify-between w-fit tablet:w-4/5 self-center items-center">
                                 <ConsumptionIcon className="w-10 text-graySecondary" />
-                                <p className="text-xs text-grayFont mobile:text-sm">
-                                  6,5 lt
+                                <p className="text-xs text-grayFont tablet:text-sm">
+                                  {
+                                    vehicle.attributes
+                                      .fuel_tank_capacity_in_liters
+                                  }
                                 </p>
                               </div>
-                              <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                                <LuggageIcon className="w-10 text-graySecondary" />
-                                <p className="text-xs text-grayFont mobile:text-sm">
-                                  615 lt
+                              <div className="flex gap-2 justify-between w-fit tablet:w-4/5 self-center items-center">
+                                <EngineIcon className="w-10 text-graySecondary" />
+                                <p className="text-xs text-grayFont tablet:text-sm">
+                                  {
+                                    vehicle.attributes
+                                      .engine_displacement_in_metric_cubic
+                                  }
                                 </p>
                               </div>
-                              <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
+                              <div className="flex gap-2 justify-between w-fit tablet:w-4/5 self-center items-center">
                                 <SeatIcon className="w-10 text-graySecondary" />
-                                <p className="text-xs text-grayFont mobile:text-sm">
+                                <p className="text-xs text-grayFont tablet:text-sm">
                                   {vehicle.attributes.seat_capacity}
                                 </p>
                               </div>
-                              <div className="flex gap-2 justify-between w-fit mobile:w-4/5 self-center items-center">
-                                <p className="text-sm font-medium text-grayFont mobile:text-base">
+                              <div className="flex gap-2 justify-between w-fit tablet:w-4/5 self-center items-center">
+                                <p className="text-sm font-medium text-grayFont tablet:text-base">
                                   {t("vehiclePrice")}
                                 </p>
-                                <p className="text-sm font-bold text-primary mobile:text-base">
+                                <p className="text-sm font-bold text-primary tablet:text-base">
                                   CHF {vehicle.attributes.base_price_in_cents}
                                   ,00
                                 </p>
@@ -253,7 +270,13 @@ export default function VehicleDetails() {
                       />
                     </TabsContent>
                     <TabsContent value="gallery">
-                      <VehicleGallery />
+                      {vehicle.relationships.media ? (
+                        <VehicleGallery images={vehicle.relationships.media} />
+                      ) : (
+                        <p className="text-grayFont text-lg font-bold mb-2">
+                          {t("noImages")}
+                        </p>
+                      )}
                     </TabsContent>
                   </Tabs>
                 </>

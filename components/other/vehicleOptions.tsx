@@ -1,7 +1,6 @@
 import {
   ChildSeatIcon,
   DriverIcon,
-  InfoIcon,
   InsuranceIcon,
   NavigationIcon,
 } from "@/assets/svgs";
@@ -20,7 +19,6 @@ export default function VehicleOptions(props: any) {
           <div className="flex flex-col text-grayFont">
             <p className="flex items-center text-[10px] font-bold gap-1">
               {t("childSeat").toUpperCase()}
-              <InfoIcon className="text-primary" />
             </p>
             <p className="text-sm text-graySecondary">
               CHF {props.prices.childSeat.toFixed(2)}/{t("daily")}
@@ -62,7 +60,6 @@ export default function VehicleOptions(props: any) {
           <div className="flex flex-col text-grayFont">
             <p className="flex items-center text-[10px] font-bold gap-1">
               {t("navigation").toUpperCase()}
-              <InfoIcon className="text-primary" />
             </p>
             <p className="text-sm text-graySecondary">
               CHF {props.prices.navigation.toFixed(2)}/{t("daily")}
@@ -103,7 +100,6 @@ export default function VehicleOptions(props: any) {
           <div className="flex flex-col text-grayFont">
             <p className="flex items-center text-[10px] font-bold gap-1">
               {t("additionalDriver").toUpperCase()}
-              <InfoIcon className="text-primary" />
             </p>
             <p className="text-sm text-graySecondary">
               CHF {props.prices.driver.toFixed(2)}/{t("daily")}
@@ -144,7 +140,6 @@ export default function VehicleOptions(props: any) {
           <div className="flex flex-col text-grayFont">
             <p className="flex items-center text-[10px] font-bold gap-1">
               {t("damageInsurance").toUpperCase()}
-              <InfoIcon className="text-primary" />
             </p>
             <p className="text-sm text-graySecondary">
               CHF {props.prices.insurance.toFixed(2)}/{t("daily")}

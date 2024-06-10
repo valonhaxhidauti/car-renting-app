@@ -124,7 +124,7 @@ export default function CarAdvertisement() {
           alt={carData.attributes.name}
           fill
           sizes="100%"
-          className="!-top-8 desktop:!h-[120%] !w-[auto] !relative"
+          className="!-top-8 desktop:!h-[120%] !w-[auto] !relative pointer-events-none"
         />
       </div>
     </div>

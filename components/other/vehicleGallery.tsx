@@ -1,18 +1,17 @@
-"use client";
-
 import { useRef } from "react";
-import Flicking, { ViewportSlot } from "@egjs/react-flicking";
 import { Arrow } from "@egjs/flicking-plugins";
-import Image from "next/image";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { ZoomImageIcon } from "@/assets/svgs";
+import Flicking, { ViewportSlot } from "@egjs/react-flicking";
+import Image from "next/image";
 import "react-photo-view/dist/react-photo-view.css";
 import "@egjs/react-flicking/dist/flicking.css";
 import "@egjs/flicking-plugins/dist/arrow.css";
-import { ZoomImageIcon } from "@/assets/svgs";
 
-export default function VehicleGallery() {
+export default function VehicleGallery({ images }: { images: any }) {
   const flickingRef = useRef<Flicking | null>(null);
   const plugins = [new Arrow()];
+  console.log(images);
 
   return (
     <>
@@ -25,20 +24,17 @@ export default function VehicleGallery() {
           plugins={plugins}
           className="w-full"
         >
-          {[1, 2, 3, 4].map((item) => (
-            <div
-              key={item}
-              className="mr-4 w-full mobile:w-1/2 laptop:w-1/3"
-            >
-              <PhotoView src={`/carSwiperPhoto${item}.png`}>
+          {images.map((item: any) => (
+            <div key={item} className="mr-4 w-full mobile:w-1/2 laptop:w-1/3">
+              <PhotoView src={`${item.attributes.public_url}`}>
                 <div className="relative group">
                   <Image
-                    src={`/carSwiperPhoto${item}.png`}
+                    src={`${item.attributes.public_url}`}
                     alt={`Gallery_${item}`}
                     width={300}
                     height={200}
                     loading="lazy"
-                    className="object-fit w-full !h-revert mobile:!h-full"
+                    className="object-fit mobile:!h-full w-auto h-auto"
                   />
                   <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-25 cursor-pointer transition-opacity duration-300 ease-in-out"></div>
                   <ZoomImageIcon className="hidden group-hover:block group-hover:cursor-pointer absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />

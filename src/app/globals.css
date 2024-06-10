@@ -80,6 +80,10 @@ html body[data-scroll-locked] {
   margin-right: 0 !important;
 } 
 
+.PhotoView__Photo {
+  pointer-events: none;
+}
+
 .scrollbar::-webkit-scrollbar {
   width: 10px;
 }
