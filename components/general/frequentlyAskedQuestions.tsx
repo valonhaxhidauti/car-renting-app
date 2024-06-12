@@ -27,6 +27,8 @@ interface OpenItems {
 
 export default function FrequentlyAskedQuestions() {
   const t = useTranslations("FaqItems");
+  const locale = useTranslations()("Locale");
+
   const [faq, setFaq] = useState<FaqItem[]>([]);
   const [openItems, setOpenItems] = useState<OpenItems>({});
   const [loading, setLoading] = useState(true);
@@ -38,6 +40,7 @@ export default function FrequentlyAskedQuestions() {
         const response = await fetch(url, {
           method: "GET",
           headers: {
+            "Accept-Language": locale,
             "Content-Type": "application/json",
             Accept: "application/json",
           },

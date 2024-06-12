@@ -6,10 +6,8 @@ import { Skeleton } from "../ui/skeleton";
 import debounce from "lodash.debounce";
 
 export default function VehicleFilters({ filtersId }: { filtersId: string }) {
-  const vf = useTranslations("VehicleFilters.vehicleClass");
-  const vt = useTranslations("VehicleFilters.vehicleType");
-  const gt = useTranslations("VehicleFilters.gearType");
-  const ft = useTranslations("VehicleFilters.fuelType");
+  const t = useTranslations("VehicleFilters")
+  const locale = useTranslations()("Locale");
 
   const router = useRouter();
 
@@ -22,7 +20,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
     gearType: [],
     fuelType: [],
   });
-  
+
   const [filters, setFilters] = useState<Filters>({
     gearType: [],
     fuelType: [],
@@ -37,6 +35,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
         const response = await fetch(url, {
           method: "GET",
           headers: {
+            "Accept-Language": locale,
             "Content-Type": "application/json",
             Accept: "application/json",
           },
@@ -68,7 +67,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
     }
     setAppliedFilters(updatedFilters);
 
-    localStorage.setItem('appliedFilters', JSON.stringify(updatedFilters));
+    localStorage.setItem("appliedFilters", JSON.stringify(updatedFilters));
 
     if (updatedFilters[filterType].length === 0) {
       removeQueryParam(filterType);
@@ -105,7 +104,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
     <>
       <div className="flex flex-col items-start gap-2 pb-4 border-borderGray border-b">
         <div className="flex space-between w-full">
-          <p className="pb-2 text-sm font-bold w-full">{vf("title")}</p>
+          <p className="pb-2 text-sm font-bold w-full">{t("vehicleClass")}</p>
         </div>
         {loading
           ? Array.from({ length: 5 }, (_, index) => (
@@ -126,13 +125,13 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
-                  {vf(filter.label)}
+                  {filter.label}
                 </label>
               </div>
             ))}
       </div>
       <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-        <p className="pb-2 text-sm font-bold">{vt("title")}</p>
+        <p className="pb-2 text-sm font-bold">{t("vehicleType")}</p>
         {loading
           ? Array.from({ length: 5 }, (_, index) => (
               <div key={index} className="flex flex-col space-y-3">
@@ -152,13 +151,13 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
-                  {vt(filter.label)}
+                  {filter.label}
                 </label>
               </div>
             ))}
       </div>
       <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
-        <p className="pb-2 text-sm font-bold">{gt("title")}</p>
+        <p className="pb-2 text-sm font-bold">{t("gearType")}</p>
 
         {loading
           ? Array.from({ length: 5 }, (_, index) => (
@@ -179,7 +178,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
-                  {gt(filter.label)}
+                  {filter.label}
                 </label>
               </div>
             ))}
@@ -189,7 +188,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
           filtersId === "1" ? "pb-4" : ""
         }`}
       >
-        <p className="pb-2 text-sm font-bold">{ft("title")}</p>
+        <p className="pb-2 text-sm font-bold">{t("fuelType")}</p>
         {loading
           ? Array.from({ length: 5 }, (_, index) => (
               <div key={index} className="flex flex-col space-y-3">
@@ -209,7 +208,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
-                  {ft(filter.label)}
+                  {filter.label}
                 </label>
               </div>
             ))}

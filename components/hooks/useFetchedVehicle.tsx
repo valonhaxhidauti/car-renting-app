@@ -1,7 +1,9 @@
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export function useFetchedVehicle(vehicleId: string) {
   const [vehicle, setVehicle] = useState<any>({});
+  const locale = useTranslations()("Locale");
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -10,6 +12,7 @@ export function useFetchedVehicle(vehicleId: string) {
         const response = await fetch(url, {
           method: "GET",
           headers: {
+            "Accept-Language": locale,
             "Content-Type": "application/json",
             Accept: "application/json",
           },
@@ -22,7 +25,7 @@ export function useFetchedVehicle(vehicleId: string) {
     };
 
     fetchVehicle();
-  }, [vehicleId]); 
+  }, [vehicleId]);
 
   return vehicle;
 }

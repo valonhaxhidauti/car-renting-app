@@ -6,6 +6,7 @@ import {
   ReturnLocIcon,
   TransmissionIcon,
 } from "@/assets/svgs";
+import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -18,6 +19,8 @@ interface Booking {
 }
 
 export default function BookingConfirmation() {
+  const locale = useTranslations()("Locale");
+
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -26,6 +29,7 @@ export default function BookingConfirmation() {
     const url = new URL("https://rent-api.rubik.dev/api/bookings");
 
     const headers = {
+      "Accept-Language": locale,
       "Content-Type": "application/json",
       Accept: "application/json",
     };
@@ -75,7 +79,9 @@ export default function BookingConfirmation() {
         </Link>
       </div>
       <div className="flex flex-col w-full items-center">
-        <h1 className="text-grayFont text-lg font-medium my-4">Booking Information</h1>
+        <h1 className="text-grayFont text-lg font-medium my-4">
+          Booking Information
+        </h1>
         <div className="border border-borderGray w-full p-4">
           {bookings.length === 0 ? (
             <p>No bookings found.</p>

@@ -24,6 +24,8 @@ export default function RentForm({
   id?: string;
 }) {
   const t = useTranslations("RentForm");
+  const locale = useTranslations()("Locale");
+
   const router = useRouter();
   const pathname = usePathname();
   const isHomePage = pathname === "/en" || pathname === "/de";
@@ -37,7 +39,8 @@ export default function RentForm({
 
   const { params } = useCustomSearchParams();
 
-  const parseDate = (dateString: string): Dayjs => dayjs(dateString, "DD/MM/YYYY HH:mm");
+  const parseDate = (dateString: string): Dayjs =>
+    dayjs(dateString, "DD/MM/YYYY HH:mm");
 
   const defaultFormData: RentFormData = {
     rentLocation: params.rentLocation || "",
@@ -96,6 +99,7 @@ export default function RentForm({
     url.searchParams.append("filter[search]", query);
 
     const headers = {
+      "Accept-Language": locale,
       "Content-Type": "application/json",
       Accept: "application/json",
     };

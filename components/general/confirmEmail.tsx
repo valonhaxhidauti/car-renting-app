@@ -12,6 +12,7 @@ export default function ConfirmEmail({
   params: { id: number; hash: string };
 }) {
   const t = useTranslations("VerifyEmail");
+  const locale = useTranslations()("Locale");
 
   const searchParams = useSearchParams();
   const emailParameter = searchParams.get("email") || "";
@@ -34,6 +35,7 @@ export default function ConfirmEmail({
       );
 
       const headers = {
+        "Accept-Language": locale,
         "Content-Type": "application/json",
         Accept: "application/json",
       };

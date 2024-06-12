@@ -1,4 +1,5 @@
 {
+    "Locale": "en",
     "AboutUs": {
         "heading": "About Us",
         "breadcrumb": {
@@ -351,7 +352,7 @@
         "imageGalleryTab": "Image Gallery",
         "childSeat": "Child Seat",
         "navigation": "Navigation",
-        "additionalDriver": "Additional Driver",
+        "additionalRack": "Additional Rack",
         "damageInsurance": "Damage Insurance",
         "daily": "Daily",
         "cubic": "Cubic",
@@ -367,45 +368,16 @@
         "luggageCapacity": "Luggage Capacity",
         "horsepower": "Hp (Horse power)",
         "fillBookingTooltip": "Fill the booking information",
-        "noImages": "There are currently no images available for this vehicle."
+        "noImages": "There are currently no images available for this vehicle.",
+        "noChildSeatsAvailable": "No more child seats available!",
+        "noRacksAvailable": "No more racks available!",
+        "noNavigationAvailable": "No navigation available!"
     },
     "VehicleFilters": {
-        "vehicleClass": {
-            "title": "Vehicle Class",
-            "Economy": "Economic",
-            "Compact": "Compact",
-            "Intermediate/Mid-size": "Intermediate/Mid-size",
-            "Luxury": "Luxury",
-            "Full-size": "Full-size"
-        },
-        "vehicleType": {
-            "title": "Vehicle Type",
-            "Sedan/Saloon": "Sedan/Saloon",
-            "Estate": "Estate",
-            "Hatchback/Small": "Hatchback/Small",
-            "SUV": "SUV",
-            "Crossover": "Crossover",
-            "Coupe": "Coupe",
-            "Sports": "Sports",
-            "Convertible/Cabriolet": "Convertible/Cabriolet",
-            "Minivan": "Minivan"
-        },
-        "gearType": {
-            "title": "Gear Type",
-            "Manual": "Manual",
-            "Automatic": "Automatic",
-            "Semi-Automatic": "Semi-Automatic",
-            "Dual-Clutch Automatic (DCT)": "Dual-Clutch Automatic (DCT)"
-        },
-        "fuelType": {
-            "title": "Fuel Type",
-            "Petrol": "Petrol",
-            "Diesel": "Diesel",
-            "Electric": "Electric",
-            "Hybrid": "Hybrid",
-            "Plug-in Hybrid (PHEV)": "Plug-in Hybrid (PHEV)",
-            "Hydrogen Fuel Cell": "Hydrogen Fuel Cell"
-        }
+        "vehicleType": "Vehicle Type",
+        "vehicleClass": "Vehicle Class",
+        "gearType": "Gear Type",
+        "fuelType": "Fuel Type"
     },
     "VerifyEmail": {
         "breadcrumb": {

@@ -17,6 +17,7 @@ import SideMenu from "../common/sideMenu";
 
 export default function Contact() {
   const t = useTranslations("Contact");
+  const locale = useTranslations()("Locale");
 
   const [formData, setFormData] = useState<ContactFormValues>({
     name: "",
@@ -26,7 +27,10 @@ export default function Contact() {
   });
   const [isSubmited, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (fieldName: keyof ContactFormValues, value: string) => {
+  const handleInputChange = (
+    fieldName: keyof ContactFormValues,
+    value: string
+  ) => {
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: value,
@@ -38,6 +42,7 @@ export default function Contact() {
 
     const url = "https://rent-api.rubik.dev/api/contact-forms";
     const headers = {
+      "Accept-Language": locale,
       "Content-Type": "application/json",
       Accept: "application/json",
     };

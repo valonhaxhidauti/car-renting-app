@@ -15,6 +15,7 @@ import { Loader2 } from "lucide-react";
 
 export default function LoginForm() {
   const t = useTranslations("Account");
+  const locale =  useTranslations()("Locale");
   const router = useRouter();
   const translations = {
     emailRequired: t("validation.emailRequired"),
@@ -25,7 +26,6 @@ export default function LoginForm() {
     formErrors: t("login.formErrors"),
     verifyEmail: t("login.verifyEmail"),
   };
-
   const [formData, setFormData] = useState<LoginFormValues>({
     email: "",
     password: "",
@@ -64,6 +64,7 @@ export default function LoginForm() {
           {
             method: "POST",
             headers: {
+              "Accept-Language": locale,
               "Content-Type": "application/json",
               Accept: "application/json",
             },

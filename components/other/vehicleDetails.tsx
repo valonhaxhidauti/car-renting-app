@@ -1,9 +1,9 @@
 "use client";
 
 import {
+  CarRackIcon,
   ChildSeatIcon,
   ConsumptionIcon,
-  DriverIcon,
   EngineIcon,
   FuelIcon,
   InsuranceIcon,
@@ -64,6 +64,8 @@ export default function VehicleDetails() {
   const [driver, incDriver, decDriver] = useCounter(0, 1);
   const [insurance, incInsurance, decInsurance] = useCounter(0, 1);
 
+  console.log(vehicle);
+
   const optionalItems = [
     {
       name: t("childSeat"),
@@ -78,10 +80,10 @@ export default function VehicleDetails() {
       icon: <NavigationIcon />,
     },
     {
-      name: t("additionalDriver"),
+      name: t("additionalRack"),
       quantity: driver,
       price: prices.driver,
-      icon: <DriverIcon />,
+      icon: <CarRackIcon />,
     },
     {
       name: t("damageInsurance"),
@@ -240,21 +242,7 @@ export default function VehicleDetails() {
                     </TabsList>
                     <TabsContent value="options">
                       <VehicleOptions
-                        {...{
-                          prices,
-                          childSeat,
-                          incChildSeat,
-                          decChildSeat,
-                          navigation,
-                          incNavigation,
-                          decNavigation,
-                          driver,
-                          incDriver,
-                          decDriver,
-                          insurance,
-                          incInsurance,
-                          decInsurance,
-                        }}
+                        extraOptions={vehicle.relationships.additionalItems}
                       />
                     </TabsContent>
                     <TabsContent

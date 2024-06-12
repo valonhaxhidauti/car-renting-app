@@ -8,6 +8,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ForgotPassword() {
   const t = useTranslations("Account");
+  const locale = useTranslations()("Locale");
+
   const translations = {
     emailRequired: t("validation.emailRequired"),
     emailInvalid: t("validation.emailInvalid"),
@@ -16,7 +18,7 @@ export default function ForgotPassword() {
   const [formData, setFormData] = useState("");
   const [captcha, setCaptcha] = useState<string | null>();
   const [isEmailValidated, setIsEmailValidated] = useState(false);
-  const [emailSent, setEmailSent] = useState(false); 
+  const [emailSent, setEmailSent] = useState(false);
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -24,6 +26,7 @@ export default function ForgotPassword() {
       try {
         const url = "https://rent-api.rubik.dev/api/auth/forgot-password";
         const headers = {
+          "Accept-Language": locale,
           "Content-Type": "application/json",
           Accept: "application/json",
         };
@@ -43,7 +46,7 @@ export default function ForgotPassword() {
         } else {
           const errorData = await response.json();
           console.error("Error:", errorData);
-          alert("Something went wrong!")
+          alert("Something went wrong!");
         }
       } catch (error) {
         console.error("Error:", error);
@@ -67,12 +70,13 @@ export default function ForgotPassword() {
           <p className="text-grayFont">{t("passwordReset.description1")}</p>
           <p className="text-grayFont">{t("passwordReset.description2")}</p>
         </div>
-        {emailSent ? ( 
-          <div className="text-center text-green-600">
-            {t("emailSent")}
-          </div>
+        {emailSent ? (
+          <div className="text-center text-green-600">{t("emailSent")}</div>
         ) : (
-          <form className="flex flex-col gap-4 items-center" onSubmit={onSubmit}>
+          <form
+            className="flex flex-col gap-4 items-center"
+            onSubmit={onSubmit}
+          >
             <div className="flex flex-col items-center">
               <div>
                 <div className="relative">

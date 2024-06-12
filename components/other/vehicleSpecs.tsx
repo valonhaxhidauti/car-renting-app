@@ -21,7 +21,7 @@ export default function VehicleSpecs({
     <div className="grid mobile:grid-cols-2 desktop:grid-cols-3 gap-4">
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <FuelIcon className="text-graySecondary" />
+          <FuelIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -34,7 +34,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <TransmissionIcon className="text-graySecondary" />
+          <TransmissionIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -47,7 +47,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <SeatIcon className="text-graySecondary" />
+          <SeatIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -61,7 +61,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <KeyIcon className="text-graySecondary" />
+          <KeyIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -74,7 +74,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <EngineIcon className="text-graySecondary" />
+          <EngineIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -88,7 +88,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <ConsumptionIcon className="text-graySecondary" />
+          <ConsumptionIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -101,7 +101,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <VehicleIcon className="text-graySecondary" />
+          <VehicleIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -114,7 +114,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <LuggageIcon className="text-graySecondary" />
+          <LuggageIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">
@@ -127,7 +127,7 @@ export default function VehicleSpecs({
       </div>
       <div className="flex gap-4 border-y border-borderGray py-6 items-center">
         <div className="w-9">
-          <HorsepowerIcon className="text-graySecondary" />
+          <HorsepowerIcon className="text-graySecondary mobile:w-full" />
         </div>
         <div className="flex justify-between text-grayFont w-full items-center">
           <span className="text-[9px] font-bold">

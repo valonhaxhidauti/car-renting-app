@@ -18,6 +18,7 @@ export default function ResetPasswordForm({
   params: { token: string };
 }) {
   const t = useTranslations("ResetPassword");
+  const locale = useTranslations()("Locale");
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -36,7 +37,10 @@ export default function ResetPasswordForm({
 
   const [errors, setErrors] = useState<Partial<ResetPasswordValues>>({});
 
-  const handleInputChange = (fieldName: keyof ResetPasswordValues, value: string) => {
+  const handleInputChange = (
+    fieldName: keyof ResetPasswordValues,
+    value: string
+  ) => {
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: value,
@@ -57,6 +61,7 @@ export default function ResetPasswordForm({
     try {
       const url = "https://rent-api.rubik.dev/api/auth/reset-password";
       const headers = {
+        "Accept-Language": locale,
         "Content-Type": "application/json",
         Accept: "application/json",
       };

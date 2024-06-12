@@ -2,16 +2,15 @@
 
 import { FuelIcon, TransmissionIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import { CarAdData } from "@/lib/types";
 import { Link } from "next-view-transitions";
+import Image from "next/image";
 
 export default function CarAdvertisement() {
   const t = useTranslations("Homepage");
-  const gt = useTranslations("VehicleFilters.gearType");
-  const ft = useTranslations("VehicleFilters.fuelType");
+  const locale =  useTranslations()("Locale");
 
   const [carData, setCarData] = useState<CarAdData>({
     id: "",
@@ -30,6 +29,7 @@ export default function CarAdvertisement() {
         const response = await fetch(url, {
           method: "GET",
           headers: {
+            "Accept-Language": locale,
             "Content-Type": "application/json",
             Accept: "application/json",
           },
@@ -68,6 +68,10 @@ export default function CarAdvertisement() {
         </div>
       </div>
     );
+  }
+
+  if (!carData) {
+    return null;
   }
 
   return (
@@ -111,11 +115,11 @@ export default function CarAdvertisement() {
           <div className="flex gap-2 text-[10px]">
             <span className="flex items-center text-center">
               <FuelIcon className="h-6 w-8" />
-              {ft(carData.relationships.fuelType.attributes.name)}
+              {carData.relationships.fuelType.attributes.name}
             </span>
             <span className="flex items-center text-center">
               <TransmissionIcon className="h-6 w-8" />
-              {gt(carData.relationships.gearType.attributes.name)}
+              {carData.relationships.gearType.attributes.name}
             </span>
           </div>
         </div>

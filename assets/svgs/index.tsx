@@ -6,7 +6,7 @@ export { default as CheckIcon } from "./checkIcon.svg";
 export { default as ChildSeatIcon } from "./childSeatIcon.svg";
 export { default as CloseMenuIcon } from "./closeMenuIcon.svg";
 export { default as ConsumptionIcon } from "./consumptionIcon.svg";
-export { default as DriverIcon } from "./driverIcon.svg";
+export { default as CarRackIcon } from "./carRackIcon.svg";
 export { default as EasyIcon } from "./easyIcon.svg";
 export { default as EconomicIcon } from "./economicIcon.svg";
 export { default as EditIcon } from "./editIcon.svg";

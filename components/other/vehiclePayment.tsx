@@ -10,8 +10,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import {
+  CarRackIcon,
   ChildSeatIcon,
-  DriverIcon,
   InsuranceIcon,
   NavigationIcon,
 } from "@/assets/svgs";
@@ -76,10 +76,10 @@ export default function VehiclePayment() {
       icon: <NavigationIcon />,
     },
     {
-      name: u("additionalDriver"),
+      name: u("additionalRack"),
       quantity: driver,
       price: prices.driver,
-      icon: <DriverIcon />,
+      icon: <CarRackIcon />,
     },
     {
       name: u("damageInsurance"),

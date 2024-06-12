@@ -27,6 +27,7 @@ import "react-phone-input-2/lib/semantic-ui.css";
 
 export default function RegisterForm() {
   const t = useTranslations("Account");
+  const locale = useTranslations()("Locale");
   const translations = {
     nameRequired: t("validation.nameRequired"),
     nameInvalid: t("validation.nameInvalid"),
@@ -112,6 +113,7 @@ export default function RegisterForm() {
           {
             method: "POST",
             headers: {
+              "Accept-Language": locale,
               "Content-Type": "application/json",
               Accept: "application/json",
             },
