@@ -46,83 +46,64 @@ export default function VehicleCard({
                 alt={vehicle.attributes.name.split(" (")[0]}
                 width="240"
                 height="120"
-                className="pointer-events-none py-12 w-auto h-auto"
+                className="pointer-events-none py-12 h-auto"
                 priority
               />
             ) : (
               <Image
                 src="/sampleCar.png"
                 alt={vehicle.attributes.name.split(" (")[0]}
-                width="240"
-                height="120"
-                className="pointer-events-none py-12"
+                width="280"
+                height="140"
+                className="pointer-events-none py-12 h-auto"
                 priority
               />
             )}
             <div className="flex justify-between w-full gap-2">
               <div className="w-full flex flex-col justify-between">
-                <div className="flex w-full justify-between mobile:pt-2">
-                  <div className="flex flex-col gap-4">
-                    <p className="text-graySecondary text-center w-32 border-graySecondary border rounded-full font-medium text-[10px] px-4 py-1">
-                      {vehicle.relationships.carType.attributes.name}
-                    </p>
+                <div className="flex w-full justify-between p-4">
+                  <div className="flex justify-between gap-4 w-full items-center">
                     <p className="text-grayFont font-medium text-2xl">
                       {vehicle.attributes.name.split(" (")[0]}
                     </p>
+                    <p className="text-graySecondary text-center w-32 border-graySecondary border rounded-full font-medium text-[10px] px-4 py-1">
+                      {vehicle.relationships.carType.attributes.name}
+                    </p>
                   </div>
                 </div>
-                <div className="flex flex-col">
-                  <div className="flex w-full">
-                    <div className="w-1/2 py-2 pr-2 border border-l-0 text-grayFont hover:text-primary flex gap-1 items-center cursor-pointer">
-                      <SearchIcon className="w-4 h-4" />
-                      <p className="text-[11px] font-medium">
-                        {t("filterVehicles")}
+                <div className="border-borderGray border-y flex w-full">
+                  <div className="grid grid-cols-2 w-full">
+                    <div className="text-grayFont p-4 flex flex-col gap-2 items-center w-full border-r border-b">
+                      <div className="w-6 h-6">
+                        <FuelIcon className="w-full h-full text-graySecondary" />
+                      </div>
+                      <p className="text-sm leading-none font-bold text-center">
+                        {vehicle.relationships.fuelType.attributes.name}
                       </p>
                     </div>
-                    <div className="w-1/2 p-2 border border-x-0 text-grayFont flex gap-1 items-center">
-                      <WarningIcon className="w-4 h-4" />
-                      <p className="text-[11px] font-medium">
-                        {t("vehicleOptions")}
+                    <div className="text-grayFont p-4 flex flex-col gap-2 items-center w-full border-b">
+                      <div className="w-6 h-6">
+                        <TransmissionIcon className="w-full h-full text-graySecondary" />
+                      </div>
+                      <p className="text-sm leading-none font-bold text-center">
+                        {vehicle.relationships.gearType.attributes.name}
                       </p>
                     </div>
-                  </div>
-                  <div className="border-borderGray border-b flex w-full">
-                    <div className="flex w-full">
-                      <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
-                        <div className="w-6 h-6">
-                          <FuelIcon className="w-full h-full text-graySecondary" />
-                        </div>
-                        <p className="text-sm leading-none font-bold text-center">
-                          {vehicle.relationships.fuelType.attributes.name}
-                        </p>
+                    <div className="text-grayFont p-4 flex flex-col gap-2 items-center w-full border-r">
+                      <div className="w-6 h-6">
+                        <SeatIcon className="w-full h-full text-graySecondary" />
                       </div>
-                      <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
-                        <div className="w-6 h-6">
-                          <TransmissionIcon className="w-full h-full text-graySecondary" />
-                        </div>
-                        <p className="text-sm leading-none font-bold text-center">
-                          {vehicle.relationships.gearType.attributes.name}
-                        </p>
+                      <p className="text-sm leading-none font-bold text-center">
+                        {vehicle.attributes.seat_capacity} {t("persons")}
+                      </p>
+                    </div>
+                    <div className="text-grayFont p-4 flex flex-col gap-2 items-center w-full">
+                      <div className="w-[33px]">
+                        <VehicleIcon className="w-full h-full text-graySecondary" />
                       </div>
-                      <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center border-r">
-                        <div className="w-6 h-6">
-                          <SeatIcon className="w-full h-full text-graySecondary" />
-                        </div>
-                        <p className="text-sm leading-none font-bold text-center">
-                          {vehicle.attributes.seat_capacity} {t("persons")}
-                        </p>
-                      </div>
-                      <div className="text-grayFont p-4 w-1/4 flex flex-col gap-2 items-center">
-                        <div className="w-[33px]">
-                          <VehicleIcon className="w-full h-full text-graySecondary" />
-                        </div>
-                        <p className="text-sm leading-none font-bold text-center">
-                          {
-                            vehicle.attributes
-                              .engine_displacement_in_metric_cubic
-                          }
-                        </p>
-                      </div>
+                      <p className="text-sm leading-none font-bold text-center">
+                        {vehicle.attributes.engine_displacement_in_metric_cubic}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -189,21 +170,7 @@ export default function VehicleCard({
             <div className="flex justify-between w-full gap-2">
               <div className="w-full flex flex-col justify-between">
                 <div className="flex flex-col w-full">
-                  <div className="flex flex-col">
-                    <div className="py-2 pr-2 border-y text-grayFont hover:text-primary flex gap-1 items-center cursor-pointer">
-                      <SearchIcon className="w-4 h-4" />
-                      <p className="text-[11px] font-medium cursor-pointer">
-                        {t("filterVehicles")}
-                      </p>
-                    </div>
-                    <div className="py-2 pr-2 border-b text-grayFont flex gap-1 items-center">
-                      <WarningIcon className="w-4 h-4" />
-                      <p className="text-[11px] font-medium">
-                        {t("vehicleOptions")}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="border-borderGray border-b grid grid-cols-2 w-full">
+                  <div className="border-borderGray border-y grid grid-cols-2 w-full">
                     <div className="text-grayFont p-4 w-full flex flex-col gap-2 justify-between items-center border-r">
                       <div className="w-6 h-6">
                         <FuelIcon className="w-full h-full text-graySecondary" />

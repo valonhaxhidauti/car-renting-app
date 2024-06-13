@@ -45,12 +45,6 @@ export default function Footer() {
                   {t("pages.exploreVehicles")}
                 </Link>
                 <Link
-                  href="/"
-                  className="text-grayFont hover:font-medium text-sm leading-none"
-                >
-                  {t("pages.blog")}
-                </Link>
-                <Link
                   href="/contact"
                   className="text-grayFont hover:font-medium text-sm leading-none"
                 >

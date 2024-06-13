@@ -278,8 +278,9 @@ export default function RentForm({
                   <div className="w-full border-b">
                     <MobileDateTimePicker
                       className="w-full"
-                      disablePast
                       value={formData.pickupDate}
+                      minutesStep={30}
+                      disablePast
                       onChange={handleDateChange("pickupDate")}
                       slotProps={{
                         textField: { placeholder: t("pickupDate") },
@@ -300,6 +301,7 @@ export default function RentForm({
                     <MobileDateTimePicker
                       className="w-full"
                       value={formData.dropOffDate}
+                      minutesStep={30}
                       disablePast
                       onChange={handleDateChange("dropOffDate")}
                       slotProps={{
@@ -410,8 +412,9 @@ export default function RentForm({
                 <div className="w-full border-b">
                   <MobileDateTimePicker
                     className="w-full"
-                    disablePast
                     value={formData.pickupDate}
+                    minutesStep={30}
+                    disablePast
                     onChange={handleDateChange("pickupDate")}
                     slotProps={{ textField: { placeholder: t("pickupDate") } }}
                     sx={{
@@ -430,6 +433,7 @@ export default function RentForm({
                   <MobileDateTimePicker
                     className="w-full"
                     value={formData.dropOffDate}
+                    minutesStep={30}
                     disablePast
                     onChange={handleDateChange("dropOffDate")}
                     slotProps={{ textField: { placeholder: t("dropOffDate") } }}
