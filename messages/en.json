@@ -121,6 +121,8 @@
         },
         "update": "Update",
         "userUpdated": "User updated successfully!",
+        "profileFetchError":"An error occurred while fetching profile data.",
+        "profileTokenError":"No token found.",
         "viewPassword": "View Password"
     },
     "Contact": {

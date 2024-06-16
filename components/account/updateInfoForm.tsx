@@ -10,7 +10,7 @@ import "react-phone-input-2/lib/semantic-ui.css";
 
 export default function UpdateInfoForm() {
   const t = useTranslations("Account");
-  const locale =  useTranslations()("Locale");
+  const locale = useTranslations()("Locale");
   const translations = {
     nameRequired: t("validation.nameRequired"),
     nameInvalid: t("validation.nameInvalid"),
@@ -108,19 +108,14 @@ export default function UpdateInfoForm() {
           } else {
             const errorData = await response.json();
             setInternalServerError(errorData.detail);
-            console.error("Failed to fetch profile data", errorData.detail);
             setLoading(false);
           }
         } catch (error) {
-          console.error("Error fetching profile data:", error);
-          setInternalServerError(
-            "An error occurred while fetching profile data."
-          );
+          setInternalServerError(t("profileFetchError"));
           setLoading(false);
         }
       } else {
-        console.error("No token found");
-        setInternalServerError("No token found.");
+        setInternalServerError(t("profileTokenError"));
         setLoading(false);
       }
     };

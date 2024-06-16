@@ -121,6 +121,8 @@
         },
         "update": "Aktualisieren",
         "userUpdated": "Benutzer erfolgreich aktualisiert!",
+        "profileFetchError":"Beim Abrufen der Profildaten ist ein Fehler aufgetreten.",
+        "profileTokenError":"Kein Token gefunden.",
         "viewPassword": "Passwort anzeigen"
     },
     "Contact": {

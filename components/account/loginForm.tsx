@@ -82,7 +82,6 @@ export default function LoginForm() {
           if (data.data.attributes.email_verified_at === null) {
             setUnprocessedErrorMessage(translations.verifyEmail);
           } else {
-            // setAuthenticated(true);
             localStorage.setItem("authenticated", "true");
             localStorage.setItem("token", token);
             router.push("/");
