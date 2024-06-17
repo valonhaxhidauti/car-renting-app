@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default function CarAdvertisement() {
   const t = useTranslations("Homepage");
-  const locale =  useTranslations()("Locale");
+  const locale = useTranslations()("Locale");
 
   const [carData, setCarData] = useState<CarAdData>({
     id: "",
@@ -94,7 +94,7 @@ export default function CarAdvertisement() {
           <p className="text-[10px] leading-none">
             {t("carDetails.startFrom")}
           </p>
-          <div >
+          <div>
             <span className="text-3xl font-bold">
               {carData.attributes.base_price_in_cents}
             </span>
@@ -123,13 +123,24 @@ export default function CarAdvertisement() {
             </span>
           </div>
         </div>
-        <Image
-          src={`${carData.relationships.media[1].attributes.public_url}`}
-          alt={carData.attributes.name}
-          fill
-          sizes="100%"
-          className="!-top-8 desktop:!h-[120%] !w-[auto] !relative pointer-events-none"
-        />
+        {carData.relationships.media ? (
+          <Image
+            src={`${carData.relationships.media[1].attributes.public_url}`}
+            alt={carData.attributes.name}
+            fill
+            sizes="100%"
+            className="!-top-8 desktop:!h-[120%] !w-[auto] !relative pointer-events-none"
+          />
+        ) : (
+          <Image
+            src="/sampleCar.png"
+            alt={carData.attributes.name.split(" (")[0]}
+            width="240"
+            height="120"
+            className="-top-8 desktop:h-[120%] w-[auto] relative pointer-events-none"
+            priority
+          />
+        )}
       </div>
     </div>
   );

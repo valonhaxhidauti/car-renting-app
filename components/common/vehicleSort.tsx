@@ -10,13 +10,13 @@ import {
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import useOverflowControl from "../hooks/useOverflowControl";
 
 export default function VehicleSort() {
   const t = useTranslations("ExploreVehicles");
   const router = useRouter();
-
-  const [shown, setShown] = useState(false);
   const [currentSort, setCurrentSort] = useState("default");
+  const toggleShown = useOverflowControl(false);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -24,16 +24,9 @@ export default function VehicleSort() {
     setCurrentSort(initialSort);
   }, [router]);
 
-  useEffect(() => {
-    if (shown) {
-      document.body.style.setProperty("overflow-y", "auto", "important");
-    } else {
-      document.body.style.removeProperty("overflow-y");
-    }
-  }, [shown]);
 
   function onSelectClicked() {
-    setShown(!shown);
+    toggleShown();
   }
 
   const handleSortChange = (sortBy:string) => {

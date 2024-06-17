@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useHandleLogout } from "../hooks/useHandleLogout";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
+import useOverflowControl from "../hooks/useOverflowControl";
 
 interface HeaderAuthenticationProps {
   isOpen: boolean;
@@ -29,8 +30,8 @@ export default function HeaderAuthentication({
   const t = useTranslations("Header");
   const u = useTranslations("Account.sideMenu");
 
-  const [shown, setShown] = useState(false);
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const toggleShown = useOverflowControl(false);
   const handleLogout = useHandleLogout();
 
   useEffect(() => {
@@ -38,16 +39,8 @@ export default function HeaderAuthentication({
     setAuthenticated(authValue === "true");
   }, []);
 
-  useEffect(() => {
-    if (shown) {
-      document.body.style.setProperty("overflow-y", "auto", "important");
-    } else {
-      document.body.style.removeProperty("overflow-y");
-    }
-  }, [shown]);
-  
   function onSelectClicked() {
-    setShown(!shown);
+    toggleShown();
   }
 
   if (authenticated === null) {

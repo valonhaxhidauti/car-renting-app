@@ -12,7 +12,7 @@ import {
 
 export default function BirthdaySelector() {
   const t = useTranslations("Account.birthdaySelect");
-  const keys = [
+  const months = [
     "jan",
     "feb",
     "mar",
@@ -69,7 +69,7 @@ export default function BirthdaySelector() {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>{t("month")}</SelectLabel>
-              {keys.map((month) => (
+              {months.map((month) => (
                 <SelectItem key={month} value={month}>
                   {t(`months.${month}`)}
                 </SelectItem>

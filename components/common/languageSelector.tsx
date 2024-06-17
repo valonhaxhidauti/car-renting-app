@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useTransition } from "react";
 import {
   Select,
   SelectContent,
@@ -13,6 +13,7 @@ import {
 } from "../ui/select";
 import { ChevronDown } from "lucide-react";
 import { FlagDeIcon, FlagUkIcon } from "@/assets/svgs";
+import useOverflowControl from "../hooks/useOverflowControl";
 
 export default function LanguageSelector({
   isOpen,
@@ -27,18 +28,10 @@ export default function LanguageSelector({
   const router = useRouter();
   const activeLocale = useLocale();
   const pathname = usePathname();
-  const [shown, setShown] = useState(false); 
-  
-  useEffect(() => {
-    if (shown) {
-      document.body.style.setProperty('overflow-y', 'auto', 'important');
-    } else {
-      document.body.style.removeProperty('overflow-y');
-    }
-  }, [shown]);
+  const toggleShown = useOverflowControl(false);
 
-  function onSelectClicked(){
-    setShown(!shown)
+  function onSelectClicked() {
+    toggleShown();
   }
 
   function onSelectChange(nextLocale: string) {

@@ -8,18 +8,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import useOverflowControl from "../hooks/useOverflowControl";
 
 export default function CreditCardPayment() {
-  const [shown, setShown] = useState(false);
+  const toggleShown = useOverflowControl(false);
 
-  useEffect(() => {
-    if (shown) {
-      document.body.style.setProperty("overflow-y", "auto", "important");
-    } else {
-      document.body.style.removeProperty("overflow-y");
-    }
-  }, [shown]);
+  function onSelectClicked() {
+    toggleShown();
+  }
 
   const months = [
     "01",
@@ -38,10 +34,7 @@ export default function CreditCardPayment() {
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 15 }, (_, index) => currentYear + index);
-
-  function onSelectClicked() {
-    setShown(!shown);
-  }
+  
   return (
     <>
       <h1 className="text-grayFont font-bold">Credit Card Information</h1>
@@ -146,9 +139,7 @@ export default function CreditCardPayment() {
               I have read and agree to the Terms and Conditions
             </label>
           </div>
-          <button
-            className="bg-primary hover:bg-secondary transition text-white py-3 px-16  w-full mobile:w-40"
-          >
+          <button className="bg-primary hover:bg-secondary transition text-white py-3 px-16  w-full mobile:w-40">
             Pay
           </button>
         </div>

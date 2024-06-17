@@ -37,6 +37,8 @@ import VehicleOptions from "./vehicleOptions";
 import BookingPrice from "../common/bookingPrice";
 import VehicleTerms from "./vehicleTerms";
 import VehicleDetailsSkeleton from "../loader/vehicleDetailsSkeleton";
+import VehicleInsurance from "./vehicleInsurance";
+import VehicleMileage from "./vehicleMileage";
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
@@ -244,6 +246,8 @@ export default function VehicleDetails() {
                       <VehicleOptions
                         extraOptions={vehicle.relationships.additionalItems}
                       />
+                      <VehicleInsurance />
+                      <VehicleMileage />
                     </TabsContent>
                     <TabsContent
                       value="terms"
