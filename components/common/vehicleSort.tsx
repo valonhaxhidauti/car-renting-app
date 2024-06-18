@@ -8,9 +8,9 @@ import {
   SelectValue,
 } from "../ui/select";
 import { ChevronDown } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import useOverflowControl from "../hooks/useOverflowControl";
+import { useOverflowControl } from "../hooks/useOverflowControl";
+import { useTranslations } from "next-intl";
 
 export default function VehicleSort() {
   const t = useTranslations("ExploreVehicles");

@@ -121,8 +121,8 @@
         },
         "update": "Aktualisieren",
         "userUpdated": "Benutzer erfolgreich aktualisiert!",
-        "profileFetchError":"Beim Abrufen der Profildaten ist ein Fehler aufgetreten.",
-        "profileTokenError":"Kein Token gefunden.",
+        "profileFetchError": "Beim Abrufen der Profildaten ist ein Fehler aufgetreten.",
+        "profileTokenError": "Kein Token gefunden.",
         "viewPassword": "Passwort anzeigen"
     },
     "Contact": {
@@ -370,7 +370,9 @@
         "noImages": "Für dieses Fahrzeug sind derzeit keine Bilder verfügbar.",
         "noChildSeatsAvailable": "Keine weiteren Kindersitze verfügbar!",
         "noRacksAvailable": "Keine weiteren Rack verfügbar!",
-        "noNavigationAvailable": "Keine Navigation verfügbar!"
+        "noNavigationAvailable": "Keine Navigation verfügbar!",
+        "mileageType": "Kilometertyp",
+        "insuranceType": "Versicherungstyp"
     },
     "VehicleFilters": {
         "vehicleType": "Fahrzeugklasse",

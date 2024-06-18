@@ -11,10 +11,10 @@ import {
   SelectTrigger,
 } from "../ui/select";
 import { useEffect, useState } from "react";
+import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useHandleLogout } from "../hooks/useHandleLogout";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
-import useOverflowControl from "../hooks/useOverflowControl";
 
 interface HeaderAuthenticationProps {
   isOpen: boolean;

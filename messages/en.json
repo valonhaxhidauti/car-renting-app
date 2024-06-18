@@ -370,7 +370,9 @@
         "noImages": "There are currently no images available for this vehicle.",
         "noChildSeatsAvailable": "No more child seats available!",
         "noRacksAvailable": "No more racks available!",
-        "noNavigationAvailable": "No navigation available!"
+        "noNavigationAvailable": "No navigation available!",
+        "mileageType": "Mileage Type",
+        "insuranceType": "Insurance Type"
     },
     "VehicleFilters": {
         "vehicleType": "Vehicle Type",

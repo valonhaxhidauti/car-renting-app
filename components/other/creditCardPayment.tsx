@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ChevronDown } from "lucide-react";
-import useOverflowControl from "../hooks/useOverflowControl";
+import { useOverflowControl } from "../hooks/useOverflowControl";
 
 export default function CreditCardPayment() {
   const toggleShown = useOverflowControl(false);

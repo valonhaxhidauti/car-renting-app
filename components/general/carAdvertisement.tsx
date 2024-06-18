@@ -125,7 +125,7 @@ export default function CarAdvertisement() {
         </div>
         {carData.relationships.media ? (
           <Image
-            src={`${carData.relationships.media[1].attributes.public_url}`}
+            src={`${carData.relationships.media[0].attributes.public_url}`}
             alt={carData.attributes.name}
             fill
             sizes="100%"

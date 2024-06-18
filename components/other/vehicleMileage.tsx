@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ChevronDown } from "lucide-react";
-import useOverflowControl from "../hooks/useOverflowControl";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import { Label } from "../ui/label";
+import { Circle, CircleDot } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useTranslations } from "next-intl";
-
-interface MileageType {
-  id: number;
-  attributes: {
-    name: string;
-    base_price_in_cents: number;
-    base_currency: string;
-    description: string;
-    updated_at: string;
-    created_at: string;
-  };
-}
+import { ItemType } from "@/lib/types";
 
 export default function VehicleMileage() {
+  const t = useTranslations("VehicleDetails")
   const locale = useTranslations()("Locale");
 
-  const [vehicleMileage, setVehicleMileage] = useState<MileageType[]>([]);
+  const [vehicleMileage, setVehicleMileage] = useState<ItemType[]>([]);
+  const [selectedValue, setSelectedValue] = useState<string>("");
   const toggleShown = useOverflowControl(false);
 
-  function onSelectClicked() {
+  function onRadioChange(value: string) {
+    setSelectedValue(value);
     toggleShown();
   }
 
@@ -50,6 +35,9 @@ export default function VehicleMileage() {
       .then((response) => response.json())
       .then((data) => {
         setVehicleMileage(data.data);
+        if (data.data.length > 0) {
+          setSelectedValue(data.data[0].attributes.name);
+        }
       })
       .catch((error) => {
         console.error("Error fetching vehicle mileage types:", error);
@@ -58,23 +46,46 @@ export default function VehicleMileage() {
 
   return (
     <div className="my-4">
-      <Select onOpenChange={onSelectClicked}>
-        <SelectTrigger className="w-full border-borderGray border flex gap-2">
-          <SelectValue placeholder="Select Mileage Type" />
-          <ChevronDown size={20} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Mileage Types</SelectLabel>
-            {vehicleMileage.map((type) => (
-              <SelectItem key={type.id} value={type.attributes.name}>
-                {type.attributes.name} - {type.attributes.base_currency}{" "}
-                {type.attributes.base_price_in_cents}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <Label htmlFor="terms" className="text-grayFont text-lg font-medium">
+        {t("mileageType")}
+      </Label>
+      <RadioGroup.Root
+        className="flex flex-col gap-4 mt-2"
+        onValueChange={onRadioChange}
+        value={selectedValue || ""}
+      >
+        {vehicleMileage.map((type) => (
+          <RadioGroup.Item
+            id="mileage"
+            key={type.id}
+            value={type.attributes.name}
+            className={`p-4 flex flex-col gap-2 text-grayFont transition-[outline] ${
+              selectedValue === type.attributes.name
+                ? "outline-primary outline outline-2"
+                : "outline-borderGray outline outline-1"
+            }`}
+          >
+            <div className="flex items-center w-full justify-between">
+              <p className="font-medium">{type.attributes.name}</p>
+              <div className="mr-2">
+                {selectedValue === type.attributes.name ? (
+                  <CircleDot className="w-6 h-6 text-primary" />
+                ) : (
+                  <Circle className="w-6 h-6 text-grayFont" />
+                )}
+              </div>
+            </div>
+            <p>
+              {type.attributes.base_currency.toUpperCase()}{" "}
+              {type.attributes.base_price_in_cents}
+            </p>
+            <p
+              className="text-sm text-left"
+              dangerouslySetInnerHTML={{ __html: type.attributes.description }}
+            ></p>
+          </RadioGroup.Item>
+        ))}
+      </RadioGroup.Root>
     </div>
   );
 }

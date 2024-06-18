@@ -8,19 +8,19 @@ export type VehiclePrices = {
   insurance: number;
 };
 
-export interface ContactFormValues {
+export type ContactFormValues = {
   name: string;
   email: string;
   phone: string;
   message: string;
 }
 
-export interface LoginFormValues {
+export type LoginFormValues = {
   email: string;
   password: string;
 }
 
-export interface RegisterFormValues {
+export type RegisterFormValues = {
   name: string;
   surname: string;
   email: string;
@@ -30,12 +30,12 @@ export interface RegisterFormValues {
   passwordConfirm: string;
 }
 
-export interface ResetPasswordValues {
+export type ResetPasswordValues = {
   password: string;
   passwordConfirm: string;
 }
 
-export interface UpdateFormValues {
+export type UpdateFormValues = {
   name: string;
   surname: string;
   email: string;
@@ -45,14 +45,14 @@ export interface UpdateFormValues {
   // password: string;
 }
 
-export interface Filters {
+export type Filters = {
   gearType: any[];
   fuelType: any[];
   carClass: any[];
   carType: any[];
 }
 
-export interface CarAdData {
+export type CarAdData = {
   id: string;
   attributes: {
     name: string;
@@ -61,22 +61,34 @@ export interface CarAdData {
   relationships: any;
 }
 
-export interface VehicleData {
+export type VehicleData = {
   data: any[];
   links: any;
   meta: any;
 }
 
 
-export interface RentFormData {
+export type RentFormData = {
   rentLocation: string;
   returnLocation: string;
   pickupDate: Dayjs | null;
   dropOffDate: Dayjs | null;
 }
 
-export interface Location {
+export type Location = {
   attributes: {
     name: string;
+  };
+}
+
+export type ItemType = {
+  id: number;
+  attributes: {
+    name: string;
+    base_price_in_cents: number;
+    base_currency: string;
+    description: string;
+    updated_at: string;
+    created_at: string;
   };
 }

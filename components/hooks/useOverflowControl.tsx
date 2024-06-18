@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useOverflowControl(initialState = false): () => void {
+export function useOverflowControl(initialState = false): () => void {
   const [shown, setShown] = useState<boolean>(initialState);
 
   useEffect(() => {
@@ -21,5 +21,3 @@ function useOverflowControl(initialState = false): () => void {
 
   return toggleShown;
 }
-
-export default useOverflowControl;

@@ -1,8 +1,4 @@
 "use client";
-
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
-import { useTransition } from "react";
 import {
   Select,
   SelectContent,
@@ -11,9 +7,13 @@ import {
   SelectLabel,
   SelectTrigger,
 } from "../ui/select";
+
+import { useLocale, useTranslations } from "next-intl";
+import { useOverflowControl } from "../hooks/useOverflowControl";
+import { usePathname, useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { ChevronDown } from "lucide-react";
 import { FlagDeIcon, FlagUkIcon } from "@/assets/svgs";
-import useOverflowControl from "../hooks/useOverflowControl";
 
 export default function LanguageSelector({
   isOpen,

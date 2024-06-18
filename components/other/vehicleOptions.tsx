@@ -37,7 +37,7 @@ export default function VehicleOptions(extraOptions: any) {
 
   console.log(extraOptions);
   return (
-    <div className="grid laptop:grid-cols-3 border-borderGray border-y border-x w-full">
+    <div className="grid laptop:grid-cols-3 border-borderGray border-y border-x w-full mb-8">
       <div className="flex gap-2 items-center pl-4 border-b laptop:border-b-0 laptop:border-r">
         <div className="w-10 laptop:w-fit">
           <ChildSeatIcon />
