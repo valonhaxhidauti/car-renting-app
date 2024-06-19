@@ -7,35 +7,31 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { useTranslations } from "next-intl";
-import { useCounter } from "../hooks/useCounter";
 
-export default function VehicleOptions(extraOptions: any) {
+export default function VehicleOptions({
+  extraOptions,
+  childSeat,
+  incChildSeat,
+  decChildSeat,
+  maxChildSeat,
+  rack,
+  incRack,
+  decRack,
+  maxRack,
+  navi,
+  incNavi,
+  decNavi,
+  maxNavi
+}:any) {
   const t = useTranslations("VehicleDetails");
-  const maxChildSeat =
-    extraOptions?.extraOptions?.[0]?.attributes?.max_quantity || 0;
-  const maxRack =
-    extraOptions?.extraOptions?.[1]?.attributes?.max_quantity || 0;
-  const maxNavi =
-    extraOptions?.extraOptions?.[2]?.attributes?.max_quantity || 0;
 
   const childSeatPrice =
-    extraOptions?.extraOptions?.[0]?.attributes?.base_price_in_cents.toFixed(
-      "2"
-    ) || 0;
+    extraOptions?.[0]?.attributes?.base_price_in_cents.toFixed(2) || 0;
   const rackPrice =
-    extraOptions?.extraOptions?.[1]?.attributes?.base_price_in_cents.toFixed(
-      "2"
-    ) || 0;
+    extraOptions?.[1]?.attributes?.base_price_in_cents.toFixed(2) || 0;
   const naviPrice =
-    extraOptions?.extraOptions?.[2]?.attributes?.base_price_in_cents.toFixed(
-      "2"
-    ) || 0;
+    extraOptions?.[2]?.attributes?.base_price_in_cents.toFixed(2) || 0;
 
-  const [childSeat, incChildSeat, decChildSeat] = useCounter(0, maxChildSeat);
-  const [rack, incRack, decRack] = useCounter(0, maxRack);
-  const [navi, incNavi, decNavi] = useCounter(0, maxNavi);
-
-  console.log(extraOptions);
   return (
     <div className="grid laptop:grid-cols-3 border-borderGray border-y border-x w-full mb-8">
       <div className="flex gap-2 items-center pl-4 border-b laptop:border-b-0 laptop:border-r">

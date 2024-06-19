@@ -3,9 +3,8 @@ import { Dayjs } from "dayjs";
 export type VehiclePrices = {
   vehicle: number;
   childSeat: number;
+  carRack: number;
   navigation: number;
-  driver: number;
-  insurance: number;
 };
 
 export type ContactFormValues = {
@@ -66,7 +65,6 @@ export type VehicleData = {
   links: any;
   meta: any;
 }
-
 
 export type RentFormData = {
   rentLocation: string;

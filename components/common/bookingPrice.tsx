@@ -57,14 +57,14 @@ export default function BookingPrice(props: any) {
                   item.quantity > 0 && (
                     <div
                       key={item.name}
-                      className="flex justify-between text-xs"
+                      className="flex justify-between items-center text-xs"
                     >
                       <div className="w-14 flex justify-center">
                         {item.icon}
                       </div>
                       <div className="flex justify-between w-full">
                         <p className="font-light text-sm">{item.name}</p>
-                        <p className="font-light text-sm text-primary">
+                        <p className="font-medium text-xs text-primary">
                           CHF{" "}
                           {(
                             item.quantity *
