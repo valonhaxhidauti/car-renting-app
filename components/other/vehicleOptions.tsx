@@ -1,3 +1,4 @@
+// /components/VehicleOptions.tsx
 import { CarRackIcon, ChildSeatIcon, NavigationIcon } from "@/assets/svgs";
 import {
   Tooltip,
@@ -7,23 +8,17 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { useTranslations } from "next-intl";
+import { useBooking } from "../context/BookingContext";
 
 export default function VehicleOptions({
   extraOptions,
-  childSeat,
-  incChildSeat,
-  decChildSeat,
   maxChildSeat,
-  rack,
-  incRack,
-  decRack,
   maxRack,
-  navi,
-  incNavi,
-  decNavi,
-  maxNavi
-}:any) {
+  maxNavi,
+}: any) {
   const t = useTranslations("VehicleDetails");
+  const { childSeat, rack, navigation, setChildSeat, setRack, setNavigation } =
+    useBooking();
 
   const childSeatPrice =
     extraOptions?.[0]?.attributes?.base_price_in_cents.toFixed(2) || 0;
@@ -31,6 +26,14 @@ export default function VehicleOptions({
     extraOptions?.[1]?.attributes?.base_price_in_cents.toFixed(2) || 0;
   const naviPrice =
     extraOptions?.[2]?.attributes?.base_price_in_cents.toFixed(2) || 0;
+
+  const incChildSeat = () =>
+    setChildSeat((prev) => Math.min(prev + 1, maxChildSeat));
+  const decChildSeat = () => setChildSeat((prev) => Math.max(prev - 1, 0));
+  const incRack = () => setRack((prev) => Math.min(prev + 1, maxRack));
+  const decRack = () => setRack((prev) => Math.max(prev - 1, 0));
+  const incNavi = () => setNavigation((prev) => Math.min(prev + 1, maxNavi));
+  const decNavi = () => setNavigation((prev) => Math.max(prev - 1, 0));
 
   return (
     <div className="grid laptop:grid-cols-3 border-borderGray border-y border-x w-full mb-8">
@@ -123,7 +126,8 @@ export default function VehicleOptions({
             <p className="font-bold text-grayFont">{rack}</p>
             <div
               onClick={decRack}
-              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative ${
+              className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 relative 
+              ${
                 rack === 0
                   ? "cursor-not-allowed text-gray-400"
                   : "cursor-pointer hover:bg-slate-200"
@@ -135,7 +139,7 @@ export default function VehicleOptions({
           </div>
         </div>
       </div>
-      <div className="flex gap-2 items-center pl-4 ">
+      <div className="flex gap-2 items-center pl-4">
         <div className="w-10 laptop:w-fit">
           <NavigationIcon />
         </div>
@@ -154,7 +158,7 @@ export default function VehicleOptions({
                     onClick={incNavi}
                     className={`text-grayFont border-gray-400 border rounded-md text-sm px-1 w-5 text-center 
                     ${
-                      navi === maxNavi
+                      navigation === maxNavi
                         ? "cursor-not-allowed text-gray-400"
                         : "cursor-pointer hover:bg-slate-200"
                     }`}
@@ -162,7 +166,7 @@ export default function VehicleOptions({
                     +
                   </div>
                 </TooltipTrigger>
-                {navi === maxNavi && (
+                {navigation === maxNavi && (
                   <TooltipContent className="bg-secondary border-none">
                     <p className="text-white">{t("noNavigationAvailable")}</p>
                     <TooltipArrow className="fill-secondary" />
@@ -170,14 +174,15 @@ export default function VehicleOptions({
                 )}
               </Tooltip>
             </TooltipProvider>
-            <p className="font-bold text-grayFont">{navi}</p>
+            <p className="font-bold text-grayFont">{navigation}</p>
             <div
               onClick={decNavi}
-              className={`text-grayFont border-gray-400 bg-white border rounded-md text-sm px-1 w-5 relative ${
-                navi === 0
+              className={`text-grayFont border-gray-400 bg-white border rounded-md text-sm px-1 w-5 relative 
+              ${
+                navigation === 0
                   ? "cursor-not-allowed text-gray-400"
                   : "cursor-pointer hover:bg-slate-200"
-              } `}
+              }`}
             >
               &nbsp;
               <span className="absolute -top-1.5 left-1.5">_</span>

@@ -1,3 +1,4 @@
+// /components/VehicleMileage.tsx
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import { Label } from "../ui/label";
 import { Circle, CircleDot } from "lucide-react";
@@ -5,10 +6,12 @@ import { useEffect, useState } from "react";
 import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useTranslations } from "next-intl";
 import { ItemType } from "@/lib/types";
+import { useBooking } from "../context/BookingContext";
 
 export default function VehicleMileage() {
   const t = useTranslations("VehicleDetails")
   const locale = useTranslations()("Locale");
+  const { setMileage, setMileagePrice } = useBooking();
 
   const [vehicleMileage, setVehicleMileage] = useState<ItemType[]>([]);
   const [selectedValue, setSelectedValue] = useState<string>("");
@@ -17,6 +20,12 @@ export default function VehicleMileage() {
   function onRadioChange(value: string) {
     setSelectedValue(value);
     toggleShown();
+
+    const selectedMileage = vehicleMileage.find(type => type.attributes.name === value);
+    if (selectedMileage) {
+      setMileage(selectedMileage.attributes.name);
+      setMileagePrice(selectedMileage.attributes.base_price_in_cents);
+    }
   }
 
   useEffect(() => {
@@ -36,7 +45,10 @@ export default function VehicleMileage() {
       .then((data) => {
         setVehicleMileage(data.data);
         if (data.data.length > 0) {
-          setSelectedValue(data.data[0].attributes.name);
+          const initialMileage = data.data[0].attributes;
+          setSelectedValue(initialMileage.name);
+          setMileage(initialMileage.name);
+          setMileagePrice(initialMileage.base_price_in_cents);
         }
       })
       .catch((error) => {

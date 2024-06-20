@@ -1,19 +1,30 @@
+import { useTranslations } from "next-intl";
+import { Link } from "next-view-transitions";
+import { Skeleton } from "../ui/skeleton";
+import BookingInfo from "./bookingInfo";
+import { usePathname } from "next/navigation";
+import { useBooking } from "../context/BookingContext";
+import { CarRackIcon, ChildSeatIcon, NavigationIcon } from "@/assets/svgs";
 import {
   Tooltip,
   TooltipArrow,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useTranslations } from "next-intl";
-import { Link } from "next-view-transitions";
-import { Skeleton } from "../ui/skeleton";
-import BookingInfo from "./bookingInfo";
-import { usePathname } from "next/navigation";
+} from "../ui/tooltip";
 
 export default function BookingPrice(props: any) {
   const t = useTranslations("VehicleDetails");
   const { params } = props;
+  const {
+    childSeat,
+    rack,
+    navigation,
+    insurance,
+    insurancePrice,
+    mileage,
+    mileagePrice,
+  } = useBooking();
   const paramsSet =
     params &&
     Object.values(params).every(
@@ -24,6 +35,38 @@ export default function BookingPrice(props: any) {
   const isPaymentPage =
     usePathname() === "/en/explore/vehicle/payment" ||
     pathname === "/de/explore/vehicle/payment";
+
+  const optionalItems = [
+    {
+      name: t("childSeat"),
+      quantity: childSeat,
+      price: props.prices.childSeat,
+      icon: <ChildSeatIcon />,
+    },
+    {
+      name: t("additionalRack"),
+      quantity: rack,
+      price: props.prices.navigation, // Note: This seems like a mistake in your original code. Should be props.prices.carRack
+      icon: <CarRackIcon />,
+    },
+    {
+      name: t("navigation"),
+      quantity: navigation,
+      price: props.prices.carRack, // Note: This seems like a mistake in your original code. Should be props.prices.navigation
+      icon: <NavigationIcon />,
+    },
+  ];
+
+  const optionalItemsTotal = optionalItems.reduce(
+    (total, item) => total + item.quantity * item.price * props.daysDifference,
+    0
+  );
+
+  const totalPrice =
+    props.prices.vehicle * props.daysDifference +
+    optionalItemsTotal +
+    insurancePrice +
+    mileagePrice;
 
   return (
     <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
@@ -44,16 +87,16 @@ export default function BookingPrice(props: any) {
               CHF {(props.prices.vehicle * props.daysDifference).toFixed(2)}
             </p>
           </div>
-          {props.optionalItemsTotal > 0 && (
+          {optionalItemsTotal > 0 && (
             <div className="flex flex-col border-b border-borderGray py-3 gap-2">
               <div className="flex justify-between text-sm">
                 <p className="font-bold">{t("optionalItems")}</p>
                 <p className="font-bold text-primary">
-                  CHF {props.optionalItemsTotal.toFixed(2)}
+                  CHF {optionalItemsTotal.toFixed(2)}
                 </p>
               </div>
-              {props.optionalItems.map(
-                (item: any) =>
+              {optionalItems.map(
+                (item) =>
                   item.quantity > 0 && (
                     <div
                       key={item.name}
@@ -91,7 +134,7 @@ export default function BookingPrice(props: any) {
             <div className="flex justify-between">
               <p className="font-bold">{t("totalValue")}</p>
               <p className="font-bold text-primary">
-                CHF {props.totalPrice.toFixed(2)}
+                CHF {totalPrice.toFixed(2)}
               </p>
             </div>
           </div>

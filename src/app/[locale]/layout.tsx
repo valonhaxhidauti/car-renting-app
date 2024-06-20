@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "@/components/ui/toaster";
 import "../globals.css";
+import { BookingProvider } from "@/components/context/BookingContext";
 
 const font = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -29,7 +30,7 @@ export default function RootLayout({ children, params: { locale } }: Props) {
       <html lang={locale}>
         <body className={font.className}>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
+            <BookingProvider>{children}</BookingProvider>
             <Toaster />
           </NextIntlClientProvider>
         </body>

@@ -12,7 +12,6 @@ import {
 import {
   CarRackIcon,
   ChildSeatIcon,
-  InsuranceIcon,
   NavigationIcon,
 } from "@/assets/svgs";
 import { useState } from "react";
@@ -32,6 +31,7 @@ import BookingPrice from "../common/bookingPrice";
 import CreditCarrdPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
 import DiscountPayment from "./discountPayment";
+import { useBooking } from "../context/BookingContext";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
@@ -49,43 +49,56 @@ export default function VehiclePayment() {
       : 1;
 
   const vehicle = useFetchedVehicle(vehicleId);
+
+  const childSeatPrice =
+    vehicle.relationships?.additionalItems[0]?.attributes?.base_price_in_cents.toFixed(
+      "2"
+    ) || 0;
+  const rackPrice =
+    vehicle.relationships?.additionalItems[1]?.attributes?.base_price_in_cents.toFixed(
+      "2"
+    ) || 0;
+  const naviPrice =
+    vehicle.relationships?.additionalItems[2]?.attributes?.base_price_in_cents.toFixed(
+      "2"
+    ) || 0;
+
   const prices: VehiclePrices = {
     vehicle: vehicle.attributes?.base_price_in_cents || 0.0,
-    childSeat: 24.0,
-    navigation: 15.5,
-    driver: 40.0,
-    insurance: 16.6,
+    childSeat: childSeatPrice,
+    navigation: rackPrice,
+    carRack: naviPrice,
   };
 
-  const [childSeat, incChildSeat, decChildSeat] = useCounter(0, 3);
-  const [navigation, incNavigation, decNavigation] = useCounter(0, 1);
-  const [driver, incDriver, decDriver] = useCounter(0, 1);
-  const [insurance, incInsurance, decInsurance] = useCounter(0, 1);
+  const maxChildSeat =
+    vehicle.relationships?.additionalItems[0]?.attributes?.max_quantity || 0;
+  const maxRack =
+    vehicle.relationships?.additionalItems[1]?.attributes?.max_quantity || 0;
+  const maxNavi =
+    vehicle.relationships?.additionalItems[2]?.attributes?.max_quantity || 0;
+
+    const { childSeat, rack, navigation } = useBooking();
+
+  console.log(vehicle);
 
   const optionalItems = [
     {
       name: u("childSeat"),
       quantity: childSeat,
-      price: prices.childSeat,
+      price: childSeatPrice,
       icon: <ChildSeatIcon />,
+    },
+    {
+      name: u("additionalRack"),
+      quantity: rack,
+      price: rackPrice,
+      icon: <CarRackIcon />,
     },
     {
       name: u("navigation"),
       quantity: navigation,
-      price: prices.navigation,
+      price: naviPrice,
       icon: <NavigationIcon />,
-    },
-    {
-      name: u("additionalRack"),
-      quantity: driver,
-      price: prices.driver,
-      icon: <CarRackIcon />,
-    },
-    {
-      name: u("damageInsurance"),
-      quantity: insurance,
-      price: prices.insurance,
-      icon: <InsuranceIcon />,
     },
   ];
 
@@ -94,12 +107,13 @@ export default function VehiclePayment() {
     0
   );
 
+  const totalPrice = prices.vehicle * daysDifference + optionalItemsTotal;
+
   function getDecimalPart(number: number) {
     var decimalPart = (number % 1).toFixed(2);
     return decimalPart.substring(2);
   }
 
-  const totalPrice = prices.vehicle * daysDifference + optionalItemsTotal;
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");

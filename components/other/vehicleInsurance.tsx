@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useTranslations } from "next-intl";
 import { ItemType } from "@/lib/types";
+import { useBooking } from "../context/BookingContext";
 
 export default function VehicleInsurance() {
   const t = useTranslations("VehicleDetails");
   const locale = useTranslations()("Locale");
+  const { setInsurance, setInsurancePrice } = useBooking();
 
   const [insuranceTypes, setInsuranceTypes] = useState<ItemType[]>([]);
   const [selectedValue, setSelectedValue] = useState<string>("");
@@ -17,6 +19,14 @@ export default function VehicleInsurance() {
   function onRadioChange(value: string) {
     setSelectedValue(value);
     toggleShown();
+
+    const selectedInsurance = insuranceTypes.find(
+      (type) => type.attributes.name === value
+    );
+    if (selectedInsurance) {
+      setInsurance(selectedInsurance.attributes.name);
+      setInsurancePrice(selectedInsurance.attributes.base_price_in_cents);
+    }
   }
 
   useEffect(() => {
@@ -36,7 +46,10 @@ export default function VehicleInsurance() {
       .then((data) => {
         setInsuranceTypes(data.data);
         if (data.data.length > 0) {
-          setSelectedValue(data.data[0].attributes.name);
+          const initialInsurance = data.data[0].attributes;
+          setSelectedValue(initialInsurance.name);
+          setInsurance(initialInsurance.name);
+          setInsurancePrice(initialInsurance.base_price_in_cents);
         }
       })
       .catch((error) => {
