@@ -9,22 +9,16 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import {
-  CarRackIcon,
-  ChildSeatIcon,
-  NavigationIcon,
-} from "@/assets/svgs";
+import { CarRackIcon, ChildSeatIcon, NavigationIcon } from "@/assets/svgs";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { VehiclePrices } from "@/lib/types";
-import { useCounter } from "../hooks/useCounter";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
 import { HeadingTitle } from "../common/headingParts";
 import dayjs from "dayjs";
 import BirthdaySelector from "../account/birthdaySelector";
-import BookingMobile from "../common/bookingMobile";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 import BookingPrice from "../common/bookingPrice";
@@ -32,6 +26,7 @@ import CreditCarrdPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
 import DiscountPayment from "./discountPayment";
 import { useBooking } from "../context/BookingContext";
+import RentForm from "../general/rentForm";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
@@ -77,7 +72,7 @@ export default function VehiclePayment() {
   const maxNavi =
     vehicle.relationships?.additionalItems[2]?.attributes?.max_quantity || 0;
 
-    const { childSeat, rack, navigation } = useBooking();
+  const { childSeat, rack, navigation } = useBooking();
 
   console.log(vehicle);
 
@@ -113,7 +108,6 @@ export default function VehiclePayment() {
     var decimalPart = (number % 1).toFixed(2);
     return decimalPart.substring(2);
   }
-
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -165,7 +159,9 @@ export default function VehiclePayment() {
             </BreadcrumbList>
           </Breadcrumb>
           <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
-            <BookingMobile />
+            <div className="flex gap-2 p-2 h-8 text-sm text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full">
+              <RentForm isModal={true} id="vehicleDetailsBooking" />
+            </div>
           </div>
           <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col-reverse laptop:flex-row gap-4">
             <div className="flex flex-col w-full laptop:w-3/4 desktop:w-4/5 gap-4">

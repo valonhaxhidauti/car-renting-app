@@ -200,12 +200,14 @@ export default function RentForm({
 
   return isModal ? (
     <>
-      <span title={t("editBooking")}>
-        <EditBookingIcon
-          className="w-6 h-6 cursor-pointer"
-          onClick={toggleModal}
-        />
-      </span>
+      <div
+        title={t("editBooking")}
+        className="flex items-center justify-between w-full cursor-pointer gap-2 text-nowrap"
+        onClick={toggleModal}
+      >
+        <p>{t("booking")}</p>
+        <EditBookingIcon />
+      </div>
       <div
         className={`fixed top-0 right-0 left-0 bottom-0 z-10 w-full fill-mode-forwards rounded ${
           showModal ? "animate-show-overlay" : "hidden"

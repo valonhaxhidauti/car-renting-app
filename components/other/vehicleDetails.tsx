@@ -20,7 +20,6 @@ import { VehiclePrices } from "@/lib/types";
 import { HeadingTitle } from "../common/headingParts";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
-import BookingMobile from "../common/bookingMobile";
 import dayjs from "dayjs";
 import VehicleOptions from "./vehicleOptions";
 import BookingPrice from "../common/bookingPrice";
@@ -29,6 +28,7 @@ import VehicleDetailsSkeleton from "../loader/vehicleDetailsSkeleton";
 import VehicleInsurance from "./vehicleInsurance";
 import VehicleMileage from "./vehicleMileage";
 import VehicleDetailsInfo from "./vehicleDetailsInfo";
+import RentForm from "../general/rentForm";
 
 export default function VehicleDetails() {
   const t = useTranslations("VehicleDetails");
@@ -134,7 +134,9 @@ export default function VehicleDetails() {
             </BreadcrumbList>
           </Breadcrumb>
           <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
-            <BookingMobile />
+            <div className="flex gap-2 p-2 h-8 text-sm text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full">
+              <RentForm isModal={true} id="vehicleDetailsBooking" />
+            </div>
           </div>
           <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col-reverse laptop:flex-row gap-4">
             <div className="flex flex-col gap-4 w-full laptop:w-3/4 desktop:w-4/5">

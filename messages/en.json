@@ -273,6 +273,7 @@
     },
     "RentForm": {
         "deliverAtDifferentPoint": "Deliver at different point",
+        "booking": "Booking Info",
         "dropOffDate": "Dropoff Date",
         "editBooking": "Edit booking info",
         "findNow": "Find Now",

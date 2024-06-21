@@ -4,7 +4,14 @@ import { Skeleton } from "../ui/skeleton";
 import BookingInfo from "./bookingInfo";
 import { usePathname } from "next/navigation";
 import { useBooking } from "../context/BookingContext";
-import { CarRackIcon, ChildSeatIcon, NavigationIcon } from "@/assets/svgs";
+import { Gauge } from "lucide-react";
+import {
+  CarRackIcon,
+  ChildSeatIcon,
+  EditBookingIcon,
+  InsuranceIcon,
+  NavigationIcon,
+} from "@/assets/svgs";
 import {
   Tooltip,
   TooltipArrow,
@@ -46,13 +53,13 @@ export default function BookingPrice(props: any) {
     {
       name: t("additionalRack"),
       quantity: rack,
-      price: props.prices.navigation, // Note: This seems like a mistake in your original code. Should be props.prices.carRack
+      price: props.prices.carRack,
       icon: <CarRackIcon />,
     },
     {
       name: t("navigation"),
       quantity: navigation,
-      price: props.prices.carRack, // Note: This seems like a mistake in your original code. Should be props.prices.navigation
+      price: props.prices.navigation,
       icon: <NavigationIcon />,
     },
   ];
@@ -76,7 +83,18 @@ export default function BookingPrice(props: any) {
       {props.vehicle && props.vehicle.attributes ? (
         <div className="text-grayFont sticky top-32 right-8 flex flex-col w-full p-4 bg-white">
           <div className="flex flex-col border-b border-borderGray pb-3">
-            <p className="text-xl font-bold">{t("pageTitle")}</p>
+            <p className="text-xl font-bold flex justify-between items-center">
+              {t("pageTitle")}
+              {isPaymentPage ? (
+                <Link
+                  href={`/explore/vehicle?vehicleId=${props.params.vehicleId}&rentLocation=${props.params.rentLocation}&returnLocation=${props.params.returnLocation}&pickupDate=${props.params.pickupDate}&dropOffDate=${props.params.dropOffDate}`}
+                >
+                  <EditBookingIcon />
+                </Link>
+              ) : (
+                <></>
+              )}
+            </p>
             <p className="font-medium">
               {props.vehicle.attributes.name.split(" (")[0]}
             </p>
@@ -119,6 +137,38 @@ export default function BookingPrice(props: any) {
                     </div>
                   )
               )}
+            </div>
+          )}
+          {insurancePrice > 0 && (
+            <div className="flex flex-col mt-2">
+              <p className="text-sm font-bold">{t("insuranceType")}</p>
+              <div className="flex justify-between items-center text-xs border-b border-borderGray py-3">
+                <div className="w-14 flex justify-center">
+                  <InsuranceIcon />
+                </div>
+                <div className="flex justify-between w-full">
+                  <p className="font-light text-sm">{insurance}</p>
+                  <p className="font-medium text-xs text-primary">
+                    CHF {insurancePrice.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+          {mileagePrice > 0 && (
+            <div className="flex flex-col mt-2">
+              <p className="text-sm font-bold">{(t("mileageType"))}</p>
+              <div className="flex justify-between items-center text-xs border-b border-borderGray py-3">
+                <div className="w-14 flex justify-center">
+                  <Gauge className="w-8 h-8" color="#acacac" />
+                </div>
+                <div className="flex justify-between w-full">
+                  <p className="font-light text-sm">{mileage}</p>
+                  <p className="font-medium text-xs text-primary">
+                    CHF {mileagePrice.toFixed(2)}
+                  </p>
+                </div>
+              </div>
             </div>
           )}
           <div className="py-3">

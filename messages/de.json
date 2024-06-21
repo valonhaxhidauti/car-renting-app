@@ -273,6 +273,7 @@
     },
     "RentForm": {
         "deliverAtDifferentPoint": "An anderer Stelle liefern",
+        "booking": "Buchungsinfos",
         "dropOffDate": "Abgabetermin",
         "editBooking": "Buchungsinformationen bearbeiten",
         "findNow": "Jetzt finden",

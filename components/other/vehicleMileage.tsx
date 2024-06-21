@@ -1,4 +1,3 @@
-// /components/VehicleMileage.tsx
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import { Label } from "../ui/label";
 import { Circle, CircleDot } from "lucide-react";

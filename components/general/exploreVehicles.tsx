@@ -8,7 +8,6 @@ import {
 } from "../ui/accordion";
 import {
   CloseMenuIcon,
-  EditBookingIcon,
   FilterIcon,
   GridViewIcon,
   ListViewIcon,
@@ -25,6 +24,7 @@ import VehicleFilters from "../common/vehicleFilters";
 import VehicleSort from "../common/vehicleSort";
 import ExploreVehiclesSkeleton from "../loader/exploreVehiclesSkeleton";
 import NoVehiclesFound from "../loader/noVehiclesFound";
+import RentForm from "./rentForm";
 
 export default function ExploreVehicles() {
   const t = useTranslations("ExploreVehicles");
@@ -107,8 +107,6 @@ export default function ExploreVehicles() {
 
   const [showFilters, setShowFilters] = useState(false);
   const [showFiltersAnimation, setShowFiltersAnimation] = useState(false);
-  const [showBooking, setShowBooking] = useState(false);
-  const [showBookingAnimation, setShowBookingAnimation] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
 
   const toggleViewMode = () => {
@@ -118,11 +116,6 @@ export default function ExploreVehicles() {
   const toggleFilters = () => {
     setShowFilters(!showFilters);
     setShowFiltersAnimation(true);
-  };
-
-  const toggleBooking = () => {
-    setShowBooking(!showBooking);
-    setShowBookingAnimation(true);
   };
 
   const handlePageChange = (pageNumber: number) => {
@@ -187,37 +180,17 @@ export default function ExploreVehicles() {
       </div>
       <div className="max-w-[1440px] m-auto">
         <Breadcrumbs translations={t} />
-        <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
+        <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-3 laptop:hidden">
           <div className="flex gap-4 mobile:gap-6 overflow-auto p-1">
-            <div
-              className="flex gap-2 p-2 h-8 text-xs text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full self-center"
-              onClick={toggleBooking}
-            >
-              <EditBookingIcon />
-              {t("booking")}
+            <div className="flex gap-2 p-2 h-8 text-sm text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full">
+              <RentForm isModal={true} id="vehicleDetailsBooking" />
             </div>
             <div
               className="border-borderGray h-8 border-2 cursor-pointer rounded-full px-2 text-grayFont font-medium text-xs flex gap-2 items-center"
               onClick={toggleFilters}
             >
-              <FilterIcon className="text-primary" /> {t("filters")}
-            </div>
-            <div
-              className={`fixed top-0 right-0 left-0 bottom-0 z-10 w-full fill-mode-forwards	${
-                showBooking ? "animate-show-overlay" : "hidden"
-              }`}
-              onClick={toggleBooking}
-            ></div>
-            <div
-              className={`fill-mode-forwards bg-white fixed w-full overflow-y-scroll right-0 z-10 ${
-                showBooking
-                  ? "animate-show-booking"
-                  : showBookingAnimation
-                  ? "animate-hide-booking"
-                  : "hidden"
-              }`}
-            >
-              <BookingInfo border={false} label="diffLocation2" />
+              {t("filters")}
+              <FilterIcon className="text-primary" />
             </div>
             <div
               className={`fixed top-0 right-0 left-0 bottom-0  z-10 w-full fill-mode-forwards	${
@@ -249,7 +222,7 @@ export default function ExploreVehicles() {
           </div>
         </div>
         <div className="flex gap-4 mobile:mx-8 bigDesktop:mx-0">
-          <div className="flex flex-col w-full laptop:w-4/5 gap-4">
+          <div className="flex flex-col w-full laptop:w-3/4 desktop:w-4/5 gap-4">
             {!loading && vehicles.data.length === 0 && <NoVehiclesFound />}
             <div
               className={`w-full gap-4 ${
@@ -283,7 +256,7 @@ export default function ExploreVehicles() {
               onPrevChange={handlePrevChange}
             />
           </div>
-          <div className="w-1/5 flex-col h-full gap-4 hidden laptop:flex">
+          <div className="w-1/4 desktop:w-1/5 flex-col h-full gap-4 hidden laptop:flex">
             <BookingInfo border={true} />
             <div className="bg-white p-4 flex flex-col gap-4 h-full">
               <Accordion
