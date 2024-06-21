@@ -136,7 +136,7 @@ export default function VehicleDetails() {
           <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
             <BookingMobile />
           </div>
-          <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col laptop:flex-row gap-4">
+          <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col-reverse laptop:flex-row gap-4">
             <div className="flex flex-col gap-4 w-full laptop:w-3/4 desktop:w-4/5">
               {vehicle && vehicle.attributes ? (
                 <>
