@@ -1,5 +1,6 @@
 import {
   Breadcrumb,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
@@ -38,4 +39,36 @@ const Breadcrumbs = ({ translations, }: { translations: any }) => {
   );
 };
 
-export {HeadingTitle, Breadcrumbs}
+const BreadcrumbExtended = ({ translations, params }: { translations: any, params: any }) => {
+  return (
+    <Breadcrumb className="w-full px-4 mobile:px-8 bigDesktop:px-0 py-8">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link href="/">{translations("homepage")}</Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbEllipsis />
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link
+              href={`/explore/vehicle?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+            >
+              {translations("vehicleDetails")}
+            </Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>{translations("payment")}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};
+
+export {HeadingTitle, Breadcrumbs, BreadcrumbExtended}

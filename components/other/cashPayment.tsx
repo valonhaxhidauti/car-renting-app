@@ -12,10 +12,6 @@ export default function CashPayment() {
       <p className="text-grayFont font-medium">
         Pay with cash at the company counter.
       </p>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col mobile:flex-row justify-between mobile:items-center gap-8"
-      >
         <div>
           <input
             type="checkbox"
@@ -31,13 +27,6 @@ export default function CashPayment() {
             I have read and agree to the Terms and Conditions
           </label>
         </div>
-        <button
-          type="submit"
-          className="bg-primary hover:bg-secondary transition text-white py-3 w-full mobile:w-40"
-        >
-          Book
-        </button>
-      </form>
     </div>
   );
 }

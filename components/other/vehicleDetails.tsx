@@ -1,6 +1,5 @@
 "use client";
 
-import { CarRackIcon, ChildSeatIcon, NavigationIcon } from "@/assets/svgs";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,11 +15,9 @@ import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
 import { useTranslations } from "next-intl";
 import { clearAppliedFilters } from "@/lib/utils";
 import { Link } from "next-view-transitions";
-import { VehiclePrices } from "@/lib/types";
 import { HeadingTitle } from "../common/headingParts";
 import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
-import dayjs from "dayjs";
 import VehicleOptions from "./vehicleOptions";
 import BookingPrice from "../common/bookingPrice";
 import VehicleTerms from "./vehicleTerms";
@@ -35,34 +32,8 @@ export default function VehicleDetails() {
 
   const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
-  const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
-  const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
-  const daysDifference =
-    dropOffDate.isValid() && pickupDate.isValid()
-      ? dropOffDate.diff(pickupDate, "day") + 1
-      : 1;
 
   const vehicle = useFetchedVehicle(vehicleId);
-
-  const childSeatPrice =
-    vehicle.relationships?.additionalItems[0]?.attributes?.base_price_in_cents.toFixed(
-      "2"
-    ) || 0;
-  const rackPrice =
-    vehicle.relationships?.additionalItems[1]?.attributes?.base_price_in_cents.toFixed(
-      "2"
-    ) || 0;
-  const naviPrice =
-    vehicle.relationships?.additionalItems[2]?.attributes?.base_price_in_cents.toFixed(
-      "2"
-    ) || 0;
-
-  const prices: VehiclePrices = {
-    vehicle: vehicle.attributes?.base_price_in_cents || 0.0,
-    childSeat: childSeatPrice,
-    navigation: rackPrice,
-    carRack: naviPrice,
-  };
 
   const maxChildSeat =
     vehicle.relationships?.additionalItems[0]?.attributes?.max_quantity || 0;
@@ -75,35 +46,6 @@ export default function VehicleDetails() {
   const [rack, incRack, decRack] = useCounter(0, maxRack);
   const [navigation, incNavigation, decNavigation] = useCounter(0, maxNavi);
   console.log(vehicle);
-
-  const optionalItems = [
-    {
-      name: t("childSeat"),
-      quantity: childSeat,
-      price: childSeatPrice,
-      icon: <ChildSeatIcon />,
-    },
-    {
-      name: t("additionalRack"),
-      quantity: rack,
-      price: rackPrice,
-      icon: <CarRackIcon />,
-    },
-    {
-      name: t("navigation"),
-      quantity: navigation,
-      price: naviPrice,
-      icon: <NavigationIcon />,
-    },
-  ];
-
-  const optionalItemsTotal = optionalItems.reduce(
-    (total, item) => total + item.quantity * item.price * daysDifference,
-    0
-  );
-
-  const totalPrice = prices.vehicle * daysDifference + optionalItemsTotal;
-
   return (
     <>
       <HeadingTitle title={t("pageTitle")} />
@@ -204,17 +146,7 @@ export default function VehicleDetails() {
                 <VehicleDetailsSkeleton />
               )}
             </div>
-            <BookingPrice
-              {...{
-                prices,
-                vehicle,
-                daysDifference,
-                optionalItems,
-                optionalItemsTotal,
-                totalPrice,
-                params,
-              }}
-            />
+            <BookingPrice vehicle={vehicle} />
           </div>
         </div>
       </div>

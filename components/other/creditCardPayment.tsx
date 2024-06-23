@@ -38,7 +38,6 @@ export default function CreditCardPayment() {
   return (
     <>
       <h1 className="text-grayFont font-bold">Credit Card Information</h1>
-      <form>
         <div className="flex flex-col mobile:flex-row flex-wrap items-start mobile:items-end justify-between gap-4">
           <div className="flex flex-col w-full mobile:w-auto">
             <label className="text-grayFont text-sm" htmlFor="cardOwner">
@@ -139,11 +138,7 @@ export default function CreditCardPayment() {
               I have read and agree to the Terms and Conditions
             </label>
           </div>
-          <button className="bg-primary hover:bg-secondary transition text-white py-3 px-16  w-full mobile:w-40">
-            Pay
-          </button>
         </div>
-      </form>
     </>
   );
 }
