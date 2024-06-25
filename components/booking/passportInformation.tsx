@@ -1,13 +1,5 @@
+import { PassportInfo } from "@/lib/types";
 import { ChangeEvent } from "react";
-
-interface PassportInfo {
-  passportNumber: string;
-  issuingCountry: string;
-  dateOfIssue: string;
-  dateOfExpiration: string;
-  frontImage: File | null;
-  backImage: File | null;
-}
 
 interface PassportInformationProps {
   passportInfo: PassportInfo;
@@ -100,7 +92,10 @@ const PassportInformation: React.FC<PassportInformationProps> = ({
             name="passportBackImage"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               if (e.target.files && e.target.files[0]) {
-                setPassportInfo({ ...passportInfo, backImage: e.target.files[0] });
+                setPassportInfo({
+                  ...passportInfo,
+                  backImage: e.target.files[0],
+                });
               }
             }}
             className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"

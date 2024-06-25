@@ -12,12 +12,12 @@ export type ContactFormValues = {
   email: string;
   phone: string;
   message: string;
-}
+};
 
 export type LoginFormValues = {
   email: string;
   password: string;
-}
+};
 
 export type RegisterFormValues = {
   name: string;
@@ -27,12 +27,12 @@ export type RegisterFormValues = {
   phoneCode: string;
   password: string;
   passwordConfirm: string;
-}
+};
 
 export type ResetPasswordValues = {
   password: string;
   passwordConfirm: string;
-}
+};
 
 export type UpdateFormValues = {
   name: string;
@@ -42,14 +42,14 @@ export type UpdateFormValues = {
   // phoneCode: string;
   // birthday: string;
   // password: string;
-}
+};
 
 export type Filters = {
   gearType: any[];
   fuelType: any[];
   carClass: any[];
   carType: any[];
-}
+};
 
 export type CarAdData = {
   id: string;
@@ -58,26 +58,26 @@ export type CarAdData = {
     base_price_in_cents: string;
   };
   relationships: any;
-}
+};
 
 export type VehicleData = {
   data: any[];
   links: any;
   meta: any;
-}
+};
 
 export type RentFormData = {
   rentLocation: string;
   returnLocation: string;
   pickupDate: Dayjs | null;
   dropOffDate: Dayjs | null;
-}
+};
 
 export type Location = {
   attributes: {
     name: string;
   };
-}
+};
 
 export type ItemType = {
   id: number;
@@ -89,4 +89,13 @@ export type ItemType = {
     updated_at: string;
     created_at: string;
   };
-}
+};
+
+export type PassportInfo = {
+  passportNumber: string;
+  issuingCountry: string;
+  dateOfIssue: string;
+  dateOfExpiration: string;
+  frontImage: File | null;
+  backImage: File | null;
+};
