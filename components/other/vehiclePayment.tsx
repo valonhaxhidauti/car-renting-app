@@ -73,7 +73,7 @@ export default function VehiclePayment() {
     body.append("insurance_type_id", "1");
     body.append("pick_up_location_id", "1");
     body.append("drop_off_location_id", "1");
-    body.append("car_id", "3");
+    body.append("car_id", "2");
     body.append("start_date_time", "2024-10-09");
     body.append("end_date_time", "2024-11-10");
     body.append("seat_no", "0");
@@ -95,6 +95,8 @@ export default function VehiclePayment() {
     body.append("number", "12");
     body.append("zip", "11111");
     body.append("street", "corporis");
+    body.append("city", "gjakove");
+    body.append("country", "kosove");
     body.append("update_billing_address", "1");
     body.append("passport_number", passportInfo.passportNumber);
     body.append("passport_issuing_country", passportInfo.issuingCountry);

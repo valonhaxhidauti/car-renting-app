@@ -18,7 +18,8 @@ export default function DriverLicenseInformation({
 
   const handleDriverLicenseImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setDriverLicenseInfo({ ...driverLicenseInfo, frontImage: e.target.files[0] });
+      const { name } = e.target;
+      setDriverLicenseInfo({ ...driverLicenseInfo, [name]: e.target.files[0] });
     }
   };
 
@@ -80,7 +81,7 @@ export default function DriverLicenseInformation({
           </label>
           <input
             type="file"
-            name="driverLicenseFrontImage"
+            name="frontImage"
             onChange={handleDriverLicenseImageChange}
             className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
@@ -91,7 +92,7 @@ export default function DriverLicenseInformation({
           </label>
           <input
             type="file"
-            name="driverLicenseBackImage"
+            name="backImage"
             onChange={handleDriverLicenseImageChange}
             className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
