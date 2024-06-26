@@ -6,21 +6,20 @@ import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
 import { BreadcrumbExtended, HeadingTitle } from "../common/headingParts";
 import BirthdaySelector from "../account/birthdaySelector";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/semantic-ui.css";
 import BookingPrice from "../common/bookingPrice";
 import CreditCardPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
 import RentForm from "../general/rentForm";
 import PassportInformation from "../booking/passportInformation";
-import { PassportInfo } from "@/lib/types";
+import { DriverLicenseInfo, PassportInfo } from "@/lib/types";
+import DriverLicenseInformation from "../booking/driverLicenseInformation";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
   const u = useTranslations("VehicleDetails");
   const locale = useTranslations()("Locale");
 
-  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
   const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
 
@@ -35,6 +34,14 @@ export default function VehiclePayment() {
 
   const [passportInfo, setPassportInfo] = useState<PassportInfo>({
     passportNumber: "",
+    issuingCountry: "",
+    dateOfIssue: "",
+    dateOfExpiration: "",
+    frontImage: null,
+  });
+
+  const [driverLicenseInfo, setDriverLicenseInfo] = useState<DriverLicenseInfo>({
+    driverLicenseNumber: "",
     issuingCountry: "",
     dateOfIssue: "",
     dateOfExpiration: "",
@@ -58,45 +65,40 @@ export default function VehiclePayment() {
     const url = "https://rent-api.rubik.dev/api/bookings";
     const headers = {
       "Accept-Language": locale,
-      "Content-Type": "multipart/form-data",
       Accept: "application/json",
     };
 
     const body = new FormData();
-    body.append("mileage_type_id", "3");
+    body.append("mileage_type_id", "1");
     body.append("insurance_type_id", "1");
-    body.append("pick_up_location_id", "16");
-    body.append("drop_off_location_id", "9");
-    body.append("car_id", vehicleId);
-    body.append("start_date_time", "2114-10-09");
-    body.append("end_date_time", "2098-07-28");
-    body.append("seat_no", "18");
-    body.append("rack_no", "8");
-    body.append("navigation_no", "14");
+    body.append("pick_up_location_id", "1");
+    body.append("drop_off_location_id", "1");
+    body.append("car_id", "3");
+    body.append("start_date_time", "2024-10-09");
+    body.append("end_date_time", "2024-11-10");
+    body.append("seat_no", "0");
+    body.append("rack_no", "0");
+    body.append("navigation_no", "0");
     body.append("update_customer", "1");
     body.append("email", personalInfo.email);
     body.append("first_name", personalInfo.firstName);
     body.append("last_name", personalInfo.lastName);
-    body.append("phone", personalInfo.phone);
-    body.append("nationality", "et");
-    body.append("gender", "o");
-    body.append("date_of_birth", "2014-03-10");
     body.append("update_documents", "1");
     body.append("payment_method", paymentMethod);
-    if (paymentMethod === "card") {
-      body.append("card_number", "2382580946423959");
-      body.append("card_expiration_month", "k");
-      body.append("card_expiration_year", "9030");
-      body.append("card_ccv", "898");
-    }
-    if (passportInfo.frontImage) {
-      body.append("passport_front_image", passportInfo.frontImage);
-    }
-    if (passportInfo.backImage) {
-      body.append("passport_back_image", passportInfo.backImage);
-    }
+    body.append("driver_licence_number", driverLicenseInfo.driverLicenseNumber);
+    body.append("driver_licence_issuing_country", driverLicenseInfo.issuingCountry);
+    body.append("driver_licence_date_of_issue", driverLicenseInfo.dateOfIssue);
+    body.append("driver_licence_date_of_expiration", driverLicenseInfo.dateOfExpiration);
+    body.append("driver_licence_front_image", driverLicenseInfo.frontImage || "");
+    body.append("driver_licence_back_image", driverLicenseInfo.backImage || "");
+    body.append("address", "ratione");
+    body.append("number", "12");
+    body.append("zip", "11111");
+    body.append("street", "corporis");
+    body.append("update_billing_address", "1");
     body.append("passport_number", passportInfo.passportNumber);
     body.append("passport_issuing_country", passportInfo.issuingCountry);
+    body.append("passport_front_image", passportInfo.frontImage || "");
     body.append("passport_date_of_issue", passportInfo.dateOfIssue);
     body.append("passport_date_of_expiration", passportInfo.dateOfExpiration);
 
@@ -110,10 +112,11 @@ export default function VehiclePayment() {
       if (response.ok) {
         // Handle successful response
       } else {
-        // Handle error response
+        const errorData = await response.json();
+        console.log(errorData);
       }
     } catch (error: any) {
-      // Handle fetch error
+      console.error(error);
     }
   };
 
@@ -177,34 +180,6 @@ export default function VehiclePayment() {
                         />
                       </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-grayFont">
-                        {t("register.phoneNumberLabel")}
-                      </label>
-                      <div className="mt-2">
-                        <PhoneInput
-                          country={"de"}
-                          buttonStyle={{
-                            border: "none",
-                            background: "white",
-                            margin: "2px",
-                          }}
-                          dropdownStyle={{
-                            border: "none",
-                            marginTop: "4px",
-                            maxWidth: "272px",
-                          }}
-                          inputProps={{
-                            required: true,
-                            name: "phone",
-                            value: personalInfo.phone,
-                            onChange: handlePersonalInfoChange,
-                            className:
-                              "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
-                          }}
-                        />
-                      </div>
-                    </div>
                     <BirthdaySelector />
                   </div>
                 </div>
@@ -219,9 +194,9 @@ export default function VehiclePayment() {
                       type="radio"
                       id="cash"
                       name="paymentMethod"
-                      value="cash"
+                      value="Cash"
                       onChange={handlePaymentMethodChange}
-                      checked={paymentMethod === "cash"}
+                      checked={paymentMethod === "Cash"}
                     />
                     <label className="text-grayFont text-sm" htmlFor="cash">
                       Pay in Cash
@@ -232,21 +207,25 @@ export default function VehiclePayment() {
                       type="radio"
                       id="card"
                       name="paymentMethod"
-                      value="card"
+                      value="Card"
                       onChange={handlePaymentMethodChange}
-                      checked={paymentMethod === "card"}
+                      checked={paymentMethod === "Card"}
                     />
                     <label className="text-grayFont text-sm" htmlFor="card">
                       Credit Card
                     </label>
                   </div>
                 </div>
-                {paymentMethod === "card" && <CreditCardPayment />}
-                {paymentMethod === "cash" && <CashPayment />}
+                {paymentMethod === "Card" && <CreditCardPayment />}
+                {paymentMethod === "Cash" && <CashPayment />}
               </div>
               <PassportInformation
                 passportInfo={passportInfo}
                 setPassportInfo={setPassportInfo}
+              />
+              <DriverLicenseInformation
+                driverLicenseInfo={driverLicenseInfo}
+                setDriverLicenseInfo={setDriverLicenseInfo}
               />
               <div className="flex justify-end gap-4 w-full bg-white p-4">
                 <button

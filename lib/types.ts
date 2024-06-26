@@ -97,5 +97,14 @@ export type PassportInfo = {
   dateOfIssue: string;
   dateOfExpiration: string;
   frontImage: File | null;
+};
+
+export type DriverLicenseInfo = {
+  driverLicenseNumber: string;
+  issuingCountry: string;
+  dateOfIssue: string;
+  dateOfExpiration: string;
+  frontImage: File | null;
   backImage: File | null;
 };
+

@@ -9,9 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/semantic-ui.css";
 
 export default function BirthdaySelector() {
-  const t = useTranslations("Account.birthdaySelect");
+  const t = useTranslations("Account");
   const months = [
     "jan",
     "feb",
@@ -37,65 +39,93 @@ export default function BirthdaySelector() {
   // const [selectedYear, setSelectedYear] = useState(null);
 
   return (
-    <div>
-      <label className="block text-sm font-medium leading-6 text-grayFont">
-        {t("label")}
-      </label>
-      <div className="mt-2 flex gap-2">
-        {/* Day */}
-        <Select>
-          <SelectTrigger className="w-full border-borderForm border rounded-sm h-[56px] flex gap-2">
-            <SelectValue placeholder={t("day")} />
-            <ChevronDown size={12} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>{t("day")}</SelectLabel>
-              {days.map((day) => (
-                <SelectItem key={day} value={day.toString()}>
-                  {day}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-
-        {/* Month */}
-        <Select>
-          <SelectTrigger className="w-full border-borderForm border rounded-sm h-[56px] flex gap-2">
-            <SelectValue placeholder={t("month")} />
-            <ChevronDown size={12} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>{t("month")}</SelectLabel>
-              {months.map((month) => (
-                <SelectItem key={month} value={month}>
-                  {t(`months.${month}`)}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-
-        {/* Year */}
-        <Select>
-          <SelectTrigger className="w-full border-borderForm border rounded-sm h-[56px] flex gap-2">
-            <SelectValue placeholder={t("year")} />
-            <ChevronDown size={12} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>{t("year")}</SelectLabel>
-              {years.map((year) => (
-                <SelectItem key={year} value={year.toString()}>
-                  {year}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+    <>
+      <div>
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("register.phoneNumberLabel")}
+        </label>
+        <div className="mt-2">
+          <PhoneInput
+            country={"de"}
+            buttonStyle={{
+              border: "none",
+              background: "white",
+              margin: "2px",
+            }}
+            dropdownStyle={{
+              border: "none",
+              marginTop: "4px",
+              maxWidth: "272px",
+            }}
+            inputProps={{
+              required: true,
+              name: "phone",
+              className:
+                "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
+            }}
+          />
+        </div>
       </div>
-    </div>
+      <div>
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("birthdaySelect.label")}
+        </label>
+        <div className="mt-2 flex gap-2">
+          {/* Day */}
+          <Select>
+            <SelectTrigger className="w-full border-borderForm border rounded-sm h-[56px] flex gap-2">
+              <SelectValue placeholder={t("birthdaySelect.day")} />
+              <ChevronDown size={12} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>{t("birthdaySelect.day")}</SelectLabel>
+                {days.map((day) => (
+                  <SelectItem key={day} value={day.toString()}>
+                    {day}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          {/* Month */}
+          <Select>
+            <SelectTrigger className="w-full border-borderForm border rounded-sm h-[56px] flex gap-2">
+              <SelectValue placeholder={t("birthdaySelect.month")} />
+              <ChevronDown size={12} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>{t("birthdaySelect.month")}</SelectLabel>
+                {months.map((month) => (
+                  <SelectItem key={month} value={month}>
+                    {t(`birthdaySelect.months.${month}`)}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          {/* Year */}
+          <Select>
+            <SelectTrigger className="w-full border-borderForm border rounded-sm h-[56px] flex gap-2">
+              <SelectValue placeholder={t("birthdaySelect.year")} />
+              <ChevronDown size={12} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>{t("birthdaySelect.year")}</SelectLabel>
+                {years.map((year) => (
+                  <SelectItem key={year} value={year.toString()}>
+                    {year}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+    </>
   );
 }
