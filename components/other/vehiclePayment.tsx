@@ -11,8 +11,17 @@ import CreditCardPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
 import RentForm from "../general/rentForm";
 import PassportInformation from "../booking/passportInformation";
-import { DriverLicenseInfo, PassportInfo } from "@/lib/types";
+import {
+  BillingInfo,
+  DriverLicenseInfo,
+  IdInfo,
+  PassportInfo,
+  PersonalInfo,
+} from "@/lib/types";
 import DriverLicenseInformation from "../booking/driverLicenseInformation";
+import IdInformation from "../booking/idInformation";
+import BillingInformation from "../booking/billingInformation";
+import PersonalInformation from "../booking/personalInformation";
 
 export default function VehiclePayment() {
   const t = useTranslations("Account");
@@ -25,12 +34,14 @@ export default function VehiclePayment() {
 
   const vehicle = useFetchedVehicle(vehicleId);
 
-  const [personalInfo, setPersonalInfo] = useState({
+  const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-  });
+    phoneCode: "",
+    dateOfBirth: "",
+  })
 
   const [passportInfo, setPassportInfo] = useState<PassportInfo>({
     passportNumber: "",
@@ -40,8 +51,19 @@ export default function VehiclePayment() {
     frontImage: null,
   });
 
-  const [driverLicenseInfo, setDriverLicenseInfo] = useState<DriverLicenseInfo>({
-    driverLicenseNumber: "",
+  const [driverLicenseInfo, setDriverLicenseInfo] = useState<DriverLicenseInfo>(
+    {
+      driverLicenseNumber: "",
+      issuingCountry: "",
+      dateOfIssue: "",
+      dateOfExpiration: "",
+      frontImage: null,
+      backImage: null,
+    }
+  );
+
+  const [idInfo, setIdInfo] = useState<IdInfo>({
+    idNumber: "",
     issuingCountry: "",
     dateOfIssue: "",
     dateOfExpiration: "",
@@ -49,14 +71,19 @@ export default function VehiclePayment() {
     backImage: null,
   });
 
+  const [billingInfo, setBillingInfo] = useState<BillingInfo>({
+    address: "",
+    number: "",
+    zip: "",
+    street: "",
+    city: "",
+    country: "",
+  });
+
   const handlePaymentMethodChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setPaymentMethod(e.target.value);
-  };
-
-  const handlePersonalInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -80,29 +107,38 @@ export default function VehiclePayment() {
     body.append("rack_no", "0");
     body.append("navigation_no", "0");
     body.append("update_customer", "1");
-    body.append("email", personalInfo.email);
     body.append("first_name", personalInfo.firstName);
     body.append("last_name", personalInfo.lastName);
+    body.append("email", personalInfo.email);
+    body.append('phone_code', personalInfo.phoneCode);
+    body.append('phone', personalInfo.phone);
+    body.append('date_of_birth', personalInfo.dateOfBirth);
     body.append("update_documents", "1");
     body.append("payment_method", paymentMethod);
     body.append("driver_licence_number", driverLicenseInfo.driverLicenseNumber);
-    body.append("driver_licence_issuing_country", driverLicenseInfo.issuingCountry);
-    body.append("driver_licence_date_of_issue", driverLicenseInfo.dateOfIssue);
-    body.append("driver_licence_date_of_expiration", driverLicenseInfo.dateOfExpiration);
-    body.append("driver_licence_front_image", driverLicenseInfo.frontImage || "");
-    body.append("driver_licence_back_image", driverLicenseInfo.backImage || "");
-    body.append("address", "ratione");
-    body.append("number", "12");
-    body.append("zip", "11111");
-    body.append("street", "corporis");
-    body.append("city", "gjakove");
-    body.append("country", "kosove");
     body.append("update_billing_address", "1");
+    body.append("address", billingInfo.address);
+    body.append("number", billingInfo.number);
+    body.append("zip", billingInfo.zip);
+    body.append("street", billingInfo.street);
+    body.append("city", billingInfo.city);
+    body.append("country", billingInfo.country);
+    body.append("driver_licence_issuing_country",driverLicenseInfo.issuingCountry);
+    body.append("driver_licence_date_of_issue", driverLicenseInfo.dateOfIssue);
+    body.append("driver_licence_date_of_expiration",driverLicenseInfo.dateOfExpiration);
+    body.append("driver_licence_front_image",driverLicenseInfo.frontImage || "");
+    body.append("driver_licence_back_image", driverLicenseInfo.backImage || "");
     body.append("passport_number", passportInfo.passportNumber);
     body.append("passport_issuing_country", passportInfo.issuingCountry);
     body.append("passport_front_image", passportInfo.frontImage || "");
     body.append("passport_date_of_issue", passportInfo.dateOfIssue);
     body.append("passport_date_of_expiration", passportInfo.dateOfExpiration);
+    body.append("id_number", idInfo.idNumber);
+    body.append("id_issuing_country", idInfo.issuingCountry);
+    body.append("id_front_image", idInfo.frontImage || "");
+    body.append("id_back_image", idInfo.backImage || "");
+    body.append("id_date_of_issue", idInfo.dateOfIssue);
+    body.append("id_date_of_expiration", idInfo.dateOfExpiration);
 
     try {
       const response = await fetch(url, {
@@ -138,54 +174,20 @@ export default function VehiclePayment() {
               className="flex flex-col w-full laptop:w-3/4 desktop:w-4/5 gap-4"
               onSubmit={onSubmit}
             >
-              <div className="flex flex-col gap-4 w-full">
-                <div className="flex flex-col gap-4 bg-white p-4">
-                  <h1 className="text-3xl text-grayFont font-bold">
-                    Personal Information
-                  </h1>
-                  <div className="w-full grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end">
-                    <div className="relative">
-                      <label className="block text-sm font-medium leading-6 text-grayFont">
-                        {t("register.nameLabel")}
-                      </label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        value={personalInfo.firstName}
-                        onChange={handlePersonalInfoChange}
-                        className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-grayFont">
-                        {t("register.surnameLabel")}
-                      </label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        value={personalInfo.lastName}
-                        onChange={handlePersonalInfoChange}
-                        className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium leading-6 text-grayFont">
-                        {t("register.emailAddressLabel")}
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="email"
-                          name="email"
-                          value={personalInfo.email}
-                          onChange={handlePersonalInfoChange}
-                          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
-                        />
-                      </div>
-                    </div>
-                    <BirthdaySelector />
-                  </div>
-                </div>
-              </div>
+              <PersonalInformation personalInfo={personalInfo} setPersonalInfo={setPersonalInfo}/>
+              <PassportInformation
+                passportInfo={passportInfo}
+                setPassportInfo={setPassportInfo}
+              />
+              <DriverLicenseInformation
+                driverLicenseInfo={driverLicenseInfo}
+                setDriverLicenseInfo={setDriverLicenseInfo}
+              />
+              <IdInformation idInfo={idInfo} setIdInfo={setIdInfo} />
+              <BillingInformation
+                billingInfo={billingInfo}
+                setBillingInfo={setBillingInfo}
+              />
               <div className="flex flex-col gap-4 w-full bg-white p-4">
                 <h1 className="text-3xl text-grayFont font-bold">
                   Payment methods
@@ -221,15 +223,7 @@ export default function VehiclePayment() {
                 {paymentMethod === "Card" && <CreditCardPayment />}
                 {paymentMethod === "Cash" && <CashPayment />}
               </div>
-              <PassportInformation
-                passportInfo={passportInfo}
-                setPassportInfo={setPassportInfo}
-              />
-              <DriverLicenseInformation
-                driverLicenseInfo={driverLicenseInfo}
-                setDriverLicenseInfo={setDriverLicenseInfo}
-              />
-              <div className="flex justify-end gap-4 w-full bg-white p-4">
+              <div className="flex justify-end gap-4 w-full p-4">
                 <button
                   type="submit"
                   className="w-full mobile:w-fit transition text-white bg-primary hover:bg-secondary px-16 py-3"

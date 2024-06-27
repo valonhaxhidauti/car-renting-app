@@ -80,7 +80,7 @@ export default function PassportInformation({
             type="file"
             name="passportFrontImage"
             onChange={handlePassportImageChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className="block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary"
           />
         </div>
       </div>

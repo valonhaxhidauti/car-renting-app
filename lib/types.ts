@@ -91,6 +91,15 @@ export type ItemType = {
   };
 };
 
+export type PersonalInfo = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  phoneCode: string;
+  dateOfBirth: string;
+};
+
 export type PassportInfo = {
   passportNumber: string;
   issuingCountry: string;
@@ -108,3 +117,20 @@ export type DriverLicenseInfo = {
   backImage: File | null;
 };
 
+export type IdInfo = {
+  idNumber: string;
+  issuingCountry: string;
+  dateOfIssue: string;
+  dateOfExpiration: string;
+  frontImage: File | null;
+  backImage: File | null;
+};
+
+export type BillingInfo = {
+  address: string;
+  number: string;
+  zip: string;
+  street: string;
+  city: string;
+  country: string;
+};
