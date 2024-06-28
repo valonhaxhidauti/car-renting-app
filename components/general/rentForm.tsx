@@ -1,5 +1,6 @@
 "use client";
 
+import { useBooking } from "../context/BookingContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -38,9 +39,10 @@ export default function RentForm({
   const [returnLocations, setReturnLocations] = useState<Location[]>([]);
 
   const { params } = useCustomSearchParams();
+  const { setRentLocationId, setReturnLocationId } = useBooking();
 
   const parseDate = (dateString: string): Dayjs =>
-    dayjs(dateString, "DD/MM/YYYY HH:mm");
+    dayjs(dateString, "YYYY/MM/DD HH:mm");
 
   const defaultFormData: RentFormData = {
     rentLocation: params.rentLocation || "",
@@ -157,8 +159,8 @@ export default function RentForm({
     const queryParams = new URLSearchParams(window.location.search);
 
     queryParams.set("rentLocation", rentLocation);
-    queryParams.set("pickupDate", pickupDate.format("DD/MM/YYYY HH:mm"));
-    queryParams.set("dropOffDate", dropOffDate.format("DD/MM/YYYY HH:mm"));
+    queryParams.set("pickupDate", pickupDate.format("YYYY/MM/DD HH:mm"));
+    queryParams.set("dropOffDate", dropOffDate.format("YYYY/MM/DD HH:mm"));
 
     if (showReturnLocation) {
       queryParams.set("returnLocation", returnLocation);
@@ -194,8 +196,14 @@ export default function RentForm({
   const handleLocationSelect = (location: Location) => {
     const updatedField = showRentSelect ? "rentLocation" : "returnLocation";
     setFormData({ ...formData, [updatedField]: location.attributes.name });
-    if (showRentSelect) setShowRentSelect(false);
-    else setShowReturnSelect(false);
+
+    if (showRentSelect) {
+      setRentLocationId(location.id);
+      setShowRentSelect(false);
+    } else {
+      setReturnLocationId(location.id);
+      setShowReturnSelect(false);
+    }
   };
 
   return isModal ? (

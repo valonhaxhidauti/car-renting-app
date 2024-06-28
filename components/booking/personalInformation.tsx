@@ -27,13 +27,13 @@ export default function PersonalInformation({
       const phoneInputValue = phoneInputRef.current.value;
 
       const countryCode = phoneInputValue?.split(" ")[0];
-      const phoneNumber = phoneInputValue;
-      console.log(countryCode);
-      console.log(phoneNumber);
+      const phoneNumber = phoneInputRef.current.value
+        .replace(countryCode, "")
+        .trim();
 
       setPersonalInfo((prevInfo) => ({
         ...prevInfo,
-        phoneCode: countryCode,
+        phoneCode: countryCode.replace(/\+/g, ""),
         phone: phoneNumber,
       }));
     }
@@ -86,7 +86,7 @@ export default function PersonalInformation({
           <div className="mt-2">
             <PhoneInput
               country={"de"}
-              value={personalInfo.phone}
+              value={personalInfo.phoneCode + personalInfo.phone}
               onChange={handlePhoneChange}
               buttonStyle={{
                 border: "none",

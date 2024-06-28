@@ -1,9 +1,9 @@
-import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import { Skeleton } from "../ui/skeleton";
 import BookingInfo from "./bookingInfo";
 import { usePathname } from "next/navigation";
 import { useBooking } from "../context/BookingContext";
+import { useTranslations } from "next-intl";
 import { Gauge } from "lucide-react";
 import {
   CarRackIcon,
@@ -57,8 +57,8 @@ export default function BookingPrice(vehicle: any) {
   } = useBooking();
 
   const { params } = useCustomSearchParams();
-  const pickupDate = dayjs(params.pickupDate, "DD/MM/YYYY");
-  const dropOffDate = dayjs(params.dropOffDate, "DD/MM/YYYY");
+  const pickupDate = dayjs(params.pickupDate, "YYYY/MM/DD");
+  const dropOffDate = dayjs(params.dropOffDate, "YYYY/MM/DD");
   const daysDifference =
     dropOffDate.isValid() && pickupDate.isValid()
       ? dropOffDate.diff(pickupDate, "day") + 1

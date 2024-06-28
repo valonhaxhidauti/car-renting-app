@@ -8,9 +8,9 @@ import { ItemType } from "@/lib/types";
 import { useBooking } from "../context/BookingContext";
 
 export default function VehicleMileage() {
-  const t = useTranslations("VehicleDetails")
+  const t = useTranslations("VehicleDetails");
   const locale = useTranslations()("Locale");
-  const { setMileage, setMileagePrice } = useBooking();
+  const { setMileage, setMileageId, setMileagePrice } = useBooking();
 
   const [vehicleMileage, setVehicleMileage] = useState<ItemType[]>([]);
   const [selectedValue, setSelectedValue] = useState<string>("");
@@ -20,9 +20,12 @@ export default function VehicleMileage() {
     setSelectedValue(value);
     toggleShown();
 
-    const selectedMileage = vehicleMileage.find(type => type.attributes.name === value);
+    const selectedMileage = vehicleMileage.find(
+      (type) => type.attributes.name === value
+    );
     if (selectedMileage) {
       setMileage(selectedMileage.attributes.name);
+      setMileageId(selectedMileage.id);
       setMileagePrice(selectedMileage.attributes.base_price_in_cents);
     }
   }
@@ -44,10 +47,11 @@ export default function VehicleMileage() {
       .then((data) => {
         setVehicleMileage(data.data);
         if (data.data.length > 0) {
-          const initialMileage = data.data[0].attributes;
-          setSelectedValue(initialMileage.name);
-          setMileage(initialMileage.name);
-          setMileagePrice(initialMileage.base_price_in_cents);
+          const initialMileage = data.data[0];
+          setSelectedValue(initialMileage.attributes.name);
+          setMileage(initialMileage.attributes.name);
+          setMileageId(initialMileage.id);
+          setMileagePrice(initialMileage.attributes.base_price_in_cents);
         }
       })
       .catch((error) => {
@@ -63,7 +67,7 @@ export default function VehicleMileage() {
       <RadioGroup.Root
         className="flex flex-col gap-4 mt-2"
         onValueChange={onRadioChange}
-        value={selectedValue || ""}
+        value={selectedValue}
       >
         {vehicleMileage.map((type) => (
           <RadioGroup.Item

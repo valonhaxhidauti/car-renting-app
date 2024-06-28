@@ -11,7 +11,6 @@ import "@egjs/flicking-plugins/dist/arrow.css";
 export default function VehicleGallery({ images }: { images: any }) {
   const flickingRef = useRef<Flicking | null>(null);
   const plugins = [new Arrow()];
-  console.log(images);
 
   return (
     <>

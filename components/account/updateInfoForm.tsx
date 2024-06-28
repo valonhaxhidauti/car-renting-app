@@ -107,7 +107,7 @@ export default function UpdateInfoForm() {
             setLoading(false);
           } else {
             const errorData = await response.json();
-            console.log(errorData)
+            console.log(errorData);
             setInternalServerError(errorData.detail);
             setLoading(false);
           }

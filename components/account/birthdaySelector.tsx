@@ -9,8 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/semantic-ui.css";
 
 export default function BirthdaySelector() {
   const t = useTranslations("Account");
@@ -40,32 +38,6 @@ export default function BirthdaySelector() {
 
   return (
     <>
-      <div>
-        <label className="block text-sm font-medium leading-6 text-grayFont">
-          {t("register.phoneNumberLabel")}
-        </label>
-        <div className="mt-2">
-          <PhoneInput
-            country={"de"}
-            buttonStyle={{
-              border: "none",
-              background: "white",
-              margin: "2px",
-            }}
-            dropdownStyle={{
-              border: "none",
-              marginTop: "4px",
-              maxWidth: "272px",
-            }}
-            inputProps={{
-              required: true,
-              name: "phone",
-              className:
-                "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
-            }}
-          />
-        </div>
-      </div>
       <div>
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("birthdaySelect.label")}

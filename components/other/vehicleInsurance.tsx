@@ -10,7 +10,7 @@ import { useBooking } from "../context/BookingContext";
 export default function VehicleInsurance() {
   const t = useTranslations("VehicleDetails");
   const locale = useTranslations()("Locale");
-  const { setInsurance, setInsurancePrice } = useBooking();
+  const { setInsurance, setInsuranceId, setInsurancePrice } = useBooking();
 
   const [insuranceTypes, setInsuranceTypes] = useState<ItemType[]>([]);
   const [selectedValue, setSelectedValue] = useState<string>("");
@@ -25,6 +25,7 @@ export default function VehicleInsurance() {
     );
     if (selectedInsurance) {
       setInsurance(selectedInsurance.attributes.name);
+      setInsuranceId(selectedInsurance.id);
       setInsurancePrice(selectedInsurance.attributes.base_price_in_cents);
     }
   }
@@ -46,10 +47,11 @@ export default function VehicleInsurance() {
       .then((data) => {
         setInsuranceTypes(data.data);
         if (data.data.length > 0) {
-          const initialInsurance = data.data[0].attributes;
-          setSelectedValue(initialInsurance.name);
-          setInsurance(initialInsurance.name);
-          setInsurancePrice(initialInsurance.base_price_in_cents);
+          const initialInsurance = data.data[0];
+          setSelectedValue(initialInsurance.attributes.name);
+          setInsurance(initialInsurance.attributes.name);
+          setInsuranceId(initialInsurance.id);
+          setInsurancePrice(initialInsurance.attributes.base_price_in_cents);
         }
       })
       .catch((error) => {
@@ -72,7 +74,7 @@ export default function VehicleInsurance() {
             id="insurance"
             key={type.id}
             value={type.attributes.name}
-            className={`p-4 flex flex-col gap-2 text-grayFont transition-[outline]  ${
+            className={`p-4 flex flex-col gap-2 text-grayFont transition-[outline] ${
               selectedValue === type.attributes.name
                 ? "outline-primary outline outline-2 "
                 : "outline-borderGray outline outline-1"

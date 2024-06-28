@@ -1,11 +1,6 @@
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
-
-interface Location {
-  attributes: {
-    name: string;
-  };
-}
+import { Location } from "@/lib/types";
 
 interface Props {
   showSelect: boolean;
@@ -38,9 +33,9 @@ const LocationsSelect = ({
             {t("noLocationsFound")}
           </div>
         ) : (
-          locations.map((location: Location, index: number) => (
+          locations.map((location: Location) => (
             <div
-              key={index}
+              key={location.id}
               className="p-2 text-sm cursor-pointer hover:bg-gray-200"
               onClick={() => handleLocationSelect(location)}
             >

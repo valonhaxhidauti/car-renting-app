@@ -45,7 +45,6 @@ export default function VehicleDetails() {
   const [childSeat, incChildSeat, decChildSeat] = useCounter(0, maxChildSeat);
   const [rack, incRack, decRack] = useCounter(0, maxRack);
   const [navigation, incNavigation, decNavigation] = useCounter(0, maxNavi);
-  console.log(vehicle);
   return (
     <>
       <HeadingTitle title={t("pageTitle")} />

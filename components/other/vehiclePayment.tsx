@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, ChangeEvent } from "react";
+import { useBooking } from "../context/BookingContext";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
 import { BreadcrumbExtended, HeadingTitle } from "../common/headingParts";
-import BirthdaySelector from "../account/birthdaySelector";
 import BookingPrice from "../common/bookingPrice";
 import CreditCardPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
@@ -29,6 +29,15 @@ export default function VehiclePayment() {
   const locale = useTranslations()("Locale");
 
   const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const {
+    childSeat,
+    rack,
+    navigation,
+    insuranceId,
+    mileageId,
+    rentLocationId,
+    returnLocationId,
+  } = useBooking();
   const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
 
@@ -96,16 +105,16 @@ export default function VehiclePayment() {
     };
 
     const body = new FormData();
-    body.append("mileage_type_id", "1");
-    body.append("insurance_type_id", "1");
-    body.append("pick_up_location_id", "1");
-    body.append("drop_off_location_id", "1");
-    body.append("car_id", "2");
-    body.append("start_date_time", "2024-10-09");
-    body.append("end_date_time", "2024-11-10");
-    body.append("seat_no", "0");
-    body.append("rack_no", "0");
-    body.append("navigation_no", "0");
+    body.append("mileage_type_id", `${mileageId}`);
+    body.append("insurance_type_id", `${insuranceId}`);
+    body.append("pick_up_location_id", `${rentLocationId}`);
+    body.append("drop_off_location_id", `${returnLocationId}`);
+    body.append("car_id", vehicleId);
+    body.append("start_date_time", params.pickupDate);
+    body.append("end_date_time", params.dropOffDate);
+    body.append("seat_no", `${childSeat}`);
+    body.append("rack_no", `${rack}`);
+    body.append("navigation_no", `${navigation}`);
     body.append("update_customer", "1");
     body.append("first_name", personalInfo.firstName);
     body.append("last_name", personalInfo.lastName);
