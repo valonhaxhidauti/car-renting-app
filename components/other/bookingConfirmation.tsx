@@ -27,11 +27,13 @@ export default function BookingConfirmation() {
 
   useEffect(() => {
     const url = new URL("https://rent-api.rubik.dev/api/bookings");
+    const token = localStorage.getItem("token");
 
     const headers = {
       "Accept-Language": locale,
       "Content-Type": "application/json",
       Accept: "application/json",
+      Authorization: `Bearer ${token}`,
     };
 
     fetch(url, {

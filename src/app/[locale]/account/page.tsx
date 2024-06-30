@@ -11,7 +11,6 @@ import RegisterForm from "@/components/account/registerForm";
 export default function Account() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  console.log("account: ", isAuthenticated);
 
   useEffect(() => {
     if (isAuthenticated === true) {

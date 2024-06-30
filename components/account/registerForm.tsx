@@ -17,8 +17,9 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { RegisterFormValues } from "@/lib/types";
-import { useRouter } from "next/navigation";
+import { useAuth } from "../context/authContext";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "@/assets/svgs";
 import { Loader2, ShieldAlert } from "lucide-react";
@@ -49,9 +50,7 @@ export default function RegisterForm() {
     errorDuringRegister: t("register.errorDuringRegister"),
     formErrors: t("register.formErrors"),
   };
-  // const [authenticated, setAuthenticated] = useState(
-  //   localStorage.getItem("authenticated") === "true"
-  // );
+  const { setAuthenticated, setToken } = useAuth(); 
 
   const router = useRouter();
   const [formData, setFormData] = useState<RegisterFormValues>({
@@ -131,9 +130,11 @@ export default function RegisterForm() {
 
         if (response.ok) {
           const data = await response.json();
-          // setAuthenticated(true);
-          localStorage.setItem("authenticated", "true");
-          router.push("/");
+          const token = data.data.attributes.token;
+
+          setAuthenticated(true);
+          router.push("/account/personal-info");
+          setToken(token);
         } else {
           const errorData = await response.json();
           setUnprocessedErrorMessage(errorData.detail);

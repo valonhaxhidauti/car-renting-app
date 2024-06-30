@@ -1,10 +1,11 @@
 "use client";
 
 import { useBooking } from "../context/bookingContext";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { BreadcrumbExtended, HeadingTitle } from "../common/headingParts";
 import BookingPrice from "../common/bookingPrice";
 import CreditCardPayment from "./creditCardPayment";
@@ -27,6 +28,7 @@ export default function VehiclePayment() {
   const t = useTranslations("Account");
   const u = useTranslations("VehicleDetails");
   const locale = useTranslations()("Locale");
+  const router = useRouter();
 
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const {
@@ -157,7 +159,7 @@ export default function VehiclePayment() {
       });
 
       if (response.ok) {
-        // Handle successful response
+        router.push("/booking/confirmation")
       } else {
         const errorData = await response.json();
         console.log(errorData);

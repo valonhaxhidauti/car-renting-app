@@ -10,7 +10,6 @@ import Header from "@/components/layout/header";
 export default function PersonalInfo() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  console.log(isAuthenticated);
 
   useEffect(() => {
     if (isAuthenticated === false) {
