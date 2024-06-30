@@ -2,7 +2,7 @@ import { Link } from "next-view-transitions";
 import { Skeleton } from "../ui/skeleton";
 import BookingInfo from "./bookingInfo";
 import { usePathname } from "next/navigation";
-import { useBooking } from "../context/BookingContext";
+import { useBooking } from "../context/bookingContext";
 import { useTranslations } from "next-intl";
 import { Gauge } from "lucide-react";
 import {

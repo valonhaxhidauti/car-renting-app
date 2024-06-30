@@ -12,11 +12,13 @@ import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import { LoginFormValues } from "@/lib/types";
 import { Loader2 } from "lucide-react";
+import { useAuth } from "../context/authContext"; 
 
 export default function LoginForm() {
   const t = useTranslations("Account");
-  const locale =  useTranslations()("Locale");
+  const locale = useTranslations()("Locale");
   const router = useRouter();
+  const { setAuthenticated, setToken } = useAuth(); 
   const translations = {
     emailRequired: t("validation.emailRequired"),
     emailInvalid: t("validation.emailInvalid"),
@@ -82,8 +84,8 @@ export default function LoginForm() {
           if (data.data.attributes.email_verified_at === null) {
             setUnprocessedErrorMessage(translations.verifyEmail);
           } else {
-            localStorage.setItem("authenticated", "true");
-            localStorage.setItem("token", token);
+            setAuthenticated(true); 
+            setToken(token);
             router.push("/");
           }
         } else {

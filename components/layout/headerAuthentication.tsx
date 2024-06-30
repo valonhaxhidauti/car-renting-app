@@ -10,7 +10,7 @@ import {
   SelectGroup,
   SelectTrigger,
 } from "../ui/select";
-import { useEffect, useState } from "react";
+import { useAuth } from "../context/authContext";
 import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useHandleLogout } from "../hooks/useHandleLogout";
 import { useTranslations } from "next-intl";
@@ -30,24 +30,17 @@ export default function HeaderAuthentication({
   const t = useTranslations("Header");
   const u = useTranslations("Account.sideMenu");
 
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const toggleShown = useOverflowControl(false);
+
+  const { isAuthenticated } = useAuth(); 
   const handleLogout = useHandleLogout();
 
-  useEffect(() => {
-    const authValue = window.localStorage.getItem("authenticated");
-    setAuthenticated(authValue === "true");
-  }, []);
-
+  
   function onSelectClicked() {
     toggleShown();
   }
 
-  if (authenticated === null) {
-    return null;
-  }
-
-  return authenticated ? (
+  return isAuthenticated ? (
     <Select onOpenChange={onSelectClicked}>
       <SelectTrigger className={triggerClassName}>
         <LoginIcon className={` ${isOpen ? "text-white" : "text-primary"}`} />

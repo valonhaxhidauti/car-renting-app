@@ -1,12 +1,15 @@
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/authContext"; 
 
 export function useHandleLogout() {
   const router = useRouter();
+  const { setAuthenticated, setToken } = useAuth(); 
 
   const handleLogout = () => {
-    localStorage.removeItem("authenticated");
-    localStorage.removeItem("token");
-    router.push("/account");
+    setAuthenticated(false);
+    setToken(null);
+
+    router.push("/account"); 
   };
 
   return handleLogout;

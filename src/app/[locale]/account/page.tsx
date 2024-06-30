@@ -1,15 +1,25 @@
 "use client";
 
-import { useAuthRedirect } from "@/components/hooks/useAuthRedirect";
+import { useAuth } from "@/components/context/authContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import LoginForm from "@/components/account/loginForm";
 import RegisterForm from "@/components/account/registerForm";
 
 export default function Account() {
-  const isAuthenticated = useAuthRedirect('/account/personal-info', false);
-  
-  if (isAuthenticated === null) {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+  console.log("account: ", isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      router.push("/account/personal-info");
+    }
+  }, [isAuthenticated, router]);
+
+  if (isAuthenticated === true) {
     return null;
   }
 

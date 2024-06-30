@@ -1,6 +1,6 @@
 "use client";
 
-import { useBooking } from "../context/BookingContext";
+import { useBooking } from "../context/bookingContext";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";

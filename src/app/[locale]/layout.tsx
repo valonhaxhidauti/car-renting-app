@@ -4,8 +4,9 @@ import { NextIntlClientProvider, useMessages } from "next-intl";
 import { ReactNode } from "react";
 import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/components/context/authContext";
+import { BookingProvider } from "@/components/context/bookingContext";
 import "../globals.css";
-import { BookingProvider } from "@/components/context/BookingContext";
 
 const font = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -30,7 +31,9 @@ export default function RootLayout({ children, params: { locale } }: Props) {
       <html lang={locale}>
         <body className={font.className}>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <BookingProvider>{children}</BookingProvider>
+            <BookingProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </BookingProvider>
             <Toaster />
           </NextIntlClientProvider>
         </body>

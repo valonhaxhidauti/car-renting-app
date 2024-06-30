@@ -1,4 +1,3 @@
-// /components/VehicleOptions.tsx
 import { CarRackIcon, ChildSeatIcon, NavigationIcon } from "@/assets/svgs";
 import {
   Tooltip,
@@ -8,7 +7,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { useTranslations } from "next-intl";
-import { useBooking } from "../context/BookingContext";
+import { useBooking } from "../context/bookingContext";
 
 export default function VehicleOptions({
   extraOptions,
