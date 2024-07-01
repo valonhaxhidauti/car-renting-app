@@ -1,5 +1,6 @@
+import { ChangeEvent, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { PersonalInfo } from "@/lib/types";
-import { ChangeEvent, useRef } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
@@ -13,6 +14,52 @@ export default function PersonalInformation({
   setPersonalInfo,
 }: PersonalInformationProps) {
   const phoneInputRef = useRef<HTMLInputElement>(null);
+  const locale = useTranslations()("Locale");
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        try {
+          const response = await fetch(
+            "https://rent-api.rubik.dev/api/my-profiles",
+            {
+              method: "GET",
+              headers: {
+                "Accept-Language": locale,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            const userProfile = data.data.attributes;
+
+            setPersonalInfo({
+              firstName: userProfile.first_name,
+              lastName: userProfile.last_name,
+              email: userProfile.email,
+              phoneCode: userProfile.phone_code || "",
+              phone: userProfile.phone,
+              dateOfBirth: userProfile.date_of_birth || "",
+            });
+          } else {
+            console.error("Failed to fetch profile data");
+          }
+        } catch (error) {
+          console.error("Error occurred during profile fetch:", error);
+        }
+      } else {
+        console.error("No token found");
+      }
+    };
+
+    fetchProfileData();
+  }, [locale, setPersonalInfo]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

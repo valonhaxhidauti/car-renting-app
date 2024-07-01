@@ -159,7 +159,9 @@ export default function VehiclePayment() {
       });
 
       if (response.ok) {
-        router.push("/booking/confirmation")
+        const responseData = await response.json();
+        const bookingId = responseData.data.attributes.booking_id;
+        router.push(`/booking/${bookingId}`)
       } else {
         const errorData = await response.json();
         console.log(errorData);
