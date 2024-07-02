@@ -31,10 +31,19 @@
         }
     },
     "Account": {
-        "title": "My Account",
-        "breadcrumb": {
-            "homepage": "Homepage",
-            "personalInfo": "My Personal Informations"
+        "personalInfo": {
+            "title": "My Account",
+            "breadcrumb": {
+                "homepage": "Homepage"
+            },
+            "heading": "My Personal Informations"
+        },
+        "myReservations": {
+            "title": "My Account",
+            "breadcrumb": {
+                "homepage": "Homepage"
+            },
+            "heading": "My Reservations"
         },
         "login": {
             "title": "Login",
@@ -121,8 +130,8 @@
         },
         "update": "Update",
         "userUpdated": "User updated successfully!",
-        "profileFetchError":"An error occurred while fetching profile data.",
-        "profileTokenError":"No token found.",
+        "profileFetchError": "An error occurred while fetching profile data.",
+        "profileTokenError": "No token found.",
         "viewPassword": "View Password"
     },
     "Contact": {

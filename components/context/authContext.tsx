@@ -5,6 +5,7 @@ import React, { createContext, useState, useContext, useEffect, ReactNode } from
 interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;
+  loading: boolean; 
   setAuthenticated: (isAuthenticated: boolean) => void;
   setToken: (token: string | null) => void;
 }
@@ -14,6 +15,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [token, setTokenState] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true); 
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -21,6 +23,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(true);
       setTokenState(storedToken);
     }
+    setLoading(false);
   }, []);
 
   const setAuthenticated = (isAuthenticated: boolean) => {
@@ -38,7 +41,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, token, setAuthenticated, setToken }}
+      value={{ isAuthenticated, token, loading, setAuthenticated, setToken }}
     >
       {children}
     </AuthContext.Provider>
@@ -47,7 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;

@@ -25,7 +25,6 @@ import BillingInformation from "../booking/billingInformation";
 import PersonalInformation from "../booking/personalInformation";
 
 export default function VehiclePayment() {
-  const t = useTranslations("Account");
   const u = useTranslations("VehicleDetails");
   const locale = useTranslations()("Locale");
   const router = useRouter();

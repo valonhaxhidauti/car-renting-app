@@ -31,10 +31,19 @@
         }
     },
     "Account": {
-        "title": "Mein Konto",
-        "breadcrumb": {
-            "homepage": "Startseite",
-            "personalInfo": "Meine persönlichen Informationen"
+        "personalInfo": {
+            "title": "Mein Konto",
+            "breadcrumb": {
+                "homepage": "Startseite"
+            },
+            "heading": "Meine persönlichen Informationen"
+        },
+        "myReservations": {
+            "title": "Mein Konto",
+            "breadcrumb": {
+                "homepage": "Startseite"
+            },
+            "heading": "Meine Reservierungen"
         },
         "login": {
             "title": "Einloggen",

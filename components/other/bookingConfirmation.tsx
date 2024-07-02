@@ -7,10 +7,13 @@ import {
   ReturnLocIcon,
   TransmissionIcon,
 } from "@/assets/svgs";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 interface Booking {
   attributes: any;
@@ -18,6 +21,9 @@ interface Booking {
   details: string;
   relationships?: any;
 }
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export default function BookingConfirmation({
   params,
@@ -31,7 +37,9 @@ export default function BookingConfirmation({
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const url = new URL(`https://rent-api.rubik.dev/api/bookings/${params.bookingId}`);
+    const url = new URL(
+      `https://rent-api.rubik.dev/api/bookings/${params.bookingId}`
+    );
     const token = localStorage.getItem("token");
 
     const headers = {
@@ -73,9 +81,9 @@ export default function BookingConfirmation({
     return <div>No booking found.</div>;
   }
 
-  const car = booking.relationships.car.attributes;
-  const pickupLocation = booking.relationships.pickUpLocation.attributes;
-  const dropOffLocation = booking.relationships.dropOffLocation.attributes;
+  const formatDate = (dateString: string) => {
+    return dayjs(dateString).utc().format("DD.MM.YYYY hh:mm A");
+  };
 
   return (
     <div className="flex flex-col items-center w-full mt-16 mb-4 m-auto max-w-6xl px-4 mobile:px-8">
@@ -98,8 +106,9 @@ export default function BookingConfirmation({
         </h1>
         <div className="border border-borderGray w-full p-4">
           <div className="grid grid-cols-1 mobile:grid-cols-2 laptop:grid-cols-4 gap-8 mobile:gap-2 justify-items-center">
+            {/* Fetch image from media if available */}
             <Image
-              src={car.relationships.media[0].attributes.public_url}
+              src="/sampleCar.png"
               width={330}
               height={285}
               alt="booked car"
@@ -107,7 +116,7 @@ export default function BookingConfirmation({
             />
             <div className="flex flex-col gap-4 justify-center">
               <p className="text-grayFont text-xl font-medium">
-                {car.name.split("(")[0]}
+                {booking.relationships.car.attributes.name.split("(")[0]}
               </p>
               <div className="flex gap-3 text-grayFont">
                 <div className="flex gap-1 items-center">
@@ -124,15 +133,19 @@ export default function BookingConfirmation({
               <div className="flex gap-2 items-center">
                 <RentLocIcon className="w-12" />
                 <div className="text-grayFont">
-                  <p className="text-sm leading-none">{booking.attributes.start_date_time}</p>
-                  <p className="text-xs leading-none">{pickupLocation.name}</p>
+                  <p className="text-sm leading-none">
+                    {formatDate(booking.attributes.start_date_time)}
+                  </p>
+                  {/* <p className="text-xs leading-none">{pickupLocation.name}</p> */}
                 </div>
               </div>
               <div className="flex gap-2 items-center">
                 <ReturnLocIcon className="w-12" />
                 <div className="text-grayFont">
-                  <p className="text-sm leading-none">{booking.attributes.end_date_time}</p>
-                  <p className="text-xs leading-none">{dropOffLocation.name}</p>
+                  <p className="text-sm leading-none">
+                    {formatDate(booking.attributes.end_date_time)}
+                  </p>
+                  {/* <p className="text-xs leading-none">{dropOffLocation.name}</p> */}
                 </div>
               </div>
             </div>
@@ -140,7 +153,7 @@ export default function BookingConfirmation({
               <div className="h-full content-center">
                 <sup className="font-bold text-lg top-0">CHF</sup>
                 <span className="text-6xl font-bold">
-                  {booking.attributes.total_price_in_cents / 100}
+                  {booking.attributes.total_price_in_cents}
                 </span>
                 <span className="inline-block ">
                   <sup className="relative block text-3xl leading-none font-bold -top-5">

@@ -32,10 +32,9 @@ export default function HeaderAuthentication({
 
   const toggleShown = useOverflowControl(false);
 
-  const { isAuthenticated } = useAuth(); 
+  const { isAuthenticated } = useAuth();
   const handleLogout = useHandleLogout();
 
-  
   function onSelectClicked() {
     toggleShown();
   }

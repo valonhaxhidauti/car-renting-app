@@ -9,16 +9,20 @@ import LoginForm from "@/components/account/loginForm";
 import RegisterForm from "@/components/account/registerForm";
 
 export default function Account() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated === true) {
+    if (!loading && isAuthenticated) {
       router.push("/account/personal-info");
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, loading, router]);
 
-  if (isAuthenticated === true) {
+  if (loading) {
+    return null;
+  }
+
+  if (isAuthenticated) {
     return null;
   }
 

@@ -8,14 +8,18 @@ import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 
 export default function PersonalInfo() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated === false) {
+    if (!loading && !isAuthenticated) {
       router.push("/account");
     }
-  }, []);
+  }, [isAuthenticated, loading, router]);
+
+  if (loading) {
+    return null;
+  }
 
   if (isAuthenticated === false) {
     return null;
