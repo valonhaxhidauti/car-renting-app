@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/components/context/authContext";
-import { BookingProvider } from "@/components/context/bookContext";
+import { BookingProvider } from "@/components/context/bookingContext";
 import "../globals.css";
 
 const font = Roboto({

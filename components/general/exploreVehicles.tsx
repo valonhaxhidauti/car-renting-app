@@ -26,7 +26,6 @@ import VehicleSort from "../common/vehicleSort";
 import ExploreVehiclesSkeleton from "../loader/exploreVehiclesSkeleton";
 import NoVehiclesFound from "../loader/noVehiclesFound";
 import RentForm from "./rentForm";
-import dayjs from "dayjs";
 
 export default function ExploreVehicles() {
   const t = useTranslations("ExploreVehicles");
@@ -35,9 +34,6 @@ export default function ExploreVehicles() {
   const [loading, setLoading] = useState(true);
 
   const searchParams = useSearchParams();
-  const formatDate = (dateString: string) => {
-    return dayjs(dateString, "YYYY/MM/DD HH:mm").format("YYYY-MM-DD HH:mm");
-  };
 
   const { rentLocationId, returnLocationId } = useBooking();
   const pickupDate = searchParams.get("pickupDate") || "";
@@ -48,7 +44,7 @@ export default function ExploreVehicles() {
   let bookDates = null;
 
   if (pickupDate || dropOffDate) {
-    bookDates = `${formatDate(pickupDate)},${formatDate(dropOffDate)}`;
+    bookDates = `${pickupDate},${dropOffDate}`;
   }
 
   const params: { [key: string]: string } = useMemo(
@@ -61,7 +57,7 @@ export default function ExploreVehicles() {
       "filter[dropOffLocation]": returnLocationId || "",
       "filter[isAvailable]": bookDates || "",
     }),
-    [searchParams,rentLocationId,returnLocationId,bookDates]
+    [searchParams, rentLocationId, returnLocationId, bookDates]
   );
   console.log(params);
 
