@@ -74,7 +74,7 @@ export type RentFormData = {
 };
 
 export type Location = {
-  id: number;
+  id: string;
   attributes: {
     name: string;
     address?: string;

@@ -1,17 +1,5 @@
 "use client";
 
-import { useBooking } from "../context/bookingContext";
-import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
-import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { BreadcrumbExtended, HeadingTitle } from "../common/headingParts";
-import BookingPrice from "../common/bookingPrice";
-import CreditCardPayment from "./creditCardPayment";
-import CashPayment from "./cashPayment";
-import RentForm from "../general/rentForm";
-import PassportInformation from "../booking/passportInformation";
 import {
   BillingInfo,
   DriverLicenseInfo,
@@ -19,13 +7,26 @@ import {
   PassportInfo,
   PersonalInfo,
 } from "@/lib/types";
+import { useBooking } from "../context/bookContext";
+import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
+import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { BreadcrumbExtended, HeadingTitle } from "../common/headingParts";
+import { Loader2 } from "lucide-react";
+import BookingPrice from "../common/bookingPrice";
+import CreditCardPayment from "./creditCardPayment";
+import CashPayment from "./cashPayment";
+import RentForm from "../general/rentForm";
+import PassportInformation from "../booking/passportInformation";
 import DriverLicenseInformation from "../booking/driverLicenseInformation";
 import IdInformation from "../booking/idInformation";
 import BillingInformation from "../booking/billingInformation";
 import PersonalInformation from "../booking/personalInformation";
 
 export default function VehiclePayment() {
-  const u = useTranslations("VehicleDetails");
+  const t = useTranslations("VehicleDetails");
   const locale = useTranslations()("Locale");
   const router = useRouter();
 
@@ -41,6 +42,7 @@ export default function VehiclePayment() {
   } = useBooking();
   const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const vehicle = useFetchedVehicle(vehicleId);
 
@@ -51,7 +53,7 @@ export default function VehiclePayment() {
     phone: "",
     phoneCode: "",
     dateOfBirth: "",
-  })
+  });
 
   const [passportInfo, setPassportInfo] = useState<PassportInfo>({
     passportNumber: "",
@@ -120,9 +122,9 @@ export default function VehiclePayment() {
     body.append("first_name", personalInfo.firstName);
     body.append("last_name", personalInfo.lastName);
     body.append("email", personalInfo.email);
-    body.append('phone_code', personalInfo.phoneCode);
-    body.append('phone', personalInfo.phone);
-    body.append('date_of_birth', personalInfo.dateOfBirth);
+    body.append("phone_code", personalInfo.phoneCode);
+    body.append("phone", personalInfo.phone);
+    body.append("date_of_birth", personalInfo.dateOfBirth);
     body.append("update_documents", "1");
     body.append("payment_method", paymentMethod);
     body.append("driver_licence_number", driverLicenseInfo.driverLicenseNumber);
@@ -150,6 +152,7 @@ export default function VehiclePayment() {
     body.append("id_date_of_issue", idInfo.dateOfIssue);
     body.append("id_date_of_expiration", idInfo.dateOfExpiration);
 
+    setIsSubmitting(true);
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -160,22 +163,24 @@ export default function VehiclePayment() {
       if (response.ok) {
         const responseData = await response.json();
         const bookingId = responseData.data.attributes.booking_id;
-        router.push(`/booking/${bookingId}`)
+        router.push(`/booking/${bookingId}`);
       } else {
         const errorData = await response.json();
         console.log(errorData);
       }
     } catch (error: any) {
       console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <>
-      <HeadingTitle title={u("pageTitle")} />
+      <HeadingTitle title={t("pageTitle")} />
       <div className="bg-bgSecondary w-full h-full mb-8">
         <div className="max-w-[1440px] pb-16 m-auto w-full">
-          <BreadcrumbExtended translations={u} params={params} />
+          <BreadcrumbExtended translations={t} params={params} />
           <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
             <div className="flex gap-2 p-2 h-8 text-sm text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full">
               <RentForm isModal={true} id="vehicleDetailsBooking" />
@@ -186,7 +191,10 @@ export default function VehiclePayment() {
               className="flex flex-col w-full laptop:w-3/4 desktop:w-4/5 gap-4"
               onSubmit={onSubmit}
             >
-              <PersonalInformation personalInfo={personalInfo} setPersonalInfo={setPersonalInfo}/>
+              <PersonalInformation
+                personalInfo={personalInfo}
+                setPersonalInfo={setPersonalInfo}
+              />
               <PassportInformation
                 passportInfo={passportInfo}
                 setPassportInfo={setPassportInfo}
@@ -238,9 +246,24 @@ export default function VehiclePayment() {
               <div className="flex justify-end gap-4 w-full p-4">
                 <button
                   type="submit"
-                  className="w-full mobile:w-fit transition text-white bg-primary hover:bg-secondary px-16 py-3"
+                  disabled={isSubmitting}
+                  className={`flex justify-center bg-primary w-[150px] mobile:w-[200px] p-3 text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary ${
+                    isSubmitting
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-secondary"
+                  }`}
                 >
-                  Book
+                  {isSubmitting ? (
+                    <div className="flex gap-2">
+                      <Loader2
+                        size={20}
+                        className="self-center my-0.5 animate-spin"
+                      />
+                      {t("bookNow")}
+                    </div>
+                  ) : (
+                    t("bookNow")
+                  )}
                 </button>
               </div>
             </form>

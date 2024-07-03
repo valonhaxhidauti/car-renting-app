@@ -12,8 +12,8 @@ interface BookingContextProps {
   mileage: string;
   mileageId: number;
   mileagePrice: number;
-  rentLocationId: number;
-  returnLocationId: number;
+  rentLocationId: string;
+  returnLocationId: string;
   setChildSeat: React.Dispatch<React.SetStateAction<number>>;
   setRack: React.Dispatch<React.SetStateAction<number>>;
   setNavigation: React.Dispatch<React.SetStateAction<number>>;
@@ -23,8 +23,8 @@ interface BookingContextProps {
   setMileage: React.Dispatch<React.SetStateAction<string>>;
   setMileageId: React.Dispatch<React.SetStateAction<number>>;
   setMileagePrice: React.Dispatch<React.SetStateAction<number>>;
-  setRentLocationId: React.Dispatch<React.SetStateAction<number>>;
-  setReturnLocationId: React.Dispatch<React.SetStateAction<number>>;
+  setRentLocationId: React.Dispatch<React.SetStateAction<string>>;
+  setReturnLocationId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(
@@ -41,8 +41,8 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [mileage, setMileage] = useState("");
   const [mileageId, setMileageId] = useState(1);
   const [mileagePrice, setMileagePrice] = useState(0);
-  const [rentLocationId, setRentLocationId] = useState(0);
-  const [returnLocationId, setReturnLocationId] = useState(0);
+  const [rentLocationId, setRentLocationId] = useState("");
+  const [returnLocationId, setReturnLocationId] = useState("");
 
   return (
     <BookingContext.Provider

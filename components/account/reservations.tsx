@@ -83,44 +83,52 @@ export default function Reservations() {
               </h1>
               {loading && <p>Loading...</p>}
               {internalServerError && <p>{internalServerError}</p>}
-              {!loading && !internalServerError && (
-                <div className="w-full desktop:w-3/4 flex flex-col gap-12 items-end">
-                  {reservations.map((reservation) => (
-                    <div
-                      key={reservation.id}
-                      className="reservation-item p-4 border rounded flex flex-col w-full"
-                    >
-                      <h2 className="text-xl font-semibold">
-                        Booking ID: {reservation.attributes.booking_id}
-                      </h2>
-                      <p>Car: {reservation.relationships.car.attributes.name}</p>
-                      <p>
-                        Start:{" "}
-                        {new Date(
-                          reservation.attributes.start_date_time
-                        ).toLocaleString()}
-                      </p>
-                      <p>
-                        End:{" "}
-                        {new Date(
-                          reservation.attributes.end_date_time
-                        ).toLocaleString()}
-                      </p>
-                      <p>
-                        Price: {reservation.attributes.total_price_in_cents / 100}{" "}
-                        {reservation.attributes.currency}
-                      </p>
-                      <p>
-                        Status: {reservation.relationships.car.attributes.status}
-                      </p>
-                      <p>
-                        Description:{" "}
-                        {reservation.relationships.car.attributes.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
+              {!loading && !internalServerError ? (
+                reservations.length > 0 ? (
+                  <div className="w-full desktop:w-3/4 flex flex-col gap-12 items-end">
+                    {reservations.map((reservation) => (
+                      <div
+                        key={reservation.id}
+                        className="reservation-item p-4 border rounded flex flex-col w-full"
+                      >
+                        <h2 className="text-xl font-semibold">
+                          Booking ID: {reservation.attributes.booking_id}
+                        </h2>
+                        <p>
+                          Car: {reservation.relationships.car.attributes.name}
+                        </p>
+                        <p>
+                          Start:{" "}
+                          {new Date(
+                            reservation.attributes.start_date_time
+                          ).toLocaleString()}
+                        </p>
+                        <p>
+                          End:{" "}
+                          {new Date(
+                            reservation.attributes.end_date_time
+                          ).toLocaleString()}
+                        </p>
+                        <p>
+                          Price:{" "}
+                          {reservation.attributes.total_price_in_cents / 100}{" "}
+                          {reservation.attributes.currency}
+                        </p>
+                        <p>
+                          Status:{" "}
+                          {reservation.relationships.car.attributes.status}
+                        </p>
+                        <p>
+                          Description:{" "}
+                          {reservation.relationships.car.attributes.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-lg font-bold text-primary">Currently you have no reservations</div>
+                )
+              ) : null}
             </div>
           </div>
         </div>

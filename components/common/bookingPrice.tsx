@@ -1,10 +1,3 @@
-import { Link } from "next-view-transitions";
-import { Skeleton } from "../ui/skeleton";
-import BookingInfo from "./bookingInfo";
-import { usePathname } from "next/navigation";
-import { useBooking } from "../context/bookingContext";
-import { useTranslations } from "next-intl";
-import { Gauge } from "lucide-react";
 import {
   CarRackIcon,
   ChildSeatIcon,
@@ -19,9 +12,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import dayjs from "dayjs";
+import { useBooking } from "../context/bookContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Gauge } from "lucide-react";
+import { Link } from "next-view-transitions";
+import { Skeleton } from "../ui/skeleton";
 import { VehiclePrices } from "@/lib/types";
+import BookingInfo from "./bookingInfo";
+import dayjs from "dayjs";
 
 export default function BookingPrice(vehicle: any) {
   const t = useTranslations("VehicleDetails");

@@ -13,8 +13,9 @@ import {
   ListViewIcon,
 } from "@/assets/svgs";
 import { useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useBooking } from "../context/bookContext";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Breadcrumbs } from "../common/headingParts";
 import { VehicleData } from "@/lib/types";
 import { VehiclePagination } from "../other/vehiclePagination";
@@ -25,6 +26,7 @@ import VehicleSort from "../common/vehicleSort";
 import ExploreVehiclesSkeleton from "../loader/exploreVehiclesSkeleton";
 import NoVehiclesFound from "../loader/noVehiclesFound";
 import RentForm from "./rentForm";
+import dayjs from "dayjs";
 
 export default function ExploreVehicles() {
   const t = useTranslations("ExploreVehicles");
@@ -33,6 +35,21 @@ export default function ExploreVehicles() {
   const [loading, setLoading] = useState(true);
 
   const searchParams = useSearchParams();
+  const formatDate = (dateString: string) => {
+    return dayjs(dateString, "YYYY/MM/DD HH:mm").format("YYYY-MM-DD HH:mm");
+  };
+
+  const { rentLocationId, returnLocationId } = useBooking();
+  const pickupDate = searchParams.get("pickupDate") || "";
+  const dropOffDate = searchParams.get("dropOffDate") || "";
+  console.log("rentLocationId:", rentLocationId);
+  console.log("returnLocationId:", returnLocationId);
+
+  let bookDates = null;
+
+  if (pickupDate || dropOffDate) {
+    bookDates = `${formatDate(pickupDate)},${formatDate(dropOffDate)}`;
+  }
 
   const params: { [key: string]: string } = useMemo(
     () => ({
@@ -40,9 +57,13 @@ export default function ExploreVehicles() {
       "filter[carClass]": searchParams.get("filter[carClass]") || "",
       "filter[gearType]": searchParams.get("filter[gearType]") || "",
       "filter[fuelType]": searchParams.get("filter[fuelType]") || "",
+      "filter[pickUpLocation]": rentLocationId || "",
+      "filter[dropOffLocation]": returnLocationId || "",
+      "filter[isAvailable]": bookDates || "",
     }),
-    [searchParams]
+    [searchParams,rentLocationId,returnLocationId,bookDates]
   );
+  console.log(params);
 
   const [vehicles, setVehicles] = useState<VehicleData>({
     data: [],
@@ -50,6 +71,8 @@ export default function ExploreVehicles() {
     meta: { last_page: 1 },
   });
   const [currentPage, setCurrentPage] = useState(1);
+
+  console.log(vehicles.data);
 
   useEffect(() => {
     const fetchVehicles = async () => {
