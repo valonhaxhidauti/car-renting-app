@@ -13,7 +13,7 @@ import {
   ListViewIcon,
 } from "@/assets/svgs";
 import { useEffect, useMemo, useState } from "react";
-import { useBooking } from "../context/bookContext";
+import { useBooking } from "../context/bookingContext";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Breadcrumbs } from "../common/headingParts";

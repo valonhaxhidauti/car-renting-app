@@ -12,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { useBooking } from "../context/bookContext";
+import { useBooking } from "../context/bookingContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";

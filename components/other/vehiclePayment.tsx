@@ -7,7 +7,7 @@ import {
   PassportInfo,
   PersonalInfo,
 } from "@/lib/types";
-import { useBooking } from "../context/bookContext";
+import { useBooking } from "../context/bookingContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
 import { useRouter } from "next/navigation";

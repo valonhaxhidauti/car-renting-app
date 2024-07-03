@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { useTranslations } from "next-intl";
-import { useBooking } from "../context/bookContext";
+import { useBooking } from "../context/bookingContext";
 
 export default function VehicleOptions({
   extraOptions,

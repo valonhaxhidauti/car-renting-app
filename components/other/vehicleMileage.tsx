@@ -1,7 +1,7 @@
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import { Label } from "../ui/label";
 import { Circle, CircleDot } from "lucide-react";
-import { useBooking } from "../context/bookContext";
+import { useBooking } from "../context/bookingContext";
 import { useEffect, useState } from "react";
 import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useTranslations } from "next-intl";
