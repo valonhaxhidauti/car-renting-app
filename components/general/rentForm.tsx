@@ -5,17 +5,13 @@ import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { clearAppliedFilters } from "@/lib/utils";
 import { X } from "lucide-react";
-import { EditBookingIcon, SearchIcon } from "@/assets/svgs";
+import { EditBookingIcon } from "@/assets/svgs";
 import { Location, RentFormData } from "@/lib/types";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
-import LocationsSelect from "./locationsSelect";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/de";
 import "dayjs/locale/en-gb";
+import LocationForm from "../common/locationForm";
 
 export default function RentForm({
   isModal,
@@ -91,10 +87,12 @@ export default function RentForm({
       }
     };
 
-  const handleDateChange =
-    (field: keyof RentFormData) => (date: Dayjs | null) => {
-      setFormData({ ...formData, [field]: date });
-    };
+  const handleDateChange = (
+    field: "pickupDate" | "dropOffDate",
+    date: Dayjs | null
+  ) => {
+    setFormData({ ...formData, [field]: date });
+  };
 
   const fetchLocations = async (query: string, type: "rent" | "return") => {
     const url = new URL("https://rent-api.rubik.dev/api/locations");
@@ -233,133 +231,22 @@ export default function RentForm({
         </div>
         <form onSubmit={submitForm}>
           <div className="w-full desktop:rounded-none">
-            <div className="flex flex-col w-full gap-2">
-              <div
-                className={`flex flex-col ${
-                  showReturnLocation ? "gap-2" : "gap-0"
-                }`}
-              >
-                <div className="w-full relative border-b font-normal text-base">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder={t("rentLocation.placeholder")}
-                    className="w-full p-2"
-                    value={formData.rentLocation}
-                    onChange={handleInputChange("rentLocation")}
-                  />
-                  <LocationsSelect
-                    showSelect={showRentSelect}
-                    toggleSelect={toggleRentSelect}
-                    locations={rentLocations}
-                    handleLocationSelect={handleLocationSelect}
-                  />
-                </div>
-                <div
-                  className={`w-full relative font-normal text-base ${
-                    showReturnLocation
-                      ? "h-full duration-300 w-full border-b "
-                      : "w-0 h-0 duration-100"
-                  } `}
-                >
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder={t("returnLocation.placeholder")}
-                    className={` ${
-                      showReturnLocation
-                        ? "h-full duration-300 w-full p-2"
-                        : "w-0 h-0 duration-100"
-                    } `}
-                    value={formData.returnLocation}
-                    onChange={handleInputChange("returnLocation")}
-                  />
-                  <LocationsSelect
-                    showSelect={showReturnSelect}
-                    toggleSelect={toggleReturnSelect}
-                    locations={returnLocations}
-                    handleLocationSelect={handleLocationSelect}
-                  />
-                </div>
-                <LocalizationProvider
-                  dateAdapter={AdapterDayjs}
-                  adapterLocale={t("locale")}
-                >
-                  <div className="w-full border-b">
-                    <MobileDateTimePicker
-                      className="w-full"
-                      value={formData.pickupDate}
-                      minutesStep={30}
-                      disablePast
-                      onChange={handleDateChange("pickupDate")}
-                      slotProps={{
-                        textField: { placeholder: t("pickupDate") },
-                      }}
-                      sx={{
-                        ".MuiInputBase-root input": {
-                          padding: "8px",
-                          fontWeight: "300",
-                          cursor: "pointer",
-                        },
-                        ".MuiInputBase-root fieldset": {
-                          border: "none !important",
-                        },
-                      }}
-                    />
-                  </div>
-                  <div className="w-full border-b">
-                    <MobileDateTimePicker
-                      className="w-full"
-                      value={formData.dropOffDate}
-                      minutesStep={30}
-                      disablePast
-                      onChange={handleDateChange("dropOffDate")}
-                      slotProps={{
-                        textField: { placeholder: t("dropOffDate") },
-                      }}
-                      sx={{
-                        ".MuiInputBase-root input": {
-                          padding: "8px",
-                          fontWeight: "300",
-                          cursor: "pointer",
-                        },
-                        ".MuiInputBase-root fieldset": {
-                          border: "none !important",
-                        },
-                      }}
-                    />
-                  </div>
-                </LocalizationProvider>
-              </div>
-              <p
-                className={`mt-2 text-base font-medium transition-opacity text-primary ${
-                  errorMessage ? "opacity-100" : "opacity-0"
-                } `}
-              >
-                {errorMessage}
-              </p>
-              <button
-                type="submit"
-                className="w-24 flex items-center justify-center bg-primary hover:bg-secondary text-white px-4 pt-2.5 pb-2 transition"
-              >
-                <SearchIcon className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2 pt-4">
-            <input
+            <LocationForm
+              formData={formData}
+              showRentSelect={showRentSelect}
+              showReturnSelect={showReturnSelect}
+              showReturnLocation={showReturnLocation}
+              rentLocations={rentLocations}
+              returnLocations={returnLocations}
+              handleInputChange={handleInputChange}
+              toggleRentSelect={toggleRentSelect}
+              toggleReturnSelect={toggleReturnSelect}
+              handleLocationSelect={handleLocationSelect}
+              handleDateChange={handleDateChange}
+              handleCheckboxClick={handleCheckboxClick}
+              errorMessage={errorMessage}
               id={id}
-              type="checkbox"
-              checked={showReturnLocation}
-              className="w-4 h-4 cursor-pointer"
-              onChange={handleCheckboxClick}
             />
-            <label
-              htmlFor={id}
-              className="text-sm font-medium text-grayFont leading-none cursor-pointer"
-            >
-              {t("deliverAtDifferentPoint")}
-            </label>
           </div>
         </form>
       </div>
@@ -372,129 +259,25 @@ export default function RentForm({
       <form className="w-full" onSubmit={submitForm}>
         <div className="shadow-grayPrimary w-full p-4 pt-2 rounded-md bg-white">
           <div className="flex flex-col relative w-full">
-            <div className="w-full flex flex-col bg-white items-start">
-              <div className="w-full relative border-b">
-                <input
-                  type="text"
-                  autoComplete="off"
-                  placeholder={t("rentLocation.placeholder")}
-                  className="w-full p-2"
-                  value={formData.rentLocation}
-                  onChange={handleInputChange("rentLocation")}
-                />
-                <LocationsSelect
-                  showSelect={showRentSelect}
-                  toggleSelect={toggleRentSelect}
-                  locations={rentLocations}
-                  handleLocationSelect={handleLocationSelect}
-                />
-              </div>
-              <div
-                className={`w-full relative ${
-                  showReturnLocation
-                    ? "h-full transition-all duration-300 w-full border-b "
-                    : "w-0 h-0 transition-all duration-100"
-                } `}
-              >
-                <input
-                  type="text"
-                  autoComplete="off"
-                  placeholder={t("returnLocation.placeholder")}
-                  className={` ${
-                    showReturnLocation
-                      ? "h-full transition-all duration-300 w-full p-2"
-                      : "w-0 h-0 transition-all duration-100"
-                  } `}
-                  value={formData.returnLocation}
-                  onChange={handleInputChange("returnLocation")}
-                />
-                <LocationsSelect
-                  showSelect={showReturnSelect}
-                  toggleSelect={toggleReturnSelect}
-                  locations={returnLocations}
-                  handleLocationSelect={handleLocationSelect}
-                />
-              </div>
-              <LocalizationProvider
-                dateAdapter={AdapterDayjs}
-                adapterLocale={t("locale")}
-              >
-                <div className="w-full border-b">
-                  <MobileDateTimePicker
-                    className="w-full"
-                    value={formData.pickupDate}
-                    minutesStep={30}
-                    disablePast
-                    onChange={handleDateChange("pickupDate")}
-                    slotProps={{ textField: { placeholder: t("pickupDate") } }}
-                    sx={{
-                      ".MuiInputBase-root input": {
-                        padding: "8px",
-                        fontWeight: "300",
-                        cursor: "pointer",
-                      },
-                      ".MuiInputBase-root fieldset": {
-                        border: "none !important",
-                      },
-                    }}
-                  />
-                </div>
-                <div className="w-full border-b">
-                  <MobileDateTimePicker
-                    className="w-full"
-                    value={formData.dropOffDate}
-                    minutesStep={30}
-                    disablePast
-                    onChange={handleDateChange("dropOffDate")}
-                    slotProps={{ textField: { placeholder: t("dropOffDate") } }}
-                    sx={{
-                      ".MuiInputBase-root input": {
-                        padding: "8px",
-                        fontWeight: "300",
-                        cursor: "pointer",
-                      },
-                      ".MuiInputBase-root fieldset": {
-                        border: "none !important",
-                      },
-                    }}
-                  />
-                </div>
-              </LocalizationProvider>
-            </div>
-            <p
-              className={`pl-2 mt-2 transition-opacity text-primary ${
-                errorMessage ? "opacity-100" : "opacity-0"
-              } `}
-            >
-              {errorMessage}
-            </p>
-            <button
-              type="submit"
-              onClick={clearAppliedFilters}
-              aria-label="Search"
-              className="w-fit mt-4 flex items-center justify-center bg-primary hover:bg-secondary text-white px-10 pt-2 pb-1.5 transition"
-            >
-              <SearchIcon className="w-5 h-5" />
-            </button>
+            <LocationForm
+              formData={formData}
+              showRentSelect={showRentSelect}
+              showReturnSelect={showReturnSelect}
+              showReturnLocation={showReturnLocation}
+              rentLocations={rentLocations}
+              returnLocations={returnLocations}
+              handleInputChange={handleInputChange}
+              toggleRentSelect={toggleRentSelect}
+              toggleReturnSelect={toggleReturnSelect}
+              handleLocationSelect={handleLocationSelect}
+              handleDateChange={handleDateChange}
+              handleCheckboxClick={handleCheckboxClick}
+              errorMessage={errorMessage}
+            />
             <h1 className="hidden tablet:block absolute -top-16 laptop:-top-24 -right-2 laptop:-right-9 font-bold text-[54px] laptop:text-[84px] text-gray-100 -z-10">
               {t("findNow")}
             </h1>
           </div>
-        </div>
-        <div className="flex items-center space-x-2 pt-4">
-          <input
-            id="diffLocation"
-            type="checkbox"
-            checked={showReturnLocation}
-            className="w-4 h-4 cursor-pointer"
-            onChange={handleCheckboxClick}
-          />
-          <label
-            htmlFor="diffLocation"
-            className="text-sm font-medium text-white tablet:text-grayFont leading-none cursor-pointer"
-          >
-            {t("deliverAtDifferentPoint")}
-          </label>
         </div>
       </form>
     </div>
