@@ -247,7 +247,7 @@ export default function VehiclePayment() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`flex justify-center bg-primary w-[150px] mobile:w-[200px] p-3 text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary ${
+                  className={`flex justify-center bg-primary w-[150px] p-3 text-sm font-semibold leading-6 text-white  transition-colors ${
                     isSubmitting
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-secondary"
