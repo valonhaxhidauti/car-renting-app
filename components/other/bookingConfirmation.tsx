@@ -106,14 +106,27 @@ export default function BookingConfirmation({
         </h1>
         <div className="border border-borderGray w-full p-4">
           <div className="grid grid-cols-1 mobile:grid-cols-2 laptop:grid-cols-4 gap-8 mobile:gap-2 justify-items-center">
-            {/* Fetch image from media if available */}
-            <Image
-              src="/sampleCar.png"
-              width={330}
-              height={285}
-              alt="booked car"
-              className="pointer-events-none"
-            />
+            {booking.relationships.car.relationships.media &&
+            booking.relationships.car.relationships.media.length > 0 ? (
+              <Image
+                src={
+                  booking.relationships.car.relationships.media[0].attributes
+                    .public_url
+                }
+                width={330}
+                height={285}
+                alt="booked car"
+                className="pointer-events-none"
+              />
+            ) : (
+              <Image
+                src="/sampleCar.png"
+                width={330}
+                height={285}
+                alt="booked car"
+                className="pointer-events-none"
+              />
+            )}
             <div className="flex flex-col gap-4 justify-center">
               <p className="text-grayFont text-xl font-medium">
                 {booking.relationships.car.attributes.name.split("(")[0]}

@@ -27,14 +27,14 @@ export default function BookingInfo({
         params.dropOffDate && (
           <>
             <div className="flex gap-2 items-center">
-              <RentLocIcon className="w-12" />
+              <RentLocIcon className="w-12 text-[#aaa]" />
               <div className="text-grayFont">
                 <p className="text-sm leading-none">{params.pickupDate}</p>
                 <p className="text-xs leading-none">{params.rentLocation}</p>
               </div>
             </div>
             <div className="flex gap-2 items-center">
-              <ReturnLocIcon className="w-12" />
+              <ReturnLocIcon className="w-12 text-[#aaa]" />
               <div className="text-grayFont">
                 <p className="text-sm leading-none">{params.dropOffDate}</p>
                 <p className="text-xs leading-none">{params.returnLocation}</p>
