@@ -50,7 +50,7 @@ export default function RegisterForm() {
     errorDuringRegister: t("register.errorDuringRegister"),
     formErrors: t("register.formErrors"),
   };
-  const { setAuthenticated, setToken } = useAuth(); 
+  const { setAuthenticated, setToken } = useAuth();
 
   const router = useRouter();
   const [formData, setFormData] = useState<RegisterFormValues>({
@@ -166,7 +166,7 @@ export default function RegisterForm() {
             {unprocessedErrorMessage}
           </div>
           <form
-            className="grid grid-cols-1 mobile:grid-cols-2 gap-4"
+            className="grid grid-cols-1 tablet:grid-cols-2 gap-4"
             onSubmit={submitForm}
           >
             <div>

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useEffect, useState, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { PersonalInfo } from "@/lib/types";
 import PhoneInput from "react-phone-input-2";
@@ -15,46 +15,50 @@ export default function PersonalInformation({
 }: PersonalInformationProps) {
   const phoneInputRef = useRef<HTMLInputElement>(null);
   const locale = useTranslations()("Locale");
+  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(() => {
     const fetchProfileData = async () => {
+      const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
       const token = localStorage.getItem("token");
 
-      if (token) {
-        try {
-          const response = await fetch(
-            "https://rent-api.rubik.dev/api/my-profiles",
-            {
-              method: "GET",
-              headers: {
-                "Accept-Language": locale,
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Accept-Language": locale,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
 
-          if (response.ok) {
-            const data = await response.json();
-            const userProfile = data.data.attributes;
+      const response = await fetch(url, {
+        method: "GET",
+        headers,
+      });
 
-            setPersonalInfo({
-              firstName: userProfile.first_name,
-              lastName: userProfile.last_name,
-              email: userProfile.email,
-              phoneCode: userProfile.phone_code || "",
-              phone: userProfile.phone,
-              dateOfBirth: userProfile.date_of_birth || "",
-            });
-          } else {
-            console.error("Failed to fetch profile data");
-          }
-        } catch (error) {
-          console.error("Error occurred during profile fetch:", error);
+      const data = await response.json();
+
+      if (data && data.data && data.data.attributes) {
+        const userProfile = data.data.attributes;
+
+        setPersonalInfo({
+          firstName: userProfile.first_name || "",
+          lastName: userProfile.last_name || "",
+          email: userProfile.email || "",
+          phoneCode: userProfile.phone_code || "",
+          phone: userProfile.phone || "",
+          dateOfBirth: userProfile.date_of_birth || "",
+        });
+
+        if (
+          !userProfile.first_name &&
+          !userProfile.last_name &&
+          !userProfile.email &&
+          !userProfile.phone &&
+          !userProfile.date_of_birth
+        ) {
+          setIsEditable(true);
         }
       } else {
-        console.error("No token found");
+        setIsEditable(true);
       }
     };
 
@@ -86,9 +90,25 @@ export default function PersonalInformation({
     }
   };
 
+  const toggleEdit = () => {
+    setIsEditable(!isEditable);
+  };
+
   return (
     <div className="flex flex-col gap-4 bg-white p-4">
-      <h1 className="text-3xl text-grayFont font-bold">Personal Information</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl text-grayFont font-bold">
+          Personal Information
+        </h1>
+        {!isEditable && (
+          <div
+            onClick={toggleEdit}
+            className="text-center cursor-pointer bg-primary w-[150px] p-3 text-sm font-semibold hover:bg-secondary leading-6 text-white transition-colors "
+          >
+            Update Data
+          </div>
+        )}
+      </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
@@ -99,7 +119,10 @@ export default function PersonalInformation({
             name="firstName"
             value={personalInfo.firstName}
             onChange={handleChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            readOnly={!isEditable}
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              isEditable ? "" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -111,7 +134,10 @@ export default function PersonalInformation({
             name="lastName"
             value={personalInfo.lastName}
             onChange={handleChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            readOnly={!isEditable}
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              isEditable ? "" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -123,7 +149,10 @@ export default function PersonalInformation({
             name="email"
             value={personalInfo.email}
             onChange={handleChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            readOnly={!isEditable}
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              isEditable ? "" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -134,6 +163,7 @@ export default function PersonalInformation({
             <PhoneInput
               country={"de"}
               value={personalInfo.phoneCode + personalInfo.phone}
+              disabled={!isEditable}
               onChange={handlePhoneChange}
               buttonStyle={{
                 border: "none",
@@ -148,8 +178,9 @@ export default function PersonalInformation({
               inputProps={{
                 required: true,
                 ref: phoneInputRef,
-                className:
-                  "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
+                className: `block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary ${
+                  isEditable ? "" : "bg-gray-100"
+                }`,
               }}
             />
           </div>
@@ -163,7 +194,10 @@ export default function PersonalInformation({
             name="dateOfBirth"
             value={personalInfo.dateOfBirth}
             onChange={handleChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            readOnly={!isEditable}
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              isEditable ? "" : "bg-gray-100"
+            }`}
           />
         </div>
       </div>

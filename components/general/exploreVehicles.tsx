@@ -38,8 +38,6 @@ export default function ExploreVehicles() {
   const { rentLocationId, returnLocationId } = useBooking();
   const pickupDate = searchParams.get("pickupDate") || "";
   const dropOffDate = searchParams.get("dropOffDate") || "";
-  console.log("rentLocationId:", rentLocationId);
-  console.log("returnLocationId:", returnLocationId);
 
   let bookDates = null;
 
@@ -59,7 +57,6 @@ export default function ExploreVehicles() {
     }),
     [searchParams, rentLocationId, returnLocationId, bookDates]
   );
-  console.log(params);
 
   const [vehicles, setVehicles] = useState<VehicleData>({
     data: [],
@@ -67,8 +64,6 @@ export default function ExploreVehicles() {
     meta: { last_page: 1 },
   });
   const [currentPage, setCurrentPage] = useState(1);
-
-  console.log(vehicles.data);
 
   useEffect(() => {
     const fetchVehicles = async () => {

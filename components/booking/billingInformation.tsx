@@ -54,7 +54,8 @@ export default function BillingInformation({
           !billingData.number &&
           !billingData.zip &&
           !billingData.street &&
-          !billingData.city
+          !billingData.city &&
+          !billingData.country
         ) {
           setIsEditable(true);
         }

@@ -92,7 +92,7 @@ export default function Reservations() {
         <div className="max-w-[1440px] m-auto">
           <div className="relative mx-0 mobile:mx-8 bigDesktop:mx-0 bg-white px-4 mobile:px-8 pb-8 flex flex-col">
             <AccountSideMenu />
-            <div className="flex flex-col w-full gap-8 mt-16">
+            <div className="flex flex-col gap-8 mt-16">
               <h1 className="text-grayFont text-3xl font-bold">
                 {t("heading")}
               </h1>
@@ -108,20 +108,20 @@ export default function Reservations() {
               )}
               {internalServerError && <p>{internalServerError}</p>}
               {!loading && !internalServerError ? (
-                <div className="w-full desktop:w-3/4  overflow-auto">
-                  <div className="grid grid-cols-3 gap-4 p-4 font-medium text-grayFont bg-bgSecondary">
-                    <p className="text-center">Vehicle Info</p>
-                    <p className="text-center">Rental Info</p>
-                    <p className="text-center">Total Price</p>
+                <div className="w-full desktop:w-3/4 overflow-auto">
+                  <div className="flex gap-4 p-4 min-w-[768px] m-1 overflow-auto font-medium text-grayFont bg-bgSecondary">
+                    <p className="text-center w-80">Vehicle Info</p>
+                    <p className="text-center w-80">Rental Info</p>
+                    <p className="text-center w-80">Total Price</p>
                   </div>
                   {reservations.length > 0 ? (
-                    <div className="flex flex-col gap-4 mt-2 items-end w-full overflow-auto">
+                    <div className="mt-2 w-full space-y-6">
                       {reservations.map((reservation) => (
                         <div
                           key={reservation.id}
-                          className="reservation-item border w-full grid grid-cols-3 gap-2 justify-between overflow-auto text-grayFont"
+                          className="reservation-item h-56 transition-colors min-w-[768px] m-1 overflow-auto border flex gap-2 justify-between text-grayFont hover:border-primary hover:border-2"
                         >
-                          <div className="vehicleInfo w-full flex flex-col border-r p-4 align-center items-center gap-4 overflow-auto">
+                          <div className="vehicleInfo w-80 flex flex-col border-r p-4 align-center items-center gap-4">
                             {reservation.relationships.car.relationships
                               .media &&
                             reservation.relationships.car.relationships.media
@@ -153,7 +153,7 @@ export default function Reservations() {
                               }
                             </p>
                           </div>
-                          <div className="rentalInfo border-r p-4 gap-2 flex items-center justify-between w-full overflow-auto">
+                          <div className="rentalInfo w-80 border-r p-4 gap-2 flex items-center justify-between ">
                             <div className="flex items-center justify-between">
                               <div>
                                 <RentLocIcon className="w-12" />
@@ -191,7 +191,7 @@ export default function Reservations() {
                               </p>
                             </div>
                           </div>
-                          <div className="totalPrice w-full flex flex-col items-center justify-center gap-2 overflow-auto">
+                          <div className="totalPrice w-80 flex flex-col items-center justify-center gap-2">
                             <div className="flex flex-col gap-2 items-center">
                               <p className="font-medium">
                                 Total{" "}

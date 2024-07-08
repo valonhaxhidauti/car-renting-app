@@ -39,9 +39,7 @@ export type UpdateFormValues = {
   surname: string;
   email: string;
   phone: string;
-  // phoneCode: string;
-  // birthday: string;
-  // password: string;
+  birthday: string;
 };
 
 export type Filters = {

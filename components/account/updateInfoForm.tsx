@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { UpdateFormValues } from "@/lib/types";
 import { UpdateFormValidation } from "../utils/formValidations";
 import { useToast } from "@/components/ui/use-toast";
-import BirthdaySelector from "@/components/account/birthdaySelector";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
@@ -40,6 +39,7 @@ export default function UpdateInfoForm() {
     surname: "",
     email: "",
     phone: "",
+    birthday: "",
   });
 
   const phoneInputRef = useRef<HTMLInputElement>(null);
@@ -50,14 +50,9 @@ export default function UpdateInfoForm() {
   ) => {
     if (fieldName === "phone" && phoneInputRef.current) {
       const phoneInputValue = phoneInputRef.current.value;
-
-      // const countryCode = phoneInputValue?.split(" ")[0];
-      const phoneNumber = phoneInputValue;
-
       setFormData((prevData) => ({
         ...prevData,
-        // phoneCode: countryCode,
-        [fieldName]: phoneNumber,
+        [fieldName]: phoneInputValue,
       }));
     } else {
       setFormData((prevData) => ({
@@ -65,7 +60,7 @@ export default function UpdateInfoForm() {
         [fieldName]: value,
       }));
     }
-
+  
     setErrors((prevErrors) => ({
       ...prevErrors,
       [fieldName]: "",
@@ -75,7 +70,7 @@ export default function UpdateInfoForm() {
   useEffect(() => {
     const fetchProfileData = async () => {
       const token = localStorage.getItem("token");
-
+  
       if (token) {
         try {
           const response = await fetch(
@@ -87,27 +82,24 @@ export default function UpdateInfoForm() {
                 "Content-Type": "application/json",
                 Accept: "application/json",
                 Authorization: `Bearer ${token}`,
-              },
+              }
             }
           );
-
+  
           if (response.ok) {
             const data = await response.json();
             const userProfile = data.data.attributes;
-
+  
             setFormData({
-              name: userProfile.first_name,
-              surname: userProfile.last_name,
-              email: userProfile.email,
-              phone: userProfile.phone,
-              // phoneCode: "", not part of the profile data
-              // birthday: "", not part of the profile data
-              // password: "", not part of the profile data
+              name: userProfile.first_name || "",
+              surname: userProfile.last_name || "",
+              email: userProfile.email || "",
+              phone: userProfile.phone || "",
+              birthday: userProfile.date_of_birth || "",
             });
             setLoading(false);
           } else {
             const errorData = await response.json();
-            console.log(errorData);
             setInternalServerError(errorData.detail);
             setLoading(false);
           }
@@ -120,7 +112,7 @@ export default function UpdateInfoForm() {
         setLoading(false);
       }
     };
-
+  
     fetchProfileData();
   }, []);
 
@@ -166,6 +158,7 @@ export default function UpdateInfoForm() {
               last_name: formData.surname,
               email: formData.email,
               phone: formData.phone,
+              date_of_birth: formData.birthday,
             }),
           }
         );
@@ -272,7 +265,17 @@ export default function UpdateInfoForm() {
           />
         </div>
       </div>
-      <BirthdaySelector />
+      <div>
+        <label className="block text-sm font-medium leading-6 text-grayFont">
+          {t("birthdaySelect.label")}
+        </label>
+        <input
+          type="date"
+          value={formData.birthday}
+          onChange={(e) => handleInputChange("birthday", e.target.value)}
+          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
+        />
+      </div>
       <div className="relative">
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.passwordLabel")}
@@ -293,9 +296,7 @@ export default function UpdateInfoForm() {
           </div>
         )}
       </div>
-      <div className="hidden laptop:block"></div>
-      <div className="hidden laptop:block"></div>
-      <div className="laptop:justify-self-end">
+      <div className="col-span-1 tablet:col-span-2 laptop:col-span-3 flex justify-end ">
         <button
           type="submit"
           className="flex w-full mobile:w-auto justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary transition focus-visible:outline-primary"

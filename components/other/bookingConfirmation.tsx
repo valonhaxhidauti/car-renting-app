@@ -134,22 +134,22 @@ export default function BookingConfirmation({
               <div className="flex gap-3 text-grayFont">
                 <div className="flex gap-1 items-center">
                   <FuelIcon className="w-6 h-6" />
-                  <p className="font-bold text-sm">GASOLINE</p>
+                  <p className="font-bold text-sm">{booking.relationships.car.relationships.fuelType.attributes.name}</p>
                 </div>
                 <div className="flex gap-1 items-center">
                   <TransmissionIcon className="w-6 h-6" />
-                  <p className="font-bold text-sm">MANUAL</p>
+                  <p className="font-bold text-sm">{booking.relationships.car.relationships.gearType.attributes.name}</p>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-4 justify-center">
+            <div className="flex flex-col gap-4 text-grayFont justify-center">
               <div className="flex gap-2 items-center">
                 <RentLocIcon className="w-12" />
                 <div className="text-grayFont">
                   <p className="text-sm leading-none">
                     {formatDate(booking.attributes.start_date_time)}
                   </p>
-                  {/* <p className="text-xs leading-none">{pickupLocation.name}</p> */}
+                  <p className="text-xs leading-none">{booking.relationships.pickUpLocation.attributes.name}</p>
                 </div>
               </div>
               <div className="flex gap-2 items-center">
@@ -158,7 +158,7 @@ export default function BookingConfirmation({
                   <p className="text-sm leading-none">
                     {formatDate(booking.attributes.end_date_time)}
                   </p>
-                  {/* <p className="text-xs leading-none">{dropOffLocation.name}</p> */}
+                  <p className="text-xs leading-none">{booking.relationships.dropOffLocation.attributes.name}</p>
                 </div>
               </div>
             </div>
