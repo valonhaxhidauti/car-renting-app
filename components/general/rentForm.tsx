@@ -2,7 +2,7 @@
 
 import { useBooking } from "../context/bookingContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
@@ -24,8 +24,6 @@ export default function RentForm({
   const locale = useTranslations()("Locale");
 
   const router = useRouter();
-  const pathname = usePathname();
-  const isHomePage = pathname === "/en" || pathname === "/de";
 
   const [showModal, setShowModal] = useState(false);
   const [showRentSelect, setShowRentSelect] = useState(false);
@@ -35,14 +33,22 @@ export default function RentForm({
   const [returnLocations, setReturnLocations] = useState<Location[]>([]);
 
   const { params } = useCustomSearchParams();
-  const { setRentLocationId, setReturnLocationId } = useBooking();
+  const {
+    rentLocationId,
+    returnLocationId,
+    setRentLocationId,
+    setReturnLocationId,
+  } = useBooking();
+
+  // console.log("rent", rentLocationId);
+  // console.log("return", returnLocationId);
 
   const parseDate = (dateString: string): Dayjs =>
     dayjs(dateString, "YYYY/MM/DD HH:mm");
 
   const defaultFormData: RentFormData = {
-    rentLocation: params.rentLocation || "",
-    returnLocation: params.returnLocation || "",
+    rentLocation: "",
+    returnLocation: "",
     pickupDate: params.pickupDate
       ? parseDate(params.pickupDate)
       : dayjs().add(1, "day").set("hour", 10).set("minute", 0),
@@ -155,7 +161,6 @@ export default function RentForm({
     }
 
     const queryParams = new URLSearchParams(window.location.search);
-
     queryParams.set("rentLocation", rentLocation);
     queryParams.set("pickupDate", pickupDate.format("YYYY/MM/DD HH:mm"));
     queryParams.set("dropOffDate", dropOffDate.format("YYYY/MM/DD HH:mm"));
@@ -168,12 +173,9 @@ export default function RentForm({
 
     const queryString = queryParams.toString();
 
-    if (isHomePage) {
-      router.push(`/explore?${queryString}`);
-    } else {
-      router.push(`?${queryString}`);
-    }
+    router.push(`/explore?${queryString}`);
 
+    setFormData(defaultFormData);
     setShowModal(false);
     setShowRentSelect(false);
     setShowReturnSelect(false);
@@ -198,6 +200,9 @@ export default function RentForm({
     if (showRentSelect) {
       setRentLocationId(location.id);
       setShowRentSelect(false);
+      if (!showReturnLocation) {
+        setReturnLocationId(location.id);
+      }
     } else {
       setReturnLocationId(location.id);
       setShowReturnSelect(false);
