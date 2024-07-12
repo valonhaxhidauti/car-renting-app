@@ -1,12 +1,4 @@
-import { useRouter } from "next/navigation";
-
 export default function CashPayment() {
-  const router = useRouter();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push("/booking/confirmation");
-  };
   return (
     <div>
       <p className="text-grayFont font-medium">

@@ -132,12 +132,12 @@ export default function BookingConfirmation({
                 {booking.relationships.car.attributes.name.split("(")[0]}
               </p>
               <div className="flex gap-3 text-grayFont">
-                <div className="flex gap-1 items-center">
-                  <FuelIcon className="w-6 h-6" />
+                <div className="flex gap-1 items-center w-fit">
+                  <FuelIcon className="w-8 h-8" />
                   <p className="font-bold text-sm">{booking.relationships.car.relationships.fuelType.attributes.name}</p>
                 </div>
-                <div className="flex gap-1 items-center">
-                  <TransmissionIcon className="w-6 h-6" />
+                <div className="flex gap-1 items-center w-fit">
+                  <TransmissionIcon className="w-8 h-8" />
                   <p className="font-bold text-sm">{booking.relationships.car.relationships.gearType.attributes.name}</p>
                 </div>
               </div>

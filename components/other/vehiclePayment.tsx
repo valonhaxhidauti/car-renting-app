@@ -118,17 +118,17 @@ export default function VehiclePayment() {
     body.append("seat_no", `${childSeat}`);
     body.append("rack_no", `${rack}`);
     body.append("navigation_no", `${navigation}`);
-    body.append("update_customer", "1");
+    body.append("update_customer", "true");
     body.append("first_name", personalInfo.firstName);
     body.append("last_name", personalInfo.lastName);
     body.append("email", personalInfo.email);
     body.append("phone_code", personalInfo.phoneCode);
     body.append("phone", personalInfo.phone);
     body.append("date_of_birth", personalInfo.dateOfBirth);
-    body.append("update_documents", "1");
+    body.append("update_documents", "true");
     body.append("payment_method", paymentMethod);
     body.append("driver_licence_number", driverLicenseInfo.driverLicenseNumber);
-    body.append("update_billing_address", "1");
+    body.append("update_billing_address", "true");
     body.append("address", billingInfo.address);
     body.append("number", billingInfo.number);
     body.append("zip", billingInfo.zip);
@@ -195,13 +195,13 @@ export default function VehiclePayment() {
                 personalInfo={personalInfo}
                 setPersonalInfo={setPersonalInfo}
               />
-              <PassportInformation
-                passportInfo={passportInfo}
-                setPassportInfo={setPassportInfo}
-              />
               <DriverLicenseInformation
                 driverLicenseInfo={driverLicenseInfo}
                 setDriverLicenseInfo={setDriverLicenseInfo}
+              />
+              <PassportInformation
+                passportInfo={passportInfo}
+                setPassportInfo={setPassportInfo}
               />
               <IdInformation idInfo={idInfo} setIdInfo={setIdInfo} />
               <BillingInformation
@@ -237,6 +237,19 @@ export default function VehiclePayment() {
                     />
                     <label className="text-grayFont text-sm" htmlFor="card">
                       Credit Card
+                    </label>
+                  </div>
+                  <div className="flex gap-2">
+                    <input
+                      type="radio"
+                      id="twint"
+                      name="paymentMethod"
+                      value="Twint"
+                      onChange={handlePaymentMethodChange}
+                      checked={paymentMethod === "Twint"}
+                    />
+                    <label className="text-grayFont text-sm" htmlFor="twint">
+                      Twint
                     </label>
                   </div>
                 </div>
