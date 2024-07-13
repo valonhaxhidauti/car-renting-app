@@ -14,6 +14,7 @@ export default function PersonalInformation({
   setPersonalInfo,
 }: PersonalInformationProps) {
   const phoneInputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations("vehiclePayment.personalInfo");
   const locale = useTranslations()("Locale");
   const [isEditable, setIsEditable] = useState(false);
 
@@ -98,21 +99,21 @@ export default function PersonalInformation({
     <div className="flex flex-col gap-4 bg-white p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl text-grayFont font-bold">
-          Personal Information
+          {t("personalInfoTitle")}
         </h1>
         {!isEditable && (
           <div
             onClick={toggleEdit}
             className="text-center cursor-pointer bg-primary w-[150px] p-3 text-sm font-semibold hover:bg-secondary leading-6 text-white transition-colors "
           >
-            Update Data
+            {t("updateDataButton")}
           </div>
         )}
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            First Name
+            {t("firstNameLabel")}
           </label>
           <input
             type="text"
@@ -127,7 +128,7 @@ export default function PersonalInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Last Name
+            {t("lastNameLabel")}
           </label>
           <input
             type="text"
@@ -142,7 +143,7 @@ export default function PersonalInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Email
+            {t("emailLabel")}
           </label>
           <input
             type="email"
@@ -157,7 +158,7 @@ export default function PersonalInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Phone Number
+            {t("phoneNumberLabel")}
           </label>
           <div className="mt-2">
             <PhoneInput
@@ -187,7 +188,7 @@ export default function PersonalInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Date of Birth
+            {t("dateOfBirthLabel")}
           </label>
           <input
             type="date"

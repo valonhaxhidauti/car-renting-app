@@ -1,4 +1,5 @@
 import { DriverLicenseInfo } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import { ChangeEvent } from "react";
 
 interface DriverLicenseInformationProps {
@@ -10,6 +11,8 @@ export default function DriverLicenseInformation({
   driverLicenseInfo,
   setDriverLicenseInfo,
 }: DriverLicenseInformationProps) {
+  const t = useTranslations("vehiclePayment");
+
   const handleDriverLicenseInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDriverLicenseInfo({
       ...driverLicenseInfo,
@@ -27,12 +30,12 @@ export default function DriverLicenseInformation({
   return (
     <div className="flex flex-col gap-4 bg-white p-4">
       <h1 className="text-3xl text-grayFont font-bold">
-        Driver License Information
+        {t("driverLicenseInfo.driverLicenseInfoTitle")}
       </h1>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Driver License Number
+            {t("driverLicenseInfo.driverLicenseNumberLabel")}
           </label>
           <input
             type="text"
@@ -44,7 +47,7 @@ export default function DriverLicenseInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Issuing Country
+            {t("issuingCountryLabel")}
           </label>
           <input
             type="text"
@@ -56,7 +59,7 @@ export default function DriverLicenseInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Date of Issue
+            {t("dateOfIssueLabel")}
           </label>
           <input
             type="date"
@@ -68,7 +71,7 @@ export default function DriverLicenseInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Date of Expiration
+            {t("dateOfExpirationLabel")}
           </label>
           <input
             type="date"
@@ -80,7 +83,7 @@ export default function DriverLicenseInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Front Image
+            {t("frontImageLabel")}
           </label>
           <input
             type="file"
@@ -91,7 +94,7 @@ export default function DriverLicenseInformation({
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Back Image
+            {t("backImageLabel")}
           </label>
           <input
             type="file"

@@ -391,6 +391,26 @@
         "gearType": "Getriebetyp",
         "fuelType": "Kraftstoffart"
     },
+    "vehiclePayment": {
+        "issuingCountryLabel": "Ausstellungsland",
+        "dateOfIssueLabel": "Ausstellungsdatum",
+        "dateOfExpirationLabel": "Ablaufdatum",
+        "frontImageLabel": "Vorderseite Bild",
+        "backImageLabel": "Rückseite Bild",
+        "personalInfo": {
+            "firstNameLabel": "Vorname",
+            "lastNameLabel": "Nachname",
+            "emailLabel": "Email",
+            "phoneNumberLabel": "Telefonnummer",
+            "dateOfBirthLabel": "Geburtsdatum",
+            "updateDataButton": "Daten aktualisieren",
+            "personalInfoTitle": "Persönliche Informationen"
+        },
+        "driverLicenseInfo": {
+            "driverLicenseNumberLabel": "Führerscheinnummer",
+            "driverLicenseInfoTitle": "Führerscheininformationen"
+        }
+    },
     "VerifyEmail": {
         "breadcrumb": {
             "homepage": "Startseite"

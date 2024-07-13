@@ -391,6 +391,26 @@
         "gearType": "Gear Type",
         "fuelType": "Fuel Type"
     },
+    "vehiclePayment": {
+        "issuingCountryLabel": "Issuing Country",
+        "dateOfIssueLabel": "Date of Issue",
+        "dateOfExpirationLabel": "Date of Expiration",
+        "frontImageLabel": "Front Image",
+        "backImageLabel": "Back Image",
+        "personalInfo": {
+            "firstNameLabel": "First Name",
+            "lastNameLabel": "Last Name",
+            "emailLabel": "Email",
+            "phoneNumberLabel": "Phone Number",
+            "dateOfBirthLabel": "Date of Birth",
+            "updateDataButton": "Update Data",
+            "personalInfoTitle": "Personal Information"
+        },
+        "driverLicenseInfo": {
+            "driverLicenseNumberLabel": "Driver License Number",
+            "driverLicenseInfoTitle": "Driver License Information"
+        }
+    },
     "VerifyEmail": {
         "breadcrumb": {
             "homepage": "Homepage"
