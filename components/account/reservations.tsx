@@ -19,7 +19,8 @@ interface Booking {
 }
 
 export default function Reservations() {
-  const t = useTranslations("Account.myReservations");
+  const t = useTranslations("Bookings");
+  const u = useTranslations("Bookings.myReservations");
   const locale = useTranslations()("Locale");
 
   const [reservations, setReservations] = useState<Booking[]>([]);
@@ -86,15 +87,15 @@ export default function Reservations() {
 
   return (
     <>
-      <HeadingTitle title={t("title")} />
+      <HeadingTitle title={t("myReservations.title")} />
       <div className="bg-bgSecondary w-full pb-16">
-        <Breadcrumbs translations={t} />
+        <Breadcrumbs translations={u} />
         <div className="max-w-[1440px] m-auto">
           <div className="relative mx-0 mobile:mx-8 bigDesktop:mx-0 bg-white px-4 mobile:px-8 pb-8 flex flex-col">
             <AccountSideMenu />
             <div className="flex flex-col gap-8 mt-16">
               <h1 className="text-grayFont text-3xl font-bold">
-                {t("heading")}
+                {t("myReservations.heading")}
               </h1>
               {loading && (
                 <div className=" w-full desktop:w-3/4">
@@ -110,9 +111,9 @@ export default function Reservations() {
               {!loading && !internalServerError ? (
                 <div className="w-full desktop:w-3/4 overflow-auto">
                   <div className="flex gap-4 p-4 min-w-[768px] m-1 overflow-auto font-medium text-grayFont bg-bgSecondary">
-                    <p className="text-center w-80">Vehicle Info</p>
-                    <p className="text-center w-80">Rental Info</p>
-                    <p className="text-center w-80">Total Price</p>
+                    <p className="text-center w-80">{t("vehicleInfo")}</p>
+                    <p className="text-center w-80">{t("rentalInfo")}</p>
+                    <p className="text-center w-80">{t("totalPrice")}</p>
                   </div>
                   {reservations.length > 0 ? (
                     <div className="mt-2 w-full space-y-6">
@@ -194,12 +195,12 @@ export default function Reservations() {
                           <div className="totalPrice w-80 flex flex-col items-center justify-center gap-2">
                             <div className="flex flex-col gap-2 items-center">
                               <p className="font-medium">
-                                Total{" "}
-                                {calculateDays(
-                                  reservation.attributes.start_date_time,
-                                  reservation.attributes.end_date_time
-                                )}{" "}
-                                days
+                                {t.rich("totalDays", {
+                                  days: calculateDays(
+                                    reservation.attributes.start_date_time,
+                                    reservation.attributes.end_date_time
+                                  ),
+                                })}
                               </p>
                               <div className="h-full content-center">
                                 <sup className="text-xs font-bold top-0">
@@ -227,7 +228,7 @@ export default function Reservations() {
                     </div>
                   ) : (
                     <div className="text-lg text-center mt-8 p-4 font-bold text-primary">
-                      Currently you have no reservations
+                      {t("currentlyNoReservations")}
                     </div>
                   )}
                 </div>

@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
+import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -30,6 +31,7 @@ export default function BookingConfirmation({
 }: {
   params: { bookingId: string };
 }) {
+  const t = useTranslations("Bookings");
   const locale = useTranslations()("Locale");
 
   const [booking, setBooking] = useState<Booking | null>(null);
@@ -70,7 +72,16 @@ export default function BookingConfirmation({
   }, [locale, params.bookingId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col bg-white px-4 w-full h-full mt-16 mb-4 m-auto items-center justify-center gap-2">
+        <Skeleton className="h-20 w-20 rounded-full" />
+        <Skeleton className="h-10 w-full mobile:w-1/3" />
+        <Skeleton className="h-8 w-full mobile:w-1/3" />
+        <Skeleton className="h-12 w-40" />
+        <Skeleton className="h-10 my-1 w-full mobile:w-3/4" />
+        <Skeleton className="h-40 mt-1 w-full mobile:w-3/4" />
+      </div>
+    );
   }
 
   if (error) {
@@ -89,20 +100,20 @@ export default function BookingConfirmation({
     <div className="flex flex-col items-center w-full mt-16 mb-4 m-auto max-w-6xl px-4 mobile:px-8">
       <div className="flex flex-col items-center gap-4 w-full border-b border-borderGray pb-12">
         <BookingConfirmed />
-        <p className="text-grayFont text-2xl">Your booking was successful!</p>
+        <p className="text-grayFont text-2xl">{t("BookingSuccessful")}</p>
         <p className="text-grayFont text-sm">
-          Reservation Code: <b>{booking.attributes.booking_id}</b>
+          {t("ReservationCode")} <b>{booking.attributes.booking_id}</b>
         </p>
         <Link
           href="/account/personal-info"
           className="bg-primary text-center hover:bg-secondary transition text-white py-3 mt-6 w-full mobile:w-40"
         >
-          Go to My Account
+          {t("GoToMyAccount")}
         </Link>
       </div>
       <div className="flex flex-col w-full items-center">
         <h1 className="text-grayFont text-lg font-medium my-4">
-          Booking Information
+          {t("BookingInformation")}
         </h1>
         <div className="border border-borderGray w-full p-4">
           <div className="grid grid-cols-1 mobile:grid-cols-2 laptop:grid-cols-4 gap-8 mobile:gap-2 justify-items-center">
@@ -134,11 +145,21 @@ export default function BookingConfirmation({
               <div className="flex gap-3 text-grayFont">
                 <div className="flex gap-1 items-center w-fit">
                   <FuelIcon className="w-8 h-8" />
-                  <p className="font-bold text-sm">{booking.relationships.car.relationships.fuelType.attributes.name}</p>
+                  <p className="font-bold text-sm">
+                    {
+                      booking.relationships.car.relationships.fuelType
+                        .attributes.name
+                    }
+                  </p>
                 </div>
                 <div className="flex gap-1 items-center w-fit">
                   <TransmissionIcon className="w-8 h-8" />
-                  <p className="font-bold text-sm">{booking.relationships.car.relationships.gearType.attributes.name}</p>
+                  <p className="font-bold text-sm">
+                    {
+                      booking.relationships.car.relationships.gearType
+                        .attributes.name
+                    }
+                  </p>
                 </div>
               </div>
             </div>
@@ -149,7 +170,9 @@ export default function BookingConfirmation({
                   <p className="text-sm leading-none">
                     {formatDate(booking.attributes.start_date_time)}
                   </p>
-                  <p className="text-xs leading-none">{booking.relationships.pickUpLocation.attributes.name}</p>
+                  <p className="text-xs leading-none">
+                    {booking.relationships.pickUpLocation.attributes.name}
+                  </p>
                 </div>
               </div>
               <div className="flex gap-2 items-center">
@@ -158,7 +181,9 @@ export default function BookingConfirmation({
                   <p className="text-sm leading-none">
                     {formatDate(booking.attributes.end_date_time)}
                   </p>
-                  <p className="text-xs leading-none">{booking.relationships.dropOffLocation.attributes.name}</p>
+                  <p className="text-xs leading-none">
+                    {booking.relationships.dropOffLocation.attributes.name}
+                  </p>
                 </div>
               </div>
             </div>
