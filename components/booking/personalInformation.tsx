@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState, useRef } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { PersonalInfo } from "@/lib/types";
 import PhoneInput from "react-phone-input-2";
@@ -7,16 +7,19 @@ import "react-phone-input-2/lib/semantic-ui.css";
 interface PersonalInformationProps {
   personalInfo: PersonalInfo;
   setPersonalInfo: React.Dispatch<React.SetStateAction<PersonalInfo>>;
+  updateCustomer: boolean;
+  setUpdateCustomer: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function PersonalInformation({
   personalInfo,
   setPersonalInfo,
+  updateCustomer,
+  setUpdateCustomer
 }: PersonalInformationProps) {
   const phoneInputRef = useRef<HTMLInputElement>(null);
-  const t = useTranslations("vehiclePayment.personalInfo");
+  const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
-  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -48,19 +51,7 @@ export default function PersonalInformation({
           phone: userProfile.phone || "",
           dateOfBirth: userProfile.date_of_birth || "",
         });
-
-        if (
-          !userProfile.first_name &&
-          !userProfile.last_name &&
-          !userProfile.email &&
-          !userProfile.phone &&
-          !userProfile.date_of_birth
-        ) {
-          setIsEditable(true);
-        }
-      } else {
-        setIsEditable(true);
-      }
+      } 
     };
 
     fetchProfileData();
@@ -91,24 +82,28 @@ export default function PersonalInformation({
     }
   };
 
-  const toggleEdit = () => {
-    setIsEditable(!isEditable);
+  const toggleUpdate = () => {
+    setUpdateCustomer(!updateCustomer);
   };
 
   return (
     <div className="flex flex-col gap-4 bg-white p-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col mobile:flex-row justify-between gap-2 items-start mobile:items-center">
         <h1 className="text-3xl text-grayFont font-bold">
           {t("personalInfoTitle")}
         </h1>
-        {!isEditable && (
-          <div
-            onClick={toggleEdit}
-            className="text-center cursor-pointer bg-primary w-[150px] p-3 text-sm font-semibold hover:bg-secondary leading-6 text-white transition-colors "
-          >
-            {t("updateDataButton")}
-          </div>
-        )}
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="editPersonalInfo"
+            checked={updateCustomer}
+            onChange={toggleUpdate}
+            className="mr-2"
+          />
+          <label htmlFor="editPersonalInfo" className="text-grayFont text-sm">
+            {t("updateCustomer")}
+          </label>
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
@@ -120,10 +115,7 @@ export default function PersonalInformation({
             name="firstName"
             value={personalInfo.firstName}
             onChange={handleChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
@@ -135,10 +127,7 @@ export default function PersonalInformation({
             name="lastName"
             value={personalInfo.lastName}
             onChange={handleChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
@@ -150,10 +139,7 @@ export default function PersonalInformation({
             name="email"
             value={personalInfo.email}
             onChange={handleChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
@@ -164,7 +150,6 @@ export default function PersonalInformation({
             <PhoneInput
               country={"de"}
               value={personalInfo.phoneCode + personalInfo.phone}
-              disabled={!isEditable}
               onChange={handlePhoneChange}
               buttonStyle={{
                 border: "none",
@@ -179,9 +164,8 @@ export default function PersonalInformation({
               inputProps={{
                 required: true,
                 ref: phoneInputRef,
-                className: `block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary ${
-                  isEditable ? "" : "bg-gray-100"
-                }`,
+                className:
+                  "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
               }}
             />
           </div>
@@ -195,10 +179,8 @@ export default function PersonalInformation({
             name="dateOfBirth"
             value={personalInfo.dateOfBirth}
             onChange={handleChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            required
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
       </div>

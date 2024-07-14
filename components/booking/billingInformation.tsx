@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { BillingInfo } from "@/lib/types";
 import { ChangeEvent } from "react";
@@ -6,14 +6,18 @@ import { ChangeEvent } from "react";
 interface BillingInformationProps {
   billingInfo: BillingInfo;
   setBillingInfo: React.Dispatch<React.SetStateAction<BillingInfo>>;
+  updateBilling: boolean;
+  setUpdateBilling: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function BillingInformation({
   billingInfo,
   setBillingInfo,
+  updateBilling,
+  setUpdateBilling,
 }: BillingInformationProps) {
+  const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
-  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(() => {
     const fetchBillingInfo = async () => {
@@ -49,18 +53,6 @@ export default function BillingInformation({
           city: billingData.city || "",
           country: billingData.country || "",
         });
-        if (
-          !billingData.address &&
-          !billingData.number &&
-          !billingData.zip &&
-          !billingData.street &&
-          !billingData.city &&
-          !billingData.country
-        ) {
-          setIsEditable(true);
-        }
-      } else {
-        setIsEditable(true);
       }
     };
 
@@ -71,114 +63,100 @@ export default function BillingInformation({
     setBillingInfo({ ...billingInfo, [e.target.name]: e.target.value });
   };
 
-  const toggleEdit = () => {
-    setIsEditable(!isEditable);
+  const toggleUpdate = () => {
+    setUpdateBilling(!updateBilling);
   };
 
   return (
     <div className="flex flex-col gap-4 bg-white p-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col mobile:flex-row justify-between gap-2 items-start mobile:items-center">
         <h1 className="text-3xl text-grayFont font-bold">
-          Billing Information
+          {t("billingInfoTitle")}
         </h1>
-        {!isEditable && (
-          <div
-            onClick={toggleEdit}
-            className="text-center cursor-pointer bg-primary w-[150px] p-3 text-sm font-semibold hover:bg-secondary leading-6 text-white transition-colors "
-          >
-            Update Data
-          </div>
-        )}
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="editBillingInfo"
+            checked={updateBilling}
+            onChange={toggleUpdate}
+            className="mr-2"
+          />
+          <label htmlFor="editBillingInfo" className="text-grayFont text-sm">
+            {t("updateBilling")}
+          </label>
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Address
+            {t("addressLabel")}
           </label>
           <input
             type="text"
             name="address"
             value={billingInfo.address}
             onChange={handleBillingInfoChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Number
+            {t("numberLabel")}
           </label>
           <input
             type="text"
             name="number"
             value={billingInfo.number}
             onChange={handleBillingInfoChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Zip
+            {t("zipLabel")}
           </label>
           <input
             type="text"
             name="zip"
             value={billingInfo.zip}
             onChange={handleBillingInfoChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Street
+            {t("streetLabel")}
           </label>
           <input
             type="text"
             name="street"
             value={billingInfo.street}
             onChange={handleBillingInfoChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            City
+            {t("cityLabel")}
           </label>
           <input
             type="text"
             name="city"
             value={billingInfo.city}
             onChange={handleBillingInfoChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
         <div className="relative">
           <label className="block text-sm font-medium leading-6 text-grayFont">
-            Country
+            {t("countryLabel")}
           </label>
           <input
             type="text"
             name="country"
             value={billingInfo.country}
             onChange={handleBillingInfoChange}
-            readOnly={!isEditable}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
-              isEditable ? "" : "bg-gray-100"
-            }`}
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
         </div>
       </div>

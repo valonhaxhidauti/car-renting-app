@@ -19,18 +19,16 @@ import BookingPrice from "../common/bookingPrice";
 import CreditCardPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
 import RentForm from "../general/rentForm";
-import PassportInformation from "../booking/passportInformation";
-import DriverLicenseInformation from "../booking/driverLicenseInformation";
-import IdInformation from "../booking/idInformation";
 import BillingInformation from "../booking/billingInformation";
+import DocumentsInformation from "../booking/documentsInformation";
 import PersonalInformation from "../booking/personalInformation";
 
 export default function VehiclePayment() {
   const t = useTranslations("VehicleDetails");
+  const u = useTranslations("vehiclePayment.payment");
   const locale = useTranslations()("Locale");
   const router = useRouter();
 
-  const [paymentMethod, setPaymentMethod] = useState("Cash");
   const {
     childSeat,
     rack,
@@ -40,9 +38,13 @@ export default function VehiclePayment() {
     rentLocationId,
     returnLocationId,
   } = useBooking();
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [updateCustomer, setUpdateCustomer] = useState(false);
+  const [updateDocuments, setUpdateDocuments] = useState(false);
+  const [updateBilling, setUpdateBilling] = useState(false);
   const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const vehicle = useFetchedVehicle(vehicleId);
 
@@ -118,27 +120,27 @@ export default function VehiclePayment() {
     body.append("seat_no", `${childSeat}`);
     body.append("rack_no", `${rack}`);
     body.append("navigation_no", `${navigation}`);
-    body.append("update_customer", "true");
+    body.append("update_customer", String(updateCustomer));
     body.append("first_name", personalInfo.firstName);
     body.append("last_name", personalInfo.lastName);
     body.append("email", personalInfo.email);
     body.append("phone_code", personalInfo.phoneCode);
     body.append("phone", personalInfo.phone);
     body.append("date_of_birth", personalInfo.dateOfBirth);
-    body.append("update_documents", "true");
+    body.append("update_documents", String(updateDocuments));
     body.append("payment_method", paymentMethod);
-    body.append("driver_licence_number", driverLicenseInfo.driverLicenseNumber);
-    body.append("update_billing_address", "true");
+    body.append("update_billing_address", String(updateBilling));
     body.append("address", billingInfo.address);
     body.append("number", billingInfo.number);
     body.append("zip", billingInfo.zip);
     body.append("street", billingInfo.street);
     body.append("city", billingInfo.city);
     body.append("country", billingInfo.country);
-    body.append("driver_licence_issuing_country",driverLicenseInfo.issuingCountry);
+    body.append("driver_licence_number", driverLicenseInfo.driverLicenseNumber);
+    body.append("driver_licence_issuing_country", driverLicenseInfo.issuingCountry);
     body.append("driver_licence_date_of_issue", driverLicenseInfo.dateOfIssue);
-    body.append("driver_licence_date_of_expiration",driverLicenseInfo.dateOfExpiration);
-    body.append("driver_licence_front_image",driverLicenseInfo.frontImage || "");
+    body.append("driver_licence_date_of_expiration", driverLicenseInfo.dateOfExpiration);
+    body.append("driver_licence_front_image", driverLicenseInfo.frontImage || "");
     body.append("driver_licence_back_image", driverLicenseInfo.backImage || "");
     body.append("passport_number", passportInfo.passportNumber);
     body.append("passport_issuing_country", passportInfo.issuingCountry);
@@ -194,25 +196,30 @@ export default function VehiclePayment() {
               <PersonalInformation
                 personalInfo={personalInfo}
                 setPersonalInfo={setPersonalInfo}
+                updateCustomer={updateCustomer}
+                setUpdateCustomer={setUpdateCustomer}
               />
-              <DriverLicenseInformation
+              <DocumentsInformation
                 driverLicenseInfo={driverLicenseInfo}
                 setDriverLicenseInfo={setDriverLicenseInfo}
-              />
-              <PassportInformation
                 passportInfo={passportInfo}
                 setPassportInfo={setPassportInfo}
+                idInfo={idInfo}
+                setIdInfo={setIdInfo}
+                updateDocuments={updateDocuments}
+                setUpdateDocuments={setUpdateDocuments}
               />
-              <IdInformation idInfo={idInfo} setIdInfo={setIdInfo} />
               <BillingInformation
                 billingInfo={billingInfo}
                 setBillingInfo={setBillingInfo}
+                updateBilling={updateBilling}
+                setUpdateBilling={setUpdateBilling}
               />
               <div className="flex flex-col gap-4 w-full bg-white p-4">
                 <h1 className="text-3xl text-grayFont font-bold">
-                  Payment methods
+                  {u("paymentMethodsTitle")}
                 </h1>
-                <div className="flex gap-8 my-8">
+                <div className="flex gap-8 mt-2 mb-8">
                   <div className="flex gap-2">
                     <input
                       type="radio"
@@ -223,7 +230,7 @@ export default function VehiclePayment() {
                       checked={paymentMethod === "Cash"}
                     />
                     <label className="text-grayFont text-sm" htmlFor="cash">
-                      Pay in Cash
+                      {u("payInCashLabel")}
                     </label>
                   </div>
                   <div className="flex gap-2">
@@ -236,7 +243,7 @@ export default function VehiclePayment() {
                       checked={paymentMethod === "Card"}
                     />
                     <label className="text-grayFont text-sm" htmlFor="card">
-                      Credit Card
+                      {u("creditCardInfoTitle")}
                     </label>
                   </div>
                   <div className="flex gap-2">
@@ -249,7 +256,7 @@ export default function VehiclePayment() {
                       checked={paymentMethod === "Twint"}
                     />
                     <label className="text-grayFont text-sm" htmlFor="twint">
-                      Twint
+                      {u("twintLabel")}
                     </label>
                   </div>
                 </div>
