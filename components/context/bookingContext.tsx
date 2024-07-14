@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface BookingContextProps {
   childSeat: number;
@@ -44,6 +50,44 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [rentLocationId, setRentLocationId] = useState("");
   const [returnLocationId, setReturnLocationId] = useState("");
 
+  useEffect(() => {
+    const storedRentLocationId = sessionStorage.getItem("rentLocationId");
+    const storedReturnLocationId = sessionStorage.getItem("returnLocationId");
+
+    if (storedRentLocationId) setRentLocationId(storedRentLocationId);
+    if (storedReturnLocationId) setReturnLocationId(storedReturnLocationId);
+  }, []);
+
+  const updateRentLocationId: React.Dispatch<React.SetStateAction<string>> = (
+    value
+  ) => {
+    if (typeof value === "function") {
+      setRentLocationId((prev) => {
+        const newValue = (value as (prev: string) => string)(prev);
+        sessionStorage.setItem("rentLocationId", newValue);
+        return newValue;
+      });
+    } else {
+      setRentLocationId(value);
+      sessionStorage.setItem("rentLocationId", value);
+    }
+  };
+
+  const updateReturnLocationId: React.Dispatch<React.SetStateAction<string>> = (
+    value
+  ) => {
+    if (typeof value === "function") {
+      setReturnLocationId((prev) => {
+        const newValue = (value as (prev: string) => string)(prev);
+        sessionStorage.setItem("returnLocationId", newValue);
+        return newValue;
+      });
+    } else {
+      setReturnLocationId(value);
+      sessionStorage.setItem("returnLocationId", value);
+    }
+  };
+
   return (
     <BookingContext.Provider
       value={{
@@ -67,8 +111,8 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
         setMileage,
         setMileageId,
         setMileagePrice,
-        setRentLocationId,
-        setReturnLocationId,
+        setRentLocationId: updateRentLocationId,
+        setReturnLocationId: updateReturnLocationId,
       }}
     >
       {children}

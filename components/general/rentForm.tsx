@@ -40,9 +40,16 @@ export default function RentForm({
     setReturnLocationId,
   } = useBooking();
 
-  // console.log("rent", rentLocationId);
-  // console.log("return", returnLocationId);
+  useEffect(() => {
+    const storedRentLocationId = localStorage.getItem("rentLocationId");
+    const storedReturnLocationId = localStorage.getItem("returnLocationId");
 
+    if (storedRentLocationId) setRentLocationId(storedRentLocationId);
+    if (storedReturnLocationId) setReturnLocationId(storedReturnLocationId);
+  }, [setRentLocationId, setReturnLocationId]);
+  console.log("rent", rentLocationId);
+  console.log("return", returnLocationId);
+  
   const parseDate = (dateString: string): Dayjs =>
     dayjs(dateString, "YYYY/MM/DD HH:mm");
 
