@@ -100,20 +100,20 @@ export default function BookingConfirmation({
     <div className="flex flex-col items-center w-full mt-16 mb-4 m-auto max-w-6xl px-4 mobile:px-8">
       <div className="flex flex-col items-center gap-4 w-full border-b border-borderGray pb-12">
         <BookingConfirmed />
-        <p className="text-grayFont text-2xl">{t("BookingSuccessful")}</p>
+        <p className="text-grayFont text-2xl">{t("bookingSuccessful")}</p>
         <p className="text-grayFont text-sm">
-          {t("ReservationCode")} <b>{booking.attributes.booking_id}</b>
+          {t("reservationCode")} <b>{booking.attributes.booking_id}</b>
         </p>
         <Link
           href="/account/personal-info"
           className="bg-primary text-center hover:bg-secondary transition text-white py-3 mt-6 w-full mobile:w-40"
         >
-          {t("GoToMyAccount")}
+          {t("goToMyAccount")}
         </Link>
       </div>
       <div className="flex flex-col w-full items-center">
         <h1 className="text-grayFont text-lg font-medium my-4">
-          {t("BookingInformation")}
+          {t("bookingInformation")}
         </h1>
         <div className="border border-borderGray w-full p-4">
           <div className="grid grid-cols-1 mobile:grid-cols-2 laptop:grid-cols-4 gap-8 mobile:gap-2 justify-items-center">
