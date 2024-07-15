@@ -1,3 +1,4 @@
+import { useAuth } from "../context/authContext";
 import { ChangeEvent, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { PersonalInfo } from "@/lib/types";
@@ -15,11 +16,12 @@ export default function PersonalInformation({
   personalInfo,
   setPersonalInfo,
   updateCustomer,
-  setUpdateCustomer
+  setUpdateCustomer,
 }: PersonalInformationProps) {
   const phoneInputRef = useRef<HTMLInputElement>(null);
   const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -51,7 +53,7 @@ export default function PersonalInformation({
           phone: userProfile.phone || "",
           dateOfBirth: userProfile.date_of_birth || "",
         });
-      } 
+      }
     };
 
     fetchProfileData();
@@ -92,18 +94,20 @@ export default function PersonalInformation({
         <h1 className="text-3xl text-grayFont font-bold">
           {t("personalInfoTitle")}
         </h1>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="editPersonalInfo"
-            checked={updateCustomer}
-            onChange={toggleUpdate}
-            className="mr-2"
-          />
-          <label htmlFor="editPersonalInfo" className="text-grayFont text-sm">
-            {t("updateCustomer")}
-          </label>
-        </div>
+        {isAuthenticated && (
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="editPersonalInfo"
+              checked={updateCustomer}
+              onChange={toggleUpdate}
+              className="mr-2"
+            />
+            <label htmlFor="editPersonalInfo" className="text-grayFont text-sm">
+              {t("updateCustomer")}
+            </label>
+          </div>
+        )}
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">

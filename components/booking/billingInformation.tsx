@@ -1,3 +1,4 @@
+import { useAuth } from "../context/authContext";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { BillingInfo } from "@/lib/types";
@@ -18,6 +19,7 @@ export default function BillingInformation({
 }: BillingInformationProps) {
   const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const fetchBillingInfo = async () => {
@@ -73,18 +75,20 @@ export default function BillingInformation({
         <h1 className="text-3xl text-grayFont font-bold">
           {t("billingInfoTitle")}
         </h1>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="editBillingInfo"
-            checked={updateBilling}
-            onChange={toggleUpdate}
-            className="mr-2"
-          />
-          <label htmlFor="editBillingInfo" className="text-grayFont text-sm">
-            {t("updateBilling")}
-          </label>
-        </div>
+        {isAuthenticated && (
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="editBillingInfo"
+              checked={updateBilling}
+              onChange={toggleUpdate}
+              className="mr-2"
+            />
+            <label htmlFor="editBillingInfo" className="text-grayFont text-sm">
+              {t("updateBilling")}
+            </label>
+          </div>
+        )}
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">

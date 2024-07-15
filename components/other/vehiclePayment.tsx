@@ -7,6 +7,7 @@ import {
   PassportInfo,
   PersonalInfo,
 } from "@/lib/types";
+import { useAuth } from "../context/authContext";
 import { useBooking } from "../context/bookingContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
@@ -38,12 +39,13 @@ export default function VehiclePayment() {
     rentLocationId,
     returnLocationId,
   } = useBooking();
+  const { params } = useCustomSearchParams();
+  const { isAuthenticated } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [updateCustomer, setUpdateCustomer] = useState(false);
   const [updateDocuments, setUpdateDocuments] = useState(false);
   const [updateBilling, setUpdateBilling] = useState(false);
-  const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
 
   const vehicle = useFetchedVehicle(vehicleId);
@@ -120,16 +122,22 @@ export default function VehiclePayment() {
     body.append("seat_no", `${childSeat}`);
     body.append("rack_no", `${rack}`);
     body.append("navigation_no", `${navigation}`);
-    body.append("update_customer", String(updateCustomer));
     body.append("first_name", personalInfo.firstName);
     body.append("last_name", personalInfo.lastName);
     body.append("email", personalInfo.email);
     body.append("phone_code", personalInfo.phoneCode);
     body.append("phone", personalInfo.phone);
     body.append("date_of_birth", personalInfo.dateOfBirth);
-    body.append("update_documents", String(updateDocuments));
+    if (isAuthenticated){
+      body.append("update_documents", "true");
+      body.append("update_customer", "true");
+      body.append("update_billing_address", "true");
+    } else {
+      body.append("update_documents", String(updateDocuments));
+      body.append("update_customer", String(updateCustomer));
+      body.append("update_billing_address", String(updateBilling));
+    }
     body.append("payment_method", paymentMethod);
-    body.append("update_billing_address", String(updateBilling));
     body.append("address", billingInfo.address);
     body.append("number", billingInfo.number);
     body.append("zip", billingInfo.zip);

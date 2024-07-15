@@ -1,3 +1,4 @@
+import { useAuth } from "../context/authContext";
 import { ChangeEvent, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { DriverLicenseInfo } from "@/lib/types";
@@ -17,6 +18,7 @@ export default function DriverLicenseInformation({
 }: DriverLicenseInformationProps) {
   const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const fetchDriverLicenseData = async () => {
@@ -88,18 +90,20 @@ export default function DriverLicenseInformation({
         <h1 className="text-3xl text-grayFont font-bold">
           {t("driverLicenseInfoTitle")}
         </h1>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="editDocuments"
-            checked={updateDocuments}
-            onChange={toggleUpdate}
-            className="mr-2"
-          />
-          <label htmlFor="editDocuments" className="text-grayFont text-sm">
-            {t("updateDocuments")}
-          </label>
-        </div>
+        {isAuthenticated && (
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="editDocuments"
+              checked={updateDocuments}
+              onChange={toggleUpdate}
+              className="mr-2"
+            />
+            <label htmlFor="editDocuments" className="text-grayFont text-sm">
+              {t("updateDocuments")}
+            </label>
+          </div>
+        )}
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
