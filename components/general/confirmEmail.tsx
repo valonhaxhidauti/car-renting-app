@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Breadcrumbs } from "@/components/common/headingParts";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,6 +15,7 @@ export default function ConfirmEmail({
   const locale = useTranslations()("Locale");
 
   const searchParams = useSearchParams();
+  const router = useRouter();
   const emailParameter = searchParams.get("email") || "";
   const [verificationFailed, setVerificationFailed] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -48,6 +49,7 @@ export default function ConfirmEmail({
 
         if (response.ok) {
           console.log("Email verified successfully");
+          router.push("/account/personal-info");
         } else {
           console.error("Failed to verify email");
           setVerificationFailed(true);
@@ -61,12 +63,12 @@ export default function ConfirmEmail({
     };
 
     verifyEmail();
-  }, [params.id, params.hash, searchParams]);
+  }, [params.id, params.hash, searchParams, router, locale]);
 
   return (
     <div className="bg-bgSecondary w-full pb-16">
       <Breadcrumbs translations={t} />
-      <div className=" max-w-[1440px] m-auto">
+      <div className="max-w-[1440px] m-auto">
         <div className="relative bg-white mx-0 mobile:mx-8 bigDesktop:mx-0 px-4 desktop:px-8 py-8 flex flex-col">
           <div className="flex flex-col w-full items-start">
             <h1 className="mb-6 text-primary text-4xl font-bold">
