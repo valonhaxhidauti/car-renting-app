@@ -36,7 +36,8 @@
             "breadcrumb": {
                 "homepage": "Startseite"
             },
-            "heading": "Meine persönlichen Informationen"
+            "heading": "Meine persönlichen Informationen",
+            "checkEmail": "Bitte prüfen Sie Ihre Email, um sie zu bestätigen!"
         },
         "login": {
             "title": "Einloggen",

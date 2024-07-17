@@ -7,7 +7,11 @@ import { useToast } from "@/components/ui/use-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
-export default function UpdateInfoForm() {
+interface UpdateInfoFormProps {
+  setInternalServerError: (error: string) => void;
+}
+
+export default function UpdateInfoForm({ setInternalServerError }: UpdateInfoFormProps) {
   const t = useTranslations("Account");
   const locale = useTranslations()("Locale");
   const translations = {
@@ -25,7 +29,6 @@ export default function UpdateInfoForm() {
     passwordsNotMatch: t("validation.passwordsNotMatch"),
   };
   const [errors, setErrors] = useState<Partial<UpdateFormValues>>({});
-  const [internalServerError, setInternalServerError] = useState("");
   const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
   const [unprocessedErrorMessage, setUnprocessedErrorMessage] = useState("");
@@ -188,12 +191,6 @@ export default function UpdateInfoForm() {
 
   if (loading) {
     return null;
-  }
-
-  if (internalServerError) {
-    return (
-      <p className="text-primary text-lg font-bold">{internalServerError}</p>
-    );
   }
 
   return (
