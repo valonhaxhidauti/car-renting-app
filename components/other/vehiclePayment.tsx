@@ -271,7 +271,7 @@ export default function VehiclePayment() {
                 {paymentMethod === "Card" && <CreditCardPayment />}
                 {paymentMethod === "Cash" && <CashPayment />}
               </div>
-              <div className="flex justify-end gap-4 w-full p-4">
+              <div className="flex justify-end gap-4 w-full">
                 <button
                   type="submit"
                   disabled={isSubmitting}

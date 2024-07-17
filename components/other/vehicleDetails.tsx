@@ -8,10 +8,18 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCounter } from "../hooks/useCounter";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useFetchedVehicle } from "../hooks/useFetchedVehicle";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { clearAppliedFilters } from "@/lib/utils";
 import { Link } from "next-view-transitions";
@@ -32,6 +40,17 @@ export default function VehicleDetails() {
 
   const { params } = useCustomSearchParams();
   const vehicleId = params.vehicleId;
+
+  const paramsSet =
+    params &&
+    Object.values(params).every(
+      (param) => typeof param === "string" && param.trim() !== ""
+    );
+
+  const pathname = usePathname();
+  const isPaymentPage =
+    usePathname() === "/en/explore/vehicle/payment" ||
+    pathname === "/de/explore/vehicle/payment";
 
   const vehicle = useFetchedVehicle(vehicleId);
 
@@ -143,6 +162,37 @@ export default function VehicleDetails() {
                 </>
               ) : (
                 <VehicleDetailsSkeleton />
+              )}
+              {isPaymentPage ? (
+                <></>
+              ) : paramsSet ? (
+                <div className="flex justify-end gap-4 w-full">
+                  <Link
+                    href={`/explore/vehicle/payment?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
+                    className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
+                  >
+                    {t("continueButton")}
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex justify-end gap-4 w-full">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <button
+                          className="px-8 py-3 text-white cursor-help bg-gray-300 relative"
+                          disabled
+                        >
+                          {t("continueButton")}
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-primary"> 
+                        <p className="text-white">{t("fillBookingTooltip")}</p>
+                        <TooltipArrow className="fill-primary" />
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
               )}
             </div>
             <BookingPrice vehicle={vehicle} />

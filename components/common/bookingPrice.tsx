@@ -1,23 +1,14 @@
 import {
   CarRackIcon,
   ChildSeatIcon,
-  EditBookingIcon,
   InsuranceIcon,
   NavigationIcon,
 } from "@/assets/svgs";
-import {
-  Tooltip,
-  TooltipArrow,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
 import { useBooking } from "../context/bookingContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Gauge } from "lucide-react";
-import { Link } from "next-view-transitions";
 import { Skeleton } from "../ui/skeleton";
 import { VehiclePrices } from "@/lib/types";
 import BookingInfo from "./bookingInfo";
@@ -117,15 +108,6 @@ export default function BookingPrice(vehicle: any) {
           <div className="flex flex-col border-b border-borderGray pb-3">
             <p className="text-xl font-bold flex justify-between items-center">
               {t("pageTitle")}
-              {isPaymentPage ? (
-                <Link
-                  href={`/explore/vehicle?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
-                >
-                  <EditBookingIcon />
-                </Link>
-              ) : (
-                <></>
-              )}
             </p>
             <p className="font-medium">
               {vehicle.vehicle.attributes.name.split(" (")[0]}
@@ -220,33 +202,6 @@ export default function BookingPrice(vehicle: any) {
               </p>
             </div>
           </div>
-          {isPaymentPage ? (
-            <></>
-          ) : paramsSet ? (
-            <Link
-              href={`/explore/vehicle/payment?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
-              className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
-            >
-              {t("continueButton")}
-            </Link>
-          ) : (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <button
-                    className="px-8 py-3 text-white cursor-help bg-gray-300 relative w-full"
-                    disabled
-                  >
-                    {t("continueButton")}
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent className="bg-primary">
-                  <p className="text-white">{t("fillBookingTooltip")}</p>
-                  <TooltipArrow className="fill-primary" />
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          )}
         </div>
       ) : (
         <div className="flex flex-col bg-white p-4 w-full h-fit gap-2">
