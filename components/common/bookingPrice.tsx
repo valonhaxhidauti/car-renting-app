@@ -52,7 +52,9 @@ export default function BookingPrice(vehicle: any) {
   const dropOffDate = dayjs(params.dropOffDate, "YYYY/MM/DD");
   const daysDifference =
     dropOffDate.isValid() && pickupDate.isValid()
-      ? dropOffDate.diff(pickupDate, "day") + 1
+      ? dropOffDate.isSame(pickupDate, "day")
+        ? 1
+        : dropOffDate.diff(pickupDate, "day")
       : 1;
 
   const paramsSet =
@@ -92,11 +94,14 @@ export default function BookingPrice(vehicle: any) {
     0
   );
 
+  const insuranceTotal = insurancePrice * daysDifference;
+  const mileageTotal = mileagePrice * daysDifference;
+
   const totalPrice =
     prices.vehicle * daysDifference +
     optionalItemsTotal +
-    insurancePrice +
-    mileagePrice;
+    insuranceTotal +
+    mileageTotal;
 
   return (
     <div className="flex flex-col gap-4 laptop:w-1/4 desktop:w-1/5">
@@ -153,7 +158,7 @@ export default function BookingPrice(vehicle: any) {
               )}
             </div>
           )}
-          {insurancePrice > 0 && (
+          {insuranceTotal > 0 && (
             <div className="flex flex-col mt-2">
               <p className="text-sm font-bold">{t("insuranceType")}</p>
               <div className="flex justify-between items-center text-xs border-b border-borderGray py-3">
@@ -163,13 +168,13 @@ export default function BookingPrice(vehicle: any) {
                 <div className="flex justify-between w-full">
                   <p className="font-light text-sm">{insurance}</p>
                   <p className="font-medium text-xs text-primary">
-                    CHF {insurancePrice.toFixed(2)}
+                    CHF {insuranceTotal.toFixed(2)}
                   </p>
                 </div>
               </div>
             </div>
           )}
-          {mileagePrice > 0 && (
+          {mileageTotal > 0 && (
             <div className="flex flex-col mt-2">
               <p className="text-sm font-bold">{t("mileageType")}</p>
               <div className="flex justify-between items-center text-xs border-b border-borderGray py-3">
@@ -179,7 +184,7 @@ export default function BookingPrice(vehicle: any) {
                 <div className="flex justify-between w-full">
                   <p className="font-light text-sm">{mileage}</p>
                   <p className="font-medium text-xs text-primary">
-                    CHF {mileagePrice.toFixed(2)}
+                    CHF {mileageTotal.toFixed(2)}
                   </p>
                 </div>
               </div>
