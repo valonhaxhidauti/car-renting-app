@@ -41,7 +41,6 @@ export default function ForgotPassword() {
         });
 
         if (response.ok) {
-          console.log("Check your email.");
           setEmailSent(true);
         } else {
           const errorData = await response.json();

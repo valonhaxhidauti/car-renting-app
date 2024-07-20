@@ -37,9 +37,13 @@
                 "homepage": "Startseite"
             },
             "heading": "Meine persönlichen Informationen",
-            "checkEmail": "Bitte prüfen Sie Ihre Email, um sie zu bestätigen!"
+            "checkEmail": "Bitte überprüfen Sie Ihre E-Mails, um diese zu bestätigen, oder klicken Sie auf die Schaltfläche unten!",
+            "emailSent": "Die E-Mail zur Bestätigung des Kontos wurde erfolgreich gesendet",
+            "emailFailed": "Fehler beim Senden der E-Mail zur Bestätigung des Kontos",
+            "verifyEmail": "E-Mail bestätigen"
         },
         "changePassword": {
+            "changeYourPassword": "Ändern Sie Ihr Passwort",
             "oldPassword": "Altes Passwort",
             "newPassword": "Neues Passwort",
             "confirmPassword": "Neues Passwort bestätigen",

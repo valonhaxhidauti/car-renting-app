@@ -48,7 +48,6 @@ export default function ConfirmEmail({
         });
 
         if (response.ok) {
-          console.log("Email verified successfully");
           router.push("/account/personal-info");
         } else {
           console.error("Failed to verify email");

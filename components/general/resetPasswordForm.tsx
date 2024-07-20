@@ -83,7 +83,6 @@ export default function ResetPasswordForm({
       } else {
         const errorData = await response.json();
         console.error("Error:", errorData);
-        alert("Password reset failed!");
       }
     } catch (error) {
       console.error("Error:", error);
