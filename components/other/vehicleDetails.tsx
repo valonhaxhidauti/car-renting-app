@@ -166,10 +166,10 @@ export default function VehicleDetails() {
               {isPaymentPage ? (
                 <></>
               ) : paramsSet ? (
-                <div className="flex justify-end gap-4 w-full">
+                <div className="flex justify-end gap-4 w-full ">
                   <Link
                     href={`/explore/vehicle/payment?vehicleId=${params.vehicleId}&rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}`}
-                    className="px-8 py-3 text-white hover:bg-secondary bg-primary transition-all text-center"
+                    className="px-8 py-3 mr-4 mobile:mr-0 text-white hover:bg-secondary bg-primary transition-all text-center"
                   >
                     {t("continueButton")}
                   </Link>
