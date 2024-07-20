@@ -48,7 +48,7 @@ export default function VehicleOptions({
             <p className="text-sm text-graySecondary">CHF {childSeatPrice}</p>
           </div>
           <div className="flex flex-col items-center">
-            <TooltipProvider>
+            <TooltipProvider delayDuration={100}>
               <Tooltip>
                 <TooltipTrigger>
                   <div
@@ -99,7 +99,7 @@ export default function VehicleOptions({
             <p className="text-sm text-graySecondary">CHF {rackPrice}</p>
           </div>
           <div className="flex flex-col items-center">
-            <TooltipProvider>
+            <TooltipProvider delayDuration={100}>
               <Tooltip>
                 <TooltipTrigger>
                   <div
@@ -150,7 +150,7 @@ export default function VehicleOptions({
             <p className="text-sm text-graySecondary">CHF {naviPrice}</p>
           </div>
           <div className="flex flex-col items-center">
-            <TooltipProvider>
+            <TooltipProvider delayDuration={100}>
               <Tooltip>
                 <TooltipTrigger>
                   <div

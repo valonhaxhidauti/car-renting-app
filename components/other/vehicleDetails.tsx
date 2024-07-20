@@ -176,7 +176,7 @@ export default function VehicleDetails() {
                 </div>
               ) : (
                 <div className="flex justify-end gap-4 w-full">
-                  <TooltipProvider>
+                  <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger>
                         <button
@@ -186,7 +186,7 @@ export default function VehicleDetails() {
                           {t("continueButton")}
                         </button>
                       </TooltipTrigger>
-                      <TooltipContent className="bg-primary"> 
+                      <TooltipContent className="bg-primary">
                         <p className="text-white">{t("fillBookingTooltip")}</p>
                         <TooltipArrow className="fill-primary" />
                       </TooltipContent>

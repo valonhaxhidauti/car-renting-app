@@ -305,7 +305,7 @@ export default function RegisterForm() {
                 />
                 {isPasswordStrong(formData.password, translations) &&
                   formSubmitted && (
-                    <TooltipProvider>
+                    <TooltipProvider delayDuration={100}>
                       <Tooltip>
                         <TooltipTrigger
                           id="passwordTooltip"

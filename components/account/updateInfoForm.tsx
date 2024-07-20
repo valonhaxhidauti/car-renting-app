@@ -1,19 +1,31 @@
-import { CheckIcon } from "@/assets/svgs";
-import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { UpdateFormValues } from "@/lib/types";
 import { UpdateFormValidation } from "../utils/formValidations";
-import { useToast } from "@/components/ui/use-toast";
+import { useTranslations } from "next-intl";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
 interface UpdateInfoFormProps {
-  setInternalServerError: (error: string) => void;
+  formData: UpdateFormValues;
+  handleInputChange: (fieldName: keyof UpdateFormValues, value: string) => void;
+  setSuccessMessage: (message: string) => void;
+  setUnprocessedErrorMessage: (message: string) => void;
+  errors: Partial<UpdateFormValues>;
+  setErrors: (errors: Partial<UpdateFormValues>) => void;
+  locale: string;
 }
 
-export default function UpdateInfoForm({ setInternalServerError }: UpdateInfoFormProps) {
+export default function UpdateInfoForm({
+  formData,
+  handleInputChange,
+  setSuccessMessage,
+  setUnprocessedErrorMessage,
+  errors,
+  setErrors,
+  locale,
+}: UpdateInfoFormProps) {
   const t = useTranslations("Account");
-  const locale = useTranslations()("Locale");
+
   const translations = {
     nameRequired: t("validation.nameRequired"),
     nameInvalid: t("validation.nameInvalid"),
@@ -23,119 +35,8 @@ export default function UpdateInfoForm({ setInternalServerError }: UpdateInfoFor
     emailInvalid: t("validation.emailInvalid"),
     phoneRequired: t("validation.phoneRequired"),
     phoneInvalid: t("validation.phoneInvalid"),
-    passwordRequired: t("validation.passwordRequired"),
-    passwordWeak: t("validation.passwordWeak"),
-    passwordConfirmRequired: t("validation.passwordConfirmRequired"),
-    passwordsNotMatch: t("validation.passwordsNotMatch"),
   };
-  const [errors, setErrors] = useState<Partial<UpdateFormValues>>({});
-  const [loading, setLoading] = useState(true);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [unprocessedErrorMessage, setUnprocessedErrorMessage] = useState("");
-  const { toast } = useToast();
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-
-  const [formData, setFormData] = useState<UpdateFormValues>({
-    name: "",
-    surname: "",
-    email: "",
-    phone: "",
-    birthday: "",
-  });
-
   const phoneInputRef = useRef<HTMLInputElement>(null);
-
-  const handleInputChange = (
-    fieldName: keyof UpdateFormValues,
-    value: string
-  ) => {
-    if (fieldName === "phone" && phoneInputRef.current) {
-      const phoneInputValue = phoneInputRef.current.value;
-      setFormData((prevData) => ({
-        ...prevData,
-        [fieldName]: phoneInputValue,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [fieldName]: value,
-      }));
-    }
-  
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: "",
-    }));
-  };
-
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      const token = localStorage.getItem("token");
-  
-      if (token) {
-        try {
-          const response = await fetch(
-            "https://rent-api.rubik.dev/api/my-profiles",
-            {
-              method: "GET",
-              headers: {
-                "Accept-Language": locale,
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-              }
-            }
-          );
-  
-          if (response.ok) {
-            const data = await response.json();
-            const userProfile = data.data.attributes;
-  
-            setFormData({
-              name: userProfile.first_name || "",
-              surname: userProfile.last_name || "",
-              email: userProfile.email || "",
-              phone: userProfile.phone || "",
-              birthday: userProfile.date_of_birth || "",
-            });
-            setLoading(false);
-          } else {
-            const errorData = await response.json();
-            setInternalServerError(errorData.detail);
-            setLoading(false);
-          }
-        } catch (error) {
-          setInternalServerError(t("profileFetchError"));
-          setLoading(false);
-        }
-      } else {
-        setInternalServerError(t("profileTokenError"));
-        setLoading(false);
-      }
-    };
-  
-    fetchProfileData();
-  }, []);
-
-  useEffect(() => {
-    if (successMessage) {
-      toast({
-        variant: "success",
-        description: successMessage,
-      });
-
-      setSuccessMessage("");
-    } else if (unprocessedErrorMessage) {
-      toast({
-        variant: "destructive",
-        description: unprocessedErrorMessage,
-      });
-
-      setUnprocessedErrorMessage("");
-    }
-  }, [successMessage, unprocessedErrorMessage, toast]);
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -181,64 +82,79 @@ export default function UpdateInfoForm({ setInternalServerError }: UpdateInfoFor
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  if (loading) {
-    return null;
-  }
-
   return (
     <form
-      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-end"
+      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-start"
       onSubmit={submitForm}
     >
-      <div className="relative">
+      <div>
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.nameLabel")}
         </label>
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) => handleInputChange("name", e.target.value)}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary 
-          ${errors.name && " outline outline-2 outline-red-500"}`}
-        />
+        <div className="relative">
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => handleInputChange("name", e.target.value)}
+            className={`block mt-2 w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary 
+          ${
+            errors.name
+              ? " outline outline-2 outline-red-500"
+              : "border-borderForm border"
+          }`}
+          />
+          {errors.name && (
+            <p className="text-xs p-2 text-red-500">{errors.name}</p>
+          )}
+        </div>
       </div>
       <div>
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.surnameLabel")}
         </label>
-        <input
-          type="text"
-          value={formData.surname}
-          onChange={(e) => handleInputChange("surname", e.target.value)}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
-        />
+        <div className="relative">
+          <input
+            type="text"
+            value={formData.surname}
+            onChange={(e) => handleInputChange("surname", e.target.value)}
+            className={`block mt-2 w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary 
+              ${
+                errors.name
+                  ? " outline outline-2 outline-red-500"
+                  : "border-borderForm border"
+              }`}
+          />
+          {errors.surname && (
+            <p className="text-xs p-2 text-red-500">{errors.surname}</p>
+          )}
+        </div>
       </div>
       <div>
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.emailAddressLabel")}
         </label>
-        <div className="mt-2">
+        <div className="relative">
           <input
             type="email"
             value={formData.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
-            className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
+            className={`block mt-2 w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary 
+              ${
+                errors.name
+                  ? " outline outline-2 outline-red-500"
+                  : "border-borderForm border"
+              }`}
           />
+          {errors.email && (
+            <p className="text-xs p-2 text-red-500">{errors.email}</p>
+          )}
         </div>
       </div>
       <div>
         <label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.phoneNumberLabel")}
         </label>
-        <div className="mt-2">
+        <div className="relative">
           <PhoneInput
             country={"de"}
             value={formData.phone}
@@ -254,12 +170,18 @@ export default function UpdateInfoForm({ setInternalServerError }: UpdateInfoFor
               maxWidth: "272px",
             }}
             inputProps={{
-              required: true,
               ref: phoneInputRef,
-              className:
-                "block w-full border-borderForm border rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary",
+              className: `block w-full rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary
+              ${
+                errors.name
+                  ? " outline outline-2 outline-red-500"
+                  : "border-borderForm border"
+              }`,
             }}
           />
+          {errors.phone && (
+            <p className="text-xs p-2 text-red-500">{errors.phone}</p>
+          )}
         </div>
       </div>
       <div>
@@ -272,26 +194,6 @@ export default function UpdateInfoForm({ setInternalServerError }: UpdateInfoFor
           onChange={(e) => handleInputChange("birthday", e.target.value)}
           className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
         />
-      </div>
-      <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
-          {t("register.passwordLabel")}
-        </label>
-        <input
-          type={showPassword ? "text" : "password"}
-          onChange={handlePasswordChange}
-          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28"
-        />
-        {password && (
-          <div className="flex gap-2 items-center absolute right-4 bottom-[20px]">
-            <p
-              className="text-primary text-sm cursor-pointer"
-              onClick={togglePasswordVisibility}
-            >
-              {t("viewPassword")}
-            </p>
-          </div>
-        )}
       </div>
       <div className="col-span-1 tablet:col-span-2 laptop:col-span-3 flex justify-end ">
         <button

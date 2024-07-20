@@ -3,6 +3,7 @@ import {
   RegisterFormValues,
   UpdateFormValues,
   ResetPasswordValues,
+  UpdatePasswordValues,
 } from "@/lib/types";
 
 const isNameValid = (name: string) => {
@@ -170,7 +171,7 @@ const UpdateFormValidation = (
 
   if (!value.phone) {
     error.phone = translations.phoneRequired;
-  } 
+  }
   // else if (!isPhoneValid(value.phone)) {
   //   error.phone = translations.phoneInvalid;
   // }
@@ -184,11 +185,39 @@ const UpdateFormValidation = (
   return error;
 };
 
+const UpdatePasswordValidation = (
+  value: UpdatePasswordValues,
+  translations: Record<string, string>
+) => {
+  let error: Partial<UpdatePasswordValues> = {};
+
+  if (!value.oldPassword) {
+    error.oldPassword = translations.passwordRequired;
+  } else if (!isPasswordValid(value.oldPassword)) {
+    error.oldPassword = translations.passwordWeak;
+  }
+
+  if (!value.newPassword) {
+    error.newPassword = translations.passwordRequired;
+  } else if (!isPasswordValid(value.newPassword)) {
+    error.newPassword = translations.passwordWeak;
+  }
+
+  if (!value.confirmPassword) {
+    error.confirmPassword = translations.passwordRequired;
+  } else if (!isPasswordValid(value.confirmPassword)) {
+    error.confirmPassword = translations.passwordWeak;
+  }
+
+  return error;
+};
+
 export {
   LoginFormValidation,
   RegisterFormValidation,
   ResetPasswordValidation,
   UpdateFormValidation,
+  UpdatePasswordValidation,
   isNameValid,
   isEmailValid,
   isPhoneValid,

@@ -1,14 +1,119 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
+import { useEffect, useState } from "react";
+import { UpdateFormValues } from "@/lib/types";
+import { useToast } from "@/components/ui/use-toast";
 import UpdateInfoForm from "./updateInfoForm";
+import ChangePassword from "./changePassword";
 import AccountSideMenu from "./accountSideMenu";
+import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 
 export default function PersonalInfoUpdate() {
   const t = useTranslations("Account.personalInfo");
+  const u = useTranslations("Account");
+  const locale = useTranslations()("Locale");
+  const { toast } = useToast();
   const [internalServerError, setInternalServerError] = useState("");
+
+  const [errors, setErrors] = useState<Partial<UpdateFormValues>>({});
+  const [loading, setLoading] = useState(true);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [unprocessedErrorMessage, setUnprocessedErrorMessage] = useState("");
+
+  const [formData, setFormData] = useState<UpdateFormValues>({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    birthday: "",
+  });
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        try {
+          const response = await fetch(
+            "https://rent-api.rubik.dev/api/my-profiles",
+            {
+              method: "GET",
+              headers: {
+                "Accept-Language": locale,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            const userProfile = data.data.attributes;
+
+            setFormData({
+              name: userProfile.first_name || "",
+              surname: userProfile.last_name || "",
+              email: userProfile.email || "",
+              phone: userProfile.phone || "",
+              birthday: userProfile.date_of_birth || "",
+            });
+            setLoading(false);
+          } else {
+            const errorData = await response.json();
+            setInternalServerError(errorData.detail);
+            setLoading(false);
+          }
+        } catch (error) {
+          setUnprocessedErrorMessage(u("profileFetchError"));
+          setLoading(false);
+        }
+      } else {
+        setUnprocessedErrorMessage(u("profileTokenError"));
+        setLoading(false);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
+  useEffect(() => {
+    if (successMessage) {
+      toast({
+        variant: "success",
+        description: successMessage,
+      });
+
+      setSuccessMessage("");
+    } else if (unprocessedErrorMessage) {
+      toast({
+        variant: "destructive",
+        description: unprocessedErrorMessage,
+      });
+
+      setUnprocessedErrorMessage("");
+    }
+  }, [successMessage, unprocessedErrorMessage, toast]);
+
+  const handleInputChange = (
+    fieldName: keyof UpdateFormValues,
+    value: string
+  ) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: "",
+    }));
+  };
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <>
@@ -45,7 +150,18 @@ export default function PersonalInfoUpdate() {
                     {t("heading")}
                   </h1>
                   <UpdateInfoForm
-                    setInternalServerError={setInternalServerError}
+                    formData={formData}
+                    handleInputChange={handleInputChange}
+                    setSuccessMessage={setSuccessMessage}
+                    setUnprocessedErrorMessage={setUnprocessedErrorMessage}
+                    errors={errors}
+                    setErrors={setErrors}
+                    locale={locale}
+                  />
+                  <ChangePassword
+                    setSuccessMessage={setSuccessMessage}
+                    setUnprocessedErrorMessage={setUnprocessedErrorMessage}
+                    locale={locale}
                   />
                 </div>
               </div>

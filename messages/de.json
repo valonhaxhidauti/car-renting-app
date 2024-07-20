@@ -39,6 +39,14 @@
             "heading": "Meine persönlichen Informationen",
             "checkEmail": "Bitte prüfen Sie Ihre Email, um sie zu bestätigen!"
         },
+        "changePassword": {
+            "oldPassword": "Altes Passwort",
+            "newPassword": "Neues Passwort",
+            "confirmPassword": "Neues Passwort bestätigen",
+            "submitButton": "Passwort ändern",
+            "passwordUpdated": "Passwort aktualisiert",
+            "tooltipMessage": "Passwörter müssen mindestens 8 Zeichen lang sein, mit 1 Großbuchstaben, 1 Kleinbuchstaben und 1 Sonderzeichen!"
+        },
         "login": {
             "title": "Einloggen",
             "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",

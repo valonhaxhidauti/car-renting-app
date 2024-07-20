@@ -39,6 +39,14 @@
             "heading": "My Personal Informations",
             "checkEmail": "Please check your email in order to verify it!"
         },
+        "changePassword": {
+            "oldPassword": "Old Password",
+            "newPassword": "New Password",
+            "confirmPassword": "Confirm New Password",
+            "submitButton": "Change password",
+            "passwordUpdated": "Password Updated",
+            "tooltipMessage": "Passwords must be at least 8 characters long with 1 uppercase letter, 1 lowercase letter, and 1 special character!"
+        },
         "login": {
             "title": "Login",
             "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
