@@ -52,12 +52,22 @@ export default function PersonalInfoUpdate() {
             const data = await response.json();
             const userProfile = data.data.attributes;
 
+            const formatDate = (dateString: string) => {
+              const date = new Date(dateString);
+              const year = date.getFullYear();
+              const month = String(date.getMonth() + 1).padStart(2, "0");
+              const day = String(date.getDate()).padStart(2, "0");
+              return `${year}-${month}-${day}`;
+            };
+
             setFormData({
               name: userProfile.first_name || "",
               surname: userProfile.last_name || "",
               email: userProfile.email || "",
               phone: userProfile.phone || "",
-              birthday: userProfile.date_of_birth || "",
+              birthday: userProfile.date_of_birth
+                ? formatDate(userProfile.date_of_birth)
+                : "",
             });
             setLoading(false);
           } else {
@@ -111,6 +121,43 @@ export default function PersonalInfoUpdate() {
     }));
   };
 
+  const handleVerifyEmail = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUnprocessedErrorMessage(u("profileTokenError"));
+      return;
+    }
+
+    const url = new URL(
+      "https://rent-api.rubik.dev/api/auth/email/verification-notification"
+    );
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Accept-Language": "en",
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers,
+      });
+
+      const responseText = await response.text();
+      const data = responseText ? JSON.parse(responseText) : null;
+
+      if (response.ok) {
+        setSuccessMessage(t("emailSent"));
+      } else {
+        setUnprocessedErrorMessage(data?.detail || t("emailFailed"));
+      }
+    } catch (error) {
+      setUnprocessedErrorMessage(t("emailFailed"));
+    }
+  };
+
   if (loading) {
     return null;
   }
@@ -128,9 +175,14 @@ export default function PersonalInfoUpdate() {
                   </h1>
                   <div>
                     <p className="text-primary text-lg font-bold">
-                      {internalServerError} Please check your email in order to
-                      verify it!
+                      {internalServerError} {t("checkEmail")}
                     </p>
+                  </div>
+                  <div
+                    className="flex w-fit justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary transition focus-visible:outline-primary"
+                    onClick={handleVerifyEmail}
+                  >
+                    {t("verifyEmail")}
                   </div>
                 </div>
               </div>
@@ -158,13 +210,13 @@ export default function PersonalInfoUpdate() {
                     setErrors={setErrors}
                     locale={locale}
                   />
-                  <ChangePassword
-                    setSuccessMessage={setSuccessMessage}
-                    setUnprocessedErrorMessage={setUnprocessedErrorMessage}
-                    locale={locale}
-                  />
                 </div>
               </div>
+              <ChangePassword
+                setSuccessMessage={setSuccessMessage}
+                setUnprocessedErrorMessage={setUnprocessedErrorMessage}
+                locale={locale}
+              />
             </div>
           </div>
         </>

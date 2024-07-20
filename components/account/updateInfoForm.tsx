@@ -47,6 +47,19 @@ export default function UpdateInfoForm({
     if (Object.keys(errors).length === 0) {
       try {
         const token = localStorage.getItem("token");
+
+        const formatDate = (dateString: string) => {
+          const date = new Date(dateString);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return `${year}-${month}-${day}`;
+        };
+
+        const formattedBirthday = formData.birthday
+          ? formatDate(formData.birthday)
+          : "";
+
         const response = await fetch(
           "https://rent-api.rubik.dev/api/my-profiles",
           {
@@ -62,7 +75,7 @@ export default function UpdateInfoForm({
               last_name: formData.surname,
               email: formData.email,
               phone: formData.phone,
-              date_of_birth: formData.birthday,
+              date_of_birth: formattedBirthday,
             }),
           }
         );
@@ -84,7 +97,7 @@ export default function UpdateInfoForm({
 
   return (
     <form
-      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-12 items-start"
+      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-8 items-start"
       onSubmit={submitForm}
     >
       <div>
@@ -137,17 +150,9 @@ export default function UpdateInfoForm({
           <input
             type="email"
             value={formData.email}
-            onChange={(e) => handleInputChange("email", e.target.value)}
-            className={`block mt-2 w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary 
-              ${
-                errors.name
-                  ? " outline outline-2 outline-red-500"
-                  : "border-borderForm border"
-              }`}
+            disabled
+            className="block mt-2 w-full cursor-not-allowed border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
           />
-          {errors.email && (
-            <p className="text-xs p-2 text-red-500">{errors.email}</p>
-          )}
         </div>
       </div>
       <div>
@@ -171,7 +176,7 @@ export default function UpdateInfoForm({
             }}
             inputProps={{
               ref: phoneInputRef,
-              className: `block w-full rounded-sm pr-8 pl-12 py-4 text-grayFont focus-visible:outline-primary
+              className: `block w-full rounded-sm pr-8 pl-12 py-[17px] text-grayFont focus-visible:outline-primary
               ${
                 errors.name
                   ? " outline outline-2 outline-red-500"
@@ -192,7 +197,7 @@ export default function UpdateInfoForm({
           type="date"
           value={formData.birthday}
           onChange={(e) => handleInputChange("birthday", e.target.value)}
-          className="block w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8"
+          className="block w-full border-borderForm border rounded-sm p-4 leading-snug text-grayFont focus-visible:outline-primary pr-8"
         />
       </div>
       <div className="col-span-1 tablet:col-span-2 laptop:col-span-3 flex justify-end ">

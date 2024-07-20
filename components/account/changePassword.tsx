@@ -118,146 +118,152 @@ export default function ChangePassword({
   };
 
   return (
-    <form
-      className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-8 items-start mt-16"
-      onSubmit={submitPassword}
-    >
-      <div>
-        <label
-          className="block text-sm font-medium leading-6 text-grayFont"
-          htmlFor="oldPassword"
-        >
-          {u("oldPassword")}
-        </label>
-        <div className="relative">
-          <input
-            type={showOldPassword ? "text" : "password"}
-            id="oldPassword"
-            value={formData.oldPassword}
-            onChange={(e) => handleInputChange("oldPassword", e.target.value)}
-            className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28 ${
-              errors.oldPassword
-                ? "outline outline-2 outline-red-500"
-                : "border-borderForm border"
-            }`}
-          />
-          {formData.oldPassword && (
-            <div className="flex gap-2 items-center absolute right-4 bottom-4">
-              {showOldPassword ? (
-                <Eye
-                  onClick={() => togglePasswordVisibility("old")}
-                  className="text-primary cursor-pointer"
-                />
-              ) : (
-                <EyeOff
-                  onClick={() => togglePasswordVisibility("old")}
-                  className="text-primary cursor-pointer"
-                />
-              )}
-            </div>
-          )}
-          {errors.oldPassword && (
-            <p className="text-xs p-2 text-red-500">{errors.oldPassword}</p>
+    <div className="relative mx-0 mt-8 mobile:mx-8 bigDesktop:mx-0 bg-white px-4 mobile:px-8 pb-8 flex flex-col">
+      <h1 className="text-grayFont text-3xl mt-16 font-bold">
+        {u("changeYourPassword")}
+      </h1>
+      <form
+        className="w-full desktop:w-3/4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-8 items-start mt-8"
+        onSubmit={submitPassword}
+      >
+        <div>
+          <label
+            className="block text-sm font-medium leading-6 text-grayFont"
+            htmlFor="oldPassword"
+          >
+            {u("oldPassword")}
+          </label>
+          <div className="relative">
+            <input
+              type={showOldPassword ? "text" : "password"}
+              id="oldPassword"
+              value={formData.oldPassword}
+              onChange={(e) => handleInputChange("oldPassword", e.target.value)}
+              className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28 ${
+                errors.oldPassword
+                  ? "outline outline-2 outline-red-500"
+                  : "border-borderForm border"
+              }`}
+            />
+            {formData.oldPassword && (
+              <div className="flex gap-2 items-center absolute right-4 bottom-4">
+                {showOldPassword ? (
+                  <Eye
+                    onClick={() => togglePasswordVisibility("old")}
+                    className="text-primary cursor-pointer"
+                  />
+                ) : (
+                  <EyeOff
+                    onClick={() => togglePasswordVisibility("old")}
+                    className="text-primary cursor-pointer"
+                  />
+                )}
+              </div>
+            )}
+            {errors.oldPassword && (
+              <p className="text-xs p-2 text-red-500">{errors.oldPassword}</p>
+            )}
+          </div>
+        </div>
+        <div>
+          <label
+            className="block text-sm font-medium leading-6 text-grayFont"
+            htmlFor="newPassword"
+          >
+            {u("newPassword")}
+          </label>
+          <div className="relative">
+            <input
+              type={showNewPassword ? "text" : "password"}
+              id="newPassword"
+              value={formData.newPassword}
+              onChange={(e) => handleInputChange("newPassword", e.target.value)}
+              className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28 ${
+                errors.newPassword
+                  ? "outline outline-2 outline-red-500"
+                  : "border-borderForm border"
+              }`}
+            />
+            {formData.newPassword && (
+              <div className="flex gap-2 items-center absolute right-4 bottom-4">
+                {showNewPassword ? (
+                  <Eye
+                    onClick={() => togglePasswordVisibility("new")}
+                    className="text-primary cursor-pointer"
+                  />
+                ) : (
+                  <EyeOff
+                    onClick={() => togglePasswordVisibility("new")}
+                    className="text-primary cursor-pointer"
+                  />
+                )}
+              </div>
+            )}
+          </div>
+          {errors.newPassword && (
+            <p className="text-xs p-2 text-red-500">{errors.newPassword}</p>
           )}
         </div>
-      </div>
-      <div>
-        <label
-          className="block text-sm font-medium leading-6 text-grayFont"
-          htmlFor="newPassword"
-        >
-          {u("newPassword")}
-        </label>
-        <div className="relative">
-          <input
-            type={showNewPassword ? "text" : "password"}
-            id="newPassword"
-            value={formData.newPassword}
-            onChange={(e) => handleInputChange("newPassword", e.target.value)}
-            className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28 ${
-              errors.newPassword
-                ? "outline outline-2 outline-red-500"
-                : "border-borderForm border"
-            }`}
-          />
-          {formData.newPassword && (
-            <div className="flex gap-2 items-center absolute right-4 bottom-4">
-              {showNewPassword ? (
-                <Eye
-                  onClick={() => togglePasswordVisibility("new")}
-                  className="text-primary cursor-pointer"
-                />
-              ) : (
-                <EyeOff
-                  onClick={() => togglePasswordVisibility("new")}
-                  className="text-primary cursor-pointer"
-                />
-              )}
-            </div>
+        <div>
+          <label
+            className="block text-sm font-medium leading-6 text-grayFont"
+            htmlFor="confirmPassword"
+          >
+            {u("confirmPassword")}
+          </label>
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              id="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={(e) =>
+                handleInputChange("confirmPassword", e.target.value)
+              }
+              className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28 ${
+                errors.confirmPassword
+                  ? "outline outline-2 outline-red-500"
+                  : "border-borderForm border"
+              }`}
+            />
+            {formData.confirmPassword && (
+              <div className="flex gap-2 items-center absolute right-4 bottom-4">
+                {showConfirmPassword ? (
+                  <Eye
+                    onClick={() => togglePasswordVisibility("confirm")}
+                    className="text-primary cursor-pointer"
+                  />
+                ) : (
+                  <EyeOff
+                    onClick={() => togglePasswordVisibility("confirm")}
+                    className="text-primary cursor-pointer"
+                  />
+                )}
+              </div>
+            )}
+          </div>
+          {errors.confirmPassword && (
+            <p className="text-xs p-2 text-red-500">{errors.confirmPassword}</p>
           )}
         </div>
-        {errors.newPassword && (
-          <p className="text-xs p-2 text-red-500">{errors.newPassword}</p>
-        )}
-      </div>
-      <div>
-        <label
-          className="block text-sm font-medium leading-6 text-grayFont"
-          htmlFor="confirmPassword"
-        >
-          {u("confirmPassword")}
-        </label>
-        <div className="relative">
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            id="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={(e) =>
-              handleInputChange("confirmPassword", e.target.value)
-            }
-            className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-28 ${
-              errors.confirmPassword
-                ? "outline outline-2 outline-red-500"
-                : "border-borderForm border"
-            }`}
-          />
-          {formData.confirmPassword && (
-            <div className="flex gap-2 items-center absolute right-4 bottom-4">
-              {showConfirmPassword ? (
-                <Eye
-                  onClick={() => togglePasswordVisibility("confirm")}
-                  className="text-primary cursor-pointer"
+        <div className="col-span-1 tablet:col-span-2 laptop:col-span-3 flex justify-end items-center gap-4 ">
+          <TooltipProvider delayDuration={100}>
+            <Tooltip>
+              <TooltipTrigger className="w-full mobile:w-auto">
+                <input
+                  type="submit"
+                  value={u("submitButton")}
+                  className="flex w-full mobile:w-auto cursor-pointer justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary transition focus-visible:outline-primary"
                 />
-              ) : (
-                <EyeOff
-                  onClick={() => togglePasswordVisibility("confirm")}
-                  className="text-primary cursor-pointer"
-                />
-              )}
-            </div>
-          )}
+              </TooltipTrigger>
+              <TooltipContent className="bg-white mb-2" data-side="right">
+                <p className="text-grayFont font-medium w-48">
+                  {u("tooltipMessage")}
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
-        {errors.confirmPassword && (
-          <p className="text-xs p-2 text-red-500">{errors.confirmPassword}</p>
-        )}
-      </div>
-      <div className="col-span-1 tablet:col-span-2 laptop:col-span-3 flex justify-end items-center gap-4 ">
-        <TooltipProvider delayDuration={100}>
-          <Tooltip>
-            <TooltipTrigger className="w-full mobile:w-auto">
-              <button
-                type="submit"
-                className="flex w-full mobile:w-auto justify-center bg-primary px-12 py-3 text-sm font-semibold leading-6 text-white hover:bg-secondary transition focus-visible:outline-primary"
-              >
-                {u("submitButton")}
-              </button>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white mb-2" data-side="right">
-              <p className="text-grayFont font-medium w-48">{u("tooltipMessage")}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
