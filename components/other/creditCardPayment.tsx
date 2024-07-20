@@ -40,21 +40,27 @@ export default function CreditCardPayment() {
   return (
     <>
       <h1 className="text-grayFont font-bold"> {t("creditCardInfoTitle")}</h1>
-      <div className="flex flex-col mobile:flex-row flex-wrap items-start mobile:items-end justify-between gap-4">
+      <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="flex flex-col w-full mobile:w-auto">
-          <label className="text-grayFont text-sm" htmlFor="cardOwner">
+          <label
+            className="block text-sm font-medium leading-6 text-grayFont"
+            htmlFor="cardOwner"
+          >
             {t("cardOwnerLabel")}
           </label>
           <input
             type="text"
             id="cardOwner"
             name="cardOwner"
-            className="w-full mobile:w-72 text-grayFont rounded-sm px-3 py-2 focus-visible:outline-primary border-gray border"
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
             required
           />
         </div>
         <div className="flex flex-col w-full mobile:w-auto">
-          <label className="text-grayFont text-sm" htmlFor="cardNumber">
+          <label
+            className="block text-sm font-medium leading-6 text-grayFont"
+            htmlFor="cardNumber"
+          >
             {t("cardNumberLabel")}
           </label>
           <input
@@ -67,23 +73,22 @@ export default function CreditCardPayment() {
             onChange={(e) => {
               e.target.value = e.target.value.replace(/\D/, "");
             }}
-            className="w-full mobile:w-72 text-grayFont rounded-sm px-3 py-2 focus-visible:outline-primary border-gray border"
+            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
             required
           />
         </div>
         <div className="flex gap-4 w-full mobile:w-auto">
           <div className="flex flex-col  w-3/4">
-            <label className="text-grayFont text-sm">
-              {" "}
+            <label className="block text-sm font-medium leading-6 text-grayFont">
               {t("expireDateLabel")}
             </label>
             <div className="flex gap-2">
               <Select onOpenChange={onSelectClicked}>
-                <SelectTrigger className="w-full mobile:w-20 text-grayFont h-[42px] gap-3 rounded-sm px-4 py-2 focus-visible:outline-primary border-gray border">
-                  <SelectValue />
+                <SelectTrigger className="mt-2 p-3.5 h-full border-borderForm border rounded-sm">
+                  <SelectValue placeholder={t("monthLabel")} />
                   <ChevronDown size={12} />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="h-full">
                   <SelectGroup>
                     <SelectLabel>Month</SelectLabel>
                     {months.map((month) => (
@@ -95,8 +100,8 @@ export default function CreditCardPayment() {
                 </SelectContent>
               </Select>
               <Select onOpenChange={onSelectClicked}>
-                <SelectTrigger className="w-full mobile:w-24 text-grayFont h-[42px] gap-3 rounded-sm px-4 py-2 focus-visible:outline-primary border-gray border">
-                  <SelectValue />
+                <SelectTrigger className="mt-2 p-3.5 h-full border-borderForm border rounded-sm">
+                  <SelectValue placeholder={t("yearLabel")} />
                   <ChevronDown size={12} />
                 </SelectTrigger>
                 <SelectContent>
@@ -113,7 +118,10 @@ export default function CreditCardPayment() {
             </div>
           </div>
           <div className="w-1/4 flex flex-col">
-            <label className="text-grayFont text-sm" htmlFor="cvv">
+            <label
+              className="block text-sm font-medium leading-6 text-grayFont"
+              htmlFor="cvv"
+            >
               {t("cvvLabel")}
             </label>
             <input
@@ -121,7 +129,7 @@ export default function CreditCardPayment() {
               maxLength={3}
               id="cvv"
               name="cvv"
-              className="w-full mobile:w-16 text-center text-grayFont rounded-sm px-3 py-2 focus-visible:outline-primary border-gray border"
+              className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
               required
             />
           </div>
