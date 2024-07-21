@@ -5,11 +5,13 @@ import { IdInfo } from "@/lib/types";
 interface IdInformationProps {
   idInfo: IdInfo;
   setIdInfo: React.Dispatch<React.SetStateAction<IdInfo>>;
+  updateDocuments: boolean;
 }
 
 export default function IdInformation({
   idInfo,
   setIdInfo,
+  updateDocuments,
 }: IdInformationProps) {
   const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
@@ -76,8 +78,11 @@ export default function IdInformation({
           type="text"
           name="idNumber"
           value={idInfo.idNumber}
+          readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -88,8 +93,11 @@ export default function IdInformation({
           type="text"
           name="issuingCountry"
           value={idInfo.issuingCountry}
+          readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -100,8 +108,11 @@ export default function IdInformation({
           type="date"
           name="dateOfIssue"
           value={idInfo.dateOfIssue}
+          readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -112,8 +123,11 @@ export default function IdInformation({
           type="date"
           name="dateOfExpiration"
           value={idInfo.dateOfExpiration}
+          readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -123,9 +137,12 @@ export default function IdInformation({
         <input
           type="file"
           name="frontImage"
-          required
+          
+          disabled={!updateDocuments}
           onChange={handleIdImageChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -135,9 +152,12 @@ export default function IdInformation({
         <input
           type="file"
           name="backImage"
-          required
+          
+          disabled={!updateDocuments}
           onChange={handleIdImageChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
     </div>

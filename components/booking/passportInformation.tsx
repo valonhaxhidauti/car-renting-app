@@ -1,3 +1,4 @@
+// passportInformation.tsx
 import { useEffect, ChangeEvent } from "react";
 import { PassportInfo } from "@/lib/types";
 import { useTranslations } from "next-intl";
@@ -5,55 +6,15 @@ import { useTranslations } from "next-intl";
 interface PassportInformationProps {
   passportInfo: PassportInfo;
   setPassportInfo: React.Dispatch<React.SetStateAction<PassportInfo>>;
+  updateDocuments: boolean;
 }
 
 export default function PassportInformation({
   passportInfo,
   setPassportInfo,
+  updateDocuments,
 }: PassportInformationProps) {
   const t = useTranslations("vehiclePayment");
-  const locale = useTranslations()("Locale");
-
-  useEffect(() => {
-    const fetchPassportData = async () => {
-      const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
-      const token = localStorage.getItem("token");
-
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        "Accept-Language": locale,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers,
-      });
-
-      const data = await response.json();
-
-      if (
-        data &&
-        data.data &&
-        data.data.relationships &&
-        data.data.relationships.passport
-      ) {
-        const passportData = data.data.relationships.passport.attributes;
-
-        setPassportInfo({
-          passportNumber: passportData.passport_number || "",
-          issuingCountry: passportData.passport_issuing_country || "",
-          dateOfIssue: passportData.passport_date_of_issue?.split("T")[0] || "",
-          dateOfExpiration:
-            passportData.passport_date_of_expiration?.split("T")[0] || "",
-          frontImage: passportData.passport_front_image || null,
-        });
-      }
-    };
-
-    fetchPassportData();
-  }, [locale, setPassportInfo]);
 
   const handlePassportInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassportInfo({ ...passportInfo, [e.target.name]: e.target.value });
@@ -75,8 +36,11 @@ export default function PassportInformation({
           type="text"
           name="passportNumber"
           value={passportInfo.passportNumber}
+          readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -87,8 +51,11 @@ export default function PassportInformation({
           type="text"
           name="issuingCountry"
           value={passportInfo.issuingCountry}
+          readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -99,8 +66,11 @@ export default function PassportInformation({
           type="date"
           name="dateOfIssue"
           value={passportInfo.dateOfIssue}
+          readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -111,8 +81,11 @@ export default function PassportInformation({
           type="date"
           name="dateOfExpiration"
           value={passportInfo.dateOfExpiration}
+          readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
       <div className="relative">
@@ -123,9 +96,12 @@ export default function PassportInformation({
           type="file"
           name="passportFrontImage"
           id="passportFrontImage"
+          disabled={!updateDocuments}
           required
           onChange={handlePassportImageChange}
-          className="block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary"
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
+            updateDocuments ? "bg-white" : "bg-gray-100"
+          }`}
         />
       </div>
     </div>
