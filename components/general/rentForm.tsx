@@ -47,7 +47,7 @@ export default function RentForm({
     if (storedRentLocationId) setRentLocationId(storedRentLocationId);
     if (storedReturnLocationId) setReturnLocationId(storedReturnLocationId);
   }, [setRentLocationId, setReturnLocationId]);
-  
+
   const parseDate = (dateString: string): Dayjs =>
     dayjs(dateString, "YYYY/MM/DD HH:mm");
 
@@ -79,7 +79,7 @@ export default function RentForm({
         fetchLocations(formData.returnLocation, "return");
       }
     }
-  }, []);
+  }, [formData]);
 
   const handleInputChange =
     (field: keyof RentFormData) =>
@@ -87,15 +87,10 @@ export default function RentForm({
       const value = event.target.value;
       setFormData({ ...formData, [field]: value });
 
-      if (value.length >= 3) {
-        const type = field === "rentLocation" ? "rent" : "return";
-        await fetchLocations(value, type);
-        if (type === "rent") setShowRentSelect(true);
-        else setShowReturnSelect(true);
-      } else {
-        if (field === "rentLocation") setShowRentSelect(false);
-        else setShowReturnSelect(false);
-      }
+      const type = field === "rentLocation" ? "rent" : "return";
+      await fetchLocations(value, type);
+      if (type === "rent") setShowRentSelect(true);
+      else setShowReturnSelect(true);
     };
 
   const handleDateChange = (
@@ -180,7 +175,6 @@ export default function RentForm({
 
     router.push(`/explore?${queryString}`);
 
-    setFormData(defaultFormData);
     setShowModal(false);
     setShowRentSelect(false);
     setShowReturnSelect(false);
