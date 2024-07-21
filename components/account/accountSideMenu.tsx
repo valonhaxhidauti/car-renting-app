@@ -17,21 +17,21 @@ export default function AccountSideMenu() {
     <div className="bg-primary hidden desktop:flex flex-col absolute -top-[60px] right-8 w-64">
       <Link
         href="/account/personal-info"
-        className="text-white flex items-center gap-2 p-4 text-xs border-b-borderMenu hover:font-medium border-b"
+        className="text-white flex items-center gap-2 p-[18px] text-xs border-b-borderMenu hover:font-medium border-b"
       >
         <AccountIcon />
         {t("personalInformations")}
       </Link>
       <Link
         href="/account/my-reservations"
-        className="text-white flex items-center gap-2 p-4 text-xs border-b-borderMenu hover:font-medium border-b"
+        className="text-white flex items-center gap-2 p-[18px] text-xs border-b-borderMenu hover:font-medium border-b"
       >
         <ReservationIcon />
         {t("reservations")}
       </Link>
       <div
         onClick={handleLogout}
-        className="text-white flex items-center gap-2 p-4 text-xs border-b-borderMenu hover:font-medium border-b cursor-pointer"
+        className="text-white flex items-center gap-2 p-[18px] text-xs border-b-borderMenu hover:font-medium border-b cursor-pointer"
       >
         <LogoutIcon className="w-6" />
         {t("logOut")}

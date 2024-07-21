@@ -25,41 +25,46 @@ export default function DriverLicenseInformation({
       const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
       const token = localStorage.getItem("token");
 
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        "Accept-Language": locale,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
+      if (isAuthenticated) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+          "Accept-Language": locale,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        };
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers,
-      });
-
-      const data = await response.json();
-
-      if (
-        data &&
-        data.data &&
-        data.data.relationships &&
-        data.data.relationships.driverLicence
-      ) {
-        const driverLicenseData =
-          data.data.relationships.driverLicence.attributes;
-        setDriverLicenseInfo({
-          driverLicenseNumber: driverLicenseData.driver_licence_number || "",
-          issuingCountry:
-            driverLicenseData.driver_licence_issuing_country || "",
-          dateOfIssue:
-            driverLicenseData.driver_licence_date_of_issue?.split("T")[0] || "",
-          dateOfExpiration:
-            driverLicenseData.driver_licence_date_of_expiration?.split(
-              "T"
-            )[0] || "",
-          frontImage: driverLicenseData.driver_licence_front_image || null,
-          backImage: driverLicenseData.driver_licence_back_image || null,
+        const response = await fetch(url, {
+          method: "GET",
+          headers,
         });
+
+        const data = await response.json();
+
+        if (
+          data &&
+          data.data &&
+          data.data.relationships &&
+          data.data.relationships.driverLicence
+        ) {
+          const driverLicenseData =
+            data.data.relationships.driverLicence.attributes;
+          setDriverLicenseInfo({
+            driverLicenseNumber: driverLicenseData.driver_licence_number || "",
+            issuingCountry:
+              driverLicenseData.driver_licence_issuing_country || "",
+            dateOfIssue:
+              driverLicenseData.driver_licence_date_of_issue?.split("T")[0] ||
+              "",
+            dateOfExpiration:
+              driverLicenseData.driver_licence_date_of_expiration?.split(
+                "T"
+              )[0] || "",
+            frontImage: driverLicenseData.driver_licence_front_image || null,
+            backImage: driverLicenseData.driver_licence_back_image || null,
+          });
+        }
+      } else {
+        setUpdateDocuments(true);
       }
     };
 
@@ -114,8 +119,11 @@ export default function DriverLicenseInformation({
             type="text"
             name="driverLicenseNumber"
             value={driverLicenseInfo.driverLicenseNumber}
+            readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateDocuments ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -126,8 +134,11 @@ export default function DriverLicenseInformation({
             type="text"
             name="issuingCountry"
             value={driverLicenseInfo.issuingCountry}
+            readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateDocuments ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -138,8 +149,11 @@ export default function DriverLicenseInformation({
             type="date"
             name="dateOfIssue"
             value={driverLicenseInfo.dateOfIssue}
+            readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+              updateDocuments ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -150,8 +164,11 @@ export default function DriverLicenseInformation({
             type="date"
             name="dateOfExpiration"
             value={driverLicenseInfo.dateOfExpiration}
+            readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+              updateDocuments ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -162,8 +179,11 @@ export default function DriverLicenseInformation({
             type="file"
             name="frontImage"
             onChange={handleDriverLicenseImageChange}
+            disabled={!updateDocuments}
             required
-            className="block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
+              updateDocuments ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -173,9 +193,12 @@ export default function DriverLicenseInformation({
           <input
             type="file"
             name="backImage"
+            disabled={!updateDocuments}
             required
             onChange={handleDriverLicenseImageChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
+              updateDocuments ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
       </div>

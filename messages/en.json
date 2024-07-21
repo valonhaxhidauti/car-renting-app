@@ -399,7 +399,7 @@
     },
     "vehiclePayment": {
         "personalInfoTitle": "Personal Information",
-        "updateCustomer": "Update Peronsal Info",
+        "updateCustomer": "Update Personal Info",
         "firstNameLabel": "First Name",
         "lastNameLabel": "Last Name",
         "emailLabel": "Email",

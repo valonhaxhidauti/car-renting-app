@@ -2,6 +2,7 @@ import { useAuth } from "../context/authContext";
 import { ChangeEvent, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { PersonalInfo } from "@/lib/types";
+import { formatDate } from "../utils/formatDate";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
@@ -28,34 +29,39 @@ export default function PersonalInformation({
       const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
       const token = localStorage.getItem("token");
 
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        "Accept-Language": locale,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
+      if (isAuthenticated) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+          "Accept-Language": locale,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        };
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers,
-      });
-
-      const data = await response.json();
-
-      if (data && data.data && data.data.attributes) {
-        const userProfile = data.data.attributes;
-
-        setPersonalInfo({
-          firstName: userProfile.first_name || "",
-          lastName: userProfile.last_name || "",
-          email: userProfile.email || "",
-          phoneCode: userProfile.phone_code || "",
-          phone: userProfile.phone || "",
-          dateOfBirth: userProfile.date_of_birth || "",
+        const response = await fetch(url, {
+          method: "GET",
+          headers,
         });
+
+        const data = await response.json();
+
+        if (data && data.data && data.data.attributes) {
+          const userProfile = data.data.attributes;
+
+          setPersonalInfo({
+            firstName: userProfile.first_name || "",
+            lastName: userProfile.last_name || "",
+            email: userProfile.email || "",
+            phoneCode: userProfile.phone_code || "",
+            phone: userProfile.phone || "",
+            dateOfBirth: userProfile.date_of_birth
+              ? formatDate(userProfile.date_of_birth)
+              : "",
+          });
+        }
+      } else {
+        setUpdateCustomer(true);
       }
     };
-
     fetchProfileData();
   }, [locale, setPersonalInfo]);
 
@@ -118,8 +124,11 @@ export default function PersonalInformation({
             type="text"
             name="firstName"
             value={personalInfo.firstName}
+            readOnly={!updateCustomer}
             onChange={handleChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateCustomer ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -130,8 +139,11 @@ export default function PersonalInformation({
             type="text"
             name="lastName"
             value={personalInfo.lastName}
+            readOnly={!updateCustomer}
             onChange={handleChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateCustomer ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -142,8 +154,11 @@ export default function PersonalInformation({
             type="email"
             name="email"
             value={personalInfo.email}
+            readOnly={!updateCustomer}
             onChange={handleChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateCustomer ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -155,6 +170,7 @@ export default function PersonalInformation({
               country={"de"}
               value={personalInfo.phoneCode + personalInfo.phone}
               onChange={handlePhoneChange}
+              disabled={!updateCustomer}
               buttonStyle={{
                 border: "none",
                 background: "white",
@@ -182,9 +198,12 @@ export default function PersonalInformation({
             type="date"
             name="dateOfBirth"
             value={personalInfo.dateOfBirth}
+            readOnly={!updateCustomer}
             onChange={handleChange}
             required
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 leading-tight text-grayFont focus-visible:outline-primary ${
+              updateCustomer ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
       </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
+import { formatDate } from "../utils/formatDate";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { UpdateFormValues } from "@/lib/types";
@@ -7,7 +9,6 @@ import { useToast } from "@/components/ui/use-toast";
 import UpdateInfoForm from "./updateInfoForm";
 import ChangePassword from "./changePassword";
 import AccountSideMenu from "./accountSideMenu";
-import { Breadcrumbs, HeadingTitle } from "../common/headingParts";
 
 export default function PersonalInfoUpdate() {
   const t = useTranslations("Account.personalInfo");
@@ -52,14 +53,6 @@ export default function PersonalInfoUpdate() {
             const data = await response.json();
             const userProfile = data.data.attributes;
 
-            const formatDate = (dateString: string) => {
-              const date = new Date(dateString);
-              const year = date.getFullYear();
-              const month = String(date.getMonth() + 1).padStart(2, "0");
-              const day = String(date.getDate()).padStart(2, "0");
-              return `${year}-${month}-${day}`;
-            };
-
             setFormData({
               name: userProfile.first_name || "",
               surname: userProfile.last_name || "",
@@ -72,6 +65,7 @@ export default function PersonalInfoUpdate() {
             setLoading(false);
           } else {
             const errorData = await response.json();
+            console.log(errorData)
             setInternalServerError(errorData.detail);
             setLoading(false);
           }

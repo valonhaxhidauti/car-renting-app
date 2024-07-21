@@ -26,35 +26,39 @@ export default function BillingInformation({
       const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
       const token = localStorage.getItem("token");
 
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        "Accept-Language": locale,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      };
+      if (isAuthenticated) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+          "Accept-Language": locale,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        };
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers,
-      });
-
-      const data = await response.json();
-
-      if (
-        data &&
-        data.data &&
-        data.data.relationships &&
-        data.data.relationships.billingAddress
-      ) {
-        const billingData = data.data.relationships.billingAddress.attributes;
-        setBillingInfo({
-          address: billingData.address || "",
-          number: billingData.number || "",
-          zip: billingData.zip || "",
-          street: billingData.street || "",
-          city: billingData.city || "",
-          country: billingData.country || "",
+        const response = await fetch(url, {
+          method: "GET",
+          headers,
         });
+
+        const data = await response.json();
+
+        if (
+          data &&
+          data.data &&
+          data.data.relationships &&
+          data.data.relationships.billingAddress
+        ) {
+          const billingData = data.data.relationships.billingAddress.attributes;
+          setBillingInfo({
+            address: billingData.address || "",
+            number: billingData.number || "",
+            zip: billingData.zip || "",
+            street: billingData.street || "",
+            city: billingData.city || "",
+            country: billingData.country || "",
+          });
+        }
+      } else {
+        setUpdateBilling(true);
       }
     };
 
@@ -99,8 +103,11 @@ export default function BillingInformation({
             type="text"
             name="address"
             value={billingInfo.address}
+            readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateBilling ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -111,8 +118,11 @@ export default function BillingInformation({
             type="text"
             name="number"
             value={billingInfo.number}
+            readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateBilling ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -123,8 +133,11 @@ export default function BillingInformation({
             type="text"
             name="zip"
             value={billingInfo.zip}
+            readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateBilling ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -135,8 +148,11 @@ export default function BillingInformation({
             type="text"
             name="street"
             value={billingInfo.street}
+            readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateBilling ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -147,8 +163,11 @@ export default function BillingInformation({
             type="text"
             name="city"
             value={billingInfo.city}
+            readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateBilling ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
         <div className="relative">
@@ -159,8 +178,11 @@ export default function BillingInformation({
             type="text"
             name="country"
             value={billingInfo.country}
+            readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className="block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+              updateBilling ? "bg-white" : "bg-gray-100"
+            }`}
           />
         </div>
       </div>
