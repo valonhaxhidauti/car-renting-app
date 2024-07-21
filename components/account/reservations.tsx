@@ -85,6 +85,16 @@ export default function Reservations() {
     return Math.ceil(daysDifference);
   };
 
+  const getCarStatus = (start: string, end: string) => {
+    const today = new Date();
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    if (endDate < today) return u("completed");
+    if (startDate > today) return u("upcoming");
+    if (startDate < today && today < endDate) return u("active");
+  };
+
   return (
     <>
       <HeadingTitle title={t("myReservations.title")} />
@@ -220,7 +230,10 @@ export default function Reservations() {
                               {reservation.attributes.booking_id}
                             </p>
                             <p>
-                              {reservation.relationships.car.attributes.status}
+                              {getCarStatus(
+                                reservation.attributes.start_date_time,
+                                reservation.attributes.end_date_time
+                              )}
                             </p>
                           </div>
                         </div>
