@@ -46,6 +46,7 @@ export default function VehiclePayment() {
   const [updateCustomer, setUpdateCustomer] = useState(false);
   const [updateDocuments, setUpdateDocuments] = useState(false);
   const [updateBilling, setUpdateBilling] = useState(false);
+  const [formErrors, setFormErrors] = useState("");
   const vehicleId = params.vehicleId;
 
   const vehicle = useFetchedVehicle(vehicleId);
@@ -128,7 +129,7 @@ export default function VehiclePayment() {
     body.append("phone_code", personalInfo.phoneCode);
     body.append("phone", personalInfo.phone);
     body.append("date_of_birth", personalInfo.dateOfBirth);
-    if (isAuthenticated){
+    if (isAuthenticated) {
       body.append("update_documents", "true");
       body.append("update_customer", "true");
       body.append("update_billing_address", "true");
@@ -177,6 +178,7 @@ export default function VehiclePayment() {
       } else {
         const errorData = await response.json();
         console.log(errorData);
+        setFormErrors(errorData.detail);
       }
     } catch (error: any) {
       console.error(error);
@@ -271,11 +273,12 @@ export default function VehiclePayment() {
                 {paymentMethod === "Card" && <CreditCardPayment />}
                 {paymentMethod === "Cash" && <CashPayment />}
               </div>
-              <div className="flex justify-end gap-4 w-full">
+              <div className="flex flex-col tablet:flex-row justify-end gap-4 w-full items-start tablet:items-center m-4 mobile:m-0">
+                <p className="text-red-500 font-medium">{formErrors}</p>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`flex justify-center mr-4 mobile:mr-0 bg-primary w-[150px] p-3 text-sm font-semibold leading-6 text-white  transition-colors ${
+                  className={`flex justify-center bg-primary w-[150px] p-3 text-sm font-semibold leading-6 text-white  transition-colors ${
                     isSubmitting
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-secondary"
