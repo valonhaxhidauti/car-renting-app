@@ -58,6 +58,7 @@ export default function LocationForm({
             className="w-full p-2"
             value={formData.rentLocation}
             onChange={handleInputChange("rentLocation")}
+            onFocus={handleInputChange("rentLocation")}
           />
           <LocationsSelect
             showSelect={showRentSelect}
@@ -84,6 +85,7 @@ export default function LocationForm({
             } `}
             value={formData.returnLocation}
             onChange={handleInputChange("returnLocation")}
+            onFocus={handleInputChange("returnLocation")}
           />
           <LocationsSelect
             showSelect={showReturnSelect}
