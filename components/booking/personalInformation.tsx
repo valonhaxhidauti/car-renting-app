@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { PersonalInfo } from "@/lib/types";
 import { formatDate } from "../utils/formatDate";
+import { Label } from "../ui/label";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
@@ -117,54 +118,66 @@ export default function PersonalInformation({
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="firstname"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("firstNameLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="firstname"
             name="firstName"
             value={personalInfo.firstName}
             readOnly={!updateCustomer}
             onChange={handleChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateCustomer ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="surname"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("lastNameLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="surname"
             name="lastName"
             value={personalInfo.lastName}
             readOnly={!updateCustomer}
             onChange={handleChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateCustomer ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="email"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("emailLabel")}
-          </label>
+          </Label>
           <input
             type="email"
+            id="email"
             name="email"
             value={personalInfo.email}
             readOnly={!updateCustomer}
             onChange={handleChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateCustomer ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <p className="block text-sm font-medium leading-6 text-grayFont">
             {t("phoneNumberLabel")}
-          </label>
+          </p>
           <div className="mt-2">
             <PhoneInput
               country={"de"}
@@ -191,11 +204,15 @@ export default function PersonalInformation({
           </div>
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="birthday"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("dateOfBirthLabel")}
-          </label>
+          </Label>
           <input
             type="date"
+            id="birthday"
             name="dateOfBirth"
             value={personalInfo.dateOfBirth}
             readOnly={!updateCustomer}

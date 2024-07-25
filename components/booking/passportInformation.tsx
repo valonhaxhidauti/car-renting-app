@@ -1,7 +1,8 @@
-// passportInformation.tsx
-import { useEffect, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { PassportInfo } from "@/lib/types";
 import { useTranslations } from "next-intl";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 interface PassportInformationProps {
   passportInfo: PassportInfo;
@@ -29,79 +30,96 @@ export default function PassportInformation({
   return (
     <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="passportNr"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("passportNumber")}
-        </label>
+        </Label>
         <input
           type="text"
+          id="passportNr"
           name="passportNumber"
           value={passportInfo.passportNumber}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="passportCountry"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("issuingCountryLabel")}
-        </label>
+        </Label>
         <input
           type="text"
+          id="passportCountry"
           name="issuingCountry"
           value={passportInfo.issuingCountry}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="passportIssue"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("dateOfIssueLabel")}
-        </label>
+        </Label>
         <input
           type="date"
+          id="passportIssue"
           name="dateOfIssue"
           value={passportInfo.dateOfIssue}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="passportExpiration"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("dateOfExpirationLabel")}
-        </label>
+        </Label>
         <input
           type="date"
+          id="passportExpiration"
           name="dateOfExpiration"
           value={passportInfo.dateOfExpiration}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="passporImage"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("frontImageLabel")}
-        </label>
-        <input
+        </Label>
+        <Input
           type="file"
           name="passportFrontImage"
-          id="passportFrontImage"
+          id="passporImage"
           disabled={!updateDocuments}
           required
           onChange={handlePassportImageChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
-            updateDocuments ? "bg-white" : "bg-gray-100"
-          }`}
+          className={`${updateDocuments ? "bg-white" : "bg-gray-100"}`}
         />
       </div>
     </div>

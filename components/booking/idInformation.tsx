@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
 import { ChangeEvent, useEffect } from "react";
 import { IdInfo } from "@/lib/types";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 interface IdInformationProps {
   idInfo: IdInfo;
@@ -71,93 +73,111 @@ export default function IdInformation({
   return (
     <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="idNr"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("idNumber")}
-        </label>
+        </Label>
         <input
           type="text"
+          id="idNr"
           name="idNumber"
           value={idInfo.idNumber}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="idCountry"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("issuingCountryLabel")}
-        </label>
+        </Label>
         <input
           type="text"
+          id="idCountry"
           name="issuingCountry"
           value={idInfo.issuingCountry}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="idIssue"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("dateOfIssueLabel")}
-        </label>
+        </Label>
         <input
           type="date"
+          id="idIssue"
           name="dateOfIssue"
           value={idInfo.dateOfIssue}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="idExpiration"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("dateOfExpirationLabel")}
-        </label>
+        </Label>
         <input
           type="date"
+          id="idExpiration"
           name="dateOfExpiration"
           value={idInfo.dateOfExpiration}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
           }`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="idFrontImg"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("frontImageLabel")}
-        </label>
-        <input
+        </Label>
+        <Input
           type="file"
+          id="idFrontImg"
           name="frontImage"
-          
           disabled={!updateDocuments}
           onChange={handleIdImageChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
-            updateDocuments ? "bg-white" : "bg-gray-100"
-          }`}
+          className={`${updateDocuments ? "bg-white" : "bg-gray-100"}`}
         />
       </div>
       <div className="relative">
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="idBackImg"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("backImageLabel")}
-        </label>
-        <input
+        </Label>
+        <Input
           type="file"
+          id="idBackImg"
           name="backImage"
-          
           disabled={!updateDocuments}
           onChange={handleIdImageChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
-            updateDocuments ? "bg-white" : "bg-gray-100"
-          }`}
+          className={`${updateDocuments ? "bg-white" : "bg-gray-100"}`}
         />
       </div>
     </div>

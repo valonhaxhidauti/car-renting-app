@@ -2,6 +2,8 @@ import { useAuth } from "../context/authContext";
 import { ChangeEvent, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { DriverLicenseInfo } from "@/lib/types";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 interface DriverLicenseInformationProps {
   driverLicenseInfo: DriverLicenseInfo;
@@ -112,93 +114,113 @@ export default function DriverLicenseInformation({
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="driverLicenseNr"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("driverLicenseNumberLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="driverLicenseNr"
             name="driverLicenseNumber"
             value={driverLicenseInfo.driverLicenseNumber}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="driverCountry"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("issuingCountryLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="driverCountry"
             name="issuingCountry"
             value={driverLicenseInfo.issuingCountry}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="driverIssue"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("dateOfIssueLabel")}
-          </label>
+          </Label>
           <input
             type="date"
+            id="driverIssue"
             name="dateOfIssue"
             value={driverLicenseInfo.dateOfIssue}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 leading-tight text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="driverExpiration"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("dateOfExpirationLabel")}
-          </label>
+          </Label>
           <input
             type="date"
+            id="driverExpiration"
             name="dateOfExpiration"
             value={driverLicenseInfo.dateOfExpiration}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-[15px] text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 leading-tight text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="driversFrontImage"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("frontImageLabel")}
-          </label>
-          <input
-            type="file"
+          </Label>
+          <Input
+            id="driversFrontImage"
             name="frontImage"
+            type="file"
             onChange={handleDriverLicenseImageChange}
             disabled={!updateDocuments}
             required
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
-              updateDocuments ? "bg-white" : "bg-gray-100"
-            }`}
+            className={` ${updateDocuments ? "bg-white" : "bg-gray-100"}`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="driversBackImage"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("backImageLabel")}
-          </label>
-          <input
-            type="file"
+          </Label>
+          <Input
+            id="driversBackImage"
             name="backImage"
+            type="file"
+            onChange={handleDriverLicenseImageChange}
             disabled={!updateDocuments}
             required
-            onChange={handleDriverLicenseImageChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-[13px] text-grayFont focus-visible:outline-primary ${
-              updateDocuments ? "bg-white" : "bg-gray-100"
-            }`}
+            className={` ${updateDocuments ? "bg-white" : "bg-gray-100"}`}
           />
         </div>
       </div>

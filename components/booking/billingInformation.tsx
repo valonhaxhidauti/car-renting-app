@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { BillingInfo } from "@/lib/types";
 import { ChangeEvent } from "react";
+import { Label } from "../ui/label";
 
 interface BillingInformationProps {
   billingInfo: BillingInfo;
@@ -96,91 +97,115 @@ export default function BillingInformation({
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="billingAddress"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("addressLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="billingAddress"
             name="address"
             value={billingInfo.address}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="billingNumber"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("numberLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="billingNumber"
             name="number"
             value={billingInfo.number}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="zipCode"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("zipLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="zipCode"
             name="zip"
             value={billingInfo.zip}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="streetAddress"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("streetLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="streetAddress"
             name="street"
             value={billingInfo.street}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="billingCity"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("cityLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="billingCity"
             name="city"
             value={billingInfo.city}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>
         <div className="relative">
-          <label className="block text-sm font-medium leading-6 text-grayFont">
+          <Label
+            htmlFor="billingCountry"
+            className="block text-sm font-medium leading-6 text-grayFont"
+          >
             {t("countryLabel")}
-          </label>
+          </Label>
           <input
             type="text"
+            id="billingCountry"
             name="country"
             value={billingInfo.country}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
             }`}
           />
