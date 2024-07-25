@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { BillingInfo } from "@/lib/types";
 import { ChangeEvent } from "react";
+import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 
 interface BillingInformationProps {
@@ -82,16 +83,18 @@ export default function BillingInformation({
         </h1>
         {isAuthenticated && (
           <div className="flex items-center">
-            <input
-              type="checkbox"
+            <Checkbox
               id="editBillingInfo"
               checked={updateBilling}
-              onChange={toggleUpdate}
+              onCheckedChange={toggleUpdate}
               className="mr-2"
             />
-            <label htmlFor="editBillingInfo" className="text-grayFont text-sm">
+            <Label
+              htmlFor="editBillingInfo"
+              className="cursor-pointer text-grayFont text-sm"
+            >
               {t("updateBilling")}
-            </label>
+            </Label>
           </div>
         )}
       </div>

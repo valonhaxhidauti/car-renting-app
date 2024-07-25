@@ -10,6 +10,8 @@ import {
 import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
 
 export default function CreditCardPayment() {
   const t = useTranslations("vehiclePayment.payment");
@@ -135,22 +137,11 @@ export default function CreditCardPayment() {
           </div>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-4 mobile:flex-row justify-between mt-12">
-        <div className="flex items-center mt-4">
-          <input
-            type="checkbox"
-            id="terms"
-            name="terms"
-            className="cursor-pointer"
-            required
-          />
-          <label
-            htmlFor="terms"
-            className="text-sm text-grayFont ml-2 cursor-pointer"
-          >
-            {t("termsLabel")}
-          </label>
-        </div>
+      <div className="flex items-center mt-4">
+        <Checkbox id="terms" className="mr-2" required />
+        <Label htmlFor="terms" className="text-sm text-grayFont cursor-pointer">
+          {t("termsLabel")}
+        </Label>
       </div>
     </>
   );

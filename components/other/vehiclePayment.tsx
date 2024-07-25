@@ -15,7 +15,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { BreadcrumbExtended, HeadingTitle } from "../common/headingParts";
+import { Label } from "../ui/label";
 import { Loader2 } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import BookingPrice from "../common/bookingPrice";
 import CreditCardPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
@@ -97,10 +99,8 @@ export default function VehiclePayment() {
     country: "",
   });
 
-  const handlePaymentMethodChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setPaymentMethod(e.target.value);
+  const handlePaymentMethodChange = (value: string) => {
+    setPaymentMethod(value);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -225,53 +225,50 @@ export default function VehiclePayment() {
                 updateBilling={updateBilling}
                 setUpdateBilling={setUpdateBilling}
               />
-              <div className="flex flex-col gap-4 w-full bg-white p-4">
+              <div className="flex flex-col gap-4 w-full h-full bg-white p-4">
                 <h1 className="text-3xl text-grayFont font-bold">
                   {u("paymentMethodsTitle")}
                 </h1>
-                <div className="flex gap-8 mt-2 mb-8">
-                  <div className="flex gap-2">
-                    <input
-                      type="radio"
-                      id="cash"
-                      name="paymentMethod"
-                      value="Cash"
-                      onChange={handlePaymentMethodChange}
-                      checked={paymentMethod === "Cash"}
-                    />
-                    <label className="text-grayFont text-sm" htmlFor="cash">
+                <RadioGroup
+                  value={paymentMethod}
+                  onValueChange={handlePaymentMethodChange}
+                  className="flex gap-8 mt-2 mb-8"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Cash" id="cash" />
+                    <Label htmlFor="cash" className="text-grayFont text-sm">
                       {u("payInCashLabel")}
-                    </label>
+                    </Label>
                   </div>
-                  <div className="flex gap-2">
-                    <input
-                      type="radio"
-                      id="card"
-                      name="paymentMethod"
-                      value="Card"
-                      onChange={handlePaymentMethodChange}
-                      checked={paymentMethod === "Card"}
-                    />
-                    <label className="text-grayFont text-sm" htmlFor="card">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Card" id="card" />
+                    <Label htmlFor="card" className="text-grayFont text-sm">
                       {u("creditCardInfoTitle")}
-                    </label>
+                    </Label>
                   </div>
-                  <div className="flex gap-2">
-                    <input
-                      type="radio"
-                      id="twint"
-                      name="paymentMethod"
-                      value="Twint"
-                      onChange={handlePaymentMethodChange}
-                      checked={paymentMethod === "Twint"}
-                    />
-                    <label className="text-grayFont text-sm" htmlFor="twint">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Twint" id="twint" />
+                    <Label htmlFor="twint" className="text-grayFont text-sm">
                       {u("twintLabel")}
-                    </label>
+                    </Label>
+                  </div>
+                </RadioGroup>
+                <div className="relative">
+                  <div
+                    className={`transition-opacity duration-700 ${
+                      paymentMethod === "Cash" ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    {paymentMethod === "Cash" && <CashPayment />}
+                  </div>
+                  <div
+                    className={`transition-opacity duration-700 ${
+                      paymentMethod === "Card" ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    {paymentMethod === "Card" && <CreditCardPayment />}
                   </div>
                 </div>
-                {paymentMethod === "Card" && <CreditCardPayment />}
-                {paymentMethod === "Cash" && <CashPayment />}
               </div>
               <div className="flex flex-col tablet:flex-row justify-end gap-4 w-full items-start tablet:items-center m-4 mobile:m-0">
                 <p className="text-red-500 font-medium">{formErrors}</p>

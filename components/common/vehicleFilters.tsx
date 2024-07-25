@@ -1,12 +1,13 @@
-import { useRouter } from "next/navigation";
+import { Checkbox } from "../ui/checkbox";
 import { Filters } from "@/lib/types";
-import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
 import debounce from "lodash.debounce";
 
 export default function VehicleFilters({ filtersId }: { filtersId: string }) {
-  const t = useTranslations("VehicleFilters")
+  const t = useTranslations("VehicleFilters");
   const locale = useTranslations()("Locale");
 
   const router = useRouter();
@@ -55,7 +56,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
     if (savedFilters) {
       setAppliedFilters(JSON.parse(savedFilters));
     }
-  }, []);
+  }, [locale]);
 
   const handleFilterClick = (filterType: string, filterId: string) => {
     const updatedFilters = { ...appliedFilters };
@@ -113,13 +114,13 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
               </div>
             ))
           : filters.carClass.map((filter: any) => (
-              <div key={filter.label} className="flex gap-4">
-                <input
+              <div key={filter.label} className="flex gap-2 items-center">
+                <Checkbox
                   id={`vehicleClass_${filter.label}_${filtersId}`}
-                  type="checkbox"
-                  className="cursor-pointer"
                   checked={appliedFilters.carClass.includes(filter.value)}
-                  onChange={() => handleFilterClick("carClass", filter.value)}
+                  onCheckedChange={() =>
+                    handleFilterClick("carClass", filter.value)
+                  }
                 />
                 <label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
@@ -139,16 +140,16 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
               </div>
             ))
           : filters.carType.map((filter: any) => (
-              <div key={filter.label} className="flex gap-4">
-                <input
-                  id={`vehicleClass_${filter.label}_${filtersId}`}
-                  type="checkbox"
-                  className="cursor-pointer"
+              <div key={filter.label} className="flex gap-2 items-center">
+                <Checkbox
+                  id={`vehicleType_${filter.label}_${filtersId}`}
                   checked={appliedFilters.carType.includes(filter.value)}
-                  onChange={() => handleFilterClick("carType", filter.value)}
+                  onCheckedChange={() =>
+                    handleFilterClick("carType", filter.value)
+                  }
                 />
                 <label
-                  htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
+                  htmlFor={`vehicleType_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
                   {filter.label}
@@ -158,7 +159,6 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
       </div>
       <div className="flex flex-col items-start gap-2 pb-4 mt-4 border-borderGray border-b">
         <p className="pb-2 text-sm font-bold">{t("gearType")}</p>
-
         {loading
           ? Array.from({ length: 5 }, (_, index) => (
               <div key={index} className="flex flex-col space-y-3">
@@ -166,16 +166,16 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
               </div>
             ))
           : filters.gearType.map((filter: any) => (
-              <div key={filter.label} className="flex gap-4">
-                <input
-                  id={`vehicleClass_${filter.label}_${filtersId}`}
-                  type="checkbox"
-                  className="cursor-pointer"
+              <div key={filter.label} className="flex gap-2 items-center">
+                <Checkbox
+                  id={`gearType_${filter.label}_${filtersId}`}
                   checked={appliedFilters.gearType.includes(filter.value)}
-                  onChange={() => handleFilterClick("gearType", filter.value)}
+                  onCheckedChange={() =>
+                    handleFilterClick("gearType", filter.value)
+                  }
                 />
                 <label
-                  htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
+                  htmlFor={`gearType_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
                   {filter.label}
@@ -196,16 +196,16 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
               </div>
             ))
           : filters.fuelType.map((filter: any) => (
-              <div key={filter.label} className="flex gap-4">
-                <input
-                  id={`vehicleClass_${filter.label}_${filtersId}`}
-                  type="checkbox"
-                  className="cursor-pointer"
+              <div key={filter.label} className="flex gap-2 items-center">
+                <Checkbox
+                  id={`fuelType_${filter.label}_${filtersId}`}
                   checked={appliedFilters.fuelType.includes(filter.value)}
-                  onChange={() => handleFilterClick("fuelType", filter.value)}
+                  onCheckedChange={() =>
+                    handleFilterClick("fuelType", filter.value)
+                  }
                 />
                 <label
-                  htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
+                  htmlFor={`fuelType_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
                   {filter.label}

@@ -2,6 +2,7 @@ import { useAuth } from "../context/authContext";
 import { ChangeEvent, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { DriverLicenseInfo } from "@/lib/types";
+import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -99,16 +100,18 @@ export default function DriverLicenseInformation({
         </h1>
         {isAuthenticated && (
           <div className="flex items-center">
-            <input
-              type="checkbox"
+            <Checkbox
               id="editDocuments"
               checked={updateDocuments}
-              onChange={toggleUpdate}
+              onCheckedChange={toggleUpdate}
               className="mr-2"
             />
-            <label htmlFor="editDocuments" className="text-grayFont text-sm">
+            <Label
+              htmlFor="editDocuments"
+              className="cursor-pointer text-grayFont text-sm"
+            >
               {t("updateDocuments")}
-            </label>
+            </Label>
           </div>
         )}
       </div>

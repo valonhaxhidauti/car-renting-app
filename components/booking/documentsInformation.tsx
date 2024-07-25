@@ -1,10 +1,11 @@
-// documentsInformation.tsx
 import { useEffect, useState } from "react";
 import { DriverLicenseInfo, IdInfo, PassportInfo } from "@/lib/types";
+import { useTranslations } from "next-intl";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Label } from "../ui/label";
 import DriverLicenseInformation from "./driverLicenseInformation";
 import IdInformation from "./idInformation";
 import PassportInformation from "./passportInformation";
-import { useTranslations } from "next-intl";
 
 interface DocumentsInformationProps {
   driverLicenseInfo: DriverLicenseInfo;
@@ -79,8 +80,8 @@ export default function DocumentsInformation({
     fetchPassportData();
   }, [locale, setPassportInfo]);
 
-  const handleInfoTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedInfoType(e.target.value);
+  const handleInfoTypeChange = (value: string) => {
+    setSelectedInfoType(value);
   };
 
   return (
@@ -98,43 +99,49 @@ export default function DocumentsInformation({
               {t("chooseDocument")}
             </h2>
           </div>
-          <div className="flex gap-4 mt-2 mb-8">
-            <label className="flex gap-2">
-              <input
-                type="radio"
-                value="passport"
-                checked={selectedInfoType === "passport"}
-                onChange={handleInfoTypeChange}
-              />
-              {t("passport")}
-            </label>
-            <label className="flex gap-2">
-              <input
-                type="radio"
-                value="id"
-                checked={selectedInfoType === "id"}
-                onChange={handleInfoTypeChange}
-              />
-              {t("id")}
-            </label>
-          </div>
+          <RadioGroup
+            value={selectedInfoType}
+            onValueChange={handleInfoTypeChange}
+            className="flex gap-4 mt-2 mb-8"
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="passport" id="passport" />
+              <Label htmlFor="passport">{t("passport")}</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="id" id="id" />
+              <Label htmlFor="id">{t("id")}</Label>
+            </div>
+          </RadioGroup>
         </div>
 
-        <div>
-          {selectedInfoType === "passport" && (
-            <PassportInformation
-              passportInfo={passportInfo}
-              setPassportInfo={setPassportInfo}
-              updateDocuments={updateDocuments}
-            />
-          )}
-          {selectedInfoType === "id" && (
-            <IdInformation
-              idInfo={idInfo}
-              setIdInfo={setIdInfo}
-              updateDocuments={updateDocuments}
-            />
-          )}
+        <div className="relative">
+          <div
+            className={`transition-opacity duration-700 ease-in-out ${
+              selectedInfoType === "passport" ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {selectedInfoType === "passport" && (
+              <PassportInformation
+                passportInfo={passportInfo}
+                setPassportInfo={setPassportInfo}
+                updateDocuments={updateDocuments}
+              />
+            )}
+          </div>
+          <div
+            className={`transition-opacity duration-700 ease-in-out ${
+              selectedInfoType === "id" ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {selectedInfoType === "id" && (
+              <IdInformation
+                idInfo={idInfo}
+                setIdInfo={setIdInfo}
+                updateDocuments={updateDocuments}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

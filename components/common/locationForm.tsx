@@ -2,6 +2,8 @@ import { useTranslations } from "next-intl";
 import { Dayjs } from "dayjs";
 import { Location, RentFormData } from "@/lib/types";
 import { SearchIcon } from "@/assets/svgs";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
 import LocationsSelect from "../general/locationsSelect";
 import DatePicker from "./datePicker";
 
@@ -114,19 +116,17 @@ export default function LocationForm({
         <SearchIcon className="w-5 h-5" />
       </button>
       <div className="flex items-center space-x-2 pt-4">
-        <input
+        <Checkbox
           id={id}
-          type="checkbox"
           checked={showReturnLocation}
-          className="w-4 h-4 cursor-pointer"
-          onChange={handleCheckboxClick}
+          onCheckedChange={handleCheckboxClick}
         />
-        <label
+        <Label
           htmlFor={id}
           className="text-sm font-medium leading-none cursor-pointer text-grayFont"
         >
           {t("deliverAtDifferentPoint")}
-        </label>
+        </Label>
       </div>
     </div>
   );

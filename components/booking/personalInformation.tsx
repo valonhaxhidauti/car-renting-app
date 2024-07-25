@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { PersonalInfo } from "@/lib/types";
 import { formatDate } from "../utils/formatDate";
+import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
@@ -103,16 +104,18 @@ export default function PersonalInformation({
         </h1>
         {isAuthenticated && (
           <div className="flex items-center">
-            <input
-              type="checkbox"
+            <Checkbox
               id="editPersonalInfo"
               checked={updateCustomer}
-              onChange={toggleUpdate}
+              onCheckedChange={toggleUpdate}
               className="mr-2"
             />
-            <label htmlFor="editPersonalInfo" className="text-grayFont text-sm">
+            <Label
+              htmlFor="editPersonalInfo"
+              className="cursor-pointer text-grayFont text-sm"
+            >
               {t("updateCustomer")}
-            </label>
+            </Label>
           </div>
         )}
       </div>
