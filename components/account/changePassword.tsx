@@ -10,6 +10,7 @@ import { UpdatePasswordValues } from "@/lib/types";
 import { useToast } from "@/components/ui/use-toast";
 import { UpdatePasswordValidation } from "@/components/utils/formValidations";
 import { useTranslations } from "next-intl";
+import { Label } from "../ui/label";
 
 interface ChangePasswordProps {
   setSuccessMessage: (message: string) => void;
@@ -127,12 +128,12 @@ export default function ChangePassword({
         onSubmit={submitPassword}
       >
         <div>
-          <label
+          <Label
             className="block text-sm font-medium leading-6 text-grayFont"
             htmlFor="oldPassword"
           >
             {u("oldPassword")}
-          </label>
+          </Label>
           <div className="relative">
             <input
               type={showOldPassword ? "text" : "password"}
@@ -166,12 +167,12 @@ export default function ChangePassword({
           </div>
         </div>
         <div>
-          <label
+          <Label
             className="block text-sm font-medium leading-6 text-grayFont"
             htmlFor="newPassword"
           >
             {u("newPassword")}
-          </label>
+          </Label>
           <div className="relative">
             <input
               type={showNewPassword ? "text" : "password"}
@@ -205,12 +206,12 @@ export default function ChangePassword({
           )}
         </div>
         <div>
-          <label
+          <Label
             className="block text-sm font-medium leading-6 text-grayFont"
             htmlFor="confirmPassword"
           >
             {u("confirmPassword")}
-          </label>
+          </Label>
           <div className="relative">
             <input
               type={showConfirmPassword ? "text" : "password"}

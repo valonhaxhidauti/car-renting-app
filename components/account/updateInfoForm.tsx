@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { UpdateFormValues } from "@/lib/types";
 import { UpdateFormValidation } from "../utils/formValidations";
 import { useTranslations } from "next-intl";
+import { Label } from "../ui/label";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
 
@@ -94,12 +95,16 @@ export default function UpdateInfoForm({
       onSubmit={submitForm}
     >
       <div>
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="firstName"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("register.nameLabel")}
-        </label>
+        </Label>
         <div className="relative">
           <input
             type="text"
+            id="firstName"
             value={formData.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
             className={`block mt-2 w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary 
@@ -115,12 +120,16 @@ export default function UpdateInfoForm({
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="lastName"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("register.surnameLabel")}
-        </label>
+        </Label>
         <div className="relative">
           <input
             type="text"
+            id="lastName"
             value={formData.surname}
             onChange={(e) => handleInputChange("surname", e.target.value)}
             className={`block mt-2 w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary 
@@ -136,12 +145,16 @@ export default function UpdateInfoForm({
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="email"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("register.emailAddressLabel")}
-        </label>
+        </Label>
         <div className="relative">
           <input
             type="email"
+            id="email"
             value={formData.email}
             disabled
             className="block mt-2 w-full cursor-not-allowed border-borderForm border rounded-sm p-4 text-grayFont focus-visible:outline-primary"
@@ -149,9 +162,9 @@ export default function UpdateInfoForm({
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label className="block text-sm font-medium leading-6 text-grayFont">
           {t("register.phoneNumberLabel")}
-        </label>
+        </Label>
         <div className="relative">
           <PhoneInput
             country={"de"}
@@ -183,11 +196,15 @@ export default function UpdateInfoForm({
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium leading-6 text-grayFont">
+        <Label
+          htmlFor="birthday"
+          className="block text-sm font-medium leading-6 text-grayFont"
+        >
           {t("birthdaySelect.label")}
-        </label>
+        </Label>
         <input
           type="date"
+          id="birthday"
           value={formData.birthday}
           onChange={(e) => handleInputChange("birthday", e.target.value)}
           className="block w-full border-borderForm border rounded-sm p-4 leading-snug text-grayFont focus-visible:outline-primary pr-8"
