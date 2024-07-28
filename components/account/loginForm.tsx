@@ -12,6 +12,7 @@ import { CheckIcon, FacebookIcon, GoogleIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import { LoginFormValues } from "@/lib/types";
 import { Loader2 } from "lucide-react";
+import { Label } from "../ui/label";
 import { useAuth } from "../context/authContext";
 
 export default function LoginForm() {
@@ -144,11 +145,15 @@ export default function LoginForm() {
               <div className="flex flex-col gap-4">
                 <div>
                   <div className="mt-2 relative">
-                    <label className="block text-sm font-medium leading-6 text-grayFont">
+                    <Label
+                      htmlFor="loginEmail"
+                      className="block text-sm font-medium leading-6 text-grayFont"
+                    >
                       {t("login.emailLabel")}
-                    </label>
+                    </Label>
                     <input
                       type="email"
+                      id="loginEmail"
                       value={formData.email}
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
@@ -177,11 +182,15 @@ export default function LoginForm() {
                 <div>
                   <div>
                     <div className="mt-2 relative">
-                      <label className="block text-sm font-medium leading-6 text-grayFont">
+                      <Label
+                        htmlFor="loginPassword"
+                        className="block text-sm font-medium leading-6 text-grayFont"
+                      >
                         {t("login.passwordLabel")}
-                      </label>
+                      </Label>
                       <input
                         type="password"
+                        id="loginPassword"
                         value={formData.password}
                         onChange={(e) =>
                           handleInputChange("password", e.target.value)
