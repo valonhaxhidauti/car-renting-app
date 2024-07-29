@@ -1,16 +1,16 @@
+import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Dayjs } from "dayjs";
 import { Location, RentFormData } from "@/lib/types";
 import { SearchIcon } from "@/assets/svgs";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
-import LocationsSelect from "../general/locationsSelect";
+import Autocomplete from "@mui/material/Autocomplete";
 import DatePicker from "./datePicker";
+import TextField from "@mui/material/TextField";
 
 interface LocationFormProps {
   formData: RentFormData;
-  showRentSelect: boolean;
-  showReturnSelect: boolean;
   showReturnLocation: boolean;
   rentLocations: Location[];
   returnLocations: Location[];
@@ -19,20 +19,19 @@ interface LocationFormProps {
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
   toggleRentSelect: () => void;
   toggleReturnSelect: () => void;
-  handleLocationSelect: (location: Location) => void;
+  handleLocationSelect: (location: Location, type: "rent" | "return") => void;
   handleDateChange: (
     field: "pickupDate" | "dropOffDate",
     date: Dayjs | null
   ) => void;
   errorMessage: string | null;
   handleCheckboxClick: () => void;
+  fetchLocationsOnFocus: (field: "rent" | "return") => void;
   id?: string;
 }
 
 export default function LocationForm({
   formData,
-  showRentSelect,
-  showReturnSelect,
   showReturnLocation,
   rentLocations,
   returnLocations,
@@ -43,59 +42,84 @@ export default function LocationForm({
   handleDateChange,
   errorMessage,
   handleCheckboxClick,
+  fetchLocationsOnFocus,
   id = "diffLocation",
 }: LocationFormProps) {
   const t = useTranslations("RentForm");
 
+  const handleFocus = useCallback(
+    (field: "rent" | "return") => {
+      if (field === "rent") {
+        toggleRentSelect();
+      } else {
+        toggleReturnSelect();
+      }
+      fetchLocationsOnFocus(field);
+    },
+    [fetchLocationsOnFocus, toggleRentSelect, toggleReturnSelect]
+  );
   return (
     <div className="flex flex-col w-full gap-2">
-      <div
-        className={`flex flex-col ${showReturnLocation ? "gap-2" : "gap-0"}`}
-      >
-        <div className="w-full relative border-b font-normal text-base">
-          <input
-            type="text"
-            autoComplete="off"
-            placeholder={t("rentLocation.placeholder")}
-            className="w-full p-2"
-            value={formData.rentLocation}
-            onChange={handleInputChange("rentLocation")}
-            onFocus={handleInputChange("rentLocation")}
-          />
-          <LocationsSelect
-            showSelect={showRentSelect}
-            toggleSelect={toggleRentSelect}
-            locations={rentLocations}
-            handleLocationSelect={handleLocationSelect}
-          />
-        </div>
-        <div
-          className={`w-full relative font-normal text-base ${
-            showReturnLocation
-              ? "h-full duration-300 w-full border-b "
-              : "w-0 h-0 duration-100"
-          }`}
-        >
-          <input
-            type="text"
-            autoComplete="off"
-            placeholder={t("returnLocation.placeholder")}
-            className={` ${
-              showReturnLocation
-                ? "h-full duration-300 w-full p-2"
-                : "w-0 h-0 duration-100"
-            } `}
-            value={formData.returnLocation}
-            onChange={handleInputChange("returnLocation")}
-            onFocus={handleInputChange("returnLocation")}
-          />
-          <LocationsSelect
-            showSelect={showReturnSelect}
-            toggleSelect={toggleReturnSelect}
-            locations={returnLocations}
-            handleLocationSelect={handleLocationSelect}
-          />
-        </div>
+      <div className="flex flex-col">
+        <Autocomplete
+          openOnFocus
+          id="rent-location-select"
+          options={rentLocations}
+          getOptionLabel={(option) => option.attributes.name}
+          sx={{
+            ".MuiInput-input": {
+              padding: "8px !important",
+            },
+            ".MuiInputBase-root": {
+              marginTop: "16px !important",
+            },
+          }}
+          onChange={(event, newValue) => {
+            if (newValue) {
+              handleLocationSelect(newValue, "rent");
+            }
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={t("rentLocation.placeholder")}
+              value={formData.rentLocation}
+              onChange={handleInputChange("rentLocation")}
+              onFocus={() => handleFocus("rent")}
+              variant="standard"
+            />
+          )}
+        />
+        <Autocomplete
+          openOnFocus
+          id="return-location-select"
+          className={`w-full ${showReturnLocation ? "block" : "hidden"}`}
+          options={returnLocations}
+          getOptionLabel={(option) => option.attributes.name}
+          sx={{
+            ".MuiInput-input": {
+              padding: "8px !important",
+            },
+            ".MuiInputBase-root": {
+              marginTop: "16px !important",
+            },
+          }}
+          onChange={(event, newValue) => {
+            if (newValue) {
+              handleLocationSelect(newValue, "return");
+            }
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={t("returnLocation.placeholder")}
+              value={formData.returnLocation}
+              onChange={handleInputChange("returnLocation")}
+              onFocus={() => handleFocus("return")}
+              variant="standard"
+            />
+          )}
+        />
         <DatePicker
           pickupDate={formData.pickupDate}
           dropOffDate={formData.dropOffDate}

@@ -27,46 +27,40 @@ export default function DatePicker({
       dateAdapter={AdapterDayjs}
       adapterLocale={t("locale")}
     >
-      <div className="w-full border-b">
+      <div className="w-full ">
         <MobileDateTimePicker
-          className="w-full"
-          value={pickupDate || null} // Handle null value
+          className="w-full mt-2"
+          value={pickupDate || null}
           minutesStep={30}
           disablePast
           onChange={(date) => handleDateChange("pickupDate", date)}
           slotProps={{
-            textField: { placeholder: t("pickupDate") },
+            textField: { placeholder: t("pickupDate"), variant: "standard" },
           }}
           sx={{
             ".MuiInputBase-root input": {
               padding: "8px",
               fontWeight: "300",
               cursor: "pointer",
-            },
-            ".MuiInputBase-root fieldset": {
-              border: "none !important",
             },
           }}
         />
       </div>
-      <div className="w-full border-b">
+      <div className="w-full ">
         <MobileDateTimePicker
-          className="w-full"
-          value={dropOffDate || null} // Handle null value
+          className="w-full mt-2"
+          value={dropOffDate || null}
           minutesStep={30}
           disablePast
           onChange={(date) => handleDateChange("dropOffDate", date)}
           slotProps={{
-            textField: { placeholder: t("dropOffDate") },
+            textField: { placeholder: t("dropOffDate"), variant: "standard" },
           }}
           sx={{
             ".MuiInputBase-root input": {
               padding: "8px",
               fontWeight: "300",
               cursor: "pointer",
-            },
-            ".MuiInputBase-root fieldset": {
-              border: "none !important",
             },
           }}
         />

@@ -1,5 +1,4 @@
 import { RentLocIcon, ReturnLocIcon } from "@/assets/svgs";
-import { useTranslations } from "next-intl";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import RentForm from "../general/rentForm";
 
@@ -10,7 +9,6 @@ export default function BookingInfo({
   border: boolean;
   label?: string;
 }) {
-  const t = useTranslations("ExploreVehicles");
   const { params } = useCustomSearchParams();
 
   return (

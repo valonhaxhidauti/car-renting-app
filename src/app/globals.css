@@ -101,3 +101,7 @@ html body[data-scroll-locked] {
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+#rent-location-select-label, #return-location-select-label {
+  padding: 8px !important;
+}

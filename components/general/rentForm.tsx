@@ -3,15 +3,15 @@
 import { useBooking } from "../context/bookingContext";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { X } from "lucide-react";
 import { EditBookingIcon } from "@/assets/svgs";
 import { Location, RentFormData } from "@/lib/types";
 import dayjs, { Dayjs } from "dayjs";
+import LocationForm from "../common/locationForm";
 import "dayjs/locale/de";
 import "dayjs/locale/en-gb";
-import LocationForm from "../common/locationForm";
 
 export default function RentForm({
   isModal,
@@ -41,8 +41,8 @@ export default function RentForm({
   } = useBooking();
 
   useEffect(() => {
-    const storedRentLocationId = localStorage.getItem("rentLocationId");
-    const storedReturnLocationId = localStorage.getItem("returnLocationId");
+    const storedRentLocationId = sessionStorage.getItem("rentLocationId");
+    const storedReturnLocationId = sessionStorage.getItem("returnLocationId");
 
     if (storedRentLocationId) setRentLocationId(storedRentLocationId);
     if (storedReturnLocationId) setReturnLocationId(storedReturnLocationId);
@@ -52,8 +52,8 @@ export default function RentForm({
     dayjs(dateString, "YYYY/MM/DD HH:mm");
 
   const defaultFormData: RentFormData = {
-    rentLocation: "",
-    returnLocation: "",
+    rentLocation: params.rentLocation || "", // Ensure fallback if params are empty
+    returnLocation: params.returnLocation || "", // Ensure fallback if params are empty
     pickupDate: params.pickupDate
       ? parseDate(params.pickupDate)
       : dayjs().add(1, "day").set("hour", 10).set("minute", 0),
@@ -79,13 +79,13 @@ export default function RentForm({
         fetchLocations(formData.returnLocation, "return");
       }
     }
-  }, [formData]);
+  }, [showModal, formData]);
 
   const handleInputChange =
     (field: keyof RentFormData) =>
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
-      setFormData({ ...formData, [field]: value });
+      setFormData((prevFormData) => ({ ...prevFormData, [field]: value }));
 
       const type = field === "rentLocation" ? "rent" : "return";
       await fetchLocations(value, type);
@@ -120,6 +120,15 @@ export default function RentForm({
     }
   };
 
+  const fetchLocationsOnFocus = useCallback(
+    async (field: "rent" | "return") => {
+      const query =
+        field === "rent" ? formData.rentLocation : formData.returnLocation;
+      await fetchLocations(query, field);
+    },
+    [formData, fetchLocations]
+  );
+
   const validateLocation = (location: string, type: "rent" | "return") => {
     const locations = type === "rent" ? rentLocations : returnLocations;
     return locations.some((loc) => loc.attributes.name === location);
@@ -132,13 +141,7 @@ export default function RentForm({
     const isValidRentLocation = validateLocation(rentLocation, "rent");
     const isValidReturnLocation = validateLocation(returnLocation, "return");
 
-    if (rentLocation.length < 3) {
-      setErrorMessage(t("rentLocation.minLength"));
-      return;
-    } else if (showReturnLocation && returnLocation.length < 3) {
-      setErrorMessage(t("returnLocation.minLength"));
-      return;
-    } else if (
+    if (
       !isValidRentLocation ||
       (!isValidReturnLocation && showReturnLocation)
     ) {
@@ -176,8 +179,8 @@ export default function RentForm({
     router.push(`/explore?${queryString}`);
 
     setShowModal(false);
-    setShowRentSelect(false);
-    setShowReturnSelect(false);
+    // setShowRentSelect(false);
+    // setShowReturnSelect(false);
     setErrorMessage(null);
   };
 
@@ -192,11 +195,15 @@ export default function RentForm({
   const toggleRentSelect = () => setShowRentSelect(!showRentSelect);
   const toggleReturnSelect = () => setShowReturnSelect(!showReturnSelect);
   const handleCheckboxClick = () => setShowReturnLocation(!showReturnLocation);
-  const handleLocationSelect = (location: Location) => {
-    const updatedField = showRentSelect ? "rentLocation" : "returnLocation";
+
+  const handleLocationSelect = (
+    location: Location,
+    type: "rent" | "return"
+  ) => {
+    const updatedField = type === "rent" ? "rentLocation" : "returnLocation";
     setFormData({ ...formData, [updatedField]: location.attributes.name });
 
-    if (showRentSelect) {
+    if (type === "rent") {
       setRentLocationId(location.id);
       setShowRentSelect(false);
       if (!showReturnLocation) {
@@ -237,8 +244,6 @@ export default function RentForm({
           <div className="w-full desktop:rounded-none">
             <LocationForm
               formData={formData}
-              showRentSelect={showRentSelect}
-              showReturnSelect={showReturnSelect}
               showReturnLocation={showReturnLocation}
               rentLocations={rentLocations}
               returnLocations={returnLocations}
@@ -249,6 +254,7 @@ export default function RentForm({
               handleDateChange={handleDateChange}
               handleCheckboxClick={handleCheckboxClick}
               errorMessage={errorMessage}
+              fetchLocationsOnFocus={fetchLocationsOnFocus}
               id={id}
             />
           </div>
@@ -265,8 +271,6 @@ export default function RentForm({
           <div className="flex flex-col relative w-full">
             <LocationForm
               formData={formData}
-              showRentSelect={showRentSelect}
-              showReturnSelect={showReturnSelect}
               showReturnLocation={showReturnLocation}
               rentLocations={rentLocations}
               returnLocations={returnLocations}
@@ -277,6 +281,7 @@ export default function RentForm({
               handleDateChange={handleDateChange}
               handleCheckboxClick={handleCheckboxClick}
               errorMessage={errorMessage}
+              fetchLocationsOnFocus={fetchLocationsOnFocus}
             />
             <h1 className="hidden tablet:block absolute -top-16 laptop:-top-24 -right-2 laptop:-right-9 font-bold text-[54px] laptop:text-[84px] text-gray-100 -z-10">
               {t("findNow")}
