@@ -7,10 +7,11 @@ import {
 } from "../utils/formValidations";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { Breadcrumbs } from "../common/headingParts";
 import { useTranslations } from "next-intl";
-import { ResetPasswordValues } from "@/lib/types";
+import { Breadcrumbs } from "../common/headingParts";
 import { CheckIcon } from "@/assets/svgs";
+import { Label } from "../ui/label";
+import { ResetPasswordValues } from "@/lib/types";
 
 export default function ResetPasswordForm({
   params,
@@ -100,9 +101,9 @@ export default function ResetPasswordForm({
             <form onSubmit={handleFormSubmit}>
               <div className="w-64 flex flex-col gap-2">
                 <div>
-                  <label htmlFor="email" className="text-grayFont text-sm">
+                  <Label htmlFor="email" className="text-grayFont text-sm">
                     {t("email")}
-                  </label>
+                  </Label>
                   <input
                     type="email"
                     disabled
@@ -113,9 +114,9 @@ export default function ResetPasswordForm({
                 </div>
                 <div>
                   <div className="relative">
-                    <label htmlFor="password" className="text-grayFont text-sm">
+                    <Label htmlFor="password" className="text-grayFont text-sm">
                       {t("newPassword")}
-                    </label>
+                    </Label>
                     <input
                       type="password"
                       id="password"
@@ -146,12 +147,12 @@ export default function ResetPasswordForm({
                 </div>
                 <div>
                   <div className="relative">
-                    <label
+                    <Label
                       htmlFor="passwordConfirm"
                       className="text-grayFont text-sm"
                     >
                       {t("confirmPassword")}
-                    </label>
+                    </Label>
                     <input
                       type="password"
                       id="passwordConfirm"

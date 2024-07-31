@@ -1,9 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
-import { CheckIcon } from "@/assets/svgs";
 import { isEmailValid } from "../utils/formValidations";
+import { CheckIcon } from "@/assets/svgs";
+import { FormEvent, useState } from "react";
+import { Label } from "../ui/label";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ForgotPassword() {
@@ -80,9 +81,9 @@ export default function ForgotPassword() {
               <div>
                 <div className="relative">
                   <div className="flex flex-col">
-                    <label htmlFor="email" className="text-grayFont">
+                    <Label htmlFor="email" className="text-grayFont">
                       {t("passwordReset.emailLabel")}
-                    </label>
+                    </Label>
                     <input
                       type="email"
                       id="email"

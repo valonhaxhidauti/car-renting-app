@@ -22,6 +22,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { CheckIcon } from "@/assets/svgs";
+import { Label } from "../ui/label";
 import { Loader2, ShieldAlert } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/semantic-ui.css";
@@ -171,9 +172,12 @@ export default function RegisterForm() {
           >
             <div>
               <div className="mt-2 relative">
-                <label className="block text-sm font-medium leading-6 text-grayFont">
+                <Label
+                  htmlFor="firstName"
+                  className="block text-sm font-medium leading-6 text-grayFont"
+                >
                   {t("register.nameLabel")}
-                </label>
+                </Label>
                 <input
                   type="text"
                   className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
@@ -197,11 +201,15 @@ export default function RegisterForm() {
             </div>
             <div>
               <div className="mt-2 relative">
-                <label className="block text-sm font-medium leading-6 text-grayFont">
+                <Label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium leading-6 text-grayFont"
+                >
                   {t("register.surnameLabel")}
-                </label>
+                </Label>
                 <input
                   type="text"
+                  id="lastName"
                   className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
                     errors.surname && " outline outline-2 outline-red-500"
                   }`}
@@ -222,13 +230,17 @@ export default function RegisterForm() {
               </p>
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-grayFont">
+              <Label
+                htmlFor="registerEmail"
+                className="block text-sm font-medium leading-6 text-grayFont"
+              >
                 {t("register.emailAddressLabel")}
-              </label>
+              </Label>
               <div>
                 <div className="mt-2 relative">
                   <input
                     type="email"
+                    id="registerEmail"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     className={`block w-full rounded-sm p-4 text-grayFont focus-visible:outline-primary pr-8${
@@ -250,9 +262,9 @@ export default function RegisterForm() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-grayFont">
+              <Label className="block text-sm font-medium leading-6 text-grayFont">
                 {t("register.phoneNumberLabel")}
-              </label>
+              </Label>
               <div className="mt-2 relative">
                 <PhoneInput
                   country={"de"}
@@ -289,12 +301,16 @@ export default function RegisterForm() {
               </p>
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-grayFont">
+              <Label
+                htmlFor="pass"
+                className="block text-sm font-medium leading-6 text-grayFont"
+              >
                 {t("register.passwordLabel")}
-              </label>
+              </Label>
               <div className="mt-2 relative">
                 <input
                   type="password"
+                  id="pass"
                   value={formData.password}
                   onChange={(e) =>
                     handleInputChange("password", e.target.value)
@@ -346,12 +362,16 @@ export default function RegisterForm() {
               </p>
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-grayFont">
+              <Label
+                htmlFor="pwConfirm"
+                className="block text-sm font-medium leading-6 text-grayFont"
+              >
                 {t("register.passwordAgainLabel")}
-              </label>
+              </Label>
               <div className="mt-2 relative">
                 <input
                   type="password"
+                  id="pwConfirm"
                   value={formData.passwordConfirm}
                   onChange={(e) =>
                     handleInputChange("passwordConfirm", e.target.value)
