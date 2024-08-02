@@ -181,10 +181,10 @@ export default function PersonalInformation({
             id="email"
             name="email"
             value={personalInfo.email}
-            readOnly={!updateCustomer}
+            disabled={isAuthenticated}
             onChange={handleChange}
             className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
-              updateCustomer ? "bg-white" : "bg-gray-100"
+              !isAuthenticated ? "bg-white" : "bg-gray-100"
             }`}
           />
         </div>

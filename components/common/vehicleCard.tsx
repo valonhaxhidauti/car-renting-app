@@ -44,7 +44,7 @@ export default function VehicleCard({
               <Image
                 src={`${vehicle.relationships.media[0].attributes.public_url}`}
                 alt={vehicle.attributes.name.split(" (")[0]}
-                width="240"
+                width="280"
                 height="120"
                 className="pointer-events-none py-12 h-auto"
                 priority
@@ -53,8 +53,8 @@ export default function VehicleCard({
               <Image
                 src="/sampleCar.png"
                 alt={vehicle.attributes.name.split(" (")[0]}
-                width="280"
-                height="140"
+                width="340"
+                height="120"
                 className="pointer-events-none py-12 h-auto"
                 priority
               />
@@ -62,7 +62,7 @@ export default function VehicleCard({
             <div className="flex justify-between w-full gap-2">
               <div className="w-full flex flex-col justify-between">
                 <div className="flex w-full justify-between p-4">
-                  <div className="flex justify-between gap-4 w-full items-center">
+                  <div className="flex flex-col justify-between gap-4 w-full items-start">
                     <p className="text-grayFont font-medium text-2xl">
                       {vehicle.attributes.name.split(" (")[0]}
                     </p>
@@ -70,6 +70,15 @@ export default function VehicleCard({
                       {vehicle.relationships.carType.attributes.name}
                     </p>
                   </div>
+                  {vehicle.relationships.activeSale && (
+                    <p className="py-1 px-2 text-center h-fit w-24 border-2 border-red-500 font-bold text-red-500 text-sm rounded-lg">
+                      {
+                        vehicle.relationships.activeSale.attributes
+                          .value_in_percentage
+                      }
+                      % OFF
+                    </p>
+                  )}
                 </div>
                 <div className="border-borderGray border-y flex w-full">
                   <div className="grid grid-cols-2 w-full">
@@ -138,6 +147,15 @@ export default function VehicleCard({
           <div className="w-full h-full justify-between p-4 flex flex-col gap-8">
             <div className="flex w-full justify-between">
               <div className="flex flex-col gap-4 justify-between">
+                {vehicle.relationships.activeSale && (
+                  <p className="py-1 px-2 text-center w-20 border-2 border-red-500 font-bold text-red-500 text-sm rounded-lg">
+                    {
+                      vehicle.relationships.activeSale.attributes
+                        .value_in_percentage
+                    }
+                    % OFF
+                  </p>
+                )}
                 <div className="flex flex-col gap-4">
                   <p className="text-graySecondary text-center w-32 border-graySecondary border rounded-full font-medium text-[10px] px-4 py-1">
                     {vehicle.relationships.carType.attributes.name}
@@ -153,7 +171,7 @@ export default function VehicleCard({
                   alt={vehicle.attributes.name.split(" (")[0]}
                   width="240"
                   height="120"
-                  className="pointer-events-none py-12 w-auto h-auto"
+                  className="pointer-events-none py-12"
                   priority
                 />
               ) : (
