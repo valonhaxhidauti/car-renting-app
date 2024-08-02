@@ -30,26 +30,26 @@ export default function PersonalInformation({
     const fetchProfileData = async () => {
       const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
       const token = localStorage.getItem("token");
-
-      if (isAuthenticated) {
+  
+      if (token) {
         const headers = {
           Authorization: `Bearer ${token}`,
           "Accept-Language": locale,
           "Content-Type": "application/json",
           Accept: "application/json",
         };
-
+  
         const response = await fetch(url, {
           method: "GET",
           headers,
         });
-
+  
         const data = await response.json();
-
+  
         if (data && data.data && data.data.attributes) {
           const userProfile = data.data.attributes;
-
-          setPersonalInfo({
+  
+          const updatedPersonalInfo = {
             firstName: userProfile.first_name || "",
             lastName: userProfile.last_name || "",
             email: userProfile.email || "",
@@ -58,14 +58,25 @@ export default function PersonalInformation({
             dateOfBirth: userProfile.date_of_birth
               ? formatDate(userProfile.date_of_birth)
               : "",
-          });
+          };
+  
+          setPersonalInfo(updatedPersonalInfo);
+  
+          const isAnyFieldEmpty = Object.values(updatedPersonalInfo).some(
+            (value) => !value
+          );
+          if (isAnyFieldEmpty) {
+            setUpdateCustomer(true);
+          }
         }
       } else {
         setUpdateCustomer(true);
       }
     };
+  
     fetchProfileData();
-  }, [locale, setPersonalInfo]);
+  }, [setPersonalInfo, setUpdateCustomer, locale]);
+  
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

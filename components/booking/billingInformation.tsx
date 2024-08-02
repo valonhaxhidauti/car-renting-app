@@ -28,7 +28,7 @@ export default function BillingInformation({
       const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
       const token = localStorage.getItem("token");
 
-      if (isAuthenticated) {
+      if (token) {
         const headers = {
           Authorization: `Bearer ${token}`,
           "Accept-Language": locale,
@@ -50,14 +50,23 @@ export default function BillingInformation({
           data.data.relationships.billingAddress
         ) {
           const billingData = data.data.relationships.billingAddress.attributes;
-          setBillingInfo({
+          const updatedBillingInfo = {
             address: billingData.address || "",
             number: billingData.number || "",
             zip: billingData.zip || "",
             street: billingData.street || "",
             city: billingData.city || "",
             country: billingData.country || "",
-          });
+          };
+
+          setBillingInfo(updatedBillingInfo);
+
+          const isAnyFieldEmpty = Object.values(updatedBillingInfo).some(
+            (value) => !value
+          );
+          if (isAnyFieldEmpty) {
+            setUpdateBilling(true);
+          }
         }
       } else {
         setUpdateBilling(true);
@@ -65,7 +74,7 @@ export default function BillingInformation({
     };
 
     fetchBillingInfo();
-  }, [setBillingInfo]);
+  }, [setBillingInfo, setUpdateBilling]);
 
   const handleBillingInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
     setBillingInfo({ ...billingInfo, [e.target.name]: e.target.value });

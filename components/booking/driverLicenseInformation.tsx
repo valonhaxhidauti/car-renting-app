@@ -28,7 +28,7 @@ export default function DriverLicenseInformation({
       const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
       const token = localStorage.getItem("token");
 
-      if (isAuthenticated) {
+      if (token) {
         const headers = {
           Authorization: `Bearer ${token}`,
           "Accept-Language": locale,
@@ -51,7 +51,8 @@ export default function DriverLicenseInformation({
         ) {
           const driverLicenseData =
             data.data.relationships.driverLicence.attributes;
-          setDriverLicenseInfo({
+
+          const updatedDriverLicenseInfo = {
             driverLicenseNumber: driverLicenseData.driver_licence_number || "",
             issuingCountry:
               driverLicenseData.driver_licence_issuing_country || "",
@@ -64,7 +65,16 @@ export default function DriverLicenseInformation({
               )[0] || "",
             frontImage: driverLicenseData.driver_licence_front_image || null,
             backImage: driverLicenseData.driver_licence_back_image || null,
-          });
+          };
+
+          setDriverLicenseInfo(updatedDriverLicenseInfo);
+
+          const isAnyFieldEmpty = Object.values(updatedDriverLicenseInfo).some(
+            (value) => !value
+          );
+          if (isAnyFieldEmpty) {
+            setUpdateDocuments(true);
+          }
         }
       } else {
         setUpdateDocuments(true);
@@ -72,7 +82,7 @@ export default function DriverLicenseInformation({
     };
 
     fetchDriverLicenseData();
-  }, [locale, setDriverLicenseInfo]);
+  }, [locale, setDriverLicenseInfo, setUpdateDocuments]);
 
   const handleDriverLicenseInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDriverLicenseInfo({
