@@ -37,7 +37,7 @@
                 "homepage": "Startseite"
             },
             "heading": "Meine persönlichen Informationen",
-            "checkEmail": "Bitte überprüfen Sie Ihre E-Mails, um diese zu bestätigen, oder klicken Sie auf die Schaltfläche unten!",
+            "checkEmail": "Bitte überprüfen Sie Ihre E-Mails. Wenn Sie noch keine E-Mail erhalten haben, klicken Sie bitte auf die Schaltfläche unten!",
             "emailSent": "Die E-Mail zur Bestätigung des Kontos wurde erfolgreich gesendet",
             "emailFailed": "Fehler beim Senden der E-Mail zur Bestätigung des Kontos",
             "verifyEmail": "E-Mail bestätigen"
@@ -442,7 +442,8 @@
             "monthLabel": "Monat",
             "yearLabel": "Jahr",
             "cvvLabel": "CVV",
-            "termsLabel": "Ich habe die Allgemeinen Geschäftsbedingungen gelesen und stimme ihnen zu"
+            "termsLabel": "Ich habe die Allgemeinen Geschäftsbedingungen gelesen und stimme ihnen zu",
+            "readTerms": "Klicken sie hier für die Bedingungen"
         }
     },
     "VerifyEmail": {

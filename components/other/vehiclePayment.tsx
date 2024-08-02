@@ -232,7 +232,7 @@ export default function VehiclePayment() {
                 <RadioGroup
                   value={paymentMethod}
                   onValueChange={handlePaymentMethodChange}
-                  className="flex gap-8 mt-2 mb-8"
+                  className="flex gap-8 mt-2 mb-8 overflow-auto"
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="Cash" id="cash" />

@@ -37,7 +37,7 @@
                 "homepage": "Homepage"
             },
             "heading": "My Personal Informations",
-            "checkEmail": "Please check your email in order to verify it or click the button below!",
+            "checkEmail": "Please check your email, if you have not received an email yet please click the button below!",
             "emailSent": "Email to verify account was sent successfully",
             "emailFailed": "Error sending email for verifying account",
             "verifyEmail": "Verify Email"
@@ -442,7 +442,8 @@
             "monthLabel": "Month",
             "yearLabel": "Year",
             "cvvLabel": "CVV",
-            "termsLabel": "I have read and agree to the Terms and Conditions"
+            "termsLabel": "I have read and agree to the Terms and Conditions",
+            "readTerms": "Click to read terms"
         }
     },
     "VerifyEmail": {
