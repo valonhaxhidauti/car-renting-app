@@ -195,7 +195,7 @@ export default function PersonalInformation({
           <div className="mt-2">
             <PhoneInput
               country={"de"}
-              value={personalInfo.phoneCode + personalInfo.phone}
+              value={personalInfo.phone}
               onChange={handlePhoneChange}
               disabled={!updateCustomer}
               buttonStyle={{

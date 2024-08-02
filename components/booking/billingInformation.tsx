@@ -51,7 +51,6 @@ export default function BillingInformation({
         ) {
           const billingData = data.data.relationships.billingAddress.attributes;
           const updatedBillingInfo = {
-            address: billingData.address || "",
             number: billingData.number || "",
             zip: billingData.zip || "",
             street: billingData.street || "",
@@ -108,7 +107,7 @@ export default function BillingInformation({
         )}
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
-        <div className="relative">
+        {/* <div className="relative">
           <Label
             htmlFor="billingAddress"
             className="block text-sm font-medium leading-6 text-grayFont"
@@ -126,7 +125,7 @@ export default function BillingInformation({
               updateBilling ? "bg-white" : "bg-gray-100"
             }`}
           />
-        </div>
+        </div> */}
         <div className="relative">
           <Label
             htmlFor="billingNumber"

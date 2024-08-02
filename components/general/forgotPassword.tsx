@@ -10,11 +10,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 export default function ForgotPassword() {
   const t = useTranslations("Account");
   const locale = useTranslations()("Locale");
-
-  const translations = {
-    emailRequired: t("validation.emailRequired"),
-    emailInvalid: t("validation.emailInvalid"),
-  };
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] = useState("");
   const [captcha, setCaptcha] = useState<string | null>();
@@ -46,7 +42,7 @@ export default function ForgotPassword() {
         } else {
           const errorData = await response.json();
           console.error("Error:", errorData);
-          alert("Something went wrong!");
+          setErrorMessage(errorData.detail);
         }
       } catch (error) {
         console.error("Error:", error);
@@ -101,6 +97,11 @@ export default function ForgotPassword() {
                     }`}
                   />
                 </div>
+                {errorMessage && (
+                  <p className="text-red-500 mt-1 text-sm text-left font-medium w-64">
+                    {errorMessage}
+                  </p>
+                )}
               </div>
             </div>
             <ReCAPTCHA

@@ -140,7 +140,6 @@ export type IdInfo = {
 };
 
 export type BillingInfo = {
-  address: string;
   number: string;
   zip: string;
   street: string;

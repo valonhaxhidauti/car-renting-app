@@ -109,7 +109,7 @@ export default function LoginForm() {
         <h1 className="text-grayFont font-bold text-4xl mb-2">
           {t("login.title")}
         </h1>
-        <div className="w-20 h-0.5 bg-primary"></div>
+        <div className="w-20 h-[3px] bg-primary"></div>
         <p className="text-grayFont">{t("login.description")}</p>
         <div
           className={`flex flex-col gap-2 w-full self-end justify-self-end h-full`}
