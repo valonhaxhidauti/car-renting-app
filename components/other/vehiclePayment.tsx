@@ -49,6 +49,7 @@ export default function VehiclePayment() {
   const [updateDocuments, setUpdateDocuments] = useState(false);
   const [updateBilling, setUpdateBilling] = useState(false);
   const [formErrors, setFormErrors] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string[] }>({});
   const vehicleId = params.vehicleId;
 
   const vehicle = useFetchedVehicle(vehicleId);
@@ -185,7 +186,9 @@ export default function VehiclePayment() {
       } else {
         const errorData = await response.json();
         console.log(errorData);
+
         setFormErrors(errorData.detail);
+        setFieldErrors(errorData.additional_details.validation_errors);
       }
     } catch (error: any) {
       console.error(error);
@@ -215,6 +218,7 @@ export default function VehiclePayment() {
                 setPersonalInfo={setPersonalInfo}
                 updateCustomer={updateCustomer}
                 setUpdateCustomer={setUpdateCustomer}
+                errors={fieldErrors}
               />
               <DocumentsInformation
                 driverLicenseInfo={driverLicenseInfo}
@@ -225,12 +229,14 @@ export default function VehiclePayment() {
                 setIdInfo={setIdInfo}
                 updateDocuments={updateDocuments}
                 setUpdateDocuments={setUpdateDocuments}
+                errors={fieldErrors}
               />
               <BillingInformation
                 billingInfo={billingInfo}
                 setBillingInfo={setBillingInfo}
                 updateBilling={updateBilling}
                 setUpdateBilling={setUpdateBilling}
+                errors={fieldErrors}
               />
               <div className="flex flex-col gap-4 w-full h-full bg-white p-4">
                 <h1 className="text-3xl text-grayFont font-bold">

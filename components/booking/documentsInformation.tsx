@@ -16,6 +16,7 @@ interface DocumentsInformationProps {
   setIdInfo: React.Dispatch<React.SetStateAction<IdInfo>>;
   updateDocuments: boolean;
   setUpdateDocuments: React.Dispatch<React.SetStateAction<boolean>>;
+  errors: { [key: string]: string[] };
 }
 
 export default function DocumentsInformation({
@@ -27,6 +28,7 @@ export default function DocumentsInformation({
   setIdInfo,
   updateDocuments,
   setUpdateDocuments,
+  errors,
 }: DocumentsInformationProps) {
   const t = useTranslations("vehiclePayment");
 
@@ -91,6 +93,7 @@ export default function DocumentsInformation({
         setDriverLicenseInfo={setDriverLicenseInfo}
         updateDocuments={updateDocuments}
         setUpdateDocuments={setUpdateDocuments}
+        errors={errors}
       />
       <div>
         <div className="flex flex-col gap-4">
@@ -126,6 +129,7 @@ export default function DocumentsInformation({
                 passportInfo={passportInfo}
                 setPassportInfo={setPassportInfo}
                 updateDocuments={updateDocuments}
+                errors={errors}
               />
             )}
           </div>
@@ -139,6 +143,7 @@ export default function DocumentsInformation({
                 idInfo={idInfo}
                 setIdInfo={setIdInfo}
                 updateDocuments={updateDocuments}
+                errors={errors}
               />
             )}
           </div>

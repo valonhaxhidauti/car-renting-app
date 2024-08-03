@@ -11,6 +11,7 @@ interface DriverLicenseInformationProps {
   setDriverLicenseInfo: React.Dispatch<React.SetStateAction<DriverLicenseInfo>>;
   updateDocuments: boolean;
   setUpdateDocuments: React.Dispatch<React.SetStateAction<boolean>>;
+  errors: { [key: string]: string[] };
 }
 
 export default function DriverLicenseInformation({
@@ -18,6 +19,7 @@ export default function DriverLicenseInformation({
   setDriverLicenseInfo,
   updateDocuments,
   setUpdateDocuments,
+  errors,
 }: DriverLicenseInformationProps) {
   const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
@@ -131,7 +133,7 @@ export default function DriverLicenseInformation({
             htmlFor="driverLicenseNr"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("driverLicenseNumberLabel")}
+            {t("driverLicenseNumberLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -140,17 +142,26 @@ export default function DriverLicenseInformation({
             value={driverLicenseInfo.driverLicenseNumber}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.driver_licence_number
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.driver_licence_number && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.driver_licence_number[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="driverCountry"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("issuingCountryLabel")}
+            {t("issuingCountryLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -159,17 +170,26 @@ export default function DriverLicenseInformation({
             value={driverLicenseInfo.issuingCountry}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.driver_licence_issuing_country
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.driver_licence_issuing_country && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.driver_licence_issuing_country[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="driverIssue"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("dateOfIssueLabel")}
+            {t("dateOfIssueLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="date"
@@ -178,10 +198,19 @@ export default function DriverLicenseInformation({
             value={driverLicenseInfo.dateOfIssue}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 leading-tight text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-4 leading-tight text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.driver_licence_date_of_issue
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.driver_licence_date_of_issue && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.driver_licence_date_of_issue[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
@@ -197,17 +226,26 @@ export default function DriverLicenseInformation({
             value={driverLicenseInfo.dateOfExpiration}
             readOnly={!updateDocuments}
             onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-4 leading-tight text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-4 leading-tight text-grayFont focus-visible:outline-primary ${
               updateDocuments ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.driver_licence_date_of_expiration
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.driver_licence_date_of_expiration && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.driver_licence_date_of_expiration[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="driversFrontImage"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("frontImageLabel")}
+            {t("frontImageLabel")} <span className="text-red-500">*</span>
           </Label>
           <Input
             id="driversFrontImage"
@@ -215,16 +253,24 @@ export default function DriverLicenseInformation({
             type="file"
             onChange={handleDriverLicenseImageChange}
             disabled={!updateDocuments}
-            required
-            className={` ${updateDocuments ? "bg-white" : "bg-gray-100"}`}
+            className={` ${updateDocuments ? "bg-white" : "bg-gray-100"} ${
+              errors.driver_licence_front_image
+                ? "outline outline-2 outline-red-500 border-none"
+                : "border-borderForm border"
+            }`}
           />
+          {errors.driver_licence_front_image && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.driver_licence_front_image[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="driversBackImage"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("backImageLabel")}
+            {t("backImageLabel")} <span className="text-red-500">*</span>
           </Label>
           <Input
             id="driversBackImage"
@@ -232,9 +278,17 @@ export default function DriverLicenseInformation({
             type="file"
             onChange={handleDriverLicenseImageChange}
             disabled={!updateDocuments}
-            required
-            className={` ${updateDocuments ? "bg-white" : "bg-gray-100"}`}
+            className={` ${updateDocuments ? "bg-white" : "bg-gray-100"} ${
+              errors.driver_licence_back_image
+                ? "outline outline-2 outline-red-500 border-none"
+                : "border-borderForm border"
+            }`}
           />
+          {errors.driver_licence_back_image && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.driver_licence_back_image[0]}
+            </p>
+          )}
         </div>
       </div>
     </>

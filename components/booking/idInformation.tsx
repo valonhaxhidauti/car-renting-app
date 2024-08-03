@@ -8,12 +8,14 @@ interface IdInformationProps {
   idInfo: IdInfo;
   setIdInfo: React.Dispatch<React.SetStateAction<IdInfo>>;
   updateDocuments: boolean;
+  errors: { [key: string]: string[] };
 }
 
 export default function IdInformation({
   idInfo,
   setIdInfo,
   updateDocuments,
+  errors,
 }: IdInformationProps) {
   const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
@@ -77,7 +79,7 @@ export default function IdInformation({
           htmlFor="idNr"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("idNumber")}
+          {t("idNumber")} <span className="text-red-500">*</span>
         </Label>
         <input
           type="text"
@@ -86,17 +88,26 @@ export default function IdInformation({
           value={idInfo.idNumber}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.id_number
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.id_number && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.id_number[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
           htmlFor="idCountry"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("issuingCountryLabel")}
+          {t("issuingCountryLabel")} <span className="text-red-500">*</span>
         </Label>
         <input
           type="text"
@@ -105,17 +116,26 @@ export default function IdInformation({
           value={idInfo.issuingCountry}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.id_issuing_country
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.id_issuing_country && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.id_issuing_country[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
           htmlFor="idIssue"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("dateOfIssueLabel")}
+          {t("dateOfIssueLabel")} <span className="text-red-500">*</span>
         </Label>
         <input
           type="date"
@@ -124,10 +144,19 @@ export default function IdInformation({
           value={idInfo.dateOfIssue}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.id_date_of_issue
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.id_date_of_issue && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.id_date_of_issue[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
@@ -143,17 +172,26 @@ export default function IdInformation({
           value={idInfo.dateOfExpiration}
           readOnly={!updateDocuments}
           onChange={handleIdInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.id_date_of_expiration
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.id_date_of_expiration && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.id_date_of_expiration[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
           htmlFor="idFrontImg"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("frontImageLabel")}
+          {t("frontImageLabel")} <span className="text-red-500">*</span>
         </Label>
         <Input
           type="file"
@@ -161,15 +199,24 @@ export default function IdInformation({
           name="frontImage"
           disabled={!updateDocuments}
           onChange={handleIdImageChange}
-          className={`${updateDocuments ? "bg-white" : "bg-gray-100"}`}
+          className={` ${updateDocuments ? "bg-white" : "bg-gray-100"} ${
+            errors.id_front_image
+              ? "outline outline-2 outline-red-500 border-none"
+              : "border-borderForm border"
+          }`}
         />
+        {errors.id_front_image && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.id_front_image[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
           htmlFor="idBackImg"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("backImageLabel")}
+          {t("backImageLabel")} <span className="text-red-500">*</span>
         </Label>
         <Input
           type="file"
@@ -177,8 +224,17 @@ export default function IdInformation({
           name="backImage"
           disabled={!updateDocuments}
           onChange={handleIdImageChange}
-          className={`${updateDocuments ? "bg-white" : "bg-gray-100"}`}
+          className={` ${updateDocuments ? "bg-white" : "bg-gray-100"} ${
+            errors.id_back_image
+              ? "outline outline-2 outline-red-500 border-none"
+              : "border-borderForm border"
+          }`}
         />
+        {errors.id_back_image && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.id_back_image[0]}
+          </p>
+        )}
       </div>
     </div>
   );

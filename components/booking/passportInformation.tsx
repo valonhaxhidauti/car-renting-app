@@ -8,12 +8,14 @@ interface PassportInformationProps {
   passportInfo: PassportInfo;
   setPassportInfo: React.Dispatch<React.SetStateAction<PassportInfo>>;
   updateDocuments: boolean;
+  errors: { [key: string]: string[] };
 }
 
 export default function PassportInformation({
   passportInfo,
   setPassportInfo,
   updateDocuments,
+  errors,
 }: PassportInformationProps) {
   const t = useTranslations("vehiclePayment");
 
@@ -34,7 +36,7 @@ export default function PassportInformation({
           htmlFor="passportNr"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("passportNumber")}
+          {t("passportNumber")} <span className="text-red-500">*</span>
         </Label>
         <input
           type="text"
@@ -43,17 +45,26 @@ export default function PassportInformation({
           value={passportInfo.passportNumber}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.passport_number
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.passport_number && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.passport_number[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
           htmlFor="passportCountry"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("issuingCountryLabel")}
+          {t("issuingCountryLabel")} <span className="text-red-500">*</span>
         </Label>
         <input
           type="text"
@@ -62,17 +73,26 @@ export default function PassportInformation({
           value={passportInfo.issuingCountry}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.passport_issuing_country
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.passport_issuing_country && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.passport_issuing_country[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
           htmlFor="passportIssue"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("dateOfIssueLabel")}
+          {t("dateOfIssueLabel")} <span className="text-red-500">*</span>
         </Label>
         <input
           type="date"
@@ -81,10 +101,19 @@ export default function PassportInformation({
           value={passportInfo.dateOfIssue}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.passport_date_of_issue
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.passport_date_of_issue && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.passport_date_of_issue[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
@@ -100,27 +129,44 @@ export default function PassportInformation({
           value={passportInfo.dateOfExpiration}
           readOnly={!updateDocuments}
           onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
+          className={`block mt-2 w-full rounded-sm p-3.5 text-grayFont focus-visible:outline-primary ${
             updateDocuments ? "bg-white" : "bg-gray-100"
+          } ${
+            errors.passport_date_of_expiration
+              ? "outline outline-2 outline-red-500"
+              : "border-borderForm border"
           }`}
         />
+        {errors.passport_date_of_expiration && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.passport_date_of_expiration[0]}
+          </p>
+        )}
       </div>
       <div className="relative">
         <Label
           htmlFor="passporImage"
           className="block text-sm font-medium leading-6 text-grayFont"
         >
-          {t("frontImageLabel")}
+          {t("frontImageLabel")} <span className="text-red-500">*</span>
         </Label>
         <Input
           type="file"
           name="passportFrontImage"
           id="passporImage"
           disabled={!updateDocuments}
-          required
           onChange={handlePassportImageChange}
-          className={`${updateDocuments ? "bg-white" : "bg-gray-100"}`}
+          className={` ${updateDocuments ? "bg-white" : "bg-gray-100"} ${
+            errors.passport_front_image
+              ? "outline outline-2 outline-red-500 border-none"
+              : "border-borderForm border"
+          }`}
         />
+        {errors.passport_front_image && (
+          <p className="text-red-500 text-sm mt-1 font-medium">
+            {errors.passport_front_image[0]}
+          </p>
+        )}
       </div>
     </div>
   );

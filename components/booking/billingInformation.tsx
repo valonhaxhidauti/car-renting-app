@@ -11,6 +11,7 @@ interface BillingInformationProps {
   setBillingInfo: React.Dispatch<React.SetStateAction<BillingInfo>>;
   updateBilling: boolean;
   setUpdateBilling: React.Dispatch<React.SetStateAction<boolean>>;
+  errors: { [key: string]: string[] };
 }
 
 export default function BillingInformation({
@@ -18,6 +19,7 @@ export default function BillingInformation({
   setBillingInfo,
   updateBilling,
   setUpdateBilling,
+  errors,
 }: BillingInformationProps) {
   const t = useTranslations("vehiclePayment");
   const locale = useTranslations()("Locale");
@@ -107,31 +109,12 @@ export default function BillingInformation({
         )}
       </div>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
-        {/* <div className="relative">
-          <Label
-            htmlFor="billingAddress"
-            className="block text-sm font-medium leading-6 text-grayFont"
-          >
-            {t("addressLabel")}
-          </Label>
-          <input
-            type="text"
-            id="billingAddress"
-            name="address"
-            value={billingInfo.address}
-            readOnly={!updateBilling}
-            onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
-              updateBilling ? "bg-white" : "bg-gray-100"
-            }`}
-          />
-        </div> */}
         <div className="relative">
           <Label
             htmlFor="billingNumber"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("numberLabel")}
+            {t("numberLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -140,17 +123,26 @@ export default function BillingInformation({
             value={billingInfo.number}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.number
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.number && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.number[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="zipCode"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("zipLabel")}
+            {t("zipLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -159,17 +151,26 @@ export default function BillingInformation({
             value={billingInfo.zip}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.zip
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.zip && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.zip[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="streetAddress"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("streetLabel")}
+            {t("streetLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -178,17 +179,26 @@ export default function BillingInformation({
             value={billingInfo.street}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.street
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.street && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.street[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="billingCity"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("cityLabel")}
+            {t("cityLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -197,17 +207,26 @@ export default function BillingInformation({
             value={billingInfo.city}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.city
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.city && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.city[0]}
+            </p>
+          )}
         </div>
         <div className="relative">
           <Label
             htmlFor="billingCountry"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("countryLabel")}
+            {t("countryLabel")} <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -216,10 +235,19 @@ export default function BillingInformation({
             value={billingInfo.country}
             readOnly={!updateBilling}
             onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full border-borderForm border rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
+            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
               updateBilling ? "bg-white" : "bg-gray-100"
+            } ${
+              errors.country
+                ? "outline outline-2 outline-red-500"
+                : "border-borderForm border"
             }`}
           />
+          {errors.country && (
+            <p className="text-red-500 text-sm mt-1 font-medium">
+              {errors.country[0]}
+            </p>
+          )}
         </div>
       </div>
     </div>
