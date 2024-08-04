@@ -429,6 +429,8 @@
         "streetLabel": "Street",
         "cityLabel": "City",
         "countryLabel": "Country",
+        "countries": "Countries",
+        "selectCountry": "Select a country",
         "payment": {
             "paymentMethodsTitle": "Payment methods",
             "payInCashLabel": "Pay in Cash",

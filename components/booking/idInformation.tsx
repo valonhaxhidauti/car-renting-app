@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect } from "react";
 import { IdInfo } from "@/lib/types";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { SelectCountries } from "./selectCountries";
 
 interface IdInformationProps {
   idInfo: IdInfo;
@@ -72,6 +73,13 @@ export default function IdInformation({
     }
   };
 
+  const handleCountryChange = (value: string) => {
+    setIdInfo({
+      ...idInfo,
+      issuingCountry: value,
+    });
+  };
+
   return (
     <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
       <div className="relative">
@@ -109,20 +117,11 @@ export default function IdInformation({
         >
           {t("issuingCountryLabel")} <span className="text-red-500">*</span>
         </Label>
-        <input
-          type="text"
-          id="idCountry"
-          name="issuingCountry"
-          value={idInfo.issuingCountry}
+        <SelectCountries
+          onChange={handleCountryChange}
+          selectedCountryId={idInfo.issuingCountry}
+          error={!!errors.id_issuing_country}
           readOnly={!updateDocuments}
-          onChange={handleIdInfoChange}
-          className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
-            updateDocuments ? "bg-white" : "bg-gray-100"
-          } ${
-            errors.id_issuing_country
-              ? "outline outline-2 outline-red-500"
-              : "border-borderForm border"
-          }`}
         />
         {errors.id_issuing_country && (
           <p className="text-red-500 text-sm mt-1 font-medium">

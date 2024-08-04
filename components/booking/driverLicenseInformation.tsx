@@ -5,6 +5,7 @@ import { DriverLicenseInfo } from "@/lib/types";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { SelectCountries } from "./selectCountries";
 
 interface DriverLicenseInformationProps {
   driverLicenseInfo: DriverLicenseInfo;
@@ -100,10 +101,16 @@ export default function DriverLicenseInformation({
     }
   };
 
+  const handleCountryChange = (value: string) => {
+    setDriverLicenseInfo({
+      ...driverLicenseInfo,
+      issuingCountry: value,
+    });
+  };
+
   const toggleUpdate = () => {
     setUpdateDocuments(!updateDocuments);
   };
-
   return (
     <>
       <div className="flex flex-col mobile:flex-row justify-between gap-2 items-start mobile:items-center">
@@ -133,7 +140,8 @@ export default function DriverLicenseInformation({
             htmlFor="driverLicenseNr"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
-            {t("driverLicenseNumberLabel")} <span className="text-red-500">*</span>
+            {t("driverLicenseNumberLabel")}{" "}
+            <span className="text-red-500">*</span>
           </Label>
           <input
             type="text"
@@ -158,25 +166,16 @@ export default function DriverLicenseInformation({
         </div>
         <div className="relative">
           <Label
-            htmlFor="driverCountry"
+            htmlFor="select"
             className="block text-sm font-medium leading-6 text-grayFont"
           >
             {t("issuingCountryLabel")} <span className="text-red-500">*</span>
           </Label>
-          <input
-            type="text"
-            id="driverCountry"
-            name="issuingCountry"
-            value={driverLicenseInfo.issuingCountry}
+          <SelectCountries
+            onChange={handleCountryChange}
+            selectedCountryId={driverLicenseInfo.issuingCountry}
+            error={!!errors.driver_licence_issuing_country} 
             readOnly={!updateDocuments}
-            onChange={handleDriverLicenseInfoChange}
-            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
-              updateDocuments ? "bg-white" : "bg-gray-100"
-            } ${
-              errors.driver_licence_issuing_country
-                ? "outline outline-2 outline-red-500"
-                : "border-borderForm border"
-            }`}
           />
           {errors.driver_licence_issuing_country && (
             <p className="text-red-500 text-sm mt-1 font-medium">

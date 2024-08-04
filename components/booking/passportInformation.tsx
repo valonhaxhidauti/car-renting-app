@@ -3,6 +3,7 @@ import { PassportInfo } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { SelectCountries } from "./selectCountries";
 
 interface PassportInformationProps {
   passportInfo: PassportInfo;
@@ -27,6 +28,13 @@ export default function PassportInformation({
     if (e.target.files && e.target.files[0]) {
       setPassportInfo({ ...passportInfo, frontImage: e.target.files[0] });
     }
+  };
+
+  const handleCountryChange = (value: string) => {
+    setPassportInfo({
+      ...passportInfo,
+      issuingCountry: value,
+    });
   };
 
   return (
@@ -66,20 +74,11 @@ export default function PassportInformation({
         >
           {t("issuingCountryLabel")} <span className="text-red-500">*</span>
         </Label>
-        <input
-          type="text"
-          id="passportCountry"
-          name="issuingCountry"
-          value={passportInfo.issuingCountry}
+        <SelectCountries
+          onChange={handleCountryChange}
+          selectedCountryId={passportInfo.issuingCountry}
+          error={!!errors.passport_issuing_country}
           readOnly={!updateDocuments}
-          onChange={handlePassportInfoChange}
-          className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
-            updateDocuments ? "bg-white" : "bg-gray-100"
-          } ${
-            errors.passport_issuing_country
-              ? "outline outline-2 outline-red-500"
-              : "border-borderForm border"
-          }`}
         />
         {errors.passport_issuing_country && (
           <p className="text-red-500 text-sm mt-1 font-medium">

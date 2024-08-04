@@ -5,6 +5,7 @@ import { BillingInfo } from "@/lib/types";
 import { ChangeEvent } from "react";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
+import { SelectCountries } from "./selectCountries";
 
 interface BillingInformationProps {
   billingInfo: BillingInfo;
@@ -83,6 +84,13 @@ export default function BillingInformation({
 
   const toggleUpdate = () => {
     setUpdateBilling(!updateBilling);
+  };
+
+  const handleCountryChange = (value: string) => {
+    setBillingInfo({
+      ...billingInfo,
+      country: value,
+    });
   };
 
   return (
@@ -228,20 +236,11 @@ export default function BillingInformation({
           >
             {t("countryLabel")} <span className="text-red-500">*</span>
           </Label>
-          <input
-            type="text"
-            id="billingCountry"
-            name="country"
-            value={billingInfo.country}
+          <SelectCountries
+            selectedCountryId={billingInfo.country}
+            onChange={handleCountryChange}
+            error={!!errors.driver_licence_issuing_country}
             readOnly={!updateBilling}
-            onChange={handleBillingInfoChange}
-            className={`block mt-2 w-full rounded-sm p-3.5 leading-relaxed text-grayFont focus-visible:outline-primary ${
-              updateBilling ? "bg-white" : "bg-gray-100"
-            } ${
-              errors.country
-                ? "outline outline-2 outline-red-500"
-                : "border-borderForm border"
-            }`}
           />
           {errors.country && (
             <p className="text-red-500 text-sm mt-1 font-medium">
