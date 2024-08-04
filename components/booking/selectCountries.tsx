@@ -49,8 +49,6 @@ export const SelectCountries: React.FC<SelectCountriesProps> = ({
     selectedCountryId
   );
 
-  console.log("countr", selectedValue);
-
   useEffect(() => {
     async function fetchCountries() {
       try {

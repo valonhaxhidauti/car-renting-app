@@ -59,7 +59,8 @@ export type CarAdData = {
   id: string;
   attributes: {
     name: string;
-    base_price_in_cents: string;
+    base_price_in_cents: number;
+    final_price_in_cents: number;
   };
   relationships: any;
 };

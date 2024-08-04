@@ -145,19 +145,10 @@ export default function VehiclePayment() {
     body.append("city", billingInfo.city);
     body.append("country", billingInfo.country);
     body.append("driver_licence_number", driverLicenseInfo.driverLicenseNumber);
-    body.append(
-      "driver_licence_issuing_country",
-      driverLicenseInfo.issuingCountry
-    );
+    body.append("driver_licence_issuing_country", driverLicenseInfo.issuingCountry);
     body.append("driver_licence_date_of_issue", driverLicenseInfo.dateOfIssue);
-    body.append(
-      "driver_licence_date_of_expiration",
-      driverLicenseInfo.dateOfExpiration
-    );
-    body.append(
-      "driver_licence_front_image",
-      driverLicenseInfo.frontImage || ""
-    );
+    body.append("driver_licence_date_of_expiration", driverLicenseInfo.dateOfExpiration);
+    body.append("driver_licence_front_image", driverLicenseInfo.frontImage || "");
     body.append("driver_licence_back_image", driverLicenseInfo.backImage || "");
     body.append("passport_number", passportInfo.passportNumber);
     body.append("passport_issuing_country", passportInfo.issuingCountry);

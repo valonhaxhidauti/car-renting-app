@@ -16,7 +16,8 @@ export default function CarAdvertisement() {
     id: "",
     attributes: {
       name: "",
-      base_price_in_cents: "",
+      base_price_in_cents: 0,
+      final_price_in_cents: 0,
     },
     relationships: {},
   });
@@ -74,6 +75,9 @@ export default function CarAdvertisement() {
     return null;
   }
 
+  const finalPrice = carData.attributes.final_price_in_cents;
+  const [integerPart, fractionalPart] = finalPrice.toFixed(2).split(".");
+
   return (
     <div className="hidden laptop:block bg-secondary w-1/2 h-1/6 fixed bottom-0 right-0">
       <div className="bg-primary w-[30%] h-full flex absolute bottom-0 -translate-x-full">
@@ -95,12 +99,10 @@ export default function CarAdvertisement() {
             {t("carDetails.startFrom")}
           </p>
           <div>
-            <span className="text-3xl font-bold">
-              {carData.attributes.base_price_in_cents}
-            </span>
+            <span className="text-3xl font-bold">{integerPart}</span>
             <span className="inline-block">
               <sup className="relative block text-xs leading-none font-bold -top-[2px]">
-                ,00
+                ,{fractionalPart}
               </sup>
               <sub className="relative text-xs block leading-none font-bold top-0">
                 {t("carDetails.daily")}

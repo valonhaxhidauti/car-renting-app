@@ -10,6 +10,8 @@ import {
 
 export default function VehicleDetailsInfo({ vehicle }: { vehicle: any }) {
   const t = useTranslations("VehicleDetails");
+  const finalPrice = vehicle.attributes.final_price_in_cents;
+  const [integerPart, fractionalPart] = finalPrice.toFixed(2).split(".");
 
   return (
     <div className="bg-white flex flex-col gap-4">
@@ -80,7 +82,7 @@ export default function VehicleDetailsInfo({ vehicle }: { vehicle: any }) {
                     {t("vehiclePrice")}
                   </p>
                   <p className="text-sm font-bold text-primary tablet:text-base">
-                    CHF {vehicle.attributes.base_price_in_cents},00
+                    CHF {integerPart},{fractionalPart}
                   </p>
                 </div>
               </div>

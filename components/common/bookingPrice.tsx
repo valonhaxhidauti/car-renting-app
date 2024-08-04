@@ -18,20 +18,20 @@ export default function BookingPrice(vehicle: any) {
   const t = useTranslations("VehicleDetails");
 
   const childSeatPrice =
-    vehicle.vehicle.relationships?.additionalItems[0]?.attributes?.base_price_in_cents.toFixed(
+    vehicle.vehicle.relationships?.additionalItems[0]?.attributes?.final_price_in_cents.toFixed(
       "2"
     ) || 0;
   const rackPrice =
-    vehicle.vehicle.relationships?.additionalItems[1]?.attributes?.base_price_in_cents.toFixed(
+    vehicle.vehicle.relationships?.additionalItems[1]?.attributes?.final_price_in_cents.toFixed(
       "2"
     ) || 0;
   const naviPrice =
-    vehicle.vehicle.relationships?.additionalItems[2]?.attributes?.base_price_in_cents.toFixed(
+    vehicle.vehicle.relationships?.additionalItems[2]?.attributes?.final_price_in_cents.toFixed(
       "2"
     ) || 0;
 
   const prices: VehiclePrices = {
-    vehicle: vehicle.vehicle.attributes?.base_price_in_cents || 0.0,
+    vehicle: vehicle.vehicle.attributes?.final_price_in_cents || 0.0,
     childSeat: childSeatPrice,
     navigation: rackPrice,
     carRack: naviPrice,
@@ -48,14 +48,14 @@ export default function BookingPrice(vehicle: any) {
   } = useBooking();
 
   const { params } = useCustomSearchParams();
-  const pickupDate = dayjs(params.pickupDate, "YYYY/MM/DD");
-  const dropOffDate = dayjs(params.dropOffDate, "YYYY/MM/DD");
-  const daysDifference =
+  const pickupDate = dayjs(params.pickupDate, "YYYY/MM/DD HH:mm");
+  const dropOffDate = dayjs(params.dropOffDate, "YYYY/MM/DD HH:mm");
+
+  const hoursDifference =
     dropOffDate.isValid() && pickupDate.isValid()
-      ? dropOffDate.isSame(pickupDate, "day")
-        ? 1
-        : dropOffDate.diff(pickupDate, "day")
-      : 1;
+      ? dropOffDate.diff(pickupDate, "hour")
+      : 0;
+  const daysDifference = Math.ceil(hoursDifference / 24);
 
   const paramsSet =
     params &&

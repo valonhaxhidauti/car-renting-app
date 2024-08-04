@@ -1,16 +1,19 @@
 import {
   VehicleIcon,
   FuelIcon,
-  SearchIcon,
   SeatIcon,
   TransmissionIcon,
-  WarningIcon,
 } from "@/assets/svgs";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+const formatPrice = (price: number) => {
+  const [integerPart, fractionalPart] = price.toFixed(2).split(".");
+  return { integerPart, fractionalPart };
+};
 
 export default function VehicleCard({
   viewMode,
@@ -30,6 +33,9 @@ export default function VehicleCard({
 
     return () => clearTimeout(timeout);
   }, []);
+
+  const basePrice = formatPrice(vehicle.attributes.base_price_in_cents);
+  const finalPrice = formatPrice(vehicle.attributes.final_price_in_cents);
 
   return (
     <div
@@ -128,7 +134,7 @@ export default function VehicleCard({
                           : "text-4xl"
                       } font-bold`}
                     >
-                      {vehicle.attributes.base_price_in_cents}
+                      {basePrice.integerPart}
                     </span>
                     <span className="inline-block ">
                       <sup
@@ -138,7 +144,7 @@ export default function VehicleCard({
                             : "text-xl -top-3"
                         } relative block leading-none font-bold`}
                       >
-                        ,00
+                        ,{basePrice.fractionalPart}
                       </sup>
                     </span>
                   </div>
@@ -146,11 +152,11 @@ export default function VehicleCard({
                     <div className="text-center">
                       <sup className="text-xs font-bold top-0">CHF</sup>
                       <span className="text-4xl font-bold">
-                        {Math.trunc(vehicle.attributes.final_price_in_cents)}
+                        {finalPrice.integerPart}
                       </span>
                       <span className="inline-block ">
                         <sup className="relative block text-xl leading-none font-bold -top-3">
-                          ,00
+                          ,{finalPrice.fractionalPart}
                         </sup>
                       </span>
                     </div>
@@ -264,7 +270,7 @@ export default function VehicleCard({
                           : "text-4xl"
                       } font-bold`}
                     >
-                      {vehicle.attributes.base_price_in_cents}
+                      {basePrice.integerPart}
                     </span>
                     <span className="inline-block ">
                       <sup
@@ -274,7 +280,7 @@ export default function VehicleCard({
                             : "text-xl -top-3"
                         } relative block leading-none font-bold`}
                       >
-                        ,00
+                        ,{basePrice.fractionalPart}
                       </sup>
                     </span>
                   </div>
@@ -282,11 +288,11 @@ export default function VehicleCard({
                     <div className="text-center">
                       <sup className="text-xs font-bold top-0">CHF</sup>
                       <span className="text-4xl font-bold">
-                        {Math.trunc(vehicle.attributes.final_price_in_cents)}
+                        {finalPrice.integerPart}
                       </span>
                       <span className="inline-block ">
                         <sup className="relative block text-xl leading-none font-bold -top-3">
-                          ,00
+                          ,{finalPrice.fractionalPart}
                         </sup>
                       </span>
                     </div>
