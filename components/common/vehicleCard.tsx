@@ -53,9 +53,9 @@ export default function VehicleCard({
               <Image
                 src="/sampleCar.png"
                 alt={vehicle.attributes.name.split(" (")[0]}
-                width="340"
-                height="120"
-                className="pointer-events-none py-12 h-auto"
+                width="240"
+                height="80"
+                className="pointer-events-none py-16"
                 priority
               />
             )}
@@ -119,15 +119,42 @@ export default function VehicleCard({
               </div>
               <div className="flex flex-col justify-between items-center p-4 bg-primary-background text-secondary">
                 <div className="h-full content-center">
-                  <sup className="text-xs font-bold top-0">CHF</sup>
-                  <span className="text-4xl font-bold">
-                    {vehicle.attributes.base_price_in_cents}
-                  </span>
-                  <span className="inline-block ">
-                    <sup className="relative block text-xl leading-none font-bold -top-3">
-                      ,00
-                    </sup>
-                  </span>
+                  <div className="text-center">
+                    <sup className="text-xs font-bold top-0">CHF</sup>
+                    <span
+                      className={`${
+                        vehicle.relationships.activeSale
+                          ? "text-2xl line-through"
+                          : "text-4xl"
+                      } font-bold`}
+                    >
+                      {vehicle.attributes.base_price_in_cents}
+                    </span>
+                    <span className="inline-block ">
+                      <sup
+                        className={`${
+                          vehicle.relationships.activeSale
+                            ? "text-base -top-2"
+                            : "text-xl -top-3"
+                        } relative block leading-none font-bold`}
+                      >
+                        ,00
+                      </sup>
+                    </span>
+                  </div>
+                  {vehicle.relationships.activeSale && (
+                    <div className="text-center">
+                      <sup className="text-xs font-bold top-0">CHF</sup>
+                      <span className="text-4xl font-bold">
+                        {Math.trunc(vehicle.attributes.final_price_in_cents)}
+                      </span>
+                      <span className="inline-block ">
+                        <sup className="relative block text-xl leading-none font-bold -top-3">
+                          ,00
+                        </sup>
+                      </span>
+                    </div>
+                  )}
                   <p className="text-xs font-medium text-center">
                     {t("dailyFee")}
                   </p>
@@ -178,8 +205,8 @@ export default function VehicleCard({
                 <Image
                   src="/sampleCar.png"
                   alt={vehicle.attributes.name.split(" (")[0]}
-                  width="240"
-                  height="120"
+                  width="180"
+                  height="100"
                   className="pointer-events-none py-12"
                   priority
                 />
@@ -228,15 +255,42 @@ export default function VehicleCard({
               </div>
               <div className="flex flex-col justify-between items-center p-4 bg-primary-background text-secondary">
                 <div className="h-full content-center">
-                  <sup className="text-xs font-bold top-0">CHF</sup>
-                  <span className="text-4xl font-bold">
-                    {vehicle.attributes.base_price_in_cents}
-                  </span>
-                  <span className="inline-block ">
-                    <sup className="relative block text-xl leading-none font-bold -top-3">
-                      ,00
-                    </sup>
-                  </span>
+                  <div className="text-center">
+                    <sup className="text-xs font-bold top-0">CHF </sup>
+                    <span
+                      className={`${
+                        vehicle.relationships.activeSale
+                          ? "line-through"
+                          : "text-4xl"
+                      } font-bold`}
+                    >
+                      {vehicle.attributes.base_price_in_cents}
+                    </span>
+                    <span className="inline-block ">
+                      <sup
+                        className={`${
+                          vehicle.relationships.activeSale
+                            ? "text-xs -top-0.5"
+                            : "text-xl -top-3"
+                        } relative block leading-none font-bold`}
+                      >
+                        ,00
+                      </sup>
+                    </span>
+                  </div>
+                  {vehicle.relationships.activeSale && (
+                    <div className="text-center">
+                      <sup className="text-xs font-bold top-0">CHF</sup>
+                      <span className="text-4xl font-bold">
+                        {Math.trunc(vehicle.attributes.final_price_in_cents)}
+                      </span>
+                      <span className="inline-block ">
+                        <sup className="relative block text-xl leading-none font-bold -top-3">
+                          ,00
+                        </sup>
+                      </span>
+                    </div>
+                  )}
                   <p className="text-xs font-medium text-center">
                     {t("dailyFee")}
                   </p>
