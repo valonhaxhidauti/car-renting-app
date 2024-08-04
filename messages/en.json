@@ -299,6 +299,7 @@
         "locale": "en-gb",
         "pickupDate": "Pickup Date",
         "invalidLocationError": "Please select one of the dropdown locations",
+        "pickupDateBeforeCurrentError": "Pickup date cannot be before current time.",
         "invalidDateError": "Drop off date should be at least 1 hour after pickup date.",
         "noDateError": "Please fill in the dates.",
         "rentLocation": {

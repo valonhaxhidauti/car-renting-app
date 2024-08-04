@@ -52,8 +52,8 @@ export default function RentForm({
     dayjs(dateString, "YYYY/MM/DD HH:mm");
 
   const defaultFormData: RentFormData = {
-    rentLocation: params.rentLocation || "", // Ensure fallback if params are empty
-    returnLocation: params.returnLocation || "", // Ensure fallback if params are empty
+    rentLocation: params.rentLocation || "", 
+    returnLocation: params.returnLocation || "", 
     pickupDate: params.pickupDate
       ? parseDate(params.pickupDate)
       : dayjs().add(1, "day").set("hour", 10).set("minute", 0),
@@ -141,6 +141,13 @@ export default function RentForm({
     const isValidRentLocation = validateLocation(rentLocation, "rent");
     const isValidReturnLocation = validateLocation(returnLocation, "return");
 
+    const now = dayjs();
+
+    if (pickupDate && pickupDate.isBefore(now)) {
+      setErrorMessage(t("pickupDateBeforeCurrentError"));
+      return;
+    }
+
     if (
       !isValidRentLocation ||
       (!isValidReturnLocation && showReturnLocation)
@@ -179,8 +186,6 @@ export default function RentForm({
     router.push(`/explore?${queryString}`);
 
     setShowModal(false);
-    // setShowRentSelect(false);
-    // setShowReturnSelect(false);
     setErrorMessage(null);
   };
 

@@ -299,6 +299,7 @@
         "locale": "de",
         "pickupDate": "Abholdatum",
         "invalidLocationError": "Bitte wählen Sie eine der Dropdown-Optionen aus",
+        "pickupDateBeforeCurrentError": "Abholtermin kann nicht vor der aktuellen Zeit liegen.",
         "invalidDateError": "Das Rückgabedatum sollte mindestens 1 Stunde nach dem Abholdatum liegen.",
         "noDateError": "Bitte füllen Sie die Daten aus.",
         "rentLocation": {
