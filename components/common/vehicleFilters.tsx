@@ -3,6 +3,7 @@ import { Filters } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { Label } from "../ui/label";
 import { Skeleton } from "../ui/skeleton";
 import debounce from "lodash.debounce";
 
@@ -122,12 +123,12 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                     handleFilterClick("carClass", filter.value)
                   }
                 />
-                <label
+                <Label
                   htmlFor={`vehicleClass_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
                   {filter.label}
-                </label>
+                </Label>
               </div>
             ))}
       </div>
@@ -148,12 +149,12 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                     handleFilterClick("carType", filter.value)
                   }
                 />
-                <label
+                <Label
                   htmlFor={`vehicleType_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
                   {filter.label}
-                </label>
+                </Label>
               </div>
             ))}
       </div>
@@ -174,12 +175,12 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                     handleFilterClick("gearType", filter.value)
                   }
                 />
-                <label
+                <Label
                   htmlFor={`gearType_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
                   {filter.label}
-                </label>
+                </Label>
               </div>
             ))}
       </div>
@@ -204,12 +205,12 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
                     handleFilterClick("fuelType", filter.value)
                   }
                 />
-                <label
+                <Label
                   htmlFor={`fuelType_${filter.label}_${filtersId}`}
                   className="text-grayFont text-xs cursor-pointer"
                 >
                   {filter.label}
-                </label>
+                </Label>
               </div>
             ))}
       </div>

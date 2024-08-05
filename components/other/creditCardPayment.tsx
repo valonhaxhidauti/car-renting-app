@@ -45,12 +45,12 @@ export default function CreditCardPayment() {
       <h1 className="text-grayFont font-bold"> {t("creditCardInfoTitle")}</h1>
       <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3">
         <div className="flex flex-col w-full mobile:w-auto">
-          <label
+          <Label
             className="block text-sm font-medium leading-6 text-grayFont"
             htmlFor="cardOwner"
           >
             {t("cardOwnerLabel")}
-          </label>
+          </Label>
           <input
             type="text"
             id="cardOwner"
@@ -60,12 +60,12 @@ export default function CreditCardPayment() {
           />
         </div>
         <div className="flex flex-col w-full mobile:w-auto">
-          <label
+          <Label
             className="block text-sm font-medium leading-6 text-grayFont"
             htmlFor="cardNumber"
           >
             {t("cardNumberLabel")}
-          </label>
+          </Label>
           <input
             type="text"
             pattern="[0-9]*"
@@ -82,9 +82,9 @@ export default function CreditCardPayment() {
         </div>
         <div className="flex gap-4 w-full mobile:w-auto">
           <div className="flex flex-col  w-3/4">
-            <label className="block text-sm font-medium leading-6 text-grayFont">
+            <Label className="block text-sm font-medium leading-6 text-grayFont">
               {t("expireDateLabel")}
-            </label>
+            </Label>
             <div className="flex gap-2">
               <Select onOpenChange={onSelectClicked}>
                 <SelectTrigger className="mt-2 p-3.5 h-full border-borderForm border rounded-sm">
@@ -121,12 +121,12 @@ export default function CreditCardPayment() {
             </div>
           </div>
           <div className="w-1/4 flex flex-col">
-            <label
+            <Label
               className="block text-sm font-medium leading-6 text-grayFont"
               htmlFor="cvv"
             >
               {t("cvvLabel")}
-            </label>
+            </Label>
             <input
               type="password"
               maxLength={3}
