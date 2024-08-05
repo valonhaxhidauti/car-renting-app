@@ -111,10 +111,7 @@ export default function IdInformation({
         )}
       </div>
       <div className="relative">
-        <Label
-          htmlFor="idCountry"
-          className="block text-sm font-medium leading-6 text-grayFont"
-        >
+        <Label className="block text-sm font-medium leading-6 text-grayFont">
           {t("issuingCountryLabel")} <span className="text-red-500">*</span>
         </Label>
         <SelectCountries

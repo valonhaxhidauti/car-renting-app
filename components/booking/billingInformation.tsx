@@ -230,10 +230,7 @@ export default function BillingInformation({
           )}
         </div>
         <div className="relative">
-          <Label
-            htmlFor="billingCountry"
-            className="block text-sm font-medium leading-6 text-grayFont"
-          >
+          <Label className="block text-sm font-medium leading-6 text-grayFont">
             {t("countryLabel")} <span className="text-red-500">*</span>
           </Label>
           <SelectCountries

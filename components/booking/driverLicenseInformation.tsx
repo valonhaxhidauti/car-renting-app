@@ -165,16 +165,13 @@ export default function DriverLicenseInformation({
           )}
         </div>
         <div className="relative">
-          <Label
-            htmlFor="select"
-            className="block text-sm font-medium leading-6 text-grayFont"
-          >
+          <Label className="block text-sm font-medium leading-6 text-grayFont">
             {t("issuingCountryLabel")} <span className="text-red-500">*</span>
           </Label>
           <SelectCountries
             onChange={handleCountryChange}
             selectedCountryId={driverLicenseInfo.issuingCountry}
-            error={!!errors.driver_licence_issuing_country} 
+            error={!!errors.driver_licence_issuing_country}
             readOnly={!updateDocuments}
           />
           {errors.driver_licence_issuing_country && (

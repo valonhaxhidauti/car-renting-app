@@ -148,7 +148,6 @@ export default function CreditCardPayment() {
             {t("termsLabel")}
           </Label>
         </div>
-
         <Link href="/terms" className="ml-6 text-blue-500 underline text-sm">
           {t("readTerms")}
         </Link>
