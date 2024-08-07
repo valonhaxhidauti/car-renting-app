@@ -1,13 +1,7 @@
-import {
-  AccountIcon,
-  EditIcon,
-  LogoutIcon,
-  ReservationIcon,
-} from "@/assets/svgs";
+import { AccountIcon, LogoutIcon, ReservationIcon } from "@/assets/svgs";
 import { useTranslations } from "next-intl";
 import { useHandleLogout } from "../hooks/useHandleLogout";
 import { Link } from "next-view-transitions";
-import Image from "next/image";
 
 export default function AccountSideMenu() {
   const t = useTranslations("Account.sideMenu");

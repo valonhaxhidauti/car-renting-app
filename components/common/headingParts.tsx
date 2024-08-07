@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link } from 'next-view-transitions'
+import { Link } from "next-view-transitions";
 
 const HeadingTitle = ({ title }: { title: string }) => {
   return (
@@ -19,7 +19,7 @@ const HeadingTitle = ({ title }: { title: string }) => {
   );
 };
 
-const Breadcrumbs = ({ translations, }: { translations: any }) => {
+const Breadcrumbs = ({ translations }: { translations: any }) => {
   return (
     <Breadcrumb className="max-w-[1440px] m-auto w-full px-4 mobile:px-8 bigDesktop:px-0 py-8">
       <BreadcrumbList>
@@ -30,16 +30,20 @@ const Breadcrumbs = ({ translations, }: { translations: any }) => {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>
-            {translations("heading")}
-          </BreadcrumbPage>
+          <BreadcrumbPage>{translations("heading")}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
   );
 };
 
-const BreadcrumbExtended = ({ translations, params }: { translations: any, params: any }) => {
+const BreadcrumbExtended = ({
+  translations,
+  params,
+}: {
+  translations: any;
+  params: any;
+}) => {
   return (
     <Breadcrumb className="w-full px-4 mobile:px-8 bigDesktop:px-0 py-8">
       <BreadcrumbList>
@@ -71,4 +75,4 @@ const BreadcrumbExtended = ({ translations, params }: { translations: any, param
   );
 };
 
-export {HeadingTitle, Breadcrumbs, BreadcrumbExtended}
+export { HeadingTitle, Breadcrumbs, BreadcrumbExtended };

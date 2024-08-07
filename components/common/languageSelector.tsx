@@ -7,7 +7,6 @@ import {
   SelectLabel,
   SelectTrigger,
 } from "../ui/select";
-
 import { useLocale, useTranslations } from "next-intl";
 import { useOverflowControl } from "../hooks/useOverflowControl";
 import { usePathname, useRouter } from "next/navigation";
@@ -49,7 +48,6 @@ export default function LanguageSelector({
       router.replace(newUrl);
     });
   }
-
 
   return (
     <>

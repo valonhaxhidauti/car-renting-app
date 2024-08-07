@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -7,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useOverflowControl } from "../hooks/useOverflowControl";
@@ -24,12 +24,11 @@ export default function VehicleSort() {
     setCurrentSort(initialSort);
   }, [router]);
 
-
   function onSelectClicked() {
     toggleShown();
   }
 
-  const handleSortChange = (sortBy:string) => {
+  const handleSortChange = (sortBy: string) => {
     const queryParams = new URLSearchParams(window.location.search);
 
     if (sortBy === currentSort) {
@@ -46,7 +45,11 @@ export default function VehicleSort() {
 
   return (
     <div className="flex gap-2 items-center text-sm">
-      <Select value={currentSort} onValueChange={handleSortChange} onOpenChange={onSelectClicked}>
+      <Select
+        value={currentSort}
+        onValueChange={handleSortChange}
+        onOpenChange={onSelectClicked}
+      >
         <SelectTrigger className="flex border-borderGray border-2 text-grayFont text-xs font-medium rounded-full h-8 gap-2 px-2">
           {t("sortBy")}
           <SelectValue />

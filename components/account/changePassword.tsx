@@ -4,7 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { Eye, EyeOff, InfoIcon, ShieldAlert } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { UpdatePasswordValues } from "@/lib/types";
 import { useToast } from "@/components/ui/use-toast";

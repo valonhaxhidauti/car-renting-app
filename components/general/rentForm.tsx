@@ -52,8 +52,8 @@ export default function RentForm({
     dayjs(dateString, "YYYY/MM/DD HH:mm");
 
   const defaultFormData: RentFormData = {
-    rentLocation: params.rentLocation || "", 
-    returnLocation: params.returnLocation || "", 
+    rentLocation: params.rentLocation || "",
+    returnLocation: params.returnLocation || "",
     pickupDate: params.pickupDate
       ? parseDate(params.pickupDate)
       : dayjs().add(1, "day").set("hour", 10).set("minute", 0),

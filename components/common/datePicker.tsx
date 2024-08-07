@@ -28,20 +28,23 @@ export default function DatePicker({
   const t = useTranslations("RentForm");
   const [workingHours, setWorkingHours] = useState<WorkingHours>({
     start: "08:00",
-    end: "19:00"
+    end: "19:00",
   });
-  
+
   useEffect(() => {
     const fetchWorkingHours = async () => {
       try {
-        const response = await fetch("https://rent-api.rubik.dev/api/working-hours", {
-          method: "GET",
-          headers: {
-            "Accept-Language": "en",
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://rent-api.rubik.dev/api/working-hours",
+          {
+            method: "GET",
+            headers: {
+              "Accept-Language": "en",
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
         const data = await response.json();
         const { start, end } = data.data.attributes;
         setWorkingHours({ start, end });
@@ -52,9 +55,15 @@ export default function DatePicker({
 
     fetchWorkingHours();
   }, []);
-  
-  const minTime = dayjs().startOf('day').hour(parseInt(workingHours.start.split(':')[0], 10)).minute(parseInt(workingHours.start.split(':')[1], 10));
-  const maxTime = dayjs().startOf('day').hour(parseInt(workingHours.end.split(':')[0], 10)).minute(parseInt(workingHours.end.split(':')[1], 10));
+
+  const minTime = dayjs()
+    .startOf("day")
+    .hour(parseInt(workingHours.start.split(":")[0], 10))
+    .minute(parseInt(workingHours.start.split(":")[1], 10));
+  const maxTime = dayjs()
+    .startOf("day")
+    .hour(parseInt(workingHours.end.split(":")[0], 10))
+    .minute(parseInt(workingHours.end.split(":")[1], 10));
   const minDate = dayjs();
 
   return (

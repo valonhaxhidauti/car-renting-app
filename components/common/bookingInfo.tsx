@@ -16,7 +16,7 @@ export default function BookingInfo({
       className={`bg-white p-4 flex flex-col gap-4 
     ${border ? "border-borderBooking border-2" : ""}`}
     >
-      <div className="flex justify-between text-lg text-grayFont font-bold">
+      <div className="flex justify-beFtween text-lg text-grayFont font-bold">
         <RentForm isModal={true} id={label} />
       </div>
       {params.rentLocation &&

@@ -1,14 +1,11 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { VehicleData } from "@/lib/types";
-import { useState } from "react";
 
 interface VehiclePaginationProps {
   currentPage: number;

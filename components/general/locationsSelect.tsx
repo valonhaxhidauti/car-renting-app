@@ -1,5 +1,3 @@
-// components/LocationsSelect.tsx
-import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Location } from "@/lib/types";
 import TextField from "@mui/material/TextField";
