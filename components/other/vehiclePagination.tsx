@@ -38,7 +38,7 @@ export const VehiclePagination: React.FC<VehiclePaginationProps> = ({
           <PaginationItem key={index}>
             <PaginationLink
               // href="#"
-            //   className={`${index + 1 === currentPage ? "hover:none" : ""}`}
+              //   className={`${index + 1 === currentPage ? "hover:none" : ""}`}
               isActive={index + 1 === currentPage}
               onClick={() => onPageChange(index + 1)}
             >

@@ -13,8 +13,8 @@ import { Link } from "next-view-transitions";
 import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 interface Booking {
   attributes: any;

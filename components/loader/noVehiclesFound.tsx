@@ -1,4 +1,3 @@
-import { Ambulance } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function NoVehiclesFound() {

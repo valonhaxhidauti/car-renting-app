@@ -20,5 +20,9 @@ export function useCounter(initialValue = 0, limit = Infinity) {
     setCount((prevCount) => prevCount - 1);
   };
 
-  return [savedCount !== null ? savedCount : count, increment, decrement] as const;
+  return [
+    savedCount !== null ? savedCount : count,
+    increment,
+    decrement,
+  ] as const;
 }

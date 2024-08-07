@@ -7,15 +7,15 @@ import {
   LogoLight,
   LogoMenu,
 } from "@/assets/svgs";
-import { useState } from "react";
-import { Link } from "next-view-transitions";
-import Image from "next/image";
-import { clearAppliedFilters } from "@/lib/utils";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import LanguageSelector from "../common/languageSelector";
+import { clearAppliedFilters } from "@/lib/utils";
+import { Link } from "next-view-transitions";
 import HeaderAuthentication from "./headerAuthentication";
+import Image from "next/image";
+import LanguageSelector from "../common/languageSelector";
 
 export default function Header({
   background,

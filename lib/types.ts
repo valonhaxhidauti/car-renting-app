@@ -46,7 +46,7 @@ export type UpdatePasswordValues = {
   oldPassword: string;
   newPassword: string;
   confirmPassword: string;
-}
+};
 
 export type Filters = {
   gearType: any[];
