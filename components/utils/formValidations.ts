@@ -172,15 +172,6 @@ const UpdateFormValidation = (
   if (!value.phone) {
     error.phone = translations.phoneRequired;
   }
-  // else if (!isPhoneValid(value.phone)) {
-  //   error.phone = translations.phoneInvalid;
-  // }
-
-  // if (!value.password) {
-  //   error.password = translations.passwordRequired;
-  // } else if (!isPasswordValid(value.password)) {
-  //   error.password = translations.passwordWeak;
-  // }
 
   return error;
 };

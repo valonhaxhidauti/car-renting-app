@@ -27,7 +27,6 @@ export const VehiclePagination: React.FC<VehiclePaginationProps> = ({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            // href="#"
             onClick={() => onPrevChange(currentPage)}
             className={`${
               currentPage === 1 ? " opacity-50 cursor-not-allowed" : ""
@@ -37,8 +36,6 @@ export const VehiclePagination: React.FC<VehiclePaginationProps> = ({
         {Array.from({ length: totalPages }, (_, index) => (
           <PaginationItem key={index}>
             <PaginationLink
-              // href="#"
-              //   className={`${index + 1 === currentPage ? "hover:none" : ""}`}
               isActive={index + 1 === currentPage}
               onClick={() => onPageChange(index + 1)}
             >
@@ -48,12 +45,10 @@ export const VehiclePagination: React.FC<VehiclePaginationProps> = ({
         ))}
         <PaginationItem>
           <PaginationNext
-            // href="#"
             onClick={() => onNextChange(currentPage)}
             className={`${
               currentPage === totalPages ? " opacity-50 cursor-not-allowed" : ""
             }`}
-            // disabled={currentPage === totalPages}
           />
         </PaginationItem>
       </PaginationContent>
