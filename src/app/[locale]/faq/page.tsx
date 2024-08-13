@@ -5,7 +5,7 @@ import Header from "@/components/layout/header";
 export default function Faq() {
   return (
     <>
-      <Header background={false} fixed={false}/>
+      <Header background={false} fixed={false} />
       <FrequentlyAskedQuestions />
       <Footer />
     </>

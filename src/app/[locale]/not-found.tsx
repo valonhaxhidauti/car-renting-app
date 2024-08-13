@@ -10,7 +10,7 @@ export default function NotFound() {
       <body>
         <Header background={false} fixed={false} />
         <Error statusCode={404} />
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

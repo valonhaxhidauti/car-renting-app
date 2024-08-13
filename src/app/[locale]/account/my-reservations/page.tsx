@@ -8,7 +8,7 @@ import Header from "@/components/layout/header";
 import Reservations from "@/components/account/reservations";
 
 export default function MyReservations() {
-  const { isAuthenticated, loading } = useAuth(); 
+  const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function MyReservations() {
   }, [isAuthenticated, loading, router]);
 
   if (loading) {
-    return null; 
+    return null;
   }
 
   if (isAuthenticated === false) {
