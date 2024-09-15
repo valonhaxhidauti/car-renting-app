@@ -25,7 +25,7 @@ import RentForm from "../general/rentForm";
 import BillingInformation from "../booking/billingInformation";
 import DocumentsInformation from "../booking/documentsInformation";
 import PersonalInformation from "../booking/personalInformation";
-import {Elements, CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
+import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 import {CreditCardPaymentRef} from './creditCardPayment';
 
@@ -219,124 +219,125 @@ export default function VehiclePayment() {
 
     return (
         <>
-            <Elements stripe={stripePromise}>
-                <HeadingTitle title={t("pageTitle")}/>
-                <div className="bg-bgSecondary w-full h-full mb-8">
-                    <div className="max-w-[1440px] pb-16 m-auto w-full">
-                        <BreadcrumbExtended translations={t} params={params}/>
-                        <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
-                            <div
-                                className="flex gap-2 p-2 h-8 text-sm text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full">
-                                <RentForm isModal={true} id="vehicleDetailsBooking"/>
-                            </div>
-                        </div>
-                        <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col-reverse laptop:flex-row gap-4">
-                            <form
-                                className="flex flex-col w-full laptop:w-3/4 desktop:w-4/5 gap-4"
-                                onSubmit={onSubmit}
-                            >
-                                <PersonalInformation
-                                    personalInfo={personalInfo}
-                                    setPersonalInfo={setPersonalInfo}
-                                    updateCustomer={updateCustomer}
-                                    setUpdateCustomer={setUpdateCustomer}
-                                    errors={fieldErrors}
-                                />
-                                <DocumentsInformation
-                                    driverLicenseInfo={driverLicenseInfo}
-                                    setDriverLicenseInfo={setDriverLicenseInfo}
-                                    passportInfo={passportInfo}
-                                    setPassportInfo={setPassportInfo}
-                                    idInfo={idInfo}
-                                    setIdInfo={setIdInfo}
-                                    updateDocuments={updateDocuments}
-                                    setUpdateDocuments={setUpdateDocuments}
-                                    errors={fieldErrors}
-                                />
-                                <BillingInformation
-                                    billingInfo={billingInfo}
-                                    setBillingInfo={setBillingInfo}
-                                    updateBilling={updateBilling}
-                                    setUpdateBilling={setUpdateBilling}
-                                    errors={fieldErrors}
-                                />
-                                <div className="flex flex-col gap-4 w-full h-full bg-white p-4">
-                                    <h1 className="text-3xl text-grayFont font-bold">
-                                        {u("paymentMethodsTitle")}
-                                    </h1>
-                                    <RadioGroup
-                                        value={paymentMethod}
-                                        onValueChange={handlePaymentMethodChange}
-                                        className="flex gap-8 mt-2 mb-8 overflow-auto"
-                                    >
-                                        <div className="flex items-center space-x-2">
-                                            <RadioGroupItem value="Cash" id="cash"/>
-                                            <Label htmlFor="cash" className="text-grayFont text-sm">
-                                                {u("payInCashLabel")}
-                                            </Label>
-                                        </div>
-                                        <div className="flex items-center space-x-2">
-                                            <RadioGroupItem value="Card" id="card"/>
-                                            <Label htmlFor="card" className="text-grayFont text-sm">
-                                                {u("creditCardInfoTitle")}
-                                            </Label>
-                                        </div>
-                                        <div className="flex items-center space-x-2">
-                                            <RadioGroupItem value="Twint" id="twint"/>
-                                            <Label htmlFor="twint" className="text-grayFont text-sm">
-                                                {u("twintLabel")}
-                                            </Label>
-                                        </div>
-                                    </RadioGroup>
-                                    <div className="relative">
-                                        <div
-                                            className={`transition-opacity duration-700 ${
-                                                paymentMethod === "Cash" ? "opacity-100" : "opacity-0"
-                                            }`}
-                                        >
-                                            {paymentMethod === "Cash" && <CashPayment/>}
-                                        </div>
-                                        <div
-                                            className={`transition-opacity duration-700 ${
-                                                paymentMethod === "Card" ? "opacity-100" : "opacity-0"
-                                            }`}
-                                        >
-                                            {paymentMethod === "Card" &&
-                                                <CreditCardPayment ref={creditCardPaymentRef}/>}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    className="flex flex-col tablet:flex-row justify-end gap-4 w-full items-start tablet:items-center m-4 mobile:m-0">
-                                    <p className="text-red-500 font-medium">{formErrors}</p>
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className={`flex justify-center bg-primary w-[150px] p-3 text-sm font-semibold leading-6 text-white  transition-colors ${
-                                            isSubmitting
-                                                ? "opacity-50 cursor-not-allowed"
-                                                : "hover:bg-secondary"
-                                        }`}
-                                    >
-                                        {isSubmitting ? (
-                                            <div className="flex gap-2">
-                                                <Loader2
-                                                    size={20}
-                                                    className="self-center my-0.5 animate-spin"
-                                                />
-                                                {t("bookNow")}
-                                            </div>
-                                        ) : (
-                                            t("bookNow")
-                                        )}
-                                    </button>
-                                </div>
-                            </form>
-                            <BookingPrice vehicle={vehicle}/>
+            <HeadingTitle title={t("pageTitle")}/>
+            <div className="bg-bgSecondary w-full h-full mb-8">
+                <div className="max-w-[1440px] pb-16 m-auto w-full">
+                    <BreadcrumbExtended translations={t} params={params}/>
+                    <div className="bg-white flex mb-4 mx-0 mobile:mx-8 p-4 laptop:hidden">
+                        <div
+                            className="flex gap-2 p-2 h-8 text-sm text-grayFont cursor-pointer items-center border-borderGray border-2 rounded-full">
+                            <RentForm isModal={true} id="vehicleDetailsBooking"/>
                         </div>
                     </div>
+                    <div className="mx-0 mobile:mx-8 bigDesktop:mx-0 flex flex-col-reverse laptop:flex-row gap-4">
+                        <form
+                            className="flex flex-col w-full laptop:w-3/4 desktop:w-4/5 gap-4"
+                            onSubmit={onSubmit}
+                        >
+                            <PersonalInformation
+                                personalInfo={personalInfo}
+                                setPersonalInfo={setPersonalInfo}
+                                updateCustomer={updateCustomer}
+                                setUpdateCustomer={setUpdateCustomer}
+                                errors={fieldErrors}
+                            />
+                            <DocumentsInformation
+                                driverLicenseInfo={driverLicenseInfo}
+                                setDriverLicenseInfo={setDriverLicenseInfo}
+                                passportInfo={passportInfo}
+                                setPassportInfo={setPassportInfo}
+                                idInfo={idInfo}
+                                setIdInfo={setIdInfo}
+                                updateDocuments={updateDocuments}
+                                setUpdateDocuments={setUpdateDocuments}
+                                errors={fieldErrors}
+                            />
+                            <BillingInformation
+                                billingInfo={billingInfo}
+                                setBillingInfo={setBillingInfo}
+                                updateBilling={updateBilling}
+                                setUpdateBilling={setUpdateBilling}
+                                errors={fieldErrors}
+                            />
+                            <div className="flex flex-col gap-4 w-full h-full bg-white p-4">
+                                <h1 className="text-3xl text-grayFont font-bold">
+                                    {u("paymentMethodsTitle")}
+                                </h1>
+                                <RadioGroup
+                                    value={paymentMethod}
+                                    onValueChange={handlePaymentMethodChange}
+                                    className="flex gap-8 mt-2 mb-8 overflow-auto"
+                                >
+                                    <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Cash" id="cash"/>
+                                        <Label htmlFor="cash" className="text-grayFont text-sm">
+                                            {u("payInCashLabel")}
+                                        </Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Card" id="card"/>
+                                        <Label htmlFor="card" className="text-grayFont text-sm">
+                                            {u("creditCardInfoTitle")}
+                                        </Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Twint" id="twint"/>
+                                        <Label htmlFor="twint" className="text-grayFont text-sm">
+                                            {u("twintLabel")}
+                                        </Label>
+                                    </div>
+                                </RadioGroup>
+                                <div className="relative">
+                                    <div
+                                        className={`transition-opacity duration-700 ${
+                                            paymentMethod === "Cash" ? "opacity-100" : "opacity-0"
+                                        }`}
+                                    >
+                                        {paymentMethod === "Cash" && <CashPayment/>}
+                                    </div>
+                                    <div
+                                        className={`transition-opacity duration-700 ${
+                                            paymentMethod === "Card" ? "opacity-100" : "opacity-0"
+                                        }`}
+                                    >
+                                        {paymentMethod === "Card" &&
+                                            <Elements stripe={stripePromise}>
+                                                <CreditCardPayment ref={creditCardPaymentRef}/>
+                                            </Elements>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                className="flex flex-col tablet:flex-row justify-end gap-4 w-full items-start tablet:items-center m-4 mobile:m-0">
+                                <p className="text-red-500 font-medium">{formErrors}</p>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className={`flex justify-center bg-primary w-[150px] p-3 text-sm font-semibold leading-6 text-white  transition-colors ${
+                                        isSubmitting
+                                            ? "opacity-50 cursor-not-allowed"
+                                            : "hover:bg-secondary"
+                                    }`}
+                                >
+                                    {isSubmitting ? (
+                                        <div className="flex gap-2">
+                                            <Loader2
+                                                size={20}
+                                                className="self-center my-0.5 animate-spin"
+                                            />
+                                            {t("bookNow")}
+                                        </div>
+                                    ) : (
+                                        t("bookNow")
+                                    )}
+                                </button>
+                            </div>
+                        </form>
+                        <BookingPrice vehicle={vehicle}/>
+                    </div>
                 </div>
-            </Elements>
+            </div>
         </>
     );
 }
