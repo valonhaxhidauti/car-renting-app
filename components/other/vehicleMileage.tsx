@@ -31,7 +31,7 @@ export default function VehicleMileage() {
   }
 
   useEffect(() => {
-    const url = new URL("https://rent-api.rubik.dev/api/mileage-types");
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mileage-types`);
 
     const headers = {
       "Accept-Language": locale,

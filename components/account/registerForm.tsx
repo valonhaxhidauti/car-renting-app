@@ -108,8 +108,9 @@ export default function RegisterForm() {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
+        console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
         const response = await fetch(
-          "https://rent-api.rubik.dev/api/auth/register",
+            process.env.NEXT_PUBLIC_API_BASE_URL+"/api/auth/register",
           {
             method: "POST",
             headers: {

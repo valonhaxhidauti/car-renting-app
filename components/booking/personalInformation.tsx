@@ -30,7 +30,7 @@ export default function PersonalInformation({
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const url = new URL("https://rent-api.rubik.dev/api/my-profiles");
+      const url = new URL(process.env.NEXT_PUBLIC_API_BASE_URL+"/api/my-profiles");
       const token = localStorage.getItem("token");
 
       if (token) {

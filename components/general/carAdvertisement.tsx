@@ -17,7 +17,7 @@ export default function CarAdvertisement() {
     attributes: {
       name: "",
       base_price_in_cents: 0,
-      final_price_in_cents: 0,
+      final_base_price_in_cents: 0,
     },
     relationships: {},
   });
@@ -26,7 +26,7 @@ export default function CarAdvertisement() {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const url = new URL("https://rent-api.rubik.dev/api/cars/featured");
+        const url = new URL(process.env.NEXT_PUBLIC_API_BASE_URL+"/api/cars/featured");
         const response = await fetch(url, {
           method: "GET",
           headers: {
@@ -75,7 +75,7 @@ export default function CarAdvertisement() {
     return null;
   }
 
-  const finalPrice = carData.attributes.final_price_in_cents;
+  const finalPrice = carData.attributes.final_base_price_in_cents;
   const [integerPart, fractionalPart] = finalPrice.toFixed(2).split(".");
 
   return (

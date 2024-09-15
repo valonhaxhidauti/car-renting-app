@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'rent-api.rubik.dev',
+        hostname: process.env.NEXT_PUBLIC_API_BASE_URL,
         pathname: '/**',
       },
     ],

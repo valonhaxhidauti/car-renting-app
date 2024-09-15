@@ -69,7 +69,7 @@ export default function ExploreVehicles() {
     const fetchVehicles = async () => {
       try {
         const url = new URL(
-          `https://rent-api.rubik.dev/api/cars?page=${currentPage}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cars?page=${currentPage}`
         );
 
         Object.keys(params).forEach((key) =>

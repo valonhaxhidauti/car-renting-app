@@ -63,7 +63,7 @@ export default function LoginForm() {
       setIsSubmitting(true);
       try {
         const response = await fetch(
-          "https://rent-api.rubik.dev/api/auth/login",
+            process.env.NEXT_PUBLIC_API_BASE_URL +"/api/auth/login",
           {
             method: "POST",
             headers: {

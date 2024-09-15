@@ -23,7 +23,7 @@ export default function ConfirmEmail({
   useEffect(() => {
     const verifyEmail = async () => {
       const url = new URL(
-        `https://rent-api.rubik.dev/api/auth/email/verify/${params.id}/${params.hash}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/email/verify/${params.id}/${params.hash}`
       );
 
       const parameters: { [key: string]: string } = {

@@ -31,7 +31,7 @@ export default function VehicleInsurance() {
   }
 
   useEffect(() => {
-    const url = new URL("https://rent-api.rubik.dev/api/insurance-types");
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/insurance-types`);
 
     const headers = {
       "Accept-Language": locale,

@@ -37,7 +37,7 @@ export default function PersonalInfoUpdate() {
       if (token) {
         try {
           const response = await fetch(
-            "https://rent-api.rubik.dev/api/my-profiles",
+              process.env.NEXT_PUBLIC_API_BASE_URL +"/api/my-profiles",
             {
               method: "GET",
               headers: {
@@ -123,7 +123,7 @@ export default function PersonalInfoUpdate() {
     }
 
     const url = new URL(
-      "https://rent-api.rubik.dev/api/auth/email/verification-notification"
+        process.env.NEXT_PUBLIC_API_BASE_URL +"/api/auth/email/verification-notification"
     );
 
     const headers = {

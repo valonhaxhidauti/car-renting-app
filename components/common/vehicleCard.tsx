@@ -35,7 +35,7 @@ export default function VehicleCard({
   }, []);
 
   const basePrice = formatPrice(vehicle.attributes.base_price_in_cents);
-  const finalPrice = formatPrice(vehicle.attributes.final_price_in_cents);
+  const finalPrice = formatPrice(vehicle.attributes.final_base_price_in_cents);
 
   return (
     <div

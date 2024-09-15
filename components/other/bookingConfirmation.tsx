@@ -40,7 +40,7 @@ export default function BookingConfirmation({
 
   useEffect(() => {
     const url = new URL(
-      `https://rent-api.rubik.dev/api/bookings/${params.bookingId}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/bookings/${params.bookingId}`
     );
     const token = localStorage.getItem("token");
 

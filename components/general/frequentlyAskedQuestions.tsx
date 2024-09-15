@@ -36,7 +36,7 @@ export default function FrequentlyAskedQuestions() {
   useEffect(() => {
     const fetchFaq = async () => {
       try {
-        const url = new URL("https://rent-api.rubik.dev/api/faq");
+        const url = new URL(process.env.NEXT_PUBLIC_API_BASE_URL+"/api/faq");
         const response = await fetch(url, {
           method: "GET",
           headers: {

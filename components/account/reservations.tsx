@@ -29,7 +29,7 @@ export default function Reservations() {
 
   useEffect(() => {
     const fetchReservations = async () => {
-      const url = new URL("https://rent-api.rubik.dev/api/bookings");
+      const url = new URL(process.env.NEXT_PUBLIC_API_BASE_URL+"/api/bookings");
       const token = localStorage.getItem("token");
 
       if (token) {

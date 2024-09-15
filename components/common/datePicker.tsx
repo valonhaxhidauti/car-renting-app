@@ -35,7 +35,7 @@ export default function DatePicker({
     const fetchWorkingHours = async () => {
       try {
         const response = await fetch(
-          "https://rent-api.rubik.dev/api/working-hours",
+            process.env.NEXT_PUBLIC_API_BASE_URL+"/api/working-hours",
           {
             method: "GET",
             headers: {

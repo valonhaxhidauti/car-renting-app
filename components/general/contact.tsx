@@ -40,7 +40,7 @@ export default function Contact() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const url = "https://rent-api.rubik.dev/api/contact-forms";
+    const url = process.env.NEXT_PUBLIC_API_BASE_URL+"/api/contact-forms";
     const headers = {
       "Accept-Language": locale,
       "Content-Type": "application/json",

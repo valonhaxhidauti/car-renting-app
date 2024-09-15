@@ -52,7 +52,7 @@ export const SelectCountries: React.FC<SelectCountriesProps> = ({
   useEffect(() => {
     async function fetchCountries() {
       try {
-        const url = new URL("https://rent-api.rubik.dev/api/countries");
+        const url = new URL(process.env.NEXT_PUBLIC_API_BASE_URL+"/api/countries");
         const headers = {
           "Accept-Language": locale,
           "Content-Type": "application/json",
@@ -103,8 +103,8 @@ export const SelectCountries: React.FC<SelectCountriesProps> = ({
         <SelectGroup>
           <SelectLabel>{t("countries")}</SelectLabel>
           {countries.map((country) => (
-            <SelectItem key={country.id} value={country.id}>
-              {country.attributes.name}
+            <SelectItem key={country.attributes.name} value={country.attributes.name}>
+              {country.attributes.flag} {country.attributes.name}
             </SelectItem>
           ))}
         </SelectGroup>

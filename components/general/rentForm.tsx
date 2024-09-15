@@ -101,7 +101,7 @@ export default function RentForm({
   };
 
   const fetchLocations = async (query: string, type: "rent" | "return") => {
-    const url = new URL("https://rent-api.rubik.dev/api/locations");
+    const url = new URL(process.env.NEXT_PUBLIC_API_BASE_URL+"/api/locations");
     url.searchParams.append("filter[search]", query);
 
     const headers = {

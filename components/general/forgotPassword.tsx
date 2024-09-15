@@ -21,7 +21,7 @@ export default function ForgotPassword() {
     event.preventDefault();
     if (captcha && isEmailValidated) {
       try {
-        const url = "https://rent-api.rubik.dev/api/auth/forgot-password";
+        const url = process.env.NEXT_PUBLIC_API_BASE_URL+"/api/auth/forgot-password";
         const headers = {
           "Accept-Language": locale,
           "Content-Type": "application/json",

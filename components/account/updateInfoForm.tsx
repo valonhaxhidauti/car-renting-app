@@ -55,7 +55,7 @@ export default function UpdateInfoForm({
           : "";
 
         const response = await fetch(
-          "https://rent-api.rubik.dev/api/my-profiles",
+            process.env.NEXT_PUBLIC_API_BASE_URL+"/api/my-profiles",
           {
             method: "PUT",
             headers: {

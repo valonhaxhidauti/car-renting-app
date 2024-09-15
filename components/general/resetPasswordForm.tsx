@@ -60,7 +60,7 @@ export default function ResetPasswordForm({
     setErrors(errors);
 
     try {
-      const url = "https://rent-api.rubik.dev/api/auth/reset-password";
+      const url = process.env.NEXT_PUBLIC_API_BASE_URL+"/api/auth/reset-password";
       const headers = {
         "Accept-Language": locale,
         "Content-Type": "application/json",

@@ -33,7 +33,7 @@ export default function VehicleFilters({ filtersId }: { filtersId: string }) {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const url = new URL("https://rent-api.rubik.dev/api/car-filters");
+        const url = new URL(process.env.NEXT_PUBLIC_API_BASE_URL+"/api/car-filters");
         const response = await fetch(url, {
           method: "GET",
           headers: {
