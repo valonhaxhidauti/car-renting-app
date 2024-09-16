@@ -18,20 +18,20 @@ export default function BookingPrice(vehicle: any) {
   const t = useTranslations("VehicleDetails");
 
   const childSeatPrice =
-    vehicle.vehicle.relationships?.additionalItems[0]?.attributes?.final_base_price_in_cents.toFixed(
+    vehicle.vehicle.relationships?.additionalItems[0]?.attributes?.final_price_in_cents.toFixed(
       "2"
     ) || 0;
   const rackPrice =
-    vehicle.vehicle.relationships?.additionalItems[1]?.attributes?.final_base_price_in_cents.toFixed(
+    vehicle.vehicle.relationships?.additionalItems[1]?.attributes?.final_price_in_cents.toFixed(
       "2"
     ) || 0;
   const naviPrice =
-    vehicle.vehicle.relationships?.additionalItems[2]?.attributes?.final_base_price_in_cents.toFixed(
+    vehicle.vehicle.relationships?.additionalItems[2]?.attributes?.final_price_in_cents.toFixed(
       "2"
     ) || 0;
 
   const prices: VehiclePrices = {
-    vehicle: vehicle.vehicle.attributes?.final_base_price_in_cents || 0.0,
+    vehicle: vehicle.vehicle.attributes?.final_price_in_cents || 0.0,
     childSeat: childSeatPrice,
     navigation: rackPrice,
     carRack: naviPrice,

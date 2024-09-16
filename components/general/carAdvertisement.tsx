@@ -17,7 +17,7 @@ export default function CarAdvertisement() {
     attributes: {
       name: "",
       base_price_in_cents: 0,
-      final_base_price_in_cents: 0,
+      final_price_in_cents: 0,
     },
     relationships: {},
   });
@@ -75,7 +75,7 @@ export default function CarAdvertisement() {
     return null;
   }
 
-  const finalPrice = carData.attributes.final_base_price_in_cents;
+  const finalPrice = carData.attributes.final_price_in_cents;
   const [integerPart, fractionalPart] = finalPrice.toFixed(2).split(".");
 
   return (
