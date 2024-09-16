@@ -10,7 +10,7 @@ import {
 
 export default function VehicleDetailsInfo({ vehicle }: { vehicle: any }) {
   const t = useTranslations("VehicleDetails");
-  const finalPrice = vehicle.attributes.final_price_in_cents;
+  const finalPrice = vehicle.attributes.final_base_price_in_cents;
   const [integerPart, fractionalPart] = finalPrice.toFixed(2).split(".");
 
   return (
