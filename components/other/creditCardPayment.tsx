@@ -27,7 +27,7 @@ const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
     }));
 
     async function createPaymentMethod() {
-        setCardOwner("");
+        setErrorMessage("");
         if (!stripe || !elements) {
             return null; // Stripe.js has not loaded yet
         }
