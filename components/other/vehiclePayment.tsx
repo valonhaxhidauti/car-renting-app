@@ -112,6 +112,10 @@ export default function VehiclePayment() {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setFormErrors('');
+        setFieldErrors({});
+
         const url = process.env.NEXT_PUBLIC_API_BASE_URL + "/api/bookings";
         const headers = {
             "Accept-Language": locale,
@@ -119,14 +123,12 @@ export default function VehiclePayment() {
         };
 
         const body = new FormData();
-
+        setIsSubmitting(true);
         if (creditCardPaymentRef.current) {
             const paymentMethod = await creditCardPaymentRef.current.createPaymentMethod();
             if (paymentMethod) {
                 body.append("stripe_payment_method_id", `${paymentMethod.id}`);
                 setPaymentSuccess(true);
-            } else {
-                console.log("Payment method creation failed.");
             }
         }
 
@@ -189,7 +191,6 @@ export default function VehiclePayment() {
         body.append("id_date_of_issue", idInfo.dateOfIssue);
         body.append("id_date_of_expiration", idInfo.dateOfExpiration);
 
-        setIsSubmitting(true);
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -197,14 +198,23 @@ export default function VehiclePayment() {
                 body,
             });
 
+
             if (response.ok) {
                 const responseData = await response.json();
                 const bookingId = responseData.data.attributes.booking_id;
-                router.push(`/booking/${bookingId}`);
+
+                if (responseData.data.attributes.requires_action && creditCardPaymentRef.current) {
+                    const success = await creditCardPaymentRef.current.handle3DSPayment(responseData.data.attributes.client_secret);
+                    if (!success) {
+                        // Handle 3D Secure failure
+                        return;
+                    }
+
+                }
+
+                router.push(`/booking/${bookingId}?payment_intent_client_secret=${responseData.data.attributes.client_secret}`);
             } else {
                 const errorData = await response.json();
-                console.log(errorData);
-
                 setFormErrors(errorData.detail);
                 setFieldErrors(errorData.additional_details.validation_errors);
             }

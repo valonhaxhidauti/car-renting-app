@@ -93,13 +93,9 @@ export default function LoginForm() {
           const errorData = await response.json();
           setUnprocessedErrorMessage(errorData.detail);
         }
-      } catch (error) {
-        console.error(translations.errorDuringLogin, error);
       } finally {
         setIsSubmitting(false);
       }
-    } else {
-      console.log(translations.formErrors, errors);
     }
   };
 

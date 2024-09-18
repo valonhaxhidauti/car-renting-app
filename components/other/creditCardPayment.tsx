@@ -1,14 +1,15 @@
-import React, {forwardRef, useImperativeHandle, useState} from "react";
-import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
-import {Checkbox} from "../ui/checkbox";
-import {Label} from "../ui/label";
-import {Link} from "next-view-transitions";
-import {useTranslations} from "next-intl";
-import {PaymentMethod} from "@stripe/stripe-js";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
+import { Link } from "next-view-transitions";
+import { useTranslations } from "next-intl";
+import { PaymentMethod, PaymentIntentResult } from "@stripe/stripe-js";
 
 // Define and export the interface for the ref
 export interface CreditCardPaymentRef {
     createPaymentMethod: () => Promise<PaymentMethod | null>;
+    handle3DSPayment: (clientSecret: string) => Promise<boolean>;
 }
 
 const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
@@ -19,12 +20,14 @@ const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
     const [cardOwner, setCardOwner] = useState("");
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    // Expose createPaymentMethod to parent via ref
+    // Expose createPaymentMethod and handle3DSPayment to parent via ref
     useImperativeHandle(ref, () => ({
         createPaymentMethod,
+        handle3DSPayment,
     }));
 
     async function createPaymentMethod() {
+        setCardOwner("");
         if (!stripe || !elements) {
             return null; // Stripe.js has not loaded yet
         }
@@ -32,7 +35,7 @@ const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
         const cardElement = elements.getElement(CardElement);
 
         try {
-            const {error, paymentMethod} = await stripe.createPaymentMethod({
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
                 type: "card",
                 card: cardElement!,
                 billing_details: {
@@ -41,6 +44,7 @@ const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
             });
 
             if (error) {
+                setErrorMessage(error.message || "Payment failed");
                 return null;
             }
 
@@ -48,6 +52,27 @@ const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
         } catch (error: any) {
             setErrorMessage(error.message || "Payment failed");
             return null;
+        }
+    }
+
+    // Handle 3D Secure Payment if required
+    async function handle3DSPayment(clientSecret: string): Promise<boolean> {
+        if (!stripe) {
+            return false;
+        }
+
+        try {
+            const result: PaymentIntentResult = await stripe.confirmCardPayment(clientSecret);
+
+            if (result.error) {
+                // Handle 3DS authentication failure
+                setErrorMessage(result.error.message || "3DS Authentication failed");
+                return false;
+            }
+            return true;
+        } catch (error: any) {
+            setErrorMessage(error.message || "3DS Authentication failed");
+            return false;
         }
     }
 
@@ -101,7 +126,7 @@ const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
 
             <div className="flex flex-col mt-8">
                 <div className="flex items-center">
-                    <Checkbox id="terms" className="mr-2" required/>
+                    <Checkbox id="terms" className="mr-2" required />
                     <Label
                         htmlFor="terms"
                         className="text-sm text-grayFont cursor-pointer"
@@ -113,6 +138,10 @@ const CreditCardPayment = forwardRef<CreditCardPaymentRef>(({}, ref) => {
                     {t("readTerms")}
                 </Link>
             </div>
+
+            {errorMessage && (
+                <p className="text-red-600 mt-4">{errorMessage}</p>
+            )}
         </>
     );
 });

@@ -99,8 +99,6 @@ export default function ChangePassword({
       } catch (error) {
         console.error("Error occurred during update:", error);
       }
-    } else {
-      console.log("Form not submitted due to errors:", errors);
     }
   };
 

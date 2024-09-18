@@ -108,7 +108,6 @@ export default function RegisterForm() {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
         const response = await fetch(
             process.env.NEXT_PUBLIC_API_BASE_URL+"/api/auth/register",
           {
@@ -146,8 +145,6 @@ export default function RegisterForm() {
       } finally {
         setIsSubmitting(false);
       }
-    } else {
-      console.log(translations.formErrors, errors);
     }
   };
 
