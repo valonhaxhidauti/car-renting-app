@@ -125,7 +125,7 @@ export default function Header({
               </Link>
             ) : (
               <Link aria-label="homepage" href="/">
-                {background ? <LogoLight /> : <Logo />}
+                { <Logo />}
               </Link>
             )}
             <div
@@ -136,7 +136,7 @@ export default function Header({
               <Link
                 href="/"
                 className={`hidden desktop:flex px-1 font-bold hover:scale-105 transition-transform ${
-                  background ? "text-white" : "text-grayFont"
+                  background ? "text-grayFont" : "text-grayFont"
                 }`}
               >
                 {t("homepage")}
@@ -145,7 +145,7 @@ export default function Header({
                 onClick={clearFilters}
                 href={`/explore?rentLocation=${params.rentLocation}&returnLocation=${params.returnLocation}&pickupDate=${params.pickupDate}&dropOffDate=${params.dropOffDate}&sort=${filters.sort}&filter[carClass]=${filters.carClass}&filter[carType]=${filters.carType}&filter[gearType]=${filters.gearType}&filter[fuelType]=${filters.fuelType}`}
                 className={`cursor-pointer hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
-                  background ? "text-white" : "text-grayFont"
+                  background ? "text-grayFont" : "text-grayFont"
                 }`}
               >
                 {t("exploreVehicles")}
@@ -153,7 +153,7 @@ export default function Header({
               <Link
                 href="/contact"
                 className={`hidden desktop:inline px-1 font-bold hover:scale-105 transition-transform ${
-                  background ? "text-white" : "text-grayFont"
+                  background ? "text-grayFont" : "text-grayFont"
                 }`}
               >
                 {t("contact")}

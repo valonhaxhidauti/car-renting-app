@@ -1,463 +1,478 @@
 {
-    "Locale": "en",
-    "AboutUs": {
-        "heading": "About Us",
-        "breadcrumb": {
-            "homepage": "Homepage"
-        },
-        "description": {
-            "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-            "paragraph2": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-        },
-        "features": {
-            "easy": {
-                "title": "Easy.",
-                "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur."
-            },
-            "economic": {
-                "title": "Economic.",
-                "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
-            },
-            "everywhere": {
-                "title": "Everywhere.",
-                "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia."
-            }
-        },
-        "teamSection": "Meet our team",
-        "callToAction": {
-            "title": "<bold>Very Easy</bold> to car rental!",
-            "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            "button": "Rent now!"
-        }
+  "Locale": "en",
+  "AboutUs": {
+    "heading": "About Us",
+    "breadcrumb": {
+      "homepage": "Homepage"
     },
-    "Account": {
-        "personalInfo": {
-            "title": "My Account",
-            "breadcrumb": {
-                "homepage": "Homepage"
-            },
-            "heading": "My Personal Informations",
-            "checkEmail": "Please check your email, if you have not received an email yet please click the button below!",
-            "emailSent": "Email to verify account was sent successfully",
-            "emailFailed": "Error sending email for verifying account",
-            "verifyEmail": "Verify Email"
-        },
-        "changePassword": {
-            "changeYourPassword": "Change Your Password",
-            "oldPassword": "Old Password",
-            "newPassword": "New Password",
-            "confirmPassword": "Confirm New Password",
-            "submitButton": "Change password",
-            "passwordUpdated": "Password Updated",
-            "tooltipMessage": "Passwords must be at least 8 characters long with 1 uppercase letter, 1 lowercase letter, and 1 special character!"
-        },
-        "login": {
-            "title": "Login",
-            "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-            "facebookButton": "Signup with Facebook",
-            "googleButton": "Signup with Google",
-            "or": "or",
-            "emailLabel": "E-mail address",
-            "passwordLabel": "Password",
-            "forgotPassword": "Forgot your password?",
-            "loginButton": "Login",
-            "errorDuringLogin": "Error occurred during Login:",
-            "formErrors": "Form not submitted due to errors:",
-            "verifyEmail": "Please check your email and verify it first!"
-        },
-        "birthdaySelect": {
-            "label": "Birth Day",
-            "months": {
-                "jan": "January",
-                "feb": "February",
-                "mar": "March",
-                "apr": "April",
-                "may": "May",
-                "jun": "June",
-                "jul": "July",
-                "aug": "August",
-                "sep": "September",
-                "oct": "October",
-                "nov": "November",
-                "dec": "December"
-            },
-            "day": "Day",
-            "month": "Month",
-            "year": "Year"
-        },
-        "emailSent": "Please check your email inbox for further instructions on how to reset your password.",
-        "passwordReset": {
-            "title": "Forgot Your Password?",
-            "description1": "Enter your registered email address to set a new password.",
-            "description2": "We will send the password change link to your email address.",
-            "emailLabel": "Email",
-            "passwordResetButton": "Password Reset"
-        },
-        "register": {
-            "title": "Register Now",
-            "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-            "mrLabel": "Mr.",
-            "mrsLabel": "Mrs.",
-            "nameLabel": "Name",
-            "surnameLabel": "Surname",
-            "emailAddressLabel": "E-mail address",
-            "phoneNumberLabel": "Phone Number",
-            "passwordLabel": "Password",
-            "passwordAgainLabel": "Password (Again)",
-            "registerButton": "Register",
-            "updateButton": "Update",
-            "errorDuringRegister": "Error occurred during registration:",
-            "formErrors": "Form not submitted due to errors:"
-        },
-        "sideMenu": {
-            "personalInformations": "My Personal Informations",
-            "reservations": "My Reservations",
-            "logOut": "Log Out"
-        },
-        "validation": {
-            "nameRequired": "Name is required",
-            "nameInvalid": "Name is invalid",
-            "surnameRequired": "Surname is required",
-            "surnameInvalid": "Surname is invalid",
-            "emailRequired": "Email is required",
-            "emailInvalid": "Email is invalid",
-            "phoneRequired": "Phone is required",
-            "phoneInvalid": "Phone is invalid",
-            "passwordRequired": "Password is required",
-            "passwordInvalid": "Password is invalid",
-            "passwordWeak": "Password is not strong enough",
-            "passwordShortLength": "Password must be at least 8 characters long",
-            "passwordNoLowercase": "Password must contain at least one lowercase letter",
-            "passwordNoUppercase": "Password must contain at least one uppercase letter",
-            "passwordNoNumber": "Password must contain at least one number",
-            "passwordNoSpecialChar": "Password must contain at least one special character",
-            "passwordConfirmRequired": "Confirm password",
-            "passwordsNotMatch": "Passwords do not match"
-        },
-        "update": "Update",
-        "userUpdated": "User updated successfully!",
-        "profileFetchError": "An error occurred while fetching profile data.",
-        "profileTokenError": "No token found.",
-        "viewPassword": "View Password"
+    "description": {
+      "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      "paragraph2": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
     },
-    "Bookings": {
-        "myReservations": {
-            "title": "My Account",
-            "breadcrumb": {
-                "homepage": "Homepage"
-            },
-            "heading": "My Reservations",
-            "active": "Active",
-            "completed": "Completed",
-            "upcoming": "Upcoming"
-        },
-        "bookingSuccessful": "Your booking was successful!",
-        "reservationCode": "Reservation Code: ",
-        "goToMyAccount": "Go to My Account",
-        "bookingInformation": "Booking Information",
-        "currentlyNoReservations": "Currently you have no reservations",
-        "totalDays": "Total {days} days",
-        "vehicleInfo": "Vehicle Info",
-        "rentalInfo": "Rental Info",
-        "totalPrice": "Total Price"
+    "features": {
+      "easy": {
+        "title": "Easy.",
+        "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur."
+      },
+      "economic": {
+        "title": "Economic.",
+        "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
+      },
+      "everywhere": {
+        "title": "Everywhere.",
+        "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia."
+      }
     },
-    "Contact": {
-        "heading": "Contact",
-        "breadcrumb": {
-            "homepage": "Homepage"
-        },
-        "visitUs": "Visit Us",
-        "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-        "visitUsLocation": "Our Location",
-        "callUs": "Call us 24/7",
-        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
-        "mailUs": "Mail us",
-        "mailUsDescription": "Excepteur sint occaecat cupidatat non proident.",
-        "formHeading": "Contact Form",
-        "formDescription": "Give us a call or drop by anytime, we endeavor to answer all enquiries within 24 hours on business days.",
-        "fullNamePlaceholder": "Full Name",
-        "emailPlaceholder": "E-Mail Address",
-        "phoneNumberPlaceholder": "Phone Number",
-        "messagePlaceholder": "Your Message",
-        "sendMessage": "Send Message",
-        "successMessageTitle": "Thank you for your message!"
-    },
-    "ExploreVehicles": {
-        "heading": "Explore Vehicles",
-        "breadcrumb": {
-            "homepage": "Homepage"
-        },
-        "notFound": {
-            "title": "No vehicles found",
-            "description": "Try adjusting the filters to find what you're looking for."
-        },
-        "sortBy": "Sort by:",
-        "default": "Default",
-        "modelYearAsc": "Model Year: Old to New",
-        "modelYearDesc": "Model Year: New to Old",
-        "priceDesc": "Price: High to Low",
-        "priceAsc": "Price: Low to High",
-        "changeListView": "Change List View",
-        "gridView": "Grid View",
-        "listView": "List View",
-        "filters": "Filters",
-        "filterVehicles": "Filter Vehicles",
-        "booking": "Booking",
-        "bookingInformation": "Booking Information",
-        "accordionHeader": "Filter Vehicles"
-    },
-    "FaqItems": {
-        "heading": "FAQ",
-        "breadcrumb": {
-            "homepage": "Homepage"
-        }
-    },
-    "Footer": {
-        "companyName": "RentTU! Car Rental Template",
-        "slogan": "Enjoy car rental!",
-        "pages": {
-            "title": "Pages",
-            "aboutUs": "About Us",
-            "exploreVehicles": "Explore Vehicles",
-            "contact": "Contact"
-        },
-        "information": {
-            "title": "Information",
-            "faq": "FAQ",
-            "rentalTerms": "Rental Terms",
-            "privacyPolicy": "Privacy Policy"
-        },
-        "copyright": "Copyright © {currentYear} All rights reserved."
-    },
-    "Header": {
-        "loginRegister": "LOGIN or REGISTER",
-        "myAccount": "MY ACCOUNT",
-        "homepage": "Homepage",
-        "exploreVehicles": "Explore Vehicles",
-        "aboutUs": "About Us",
-        "faq": "FAQ",
-        "rentalTerms": "Rental Terms",
-        "privacyPolicy": "Privacy Policy",
-        "contact": "Contact",
-        "languages": {
-            "label": "Languages",
-            "english": "English",
-            "german": "German"
-        },
-        "copyright": "Copyright {currentYear} © All rights reserved."
-    },
-    "Homepage": {
-        "enjoyJourney": {
-            "title": "Enjoy<br></br>the journey<br></br>with your family",
-            "subtitle": "RentTU Car Rental Template"
-        },
-        "rentNow": "Rent Now",
-        "carDetails": {
-            "startFrom": "Start From",
-            "daily": "/ Daily",
-            "fuelType": {
-                "gasFuel": "Gas",
-                "dieselFuel": "Diesel",
-                "electricFuel": "Electric"
-            },
-            "transmissionType": {
-                "manualTransmission": "Manual",
-                "automaticTransmission": "Automatic"
-            }
-        }
-    },
-    "PrivacyPolicy": {
-        "heading": "Privacy Policy",
-        "breadcrumb": {
-            "homepage": "Homepage"
-        },
-        "content": {
-            "paragraph1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "paragraph2": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-            "paragraph3": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-            "paragraph4": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-        }
-    },
-    "RentalTerms": {
-        "heading": "Rental Terms",
-        "breadcrumb": {
-            "homepage": "Homepage"
-        },
-        "content": {
-            "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "paragraph2": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-            "paragraph3": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-        }
-    },
-    "RentForm": {
-        "deliverAtDifferentPoint": "Deliver at different point",
-        "booking": "Booking Info",
-        "dropOffDate": "Dropoff Date",
-        "editBooking": "Edit booking info",
-        "findNow": "Find Now",
-        "findYourCar": "Find your car",
-        "locale": "en-gb",
-        "pickupDate": "Pickup Date",
-        "invalidLocationError": "Please select one of the dropdown locations",
-        "pickupDateBeforeCurrentError": "Pickup date cannot be before current time.",
-        "invalidDateError": "Drop off date should be at least 1 hour after pickup date.",
-        "noDateError": "Please fill in the dates.",
-        "rentLocation": {
-            "placeholder": "Rent Location",
-            "requiredError": "Required Rent Location",
-            "minLength": "Enter the first three letters of the rent location and wait to see results"
-        },
-        "returnLocation": {
-            "placeholder": "Return Location",
-            "requiredError": "Required Return Location",
-            "minLength": "Enter the first three letters of the return location and wait to see results"
-        },
-        "locationSelect": {
-            "selectLocation": "Select Location",
-            "noLocationsFound": "No locations found. Try again"
-        },
-        "search": "Search"
-    },
-    "ResetPassword": {
-        "heading": "Reset Password",
-        "breadcrumb": {
-            "homepage": "Homepage"
-        },
-        "title": "Password Resetting",
-        "email": "Email",
-        "confirmPassword": "Confirm Password",
-        "newPassword": "New Password",
-        "resetPassword": "Reset Password",
-        "validation": {
-            "passwordRequired": "Password is required",
-            "passwordWeak": "Password is not strong enough",
-            "passwordsNotMatched": "Passwords are not matched",
-            "passwordConfirmRequired": "Confirm password"
-        }
-    },
-    "SideMenu": {
-        "pages": "Pages",
-        "about": "About Us",
-        "faq": "FAQ",
-        "rentalTerms": "Rental Terms",
-        "privacyPolicy": "Privacy Policy",
-        "contact": "Contact"
-    },
-    "VehicleCard": {
-        "viewAllSpecs": "View All Specifications",
-        "persons": "Persons",
-        "dailyFee": "Daily Rental Fee",
-        "off": "OFF",
-        "rentNow": "Rent Now!"
-    },
-    "VehicleDetails": {
-        "homepage": "Homepage",
-        "explore": "Explore Vehicles",
-        "booking": "Booking",
-        "bookNow": "Book",
-        "vehicleDetails": "Vehicle Details",
-        "payment": "Payment",
-        "vehiclePrice": "Vehicle price",
-        "pageTitle": "Your Booking",
-        "vehicleValue": "Vehicle Value",
-        "optionalItems": "Optional Items",
-        "pricePer": "Price per",
-        "day": "Day",
-        "days": "Days",
-        "totalValue": "Total Value",
-        "continueButton": "Continue",
-        "extraOptionsTab": "Extra options",
-        "rentalTermsTab": "Rental Terms",
-        "allSpecificationsTab": "All specifications",
-        "imageGalleryTab": "Image Gallery",
-        "childSeat": "Child Seat",
-        "navigation": "Navigation",
-        "additionalRack": "Additional Rack",
-        "damageInsurance": "Damage Insurance",
-        "daily": "Daily",
-        "cubic": "Cubic",
-        "fuelType": "Fuel Type",
-        "gearType": "Gear Type",
-        "passengerCapacity": "Passenger Capacity",
-        "person": "Person",
-        "persons": "Persons",
-        "modelYear": "Model Year",
-        "engineType": "Engine Type",
-        "fuelConsumption": "Fuel Consumption",
-        "vehicleType": "Vehicle Type",
-        "luggageCapacity": "Luggage Capacity",
-        "horsepower": "Hp (Horse power)",
-        "fillBookingTooltip": "Fill the booking information",
-        "noImages": "There are currently no images available for this vehicle.",
-        "noChildSeatsAvailable": "No more child seats available!",
-        "noRacksAvailable": "No more racks available!",
-        "noNavigationAvailable": "No navigation available!",
-        "mileageType": "Mileage Type",
-        "insuranceType": "Insurance Type"
-    },
-    "VehicleFilters": {
-        "vehicleType": "Vehicle Type",
-        "vehicleClass": "Vehicle Class",
-        "gearType": "Gear Type",
-        "fuelType": "Fuel Type"
-    },
-    "vehiclePayment": {
-        "personalInfoTitle": "Personal Information",
-        "updateCustomer": "Update Personal Info",
-        "firstNameLabel": "First Name",
-        "lastNameLabel": "Last Name",
-        "emailLabel": "Email",
-        "phoneNumberLabel": "Phone Number",
-        "dateOfBirthLabel": "Date of Birth",
-        "updateDocuments": "Update Documents",
-        "driverLicenseNumberLabel": "Driver License Number",
-        "driverLicenseInfoTitle": "Driver License Information",
-        "chooseDocument": "Choose Document",
-        "passport": "Passport",
-        "id": "ID",
-        "passportNumber": "Passport Number",
-        "idNumber": "ID Number",
-        "issuingCountryLabel": "Issuing Country",
-        "dateOfIssueLabel": "Date of Issue",
-        "dateOfExpirationLabel": "Date of Expiration",
-        "frontImageLabel": "Front Image",
-        "backImageLabel": "Back Image",
-        "updateBilling": "Update Billing Info",
-        "billingInfoTitle": "Billing Information",
-        "addressLabel": "Address",
-        "numberLabel": "Number",
-        "zipLabel": "Zip",
-        "streetLabel": "Street",
-        "cityLabel": "City",
-        "countryLabel": "Country",
-        "countries": "Countries",
-        "selectCountry": "Select a country",
-        "payment": {
-            "paymentMethodsTitle": "Payment methods",
-            "payInCashLabel": "Pay in Cash",
-            "creditCardLabel": "Credit Card",
-            "twintLabel": "Twint",
-            "payWithCash": "Pay with cash at the company counter.",
-            "creditCardInfoTitle": "Credit Card Information",
-            "cardOwnerLabel": "Card Owner",
-            "cardNumberLabel": "Card Number",
-            "expireDateLabel": "Expire Date",
-            "monthLabel": "Month",
-            "yearLabel": "Year",
-            "cvvLabel": "CVV",
-            "termsLabel": "I have read and agree to the Terms and Conditions",
-            "readTerms": "Click to read terms"
-        }
-    },
-    "VerifyEmail": {
-        "breadcrumb": {
-            "homepage": "Homepage"
-        },
-        "heading": "Verify Email",
-        "emailVerification": {
-            "title": "Email Verification",
-            "verificationFailed": "Email verification failed!",
-            "verifiedEmail": "Email successfully verified!"
-        }
+    "teamSection": "Meet our team",
+    "callToAction": {
+      "title": "<bold>Very Easy</bold> to car rental!",
+      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "button": "Rent now!"
     }
+  },
+  "Account": {
+    "personalInfo": {
+      "title": "My Account",
+      "breadcrumb": {
+        "homepage": "Homepage"
+      },
+      "heading": "My Personal Informations",
+      "checkEmail": "Please check your email, if you have not received an email yet please click the button below!",
+      "emailSent": "Email to verify account was sent successfully",
+      "emailFailed": "Error sending email for verifying account",
+      "verifyEmail": "Verify Email"
+    },
+    "changePassword": {
+      "changeYourPassword": "Change Your Password",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "submitButton": "Change password",
+      "passwordUpdated": "Password Updated",
+      "tooltipMessage": "Passwords must be at least 8 characters long with 1 uppercase letter, 1 lowercase letter, and 1 special character!"
+    },
+    "login": {
+      "title": "Login",
+      "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+      "facebookButton": "Signup with Facebook",
+      "googleButton": "Signup with Google",
+      "or": "or",
+      "emailLabel": "E-mail address",
+      "passwordLabel": "Password",
+      "forgotPassword": "Forgot your password?",
+      "loginButton": "Login",
+      "errorDuringLogin": "Error occurred during Login:",
+      "formErrors": "Form not submitted due to errors:",
+      "verifyEmail": "Please check your email and verify it first!"
+    },
+    "birthdaySelect": {
+      "label": "Birth Day",
+      "months": {
+        "jan": "January",
+        "feb": "February",
+        "mar": "March",
+        "apr": "April",
+        "may": "May",
+        "jun": "June",
+        "jul": "July",
+        "aug": "August",
+        "sep": "September",
+        "oct": "October",
+        "nov": "November",
+        "dec": "December"
+      },
+      "day": "Day",
+      "month": "Month",
+      "year": "Year"
+    },
+    "emailSent": "Please check your email inbox for further instructions on how to reset your password.",
+    "passwordReset": {
+      "title": "Forgot Your Password?",
+      "description1": "Enter your registered email address to set a new password.",
+      "description2": "We will send the password change link to your email address.",
+      "emailLabel": "Email",
+      "passwordResetButton": "Password Reset"
+    },
+    "register": {
+      "title": "Register Now",
+      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+      "mrLabel": "Mr.",
+      "mrsLabel": "Mrs.",
+      "nameLabel": "Name",
+      "surnameLabel": "Surname",
+      "emailAddressLabel": "E-mail address",
+      "phoneNumberLabel": "Phone Number",
+      "passwordLabel": "Password",
+      "passwordAgainLabel": "Password (Again)",
+      "registerButton": "Register",
+      "updateButton": "Update",
+      "errorDuringRegister": "Error occurred during registration:",
+      "formErrors": "Form not submitted due to errors:"
+    },
+    "sideMenu": {
+      "personalInformations": "My Personal Informations",
+      "reservations": "My Reservations",
+      "logOut": "Log Out"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "nameInvalid": "Name is invalid",
+      "surnameRequired": "Surname is required",
+      "surnameInvalid": "Surname is invalid",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Email is invalid",
+      "phoneRequired": "Phone is required",
+      "phoneInvalid": "Phone is invalid",
+      "passwordRequired": "Password is required",
+      "passwordInvalid": "Password is invalid",
+      "passwordWeak": "Password is not strong enough",
+      "passwordShortLength": "Password must be at least 8 characters long",
+      "passwordNoLowercase": "Password must contain at least one lowercase letter",
+      "passwordNoUppercase": "Password must contain at least one uppercase letter",
+      "passwordNoNumber": "Password must contain at least one number",
+      "passwordNoSpecialChar": "Password must contain at least one special character",
+      "passwordConfirmRequired": "Confirm password",
+      "passwordsNotMatch": "Passwords do not match"
+    },
+    "update": "Update",
+    "userUpdated": "User updated successfully!",
+    "profileFetchError": "An error occurred while fetching profile data.",
+    "profileTokenError": "No token found.",
+    "viewPassword": "View Password"
+  },
+  "Bookings": {
+    "myReservations": {
+      "title": "My Account",
+      "breadcrumb": {
+        "homepage": "Homepage"
+      },
+      "heading": "My Reservations",
+      "active": "Active",
+      "completed": "Completed",
+      "upcoming": "Upcoming"
+    },
+    "bookingSuccessful": "Your booking was successful!",
+    "reservationCode": "Reservation Code: ",
+    "goToMyAccount": "Go to My Account",
+    "bookingInformation": "Booking Information",
+    "currentlyNoReservations": "Currently you have no reservations",
+    "totalDays": "Total {days} days",
+    "vehicleInfo": "Vehicle Info",
+    "rentalInfo": "Rental Info",
+    "totalPrice": "Total Price"
+  },
+  "Contact": {
+    "heading": "Contact",
+    "breadcrumb": {
+      "homepage": "Homepage"
+    },
+    "visitUs": "Visit Us",
+    "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+    "visitUsLocation": "Our Location",
+    "callUs": "Call us 24/7",
+    "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+    "mailUs": "Mail us",
+    "mailUsDescription": "Excepteur sint occaecat cupidatat non proident.",
+    "formHeading": "Contact Form",
+    "formDescription": "Give us a call or drop by anytime, we endeavor to answer all enquiries within 24 hours on business days.",
+    "fullNamePlaceholder": "Full Name",
+    "emailPlaceholder": "E-Mail Address",
+    "phoneNumberPlaceholder": "Phone Number",
+    "messagePlaceholder": "Your Message",
+    "sendMessage": "Send Message",
+    "successMessageTitle": "Thank you for your message!"
+  },
+  "ExploreVehicles": {
+    "heading": "Explore Vehicles",
+    "breadcrumb": {
+      "homepage": "Homepage"
+    },
+    "notFound": {
+      "title": "No vehicles found",
+      "description": "Try adjusting the filters to find what you're looking for."
+    },
+    "sortBy": "Sort by:",
+    "default": "Default",
+    "modelYearAsc": "Model Year: Old to New",
+    "modelYearDesc": "Model Year: New to Old",
+    "priceDesc": "Price: High to Low",
+    "priceAsc": "Price: Low to High",
+    "changeListView": "Change List View",
+    "gridView": "Grid View",
+    "listView": "List View",
+    "filters": "Filters",
+    "filterVehicles": "Filter Vehicles",
+    "booking": "Booking",
+    "bookingInformation": "Booking Information",
+    "accordionHeader": "Filter Vehicles"
+  },
+  "FaqItems": {
+    "heading": "FAQ",
+    "breadcrumb": {
+      "homepage": "Homepage"
+    }
+  },
+  "Footer": {
+    "companyName": "Abag Rent! Car Rental Template",
+    "slogan": "Enjoy car rental!",
+    "pages": {
+      "title": "Pages",
+      "aboutUs": "About Us",
+      "exploreVehicles": "Explore Vehicles",
+      "contact": "Contact"
+    },
+    "information": {
+      "title": "Information",
+      "faq": "FAQ",
+      "rentalTerms": "Rental Terms",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "copyright": "Copyright © {currentYear} All rights reserved."
+  },
+  "Header": {
+    "loginRegister": "LOGIN or REGISTER",
+    "myAccount": "MY ACCOUNT",
+    "homepage": "Homepage",
+    "exploreVehicles": "Explore Vehicles",
+    "aboutUs": "About Us",
+    "faq": "FAQ",
+    "rentalTerms": "Rental Terms",
+    "privacyPolicy": "Privacy Policy",
+    "contact": "Contact",
+    "languages": {
+      "label": "Languages",
+      "english": "English",
+      "german": "German"
+    },
+    "copyright": "Copyright {currentYear} © All rights reserved."
+  },
+  "Homepage": {
+    "enjoyJourney": {
+      "title": "Enjoy<br></br>the journey<br></br>with your family",
+      "subtitle": "Abag Rent Car Rental Template"
+    },
+    "rentNow": "Rent Now",
+    "carDetails": {
+      "startFrom": "Start From",
+      "daily": "/ Daily",
+      "fuelType": {
+        "gasFuel": "Gas",
+        "dieselFuel": "Diesel",
+        "electricFuel": "Electric"
+      },
+      "transmissionType": {
+        "manualTransmission": "Manual",
+        "automaticTransmission": "Automatic"
+      }
+    }
+  },
+  "PrivacyPolicy": {
+    "heading": "Privacy Policy",
+    "breadcrumb": {
+      "homepage": "Homepage"
+    },
+    "content": {
+      "paragraph1": "Welcome to ABAG Rent. We respect your privacy and are committed to protecting your personal data in accordance with the General Data Protection Regulation (GDPR). This policy explains how we collect, use, and protect your personal data when you use our website, www.abag-rent.ch.",
+      "paragraph2": "ABAG Rent, is the data controller responsible for your personal data.",
+      "paragraph3": "We collect the following types of personal data: Identity Data (Name, title, date of birth, and gender), Contact Data (Address, email address, phone number), Financial Data (Payment card details or banking information for transactions), and Technical Data (IP address, browser type, time zone settings, and information about how you use our website).",
+      "paragraph4": "We collect personal data through: direct interactions when you fill out forms or make bookings on our site, and automated technologies such as cookies that collect technical data about your browsing behavior.",
+      "paragraph5": "We process your personal data based on the following legal grounds: Consent (where you have provided your explicit consent, e.g., for marketing communications), Contractual Necessity (to perform our obligations under the rental agreement with you), Legitimate Interests (for running our business and improving services), and Legal Obligations (e.g., for tax compliance).",
+      "paragraph6": "We use your personal data to process and manage your bookings, facilitate payments, provide customer support, send marketing communications (if opted in), and analyze site usage to improve services.",
+      "paragraph7": "We will only share your personal data with third-party service providers (e.g., payment processors or IT service providers) who are GDPR-compliant, or to comply with legal obligations or requests by authorities. We do not sell your personal data to third parties.",
+      "paragraph8": "Your personal data may be transferred to and processed in countries outside of the European Economic Area (EEA). We ensure such transfers are legally compliant, using Standard Contractual Clauses or Privacy Shield participation.",
+      "paragraph9": "We will retain your personal data only as long as necessary to fulfill the purposes for which it was collected, including legal, accounting, or reporting requirements. For example, financial transaction data will be retained for 6 years for tax purposes.",
+      "paragraph10": "Under the GDPR, you have the following rights regarding your personal data: Access (request access to your personal data), Rectification (request corrections to inaccurate or incomplete data), Erasure (request deletion of your data under certain conditions), Restriction (request restricted processing in certain circumstances), Objection (object to processing based on legitimate interests), and Data Portability (request a copy of your data in a structured, machine-readable format). To exercise these rights, please contact us at info@abag-rent.ch.",
+      "paragraph11": "We implement appropriate technical and organizational measures to ensure the security of your personal data, preventing unauthorized access, disclosure, or loss.",
+      "paragraph12": "We use cookies to enhance your experience on our website. You can manage or disable cookies through your browser settings.",
+      "paragraph13": "We may update this policy from time to time to comply with legal requirements or improve our practices. Please review this page regularly for updates.",
+      "paragraph14": "If you have any questions regarding this policy or wish to exercise your rights under the GDPR, please contact us at: Email: info@abag-rent.ch"
+    }
+  },
+  "RentalTerms": {
+    "heading": "Rental Terms",
+    "breadcrumb": {
+      "homepage": "Homepage"
+    },
+    "content": {
+      "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "paragraph2": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "paragraph3": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+    }
+  },
+  "RentForm": {
+    "deliverAtDifferentPoint": "Deliver at different point",
+    "booking": "Booking Info",
+    "dropOffDate": "Dropoff Date",
+    "editBooking": "Edit booking info",
+    "findNow": "Find Now",
+    "findYourCar": "Find your car",
+    "locale": "en-gb",
+    "pickupDate": "Pickup Date",
+    "invalidLocationError": "Please select one of the dropdown locations",
+    "pickupDateBeforeCurrentError": "Pickup date cannot be before current time.",
+    "invalidDateError": "Drop off date should be at least 1 hour after pickup date.",
+    "noDateError": "Please fill in the dates.",
+    "rentLocation": {
+      "placeholder": "Rent Location",
+      "requiredError": "Required Rent Location",
+      "minLength": "Enter the first three letters of the rent location and wait to see results"
+    },
+    "returnLocation": {
+      "placeholder": "Return Location",
+      "requiredError": "Required Return Location",
+      "minLength": "Enter the first three letters of the return location and wait to see results"
+    },
+    "locationSelect": {
+      "selectLocation": "Select Location",
+      "noLocationsFound": "No locations found. Try again"
+    },
+    "search": "Search"
+  },
+  "ResetPassword": {
+    "heading": "Reset Password",
+    "breadcrumb": {
+      "homepage": "Homepage"
+    },
+    "title": "Password Resetting",
+    "email": "Email",
+    "confirmPassword": "Confirm Password",
+    "newPassword": "New Password",
+    "resetPassword": "Reset Password",
+    "validation": {
+      "passwordRequired": "Password is required",
+      "passwordWeak": "Password is not strong enough",
+      "passwordsNotMatched": "Passwords are not matched",
+      "passwordConfirmRequired": "Confirm password"
+    }
+  },
+  "SideMenu": {
+    "pages": "Pages",
+    "about": "About Us",
+    "faq": "FAQ",
+    "rentalTerms": "Rental Terms",
+    "privacyPolicy": "Privacy Policy",
+    "contact": "Contact"
+  },
+  "VehicleCard": {
+    "viewAllSpecs": "View All Specifications",
+    "persons": "Persons",
+    "dailyFee": "Daily Rental Fee",
+    "off": "OFF",
+    "rentNow": "Rent Now!"
+  },
+  "VehicleDetails": {
+    "homepage": "Homepage",
+    "explore": "Explore Vehicles",
+    "booking": "Booking",
+    "bookNow": "Book",
+    "vehicleDetails": "Vehicle Details",
+    "payment": "Payment",
+    "vehiclePrice": "Vehicle price",
+    "pageTitle": "Your Booking",
+    "vehicleValue": "Vehicle Value",
+    "optionalItems": "Optional Items",
+    "pricePer": "Price per",
+    "day": "Day",
+    "days": "Days",
+    "totalValue": "Total Value",
+    "continueButton": "Continue",
+    "extraOptionsTab": "Extra options",
+    "rentalTermsTab": "Rental Terms",
+    "allSpecificationsTab": "All specifications",
+    "imageGalleryTab": "Image Gallery",
+    "childSeat": "Child Seat",
+    "navigation": "Navigation",
+    "additionalRack": "Additional Rack",
+    "damageInsurance": "Damage Insurance",
+    "daily": "Daily",
+    "cubic": "Cubic",
+    "fuelType": "Fuel Type",
+    "gearType": "Gear Type",
+    "passengerCapacity": "Passenger Capacity",
+    "person": "Person",
+    "persons": "Persons",
+    "modelYear": "Model Year",
+    "engineType": "Engine Type",
+    "fuelConsumption": "Fuel Consumption",
+    "vehicleType": "Vehicle Type",
+    "luggageCapacity": "Luggage Capacity",
+    "horsepower": "Hp (Horse power)",
+    "fillBookingTooltip": "Fill the booking information",
+    "noImages": "There are currently no images available for this vehicle.",
+    "noChildSeatsAvailable": "No more child seats available!",
+    "noRacksAvailable": "No more racks available!",
+    "noNavigationAvailable": "No navigation available!",
+    "mileageType": "Mileage Type",
+    "insuranceType": "Insurance Type"
+  },
+  "VehicleFilters": {
+    "vehicleType": "Vehicle Type",
+    "vehicleClass": "Vehicle Class",
+    "gearType": "Gear Type",
+    "fuelType": "Fuel Type"
+  },
+  "vehiclePayment": {
+    "personalInfoTitle": "Personal Information",
+    "updateCustomer": "Update Personal Info",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
+    "emailLabel": "Email",
+    "phoneNumberLabel": "Phone Number",
+    "dateOfBirthLabel": "Date of Birth",
+    "updateDocuments": "Update Documents",
+    "driverLicenseNumberLabel": "Driver License Number",
+    "driverLicenseInfoTitle": "Driver License Information",
+    "chooseDocument": "Choose Document",
+    "passport": "Passport",
+    "id": "ID",
+    "passportNumber": "Passport Number",
+    "idNumber": "ID Number",
+    "issuingCountryLabel": "Issuing Country",
+    "dateOfIssueLabel": "Date of Issue",
+    "dateOfExpirationLabel": "Date of Expiration",
+    "frontImageLabel": "Front Image",
+    "backImageLabel": "Back Image",
+    "updateBilling": "Update Billing Info",
+    "billingInfoTitle": "Billing Information",
+    "addressLabel": "Address",
+    "numberLabel": "Number",
+    "zipLabel": "Zip",
+    "streetLabel": "Street",
+    "cityLabel": "City",
+    "countryLabel": "Country",
+    "countries": "Countries",
+    "selectCountry": "Select a country",
+    "payment": {
+      "paymentMethodsTitle": "Payment methods",
+      "payInCashLabel": "Pay in Cash",
+      "creditCardLabel": "Credit Card",
+      "twintLabel": "Twint",
+      "payWithCash": "Pay with cash at the company counter.",
+      "creditCardInfoTitle": "Credit Card Information",
+      "cardOwnerLabel": "Card Owner",
+      "cardNumberLabel": "Card Number",
+      "expireDateLabel": "Expire Date",
+      "monthLabel": "Month",
+      "yearLabel": "Year",
+      "cvvLabel": "CVV",
+      "termsLabel": "I have read and agree to the Terms and Conditions",
+      "readTerms": "Click to read terms"
+    }
+  },
+  "VerifyEmail": {
+    "breadcrumb": {
+      "homepage": "Homepage"
+    },
+    "heading": "Verify Email",
+    "emailVerification": {
+      "title": "Email Verification",
+      "verificationFailed": "Email verification failed!",
+      "verifiedEmail": "Email successfully verified!"
+    }
+  },
+  "CookieConsent": {
+    "message": "This website uses cookies to enhance the user experience.",
+    "learnMore": "Learn More",
+    "accept": "Accept"
+  }
 }

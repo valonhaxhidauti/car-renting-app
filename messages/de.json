@@ -213,7 +213,7 @@
         }
     },
     "Footer": {
-        "companyName": "RentTU! Autovermietungsvorlage",
+        "companyName": "Abag Rent! Autovermietungsvorlage",
         "slogan": "Genießen Sie die Autovermietung!",
         "pages": {
             "title": "Seiten",
@@ -249,7 +249,7 @@
     "Homepage": {
         "enjoyJourney": {
             "title": "Genießen <br></br> Sie die Reise <br></br> mit Ihrer Familie",
-            "subtitle": "RentTU Autovermietungsvorlage"
+            "subtitle": "Abag Rent Autovermietungsvorlage"
         },
         "rentNow": "Jetzt mieten",
         "carDetails": {
@@ -272,10 +272,20 @@
             "homepage": "Startseite"
         },
         "content": {
-            "paragraph1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "paragraph2": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-            "paragraph3": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-            "paragraph4": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+            "paragraph1": "Willkommen bei ABAG Rent. Wir respektieren Ihre Privatsphäre und verpflichten uns, Ihre persönlichen Daten gemäß der Datenschutz-Grundverordnung (DSGVO) zu schützen. Diese Richtlinie erklärt, wie wir Ihre persönlichen Daten erfassen, verwenden und schützen, wenn Sie unsere Website www.abag-rent.ch nutzen.",
+            "paragraph2": "ABAG Rent, ist der Datenverantwortliche für Ihre persönlichen Daten.",
+            "paragraph3": "Wir erfassen folgende Arten von persönlichen Daten: Identitätsdaten (Name, Titel, Geburtsdatum und Geschlecht), Kontaktdaten (Adresse, E-Mail-Adresse, Telefonnummer), Finanzdaten (Zahlungskartendaten oder Bankinformationen für Transaktionen) und technische Daten (IP-Adresse, Browsertyp, Zeitzoneneinstellungen und Informationen darüber, wie Sie unsere Website nutzen).",
+            "paragraph4": "Wir erfassen persönliche Daten durch: direkte Interaktionen, wenn Sie Formulare ausfüllen oder Buchungen auf unserer Website vornehmen, und automatisierte Technologien wie Cookies, die technische Daten über Ihr Surfverhalten sammeln.",
+            "paragraph5": "Wir verarbeiten Ihre persönlichen Daten auf der Grundlage folgender rechtlicher Grundlagen: Einwilligung (wenn Sie uns Ihre ausdrückliche Zustimmung gegeben haben, z. B. für Marketingkommunikation), vertragliche Notwendigkeit (um unsere Verpflichtungen aus dem Mietvertrag mit Ihnen zu erfüllen), berechtigte Interessen (für den Betrieb unseres Unternehmens und zur Verbesserung unserer Dienstleistungen) und gesetzliche Verpflichtungen (z. B. für die Einhaltung von Steuervorschriften).",
+            "paragraph6": "Wir verwenden Ihre persönlichen Daten, um Buchungen zu bearbeiten und zu verwalten, Zahlungen zu erleichtern, Kundensupport zu leisten, Marketingkommunikation zu senden (wenn Sie zugestimmt haben) und die Nutzung der Website zu analysieren, um unsere Dienstleistungen zu verbessern.",
+            "paragraph7": "Wir geben Ihre persönlichen Daten nur weiter an: Dienstleister wie Zahlungsabwickler oder IT-Dienstleister, die DSGVO-konform sind, oder um rechtlichen Verpflichtungen nachzukommen oder auf Anfragen von Behörden zu reagieren. Wir verkaufen Ihre persönlichen Daten nicht an Dritte.",
+            "paragraph8": "Ihre persönlichen Daten können in Länder außerhalb des Europäischen Wirtschaftsraums (EWR) übermittelt und dort verarbeitet werden. Wir stellen sicher, dass solche Übermittlungen gesetzeskonform sind, indem wir Standardvertragsklauseln verwenden oder uns auf die Teilnahme des Empfängers am Privacy Shield Framework stützen.",
+            "paragraph9": "Wir speichern Ihre persönlichen Daten nur so lange, wie es notwendig ist, um die Zwecke zu erfüllen, für die sie erhoben wurden, einschließlich rechtlicher, buchhalterischer oder Berichtspflichten. Zum Beispiel werden Finanztransaktionsdaten für 6 Jahre zu Steuerzwecken aufbewahrt.",
+            "paragraph10": "Nach der DSGVO haben Sie folgende Rechte in Bezug auf Ihre persönlichen Daten: Auskunft (Sie können Zugang zu Ihren persönlichen Daten verlangen), Berichtigung (Sie können die Korrektur unrichtiger oder unvollständiger Daten verlangen), Löschung (Sie können die Löschung Ihrer Daten unter bestimmten Bedingungen verlangen), Einschränkung (Sie können verlangen, dass die Verarbeitung unter bestimmten Umständen eingeschränkt wird), Widerspruch (Sie können der Verarbeitung auf der Grundlage berechtigter Interessen widersprechen) und Datenübertragbarkeit (Sie können eine Kopie Ihrer Daten in einem strukturierten, maschinenlesbaren Format anfordern). Um diese Rechte auszuüben, kontaktieren Sie uns bitte unter info@abag-rent.ch.",
+            "paragraph11": "Wir setzen geeignete technische und organisatorische Maßnahmen ein, um die Sicherheit Ihrer persönlichen Daten zu gewährleisten und unbefugten Zugriff, Offenlegung oder Verlust zu verhindern.",
+            "paragraph12": "Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Sie können Cookies über Ihre Browsereinstellungen verwalten oder deaktivieren.",
+            "paragraph13": "Wir können diese Richtlinie von Zeit zu Zeit aktualisieren, um den gesetzlichen Anforderungen zu entsprechen oder unsere Praktiken zu verbessern. Bitte überprüfen Sie diese Seite regelmäßig auf Aktualisierungen.",
+            "paragraph14": "Wenn Sie Fragen zu dieser Richtlinie haben oder Ihre Rechte nach der DSGVO ausüben möchten, kontaktieren Sie uns bitte unter: E-Mail: info@abag-rent.ch"
         }
     },
     "RentalTerms": {
@@ -459,5 +469,10 @@
             "verificationFailed": "Email verifizierung fehlgeschlagen!",
             "verifiedEmail": "Email erfolgreich verifiziert!"
         }
+    },
+    "CookieConsent": {
+        "message": "Diese Website verwendet Cookies, um die Benutzererfahrung zu verbessern.",
+        "learnMore": "Mehr erfahren",
+        "accept": "Akzeptieren"
     }
 }

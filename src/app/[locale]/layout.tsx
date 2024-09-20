@@ -7,6 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/components/context/authContext";
 import { BookingProvider } from "@/components/context/bookingContext";
 import "../globals.css";
+import { unstable_setRequestLocale } from 'next-intl/server';
+import CookieConsent from "@/components/other/cookieConsent";
 
 const font = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -19,25 +21,33 @@ type Props = {
 };
 
 export const metadata: Metadata = {
-  title: "Rent TU!",
+  title: "Abag Rent!",
   description: "Car renting app",
 };
 
 export default function RootLayout({ children, params: { locale } }: Props) {
+
+  // Set locale statically
+  unstable_setRequestLocale(locale);
+
   const messages = useMessages();
 
   return (
-    <ViewTransitions>
-      <html lang={locale}>
+      <ViewTransitions>
+        <html lang={locale}>
         <body className={font.className}>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <BookingProvider>
-              <AuthProvider>{children}</AuthProvider>
-            </BookingProvider>
-            <Toaster />
-          </NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <BookingProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </BookingProvider>
+          <Toaster />
+
+          {/* Include your custom Cookie Consent component */}
+          <CookieConsent />
+
+        </NextIntlClientProvider>
         </body>
-      </html>
-    </ViewTransitions>
+        </html>
+      </ViewTransitions>
   );
 }

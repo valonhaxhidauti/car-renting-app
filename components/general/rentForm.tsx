@@ -268,7 +268,7 @@ export default function RentForm({
     </>
   ) : (
     <div className="w-full tablet:w-1/2 h-screen relative p-4 mobile:p-8 bigDesktop:pr-0 flex flex-col justify-center">
-      <p className="pb-4 font-bold leading-4 text-white tablet:text-grayFont text-lg">
+      <p className="pb-4 font-bold leading-4 text-grayFont text-lg">
         {t("findYourCar")}
       </p>
       <form className="w-full" onSubmit={submitForm}>
