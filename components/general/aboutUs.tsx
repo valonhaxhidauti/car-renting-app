@@ -69,63 +69,65 @@ export default function AboutUs() {
                 <div className="flex flex-col gap-4 tablet:flex-row">
                   <div className="relative overflow-hidden group w-fit">
                     <Image
-                      src="/person1.png"
+                      src="/person2.png"
                       alt="person1"
                       width="400"
                       height="400"
                     />
                     <div className="absolute flex flex-col justify-between group items-end inset-0 hover:bg-primary transition-all duration-300 ease-in-out group-hover:opacity-90">
                       <div className="p-8 hidden group-hover:flex justify-end gap-4">
-                        <Facebook className="text-white" size={24} />
-                        <Twitter className="text-white" size={24} />
-                        <Instagram className="text-white" size={24} />
+                        {/*<Facebook className="text-white" size={24} />*/}
+                        {/*<Twitter className="text-white" size={24} />*/}
+                        {/*<Instagram className="text-white" size={24} />*/}
                       </div>
                       <div className="p-8 hidden group-hover:flex flex-col self-start">
-                        <p className="text-white text-2xl">Daisy Rose</p>
+                        <p className="text-white text-2xl">Eliana Bajrami</p>
                         <p className="text-white text-xs">General Manager</p>
                       </div>
                     </div>
                   </div>
-                  <div className="relative overflow-hidden group w-fit">
-                    <Image
-                      src="/person2.png"
-                      alt="person2"
-                      width="400"
-                      height="400"
-                    />
-                    <div className="absolute flex flex-col justify-between group items-end inset-0 hover:bg-primary transition-all duration-300 ease-in-out group-hover:opacity-90">
-                      <div className="p-8 hidden group-hover:flex justify-end gap-4">
-                        <Facebook className="text-white" size={24} />
-                        <Twitter className="text-white" size={24} />
-                        <Instagram className="text-white" size={24} />
-                      </div>
-                      <div className="p-8 hidden group-hover:flex flex-col self-start">
-                        <p className="text-white text-2xl">
-                          Nathaniel Garrison
-                        </p>
-                        <p className="text-white text-xs">Director</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="relative overflow-hidden group w-fit">
-                    <Image
-                      src="/person3.png"
-                      alt="person3"
-                      width="400"
-                      height="400"
-                    />
-                    <div className="absolute flex flex-col justify-between group items-end inset-0 hover:bg-primary transition-all duration-300 ease-in-out group-hover:opacity-90">
-                      <div className="p-8 hidden group-hover:flex justify-end gap-4">
-                        <Facebook className="text-white" size={24} />
-                        <Twitter className="text-white" size={24} />
-                        <Instagram className="text-white" size={24} />
-                      </div>
-                      <div className="p-8 hidden group-hover:flex flex-col self-start">
-                        <p className="text-white text-2xl">Aron Garrison</p>
-                        <p className="text-white text-xs">Founder</p>
-                      </div>
-                    </div>
-                  </div>
+                  {/*<div className="relative overflow-hidden group w-fit">*/}
+                  {/*  <Image*/}
+                  {/*    src="/person2.png"*/}
+                  {/*    alt="person2"*/}
+                  {/*    width="400"*/}
+                  {/*    height="400"*/}
+                  {/*  />*/}
+                  {/*  <div className="absolute flex flex-col justify-between group items-end inset-0 hover:bg-primary transition-all duration-300 ease-in-out group-hover:opacity-90">*/}
+                  {/*    <div className="p-8 hidden group-hover:flex justify-end gap-4">*/}
+                  {/*      /!*<Facebook className="text-white" size={24} />*!/*/}
+                  {/*      /!*<Twitter className="text-white" size={24} />*!/*/}
+                  {/*      /!*<Instagram className="text-white" size={24} />*!/*/}
+                  {/*    </div>*/}
+                  {/*    <div className="p-8 hidden group-hover:flex flex-col self-start">*/}
+                  {/*      <p className="text-white text-2xl">*/}
+                  {/*        Nathaniel Garrison*/}
+                  {/*      </p>*/}
+                  {/*      <p className="text-white text-xs">Director</p>*/}
+                  {/*    </div>*/}
+                  {/*  </div>*/}
+                  {/*</div>*/}
+                  {/*<div className="relative overflow-hidden group w-fit">*/}
+                  {/*  <Image*/}
+                  {/*    src="/person3.png"*/}
+                  {/*    alt="person3"*/}
+                  {/*    width="400"*/}
+                  {/*    height="400"*/}
+                  {/*  />*/}
+                  {/*  <div className="absolute flex flex-col justify-between group items-end inset-0 hover:bg-primary transition-all duration-300 ease-in-out group-hover:opacity-90">*/}
+                  {/*    <div className="p-8 hidden group-hover:flex justify-end gap-4">*/}
+                  {/*      /!*<Facebook className="text-white" size={24} />*!/*/}
+                  {/*      /!*<Twitter className="text-white" size={24} />*!/*/}
+                  {/*      /!*<a href="https://www.instagram.com/abag_autovermietung?igsh=dDIwM2w1MzFpb2w2" target="_blank">*!/*/}
+                  {/*      /!*    <Instagram className="text-white" size={24} />*!/*/}
+                  {/*      /!*</a>*!/*/}
+                  {/*    </div>*/}
+                  {/*    <div className="p-8 hidden group-hover:flex flex-col self-start">*/}
+                  {/*      <p className="text-white text-2xl">Aron Garrison</p>*/}
+                  {/*      <p className="text-white text-xs">Founder</p>*/}
+                  {/*    </div>*/}
+                  {/*  </div>*/}
+                  {/*</div>*/}
                 </div>
               </div>
             </div>

@@ -21,11 +21,13 @@ export default function Footer() {
               <p className="text-grayFont text-xs mt-6">{t("companyName")}</p>
               <p className="text-grayFont text-2xl mb-6">{t("slogan")}</p>
               <div className="flex gap-4">
-                <Facebook size={20} />
-                <Twitter size={20} />
-                <Instagram size={20} />
-                <Youtube size={20} />
-                <Linkedin size={20} />
+                {/*<Facebook size={20} />*/}
+                {/*<Twitter size={20} />*/}
+                <a href="https://www.instagram.com/abag_autovermietung?igsh=dDIwM2w1MzFpb2w2" target="_blank">
+                  <Instagram size={20} />
+                </a>
+                {/*<Youtube size={20} />*/}
+                {/*<Linkedin size={20} />*/}
               </div>
             </div>
             <div className="flex flex-col">

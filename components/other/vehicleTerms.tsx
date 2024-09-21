@@ -1,33 +1,44 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function VehicleTerms() {
-  return (
-    <>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
-      <p className="text-sm mt-2">
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-        officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde
-        omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-        magni dolores eos qui ratione voluptatem sequi nesciunt.
-      </p>
-      <p className="text-sm mt-2">
-        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-        consectetur, adipisci velit, sed quia non numquam eius modi tempora
-        incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-      </p>
-      <p className="text-sm mt-2">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo.
-      </p>
-    </>
-  );
+    const t = useTranslations("RentalTerms");
+    const paragraphs = [
+        t.rich("content.paragraph1",{br: () => <br/>,bold: (chunks) => <strong>{chunks}</strong>}),
+        t.rich("content.paragraph2",{br: () => <br/>,bold: (chunks) => <strong>{chunks}</strong>}),
+    ];
+
+    return (
+        <>
+            {paragraphs.map((paragraph, index) => (
+                <p key={index} className="text-grayFont">
+                    {paragraph}
+                </p>
+            ))}
+            <br/>
+            <p className="text-grayFont">{t.rich("content.deposit", {
+                br: () => <br/>,
+                bold: (chunks) => <strong>{chunks}</strong>
+            })}</p>
+            <br/>
+            <p className="text-grayFont">{t.rich("content.deductible", {
+                br: () => <br/>,
+                bold: (chunks) => <strong>{chunks}</strong>
+            })}</p>
+            <br/>
+            <ul className="text-grayFont list-disc list-inside">
+                <li>{t.rich("content.agreement1", {br: () => <br/>, bold: (chunks) => <strong>{chunks}</strong>})}</li>
+                <li>{t.rich("content.agreement2", {br: () => <br/>, bold: (chunks) => <strong>{chunks}</strong>})}</li>
+                <li>{t.rich("content.agreement3", {br: () => <br/>, bold: (chunks) => <strong>{chunks}</strong>})}</li>
+                <li>{t.rich("content.agreement4", {br: () => <br/>, bold: (chunks) => <strong>{chunks}</strong>})}</li>
+            </ul>
+            <br/>
+            <p className="text-grayFont">{t.rich("content.jurisdiction", {
+                br: () => <br/>,
+                bold: (chunks) => <strong>{chunks}</strong>
+            })}</p>
+
+        </>
+    );
 }

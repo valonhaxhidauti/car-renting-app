@@ -6,27 +6,27 @@
             "homepage": "Startseite"
         },
         "description": {
-            "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-            "paragraph2": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+            "paragraph1": "Entdecken Sie das ultimative Autovermietungserlebnis mit Abag Rent – zuverlässig, erschwinglich und bequem",
+            "paragraph2": "Bei Abag Rent sind wir darauf spezialisiert, einen Autovermietungsservice zu bieten, der zu Ihrem Lebensstil passt. Ob geschäftlich oder privat unterwegs, unser Ziel ist es, Ihnen eine stressfreie und zuverlässige Lösung zu bieten, die Sie problemlos auf die Straße bringt. Wir legen Wert auf eine breite Fahrzeugauswahl, transparente Preise und einen Kundenservice, der das Extra für Sie tut. Mit Standorten, die Abholung und Rückgabe zum Kinderspiel machen, war es noch nie einfacher oder günstiger, ein Auto zu mieten. Wählen Sie Abag Rent für eine Reise, die so reibungslos verläuft wie Ihr Auto!"
         },
         "features": {
             "easy": {
                 "title": "Einfach.",
-                "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur."
+                "description": "Unser benutzerfreundliches Online-Buchungssystem macht die Reservierung Ihres Autos schnell und mühelos."
             },
             "economic": {
-                "title": "Wirtschaftlich.",
-                "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
+                "title": "Günstig.",
+                "description": "Genießen Sie unschlagbaren Wert mit unseren wettbewerbsfähigen Preisen, ohne Ihr Budget zu sprengen."
             },
             "everywhere": {
-                "title": "Überall.",
-                "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia."
+                "title": "Gute Lage.",
+                "description": "Strategisch gelegen, machen wir es Ihnen leicht, Ihr Auto abzuholen und zurückzugeben."
             }
         },
         "teamSection": "Unser Team treffen",
         "callToAction": {
-            "title": "<bold>Sehr einfach</bold> zu Autovermietung!",
-            "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "title": "<bold>Abag Rent!</bold> - Ihre erste Wahl für Autovermietung!",
+            "description": "Bereit für die Straße? Mieten Sie Ihr perfektes Auto noch heute bei Abag Rent – schnell, günstig und unkompliziert!",
             "button": "Jetzt mieten!"
         }
     },
@@ -167,12 +167,12 @@
             "homepage": "Startseite"
         },
         "visitUs": "Besuchen Sie uns",
-        "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-        "visitUsLocation": "Our Location",
-        "callUs": "Rufen Sie uns 24/7 an",
-        "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
-        "mailUs": "Mailen Sie uns",
-        "mailUsDescription": "Excepteur sint occaecat cupidatat non proident.",
+        "visitUsDescription": "Kommen Sie uns an unserem praktischen Standort besuchen!",
+        "visitUsLocation": "Unser Standort",
+        "callUs": "Rufen Sie uns an",
+        "callUsDescription": "Brauchen Sie Hilfe? Rufen Sie uns an!",
+        "mailUs": "Schreiben Sie uns",
+        "mailUsDescription": "Haben Sie Fragen? Schreiben Sie uns jederzeit!",
         "formHeading": "Kontaktformular",
         "formDescription": "Rufen Sie uns an oder kommen Sie jederzeit vorbei. Wir bemühen uns, alle Anfragen innerhalb von 24 Stunden an Werktagen zu beantworten.",
         "fullNamePlaceholder": "Vollständiger Name",
@@ -213,7 +213,7 @@
         }
     },
     "Footer": {
-        "companyName": "Abag Rent! Autovermietungsvorlage",
+        "companyName": "Abag Rent! Autovermietung",
         "slogan": "Genießen Sie die Autovermietung!",
         "pages": {
             "title": "Seiten",
@@ -294,9 +294,15 @@
             "homepage": "Startseite"
         },
         "content": {
-            "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "paragraph2": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-            "paragraph3": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+            "paragraph1": "Bitte beachten Sie die folgenden Punkte, die für alle Mietverträge gelten:",
+            "paragraph2": "<bold>Kaution:</bold> <br></br> Kunden ohne festen Wohnsitz in der Schweiz müssen eine Kaution hinterlegen. Die Höhe variiert je nach Dauer des Vertrages und Fahrzeugtyp. Der genaue Betrag der Kaution wird Ihnen zum Zeitpunkt der Buchung mitgeteilt.",
+            "deductible": "<bold>Selbstbehalt im Schadensfall:</bold> <br></br> Im Schadensfall gilt eine Haftpflichtversicherung mit einem Selbstbehalt von CHF 1.000 für sowohl Teil- als auch Vollkaskoversicherungen.",
+            "deposit": "Weitere Vereinbarungen und Anmerkungen:",
+            "agreement1": "Das Fahrzeug muss innen gereinigt und mit vollem Tank zurückgegeben werden.",
+            "agreement2": "Alle unsere Fahrzeuge sind Nichtraucherfahrzeuge.",
+            "agreement3": "Das Auto muss in demselben Zustand zurückgegeben werden, wie es in den Fotos und Videos am Rückgabetag dokumentiert wurde.",
+            "agreement4": "Die Nichteinhaltung dieser Bedingungen kann je nach Zustand des Fahrzeugs bei der Rückgabe zu zusätzlichen Kosten führen. Dies gilt nicht für leichte Gebrauchsspuren, die im beigefügten PDF-Dokument näher erläutert werden.",
+            "jurisdiction": "<bold>Allgemeine Vertragsbedingungen und Gerichtsstand:</bold> <br></br>Der Kunde erklärt, die nachstehenden Vertragsbedingungen einschließlich der Vereinbarung über den Gerichtsstand zur Kenntnis genommen zu haben und erkennt diese als verbindlich an."
         }
     },
     "RentForm": {

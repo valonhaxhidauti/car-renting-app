@@ -6,27 +6,27 @@
       "homepage": "Homepage"
     },
     "description": {
-      "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-      "paragraph2": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+      "paragraph1": "Discover the Ultimate Car Rental Experience with Abag Rent – Reliable, Affordable, and Convenient",
+      "paragraph2": "At Abag Rent, we’re dedicated to delivering a car rental service that’s tailored to your lifestyle. Whether you're traveling for business or pleasure, our goal is to provide a stress-free and reliable solution that gets you on the road with ease. We pride ourselves on offering a wide range of vehicles, transparent pricing, and customer service that goes the extra mile. With locations that make pick-up and drop-off a breeze, renting a car has never been more convenient or affordable. Choose Abag Rent for a journey that’s as smooth as your ride!"
     },
     "features": {
       "easy": {
         "title": "Easy.",
-        "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur."
+        "description": "Our user-friendly online booking system makes reserving your car quick and effortless."
       },
       "economic": {
         "title": "Economic.",
-        "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
+        "description": "Enjoy unbeatable value with our competitive rates, without breaking the bank."
       },
       "everywhere": {
-        "title": "Everywhere.",
-        "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia."
+        "title": "Good Location.",
+        "description": "Strategically located, we make it easy for you to pick up and drop off"
       }
     },
     "teamSection": "Meet our team",
     "callToAction": {
-      "title": "<bold>Very Easy</bold> to car rental!",
-      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "title": "<bold>Abag Rent!</bold> – Your Go-To Car Rental Solution",
+      "description": "Ready to hit the road? Rent your perfect ride today with Abag Rent – fast, affordable, and hassle-free!",
       "button": "Rent now!"
     }
   },
@@ -167,12 +167,12 @@
       "homepage": "Homepage"
     },
     "visitUs": "Visit Us",
-    "visitUsDescription": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+    "visitUsDescription": "Come see us at our convenient location!",
     "visitUsLocation": "Our Location",
-    "callUs": "Call us 24/7",
-    "callUsDescription": "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+    "callUs": "Call us",
+    "callUsDescription": "Need assistance? Give us a call!",
     "mailUs": "Mail us",
-    "mailUsDescription": "Excepteur sint occaecat cupidatat non proident.",
+    "mailUsDescription": "Have questions? Email us anytime!",
     "formHeading": "Contact Form",
     "formDescription": "Give us a call or drop by anytime, we endeavor to answer all enquiries within 24 hours on business days.",
     "fullNamePlaceholder": "Full Name",
@@ -213,7 +213,7 @@
     }
   },
   "Footer": {
-    "companyName": "Abag Rent! Car Rental Template",
+    "companyName": "Abag Rent! Car Rental",
     "slogan": "Enjoy car rental!",
     "pages": {
       "title": "Pages",
@@ -294,9 +294,15 @@
       "homepage": "Homepage"
     },
     "content": {
-      "paragraph1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "paragraph2": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "paragraph3": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+      "paragraph1": "Please note the following points, which apply to all rental contracts:",
+      "paragraph2": "<bold>Deposit:</bold> <br></br> Customers without permanent residence in Switzerland are required to pay a deposit. The amount varies depending on the duration of the contract and the type of vehicle. You will be informed of the exact amount of the deposit at the time of booking.",
+      "deductible": "<bold>Deductible in the event of damage:</bold> <br></br> In the event of damage, liability insurance with a deductible of CHF 1,000 applies for both partial and fully comprehensive insurance.",
+      "deposit": "Further agreements and remarks:",
+      "agreement1": "The vehicle must be cleaned inside and returned with a full tank of gas.",
+      "agreement2": "All our vehicles are non-smoking vehicles.",
+      "agreement3": "The car must be returned in the same condition as documented in the photos and videos on the day of return.",
+      "agreement4": "Failure to comply with these conditions may result in additional costs, depending on the condition of the vehicle on return. This does not apply to slight signs of use, which are explained in more detail in the attached PDF file.",
+      "jurisdiction": "<bold>General contractual conditions and place of jurisdiction:</bold> <br></br>The customer declares that he has taken note of the contractual terms and conditions listed below, including the agreement on the place of jurisdiction, and recognizes them as binding."
     }
   },
   "RentForm": {

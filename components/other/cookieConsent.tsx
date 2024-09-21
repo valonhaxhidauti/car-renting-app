@@ -8,12 +8,12 @@ const CookieConsent = () => {
     const [isConsentGiven, setIsConsentGiven] = useState<boolean>(true);
 
     useEffect(() => {
-        const consent = sessionStorage.getItem("cookie-consent");
+        const consent = localStorage.getItem("cookie-consent");
         setIsConsentGiven(consent === "true");
     }, []);
 
     const handleAccept = () => {
-        sessionStorage.setItem("cookie-consent", "true");
+        localStorage.setItem("cookie-consent", "true");
         setIsConsentGiven(true);
     };
 

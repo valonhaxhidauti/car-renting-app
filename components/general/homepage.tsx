@@ -10,7 +10,7 @@ export default function Homepage() {
         <>
             <div className="absolute -z-10 w-full tablet:w-1/2 h-screen">
                 <Image
-                    src="/homeBackground.png"
+                    src="/newHomeBackground.png"
                     alt="Home background image"
                     fill
                     sizes="width:100%"
