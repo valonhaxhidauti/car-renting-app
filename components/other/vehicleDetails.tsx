@@ -134,8 +134,12 @@ export default function VehicleDetails() {
                         decNavi={decNavigation}
                         maxNavi={maxNavi}
                       />
-                      <VehicleInsurance />
-                      <VehicleMileage />
+                      <VehicleInsurance
+                        insuranceTypes={vehicle.relationships.insurances}
+                      />
+                      <VehicleMileage
+                          mileageTypes={vehicle.relationships.mileages}
+                      />
                     </TabsContent>
                     <TabsContent
                       value="terms"

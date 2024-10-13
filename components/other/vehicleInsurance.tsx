@@ -7,12 +7,17 @@ import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useTranslations } from "next-intl";
 import { ItemType } from "@/lib/types";
 
-export default function VehicleInsurance() {
+
+interface VehicleInsuranceProps {
+    insuranceTypes: ItemType[];
+}
+
+export default function VehicleInsurance({
+                                             insuranceTypes,
+                                         }: VehicleInsuranceProps) {
   const t = useTranslations("VehicleDetails");
-  const locale = useTranslations()("Locale");
   const { setInsurance, setInsuranceId, setInsurancePrice } = useBooking();
 
-  const [insuranceTypes, setInsuranceTypes] = useState<ItemType[]>([]);
   const [selectedValue, setSelectedValue] = useState<string>("");
   const toggleShown = useOverflowControl(false);
 
@@ -30,37 +35,18 @@ export default function VehicleInsurance() {
     }
   }
 
-  useEffect(() => {
-    const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/insurance-types`);
-
-    const headers = {
-      "Accept-Language": locale,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-
-    fetch(url, {
-      method: "GET",
-      headers,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInsuranceTypes(data.data);
-        if (data.data.length > 0) {
-          const initialInsurance = data.data[0];
-          setSelectedValue(initialInsurance.attributes.name);
-          setInsurance(initialInsurance.attributes.name);
-          setInsuranceId(initialInsurance.id);
-          setInsurancePrice(initialInsurance.attributes.base_price_in_cents);
+    useEffect(() => {
+        if (insuranceTypes.length > 0) {
+            const initialInsurance = insuranceTypes[0];
+            setSelectedValue(initialInsurance.attributes.name);
+            setInsurance(initialInsurance.attributes.name);
+            setInsuranceId(initialInsurance.id);
+            setInsurancePrice(initialInsurance.attributes.base_price_in_cents);
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching insurance types:", error);
-      });
-  }, []);
+    }, []);
 
   return (
-    <div className="mb-8">
+      insuranceTypes.length > 0 && (<div className="mb-8">
       <Label htmlFor="terms" className="text-grayFont text-lg font-medium">
         {t("insuranceType")}
       </Label>
@@ -101,6 +87,6 @@ export default function VehicleInsurance() {
           </RadioGroup.Item>
         ))}
       </RadioGroup.Root>
-    </div>
+    </div>)
   );
 }

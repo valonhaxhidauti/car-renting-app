@@ -4,7 +4,6 @@ import {
   CloseMenuIcon,
   HamburgerIcon,
   Logo,
-  LogoLight,
   LogoMenu,
 } from "@/assets/svgs";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";

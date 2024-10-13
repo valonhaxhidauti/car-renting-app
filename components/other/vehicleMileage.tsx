@@ -7,12 +7,17 @@ import { useOverflowControl } from "../hooks/useOverflowControl";
 import { useTranslations } from "next-intl";
 import { ItemType } from "@/lib/types";
 
-export default function VehicleMileage() {
+
+interface VehicleMileageProps {
+    mileageTypes: ItemType[];
+}
+
+export default function VehicleMileage({
+                                           mileageTypes,
+                                       }: VehicleMileageProps) {
   const t = useTranslations("VehicleDetails");
-  const locale = useTranslations()("Locale");
   const { setMileage, setMileageId, setMileagePrice } = useBooking();
 
-  const [vehicleMileage, setVehicleMileage] = useState<ItemType[]>([]);
   const [selectedValue, setSelectedValue] = useState<string>("");
   const toggleShown = useOverflowControl(false);
 
@@ -20,7 +25,7 @@ export default function VehicleMileage() {
     setSelectedValue(value);
     toggleShown();
 
-    const selectedMileage = vehicleMileage.find(
+    const selectedMileage = mileageTypes.find(
       (type) => type.attributes.name === value
     );
     if (selectedMileage) {
@@ -30,37 +35,18 @@ export default function VehicleMileage() {
     }
   }
 
-  useEffect(() => {
-    const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mileage-types`);
-
-    const headers = {
-      "Accept-Language": locale,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-
-    fetch(url, {
-      method: "GET",
-      headers,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setVehicleMileage(data.data);
-        if (data.data.length > 0) {
-          const initialMileage = data.data[0];
-          setSelectedValue(initialMileage.attributes.name);
-          setMileage(initialMileage.attributes.name);
-          setMileageId(initialMileage.id);
-          setMileagePrice(initialMileage.attributes.base_price_in_cents);
+    useEffect(() => {
+        if (mileageTypes.length > 0) {
+            const initialMileage = mileageTypes[0];
+            setSelectedValue(initialMileage.attributes.name);
+            setMileage(initialMileage.attributes.name);
+            setMileageId(initialMileage.id);
+            setMileagePrice(initialMileage.attributes.base_price_in_cents);
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching vehicle mileage types:", error);
-      });
-  }, []);
+    }, []);
 
   return (
-    <div className="my-4">
+      mileageTypes.length > 0 && (<div className="my-4">
       <Label htmlFor="terms" className="text-grayFont text-lg font-medium">
         {t("mileageType")}
       </Label>
@@ -69,7 +55,7 @@ export default function VehicleMileage() {
         onValueChange={onRadioChange}
         value={selectedValue}
       >
-        {vehicleMileage.map((type) => (
+        {mileageTypes.map((type) => (
           <RadioGroup.Item
             id="mileage"
             key={type.id}
@@ -101,6 +87,6 @@ export default function VehicleMileage() {
           </RadioGroup.Item>
         ))}
       </RadioGroup.Root>
-    </div>
+    </div>)
   );
 }
