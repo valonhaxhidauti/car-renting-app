@@ -94,8 +94,8 @@ export default function BookingPrice(vehicle: any) {
     0
   );
 
-  const insuranceTotal = insurancePrice;
-  const mileageTotal = mileagePrice;
+  const insuranceTotal = insurancePrice ?? 0;
+  const mileageTotal = mileagePrice ?? 0;
 
   const totalPrice =
     prices.vehicle * daysDifference +
