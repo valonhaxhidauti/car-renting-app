@@ -116,7 +116,7 @@ export default function Contact() {
 
                             <div
                                 className="flex flex-col hover:justify-center flex-grow tablet:w-1/3 min-h-64 gap-6 justify-between items-center py-8 px-12 transition-all group hover:relative hover:border-none hover:shadow-grayPrimary border-primary border-b-[3px]">
-                                <a href="mailto:admin@rubik.dev">
+                                <a href="mailto:info@abag-rent.ch">
                                     <MailIcon
                                         className="text-primary group-hover:text-[#f3f3f3] group-hover:scale-[2.3] group-hover:absolute group-hover:top-12 group-hover:right-14 transition-all"/>
                                     <h1 className="text-center text-grayFont font-bold text-2xl group-hover:hidden">
@@ -124,10 +124,10 @@ export default function Contact() {
                                     </h1>
                                     <div className="relative hidden flex-col gap-2 group-hover:flex">
                                         <a
-                                            href="mailto:admin@rubik.dev"
+                                            href="mailto:info@abag-rent.ch"
                                             className="text-primary"
                                         >
-                                            admin@rubik.dev
+                                            info@abag-rent.ch
                                         </a>
                                     </div>
                                     <p className="text-center text-grayFont text-sm group-hover:hidden">

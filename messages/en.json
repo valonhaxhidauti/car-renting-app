@@ -53,7 +53,7 @@
     },
     "login": {
       "title": "Login",
-      "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
+      "description": "",
       "facebookButton": "Signup with Facebook",
       "googleButton": "Signup with Google",
       "or": "or",
@@ -95,7 +95,7 @@
     },
     "register": {
       "title": "Register Now",
-      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+      "description": "",
       "mrLabel": "Mr.",
       "mrsLabel": "Mrs.",
       "nameLabel": "Name",
