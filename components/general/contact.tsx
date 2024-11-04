@@ -138,7 +138,8 @@ export default function Contact() {
                         </div>
                         <div className="py-8 w-full laptop:w-3/4">
                             <div className="flex flex-col tablet:flex-row gap-8">
-                                <div className="relative flex-shrink-0 w-full tablet:w-1/2 h-80 tablet:h-auto">
+                                <div
+                                    className="relative flex-shrink-0 w-full tablet:w-1/2 h-80 tablet:h-auto  grayscale hover:grayscale-0">
                                     <Image
                                         src="/map.png"
                                         alt="map"
@@ -148,8 +149,8 @@ export default function Contact() {
                                         sizes="100%"
                                         className="object-cover absolute w-full h-full left-0 top-0 pointer-events-none"
                                     />
-                                    <LocationMapIcon
-                                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>
+                                    {/*<LocationMapIcon*/}
+                                    {/*    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>*/}
                                 </div>
                                 <div className="flex flex-col w-full tablet:w-1/2">
                                     <h1 className="text-grayFont text-2xl font-bold">
