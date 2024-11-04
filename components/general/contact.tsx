@@ -122,14 +122,13 @@ export default function Contact() {
                                     <h1 className="text-center text-grayFont font-bold text-2xl group-hover:hidden">
                                         {t("mailUs")}
                                     </h1>
-                                    <div className="relative hidden flex-col gap-2 group-hover:flex">
-                                        <a
-                                            href="mailto:info@abag-rent.ch"
+                                    <span className="relative hidden flex-col gap-2 group-hover:flex">
+                                        <span
                                             className="text-primary"
                                         >
                                             info@abag-rent.ch
-                                        </a>
-                                    </div>
+                                        </span>
+                                    </span>
                                     <p className="text-center text-grayFont text-sm group-hover:hidden">
                                         {t("mailUsDescription")}
                                     </p>
@@ -149,8 +148,6 @@ export default function Contact() {
                                         sizes="100%"
                                         className="object-cover absolute w-full h-full left-0 top-0 pointer-events-none"
                                     />
-                                    {/*<LocationMapIcon*/}
-                                    {/*    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>*/}
                                 </div>
                                 <div className="flex flex-col w-full tablet:w-1/2">
                                     <h1 className="text-grayFont text-2xl font-bold">
