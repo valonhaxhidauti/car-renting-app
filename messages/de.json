@@ -454,6 +454,7 @@
             "creditCardLabel": "Kreditkarte",
             "twintLabel": "Twint",
             "payWithCash": "Barzahlung an der Unternehmenskasse.",
+            "payWithTwint": "Ja, ich benutze Twint",
             "creditCardInfoTitle": "Kreditkarteninformationen",
             "cardOwnerLabel": "Karteninhaber",
             "cardNumberLabel": "Kartennummer",

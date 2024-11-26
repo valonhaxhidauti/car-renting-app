@@ -21,6 +21,7 @@ import {RadioGroup, RadioGroupItem} from "../ui/radio-group";
 import BookingPrice from "../common/bookingPrice";
 import CreditCardPayment from "./creditCardPayment";
 import CashPayment from "./cashPayment";
+import TwintPayment from "./twintPayment";
 import RentForm from "../general/rentForm";
 import BillingInformation from "../booking/billingInformation";
 import DocumentsInformation from "../booking/documentsInformation";
@@ -203,6 +204,11 @@ export default function VehiclePayment() {
                 const responseData = await response.json();
                 const bookingId = responseData.data.attributes.booking_id;
 
+                if (responseData.data.attributes.requires_action.type === 'redirect_to_url') {
+                    window.location.href = responseData.data.attributes.requires_action.redirect_to_url.url;
+                    return;
+                }
+
                 if (responseData.data.attributes.requires_action && creditCardPaymentRef.current) {
                     const success = await creditCardPaymentRef.current.handle3DSPayment(responseData.data.attributes.client_secret);
                     if (!success) {
@@ -315,6 +321,13 @@ export default function VehiclePayment() {
                                                 <CreditCardPayment ref={creditCardPaymentRef}/>
                                             </Elements>
                                         }
+                                    </div>
+                                    <div
+                                        className={`transition-opacity duration-700 ${
+                                            paymentMethod === "Twint" ? "opacity-100" : "opacity-0"
+                                        }`}
+                                    >
+                                        {paymentMethod === "Twint" &&  <TwintPayment/> }
                                     </div>
                                 </div>
                             </div>

@@ -454,6 +454,7 @@
       "creditCardLabel": "Credit Card",
       "twintLabel": "Twint",
       "payWithCash": "Pay with cash at the company counter.",
+      "payWithTwint": "Pay with twint.",
       "creditCardInfoTitle": "Credit Card Information",
       "cardOwnerLabel": "Card Owner",
       "cardNumberLabel": "Card Number",

@@ -28,7 +28,7 @@ import VehicleGallery from "./vehicleGallery";
 import VehicleSpecs from "./vehicleSpecs";
 import VehicleOptions from "./vehicleOptions";
 import BookingPrice from "../common/bookingPrice";
-import VehicleTerms from "./vehicleTerms";
+// import VehicleTerms from "./vehicleTerms";
 import VehicleDetailsSkeleton from "../loader/vehicleDetailsSkeleton";
 import VehicleInsurance from "./vehicleInsurance";
 import VehicleMileage from "./vehicleMileage";
@@ -108,9 +108,9 @@ export default function VehicleDetails() {
                       <TabsTrigger value="options">
                         {t("extraOptionsTab").toUpperCase()}
                       </TabsTrigger>
-                      <TabsTrigger value="terms">
-                        {t("rentalTermsTab").toUpperCase()}
-                      </TabsTrigger>
+                      {/*<TabsTrigger value="terms">*/}
+                      {/*  {t("rentalTermsTab").toUpperCase()}*/}
+                      {/*</TabsTrigger>*/}
                       <TabsTrigger value="specs">
                         {t("allSpecificationsTab").toUpperCase()}
                       </TabsTrigger>
@@ -141,12 +141,12 @@ export default function VehicleDetails() {
                           mileageTypes={vehicle.relationships.mileages}
                       />
                     </TabsContent>
-                    <TabsContent
-                      value="terms"
-                      className="text-grayFont px-8 pb-8"
-                    >
-                      <VehicleTerms />
-                    </TabsContent>
+                    {/*<TabsContent*/}
+                    {/*  value="terms"*/}
+                    {/*  className="text-grayFont px-8 pb-8"*/}
+                    {/*>*/}
+                    {/*  <VehicleTerms />*/}
+                    {/*</TabsContent>*/}
                     <TabsContent value="specs" className="px-8 pb-8">
                       <VehicleSpecs
                         translations={t}
