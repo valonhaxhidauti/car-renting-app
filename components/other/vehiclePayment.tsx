@@ -204,12 +204,12 @@ export default function VehiclePayment() {
                 const responseData = await response.json();
                 const bookingId = responseData.data.attributes.booking_id;
 
-                if (responseData.data.attributes.requires_action.type === 'redirect_to_url') {
+                if (responseData?.data?.attributes?.requires_action?.type === 'redirect_to_url') {
                     window.location.href = responseData.data.attributes.requires_action.redirect_to_url.url;
                     return;
                 }
 
-                if (responseData.data.attributes.requires_action && creditCardPaymentRef.current) {
+                if (responseData?.data?.attributes?.requires_action && creditCardPaymentRef.current) {
                     const success = await creditCardPaymentRef.current.handle3DSPayment(responseData.data.attributes.client_secret);
                     if (!success) {
                         // Handle 3D Secure failure
